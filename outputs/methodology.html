@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>指标说明 · MARKET10</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .method{max-width:900px;margin:0 auto;padding:46px 42px 80px}.method-top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:22px}.back-link{font-size:13px;color:#64706b;text-decoration:none}.method-brand{font-size:13px;font-weight:800;letter-spacing:.06em}.method-brand span{color:var(--green)}.method-main{padding-top:58px}.method h1{font-size:40px;line-height:1.15;max-width:680px}.method .lead{color:#68746f;font-size:16px;line-height:1.8;max-width:700px;margin:17px 0 35px}.method-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:27px 29px;margin:17px 0}.method-card h2{font-size:17px;margin:0 0 14px}.method-card p,.method-card li{font-size:14px;color:#53605a;line-height:1.8}.method-card p:last-child{margin-bottom:0}.formula{font:500 15px "DM Mono",monospace;color:#16422f;background:#eff8f2;border-radius:8px;padding:17px;overflow:auto;white-space:nowrap}.assumptions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.assumption{border:1px solid var(--line);border-radius:8px;padding:14px}.assumption b{display:block;font:700 18px "DM Mono";color:var(--green);margin-top:6px}.assumption span{font-size:11px;color:#7b8681}.definition-list{display:grid;gap:10px}.definition{border-bottom:1px solid #edf0ee;padding:0 0 15px}.definition:last-child{border:0;padding:0}.definition strong{font-size:14px}.definition p{margin:5px 0 0}.warning{border-left:3px solid #e59b37;background:#fff8e9;padding:12px 15px;font-size:13px;color:#745b30;line-height:1.7;border-radius:0 7px 7px 0}@media(max-width:600px){.method{padding:26px 18px 48px}.method-main{padding-top:36px}.method h1{font-size:29px}.method .lead{font-size:14px}.method-card{padding:20px 17px}.assumptions{grid-template-columns:1fr}.method-top{padding-bottom:17px}}
+  </style>
+</head>
+<body>
+  <main class="method">
+    <header class="method-top"><a class="back-link" href="index.html">← 返回估值概览</a><div class="method-brand">MARKET<span>10</span> · 指标说明</div></header>
+    <article class="method-main" id="content"></article>
+  </main>
+  <script>
+    const metrics={
+      company:{title:'公司与股票代码',lead:'公司名称对应其主要交易证券；代码用于从数据源匹配公开市场数据。',body:'<div class="method-card"><h2>如何使用</h2><p>点击任意公司行可进入详情页，查看该公司的真实估值快照历史。不同上市地、ADR 和普通股可能存在不同代码与货币口径。</p></div>'},
+      'market-cap':{title:'市值（Market Capitalization）',lead:'市值代表市场给予一家上市公司全部普通股权益的价格。',body:'<div class="method-card"><h2>计算方式</h2><div class="formula">市值 = 最新股价 × 流通在外普通股股数</div><p>市值不是公司全部价值：它不包含净债务。不同数据源在股份口径、盘后价格和更新时间上可能有轻微差异。</p></div>'},
+      pe:{title:'PE（TTM）',lead:'市盈率衡量投资者为过去十二个月的每一单位盈利支付了多少倍价格。',body:'<div class="method-card"><h2>计算方式</h2><div class="formula">PE (TTM) = 市值 ÷ 过去十二个月归母净利润</div><p>TTM 指最近四个已披露季度。亏损公司通常没有有意义的 PE，因此显示为“—”。</p></div>'},
+      'forward-pe':{title:'预期 PE（Forward PE）',lead:'预期市盈率使用市场对未来十二个月盈利的估计，而不是已经实现的盈利。',body:'<div class="method-card"><h2>计算方式</h2><div class="formula">Forward PE = 当前市值 ÷ 未来十二个月预期净利润</div><p>它通常低于或高于 TTM PE，取决于市场预期的盈利增长或下滑。预期值会随着分析师预测更新而变化，免费数据源可能存在延迟或缺失。</p></div>'},
+      peg:{title:'PEG',lead:'PEG 用市盈率除以盈利增长率，试图将估值与增长速度放在同一框架中比较。',body:'<div class="method-card"><h2>计算方式</h2><div class="formula">PEG = PE ÷ 预期盈利增长率（%）</div><p>PEG 低于 1 常被解读为“相对增长较便宜”，但不能单独作为投资判断：增长预测、会计利润质量和周期波动都会显著影响结果。</p></div>'},
+      ps:{title:'市销率（P/S）',lead:'市销率衡量市场为每一单位收入支付多少倍价格，尤其适用于利润尚在扩张的公司。',body:'<div class="method-card"><h2>计算方式</h2><div class="formula">P/S = 市值 ÷ 过去十二个月营业收入</div><p>收入不等于利润。高毛利、高自由现金流率的业务通常能够承受更高的 P/S，因此跨行业比较要谨慎。</p></div>'},
+      price:{title:'最新股价',lead:'最近一个日终或最近可用交易时段的单股价格。',body:'<div class="method-card"><h2>数据口径</h2><p>来自 Alpha Vantage 的 Global Quote 接口。免费方案以日终数据为主，非盘中实时行情；休市日会保留最近一个交易日的收盘数据。</p></div>'},
+      change:{title:'当日涨跌幅',lead:'最新价格相对前一个交易日收盘价的百分比变动。',body:'<div class="method-card"><h2>计算方式</h2><div class="formula">当日涨跌幅 = （最新价格 ÷ 前收盘价 − 1）× 100%</div><p>绿色表示上涨，红色表示下跌。免费数据通常在日终更新，盘中不保证实时。</p></div>'},
+      'ev-ebitda':{title:'EV/EBITDA',lead:'企业价值倍数将公司的整体资本结构与税息折旧摊销前利润相比较，适合跨不同负债水平的公司比较。',body:'<div class="method-card"><h2>计算方式</h2><div class="formula">EV/EBITDA = 企业价值 ÷ EBITDA</div><p>企业价值（EV）通常等于市值加净债务等资本结构项目。它不增加当前 Alpha Vantage 的日更请求数，因此取代了暂缺的市现率。</p></div>'},
+      'revenue-growth':{title:'收入同比（最近）',lead:'这是最近披露季度的营业收入相对去年同期的增长率，不是未来预测。',body:'<div class="method-card"><h2>计算方式</h2><div class="formula">收入同比 = （本季收入 ÷ 去年同期收入 − 1）× 100%</div><p>季节性较强的公司应优先看同比，而不是环比。它反映已实现增长；分析师未来收入预期需要单独的数据源。</p></div>'},
+      'implied-growth':{title:'隐含增长率',lead:'这是公司级反向 FCFE 推算：每家公司都以自身已披露现金流与风险参数反推未来五年收入 CAGR。',body:'<div class="method-card"><h2>公司级输入</h2><p>模型使用最近四季收入、经营现金流和资本开支计算 TTM 自由现金流率，并取该公司过去三年自由现金流率中位数。两者按公司特征加权，而非使用行业固定参数。</p></div><div class="method-card"><h2>权益成本与计算逻辑</h2><div class="formula">Ke = 无风险利率 + Beta × 股权风险溢价<br>权益价值 = Σ FCFEₜ ÷ (1+Ke)ᵗ + 终值</div><p>FCF 率会从当前 TTM 值逐年过渡至该公司的归一化值；永续增长率为 2.5%。通过二分法求解增长率 <em>g</em>，使模型权益价值等于当前市值。</p></div><div class="method-card"><h2>公司差异如何处理</h2><p>Microsoft、Alphabet、Amazon 和 Meta 的 AI 基础设施资本开支较高，因此当前现金流权重更高；Tesla、TSMC、Micron 和 SK hynix 的景气周期更强，因此更重视自身三年中位数。NVIDIA 与 Apple 使用较均衡的权重。没有四季和三年可比公开数据的公司直接显示“—”。</p></div><div class="warning">这不是分析师预测或目标价。每家公司详情页会披露实际输入、财报截止期、参数依据与数据来源。</div>'}
+    };
+    const key=new URLSearchParams(location.search).get('metric')||'implied-growth';const item=metrics[key]||metrics['implied-growth'];document.title=`${item.title} · MARKET10`;document.querySelector('#content').innerHTML=`<p class="eyebrow">METRIC METHODOLOGY</p><h1>${item.title}</h1><p class="lead">${item.lead}</p>${item.body}`;
+  </script>
+</body>
+</html>

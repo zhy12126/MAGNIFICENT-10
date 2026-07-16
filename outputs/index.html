@@ -13,32 +13,35 @@
   <main class="shell">
     <header class="topbar">
       <div class="brand"><span class="brand-mark">M</span><span>MARKET<span>10</span></span></div>
-      <nav><button class="nav-active">估值概览</button><button>盈利预测</button><button>市场动态</button></nav>
+      <nav><button class="nav-active" data-view="overview">巨头估值</button><button data-view="nasdaq">纳斯达克估值</button></nav>
       <div class="header-right"><span class="live-dot"></span><span>美股日终估值</span><span class="updated">更新于 <b>等待日更数据</b></span></div>
     </header>
 
     <section id="overview" class="overview">
-      <div class="page-title"><div><p class="eyebrow">THE MAGNIFICENT 10</p><h1>美股巨头估值雷达</h1><p class="subtitle">以多维估值指标，快速透视全球科技领袖的定价。</p></div><div class="market-summary"><span>10 家公司总市值</span><strong>$31.6T</strong><em>+0.82% 今日</em></div></div>
-      <div class="filters"><div class="filter-group"><button class="pill selected">全部</button><button class="pill">半导体</button><button class="pill">软件与云</button><button class="pill">平台与电商</button></div><button class="sort">按市值排序 <span>↓</span></button></div>
+      <div class="page-title"><div><p class="eyebrow">MEGA-CAP WATCHLIST</p><h1>美股巨头估值雷达</h1><p class="subtitle">以多维估值指标，快速透视全球科技领袖的定价。</p></div><div class="market-summary"><span>11 家公司总市值</span><strong>$31.6T</strong><em>+0.82% 今日</em></div></div>
       <div class="table-card">
-        <div class="table-head"><span>公司</span><span>市值</span><span>PE (TTM)</span><span>预期 PE</span><span>PEG</span><span>市销率</span><span>市现率</span><span>隐含增长率 <b class="help" title="为支撑当前估值所需的未来五年收入年复合增长率">?</b></span><span>收入同比（最近）</span><span></span></div>
+        <div class="table-head"><span><button class="sort-header" data-sort="name">公司</button> <a class="help" href="#company" data-metric="company" aria-label="公司说明">?</a></span><span><button class="sort-header" data-sort="price">最新股价</button> <a class="help" href="#price" data-metric="price" aria-label="股价说明">?</a></span><span><button class="sort-header" data-sort="cap">市值</button> <a class="help" href="#market-cap" data-metric="market-cap" aria-label="市值说明">?</a></span><span><button class="sort-header" data-sort="pe">PE (TTM)</button> <a class="help" href="#pe" data-metric="pe" aria-label="PE说明">?</a></span><span><button class="sort-header" data-sort="fpe">预期 PE</button> <a class="help" href="#forward-pe" data-metric="forward-pe" aria-label="预期PE说明">?</a></span><span><button class="sort-header" data-sort="peg">PEG</button> <a class="help" href="#peg" data-metric="peg" aria-label="PEG说明">?</a></span><span><button class="sort-header" data-sort="ps">市销率</button> <a class="help" href="#ps" data-metric="ps" aria-label="市销率说明">?</a></span><span><button class="sort-header" data-sort="evEbitda">EV/EBITDA</button> <a class="help" href="#ev-ebitda" data-metric="ev-ebitda" aria-label="EV EBITDA说明">?</a></span><span><button class="sort-header" data-sort="implied">隐含增长率</button> <a class="help" href="#implied-growth" data-metric="implied-growth" aria-label="隐含增长率说明">?</a></span><span><button class="sort-header" data-sort="growth">收入同比（最近）</button> <a class="help" href="#revenue-growth" data-metric="revenue-growth" aria-label="收入同比说明">?</a></span><span></span></div>
         <div id="stock-rows"></div>
       </div>
-      <p class="disclaimer">数据仅供研究参考，不构成投资建议。隐含增长率为模型推算的未来五年收入 CAGR（折现率 9%、终值增长 3%、目标自由现金流率按行业估计），并非分析师一致预期。</p>
+      <p class="disclaimer">数据仅供研究参考，不构成投资建议。隐含增长率为公司级反向 FCFE 推算的未来五年收入 CAGR，采用各公司自身现金流与风险参数，并非分析师一致预期。</p>
     </section>
+
+    <section id="nasdaq" class="aux hidden"><div class="aux-title"><p class="eyebrow">NASDAQ VALUATION</p><h1>纳斯达克指数估值</h1><p>追踪纳斯达克 100 的估值水平与头部权重集中度。</p></div><div class="index-stats index-stats-three"><div class="index-stat"><span>PE（TTM）</span><strong id="ndx-pe">等待数据</strong><small id="ndx-date">—</small></div><div class="index-stat"><span>前瞻 PE</span><strong id="ndx-forward-pe">等待数据</strong><small>下一财年预期盈利</small></div><div class="index-stat"><span>市净率（P/B）</span><strong id="ndx-pb">等待数据</strong><small>每单位净资产的市场定价</small></div></div><div class="index-chart"><div class="chart-top"><div><p class="eyebrow">VALUATION HISTORY</p><h3>纳斯达克 100 估值历史</h3><p class="chart-caption">PE 与前瞻 PE 使用左轴；市净率使用右轴，避免数值较小的 P/B 曲线被压平。</p></div></div><div class="metric-toggles" role="group" aria-label="选择显示的估值指标"><label><input type="checkbox" data-ndx-metric="pe" checked><i class="orange"></i>PE（TTM）</label><label><input type="checkbox" data-ndx-metric="forwardPe" checked><i class="teal"></i>前瞻 PE</label><label><input type="checkbox" data-ndx-metric="pb" checked><i class="violet"></i>市净率</label></div><div class="chart-wrap"><svg id="ndx-valuation-chart" viewBox="0 0 1040 400" aria-label="纳斯达克100估值历史"></svg></div></div><div class="index-chart"><div class="chart-top"><div><p class="eyebrow">CONCENTRATION HISTORY</p><h3>前十市值占比（集中度）</h3></div></div><div class="chart-wrap"><svg id="ndx-concentration-chart" viewBox="0 0 1040 400" aria-label="纳斯达克前十集中度历史"></svg></div></div><p class="index-note">数据口径：前十占比 = 前十成分股自由流通市值 ÷ 纳斯达克 100 自由流通总市值。该页仅展示已导入的真实指数数据。</p></section>
 
     <section id="detail" class="detail hidden">
       <button id="back" class="back">← 返回估值概览</button>
       <div class="detail-head"><div class="detail-company"><div id="detail-logo" class="logo lg"></div><div><p id="detail-ticker" class="eyebrow"></p><h2 id="detail-name"></h2><p id="detail-price" class="detail-price"></p></div></div><div class="growth-panel"><span>预期收入增长</span><strong id="detail-growth"></strong><em>未来 12 个月</em></div></div>
-      <div class="periods"><button>1年</button><button>3年</button><button class="active">5年</button><button>全部</button></div>
+      <div class="periods"><button>1年</button><button>3年</button><button class="active">5年</button><button>10年</button></div>
       <div class="chart-card">
-        <div class="chart-top"><div><p class="eyebrow">VALUATION HISTORY</p><h3 id="chart-title">估值区间与趋势</h3></div><div class="legend"><span><i class="orange"></i>PE (TTM)</span><span><i class="teal"></i>Forward PE</span><span><i class="blue"></i>市现率</span><span><i class="violet"></i>市销率</span></div></div>
+        <div class="chart-top"><div><p class="eyebrow">VALUATION HISTORY</p><h3 id="chart-title">估值区间与趋势</h3></div><div class="legend"><span><i class="orange"></i>P/E GAAP</span><span><i class="teal"></i>Price / CF</span><span><i class="violet"></i>Price / Sales</span></div></div>
         <div class="stats" id="stats"></div>
         <div class="chart-wrap"><svg id="chart" viewBox="0 0 1040 400" role="img" aria-label="估值历史走势"></svg></div>
       </div>
       <section class="insight"><p class="eyebrow">估值解读</p><p id="insight-copy"></p></section>
+      <section id="model-inputs" class="model-inputs"></section>
     </section>
   </main>
+  <div id="metric-modal" class="metric-modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-panel"><button id="modal-close" class="modal-close" aria-label="关闭">×</button><p class="eyebrow">METRIC GUIDE</p><h2 id="modal-title"></h2><div id="modal-content"></div><p class="modal-hint">点击空白处或按 Esc 关闭</p></div></div>
   <script src="app.js"></script>
 </body>
 </html>
