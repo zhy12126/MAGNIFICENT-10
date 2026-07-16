@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magnificent 10 · 估值雷达</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">M</span><span>MARKET<span>10</span></span></div>
+      <nav><button class="nav-active">估值概览</button><button>盈利预测</button><button>市场动态</button></nav>
+      <div class="header-right"><span class="live-dot"></span><span>美股日终估值</span><span class="updated">更新于 <b>等待日更数据</b></span></div>
+    </header>
+
+    <section id="overview" class="overview">
+      <div class="page-title"><div><p class="eyebrow">THE MAGNIFICENT 10</p><h1>美股巨头估值雷达</h1><p class="subtitle">以多维估值指标，快速透视全球科技领袖的定价。</p></div><div class="market-summary"><span>10 家公司总市值</span><strong>$31.6T</strong><em>+0.82% 今日</em></div></div>
+      <div class="filters"><div class="filter-group"><button class="pill selected">全部</button><button class="pill">半导体</button><button class="pill">软件与云</button><button class="pill">平台与电商</button></div><button class="sort">按市值排序 <span>↓</span></button></div>
+      <div class="table-card">
+        <div class="table-head"><span>公司</span><span>市值</span><span>PE (TTM)</span><span>预期 PE</span><span>PEG</span><span>市销率</span><span>市现率</span><span>隐含增长率 <b class="help" title="为支撑当前估值所需的未来五年收入年复合增长率">?</b></span><span>收入同比（最近）</span><span></span></div>
+        <div id="stock-rows"></div>
+      </div>
+      <p class="disclaimer">数据仅供研究参考，不构成投资建议。隐含增长率为模型推算的未来五年收入 CAGR（折现率 9%、终值增长 3%、目标自由现金流率按行业估计），并非分析师一致预期。</p>
+    </section>
+
+    <section id="detail" class="detail hidden">
+      <button id="back" class="back">← 返回估值概览</button>
+      <div class="detail-head"><div class="detail-company"><div id="detail-logo" class="logo lg"></div><div><p id="detail-ticker" class="eyebrow"></p><h2 id="detail-name"></h2><p id="detail-price" class="detail-price"></p></div></div><div class="growth-panel"><span>预期收入增长</span><strong id="detail-growth"></strong><em>未来 12 个月</em></div></div>
+      <div class="periods"><button>1年</button><button>3年</button><button class="active">5年</button><button>全部</button></div>
+      <div class="chart-card">
+        <div class="chart-top"><div><p class="eyebrow">VALUATION HISTORY</p><h3 id="chart-title">估值区间与趋势</h3></div><div class="legend"><span><i class="orange"></i>PE (TTM)</span><span><i class="teal"></i>Forward PE</span><span><i class="blue"></i>市现率</span><span><i class="violet"></i>市销率</span></div></div>
+        <div class="stats" id="stats"></div>
+        <div class="chart-wrap"><svg id="chart" viewBox="0 0 1040 400" role="img" aria-label="估值历史走势"></svg></div>
+      </div>
+      <section class="insight"><p class="eyebrow">估值解读</p><p id="insight-copy"></p></section>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
