@@ -1,9 +1,9 @@
 name: Update market data
 
 on:
-  schedule:
+  #schedule:
     # 每个美股交易日收盘后运行；UTC 22:30 = 美东夏令时 18:30
-    - cron: '30 22 * * 1-5'
+    # - cron: '30 22 * * 1-5'
   workflow_dispatch:
 
 permissions:
