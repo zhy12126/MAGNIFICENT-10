@@ -329,6 +329,39 @@ const setChartMode=mode=>{
 };
 const originalOpenDetail=openDetail;
 openDetail=ticker=>{chartMode='valuation';activePeriod=activeValuationPeriod;document.querySelectorAll('.periods button').forEach(button=>button.classList.toggle('active',button.textContent===activePeriod));originalOpenDetail(ticker);document.querySelector('.chart-card').classList.remove('price-mode');document.querySelectorAll('#chart-mode button').forEach(button=>button.classList.toggle('active',button.dataset.chartMode==='valuation'))};
+// Make a company detail view a real browser-history entry. This lets the
+// phone's system back gesture/button return to the overview rather than leave
+// the site, while retaining the existing on-page back control.
+const openDetailWithoutHistory=openDetail;
+let restoringDetailFromHistory=false;
+openDetail=ticker=>{
+  if(!restoringDetailFromHistory){
+    const url=new URL(window.location.href);
+    if(url.searchParams.get('stock')!==ticker){
+      url.searchParams.set('stock',ticker);
+      window.history.pushState({market10Detail:true,ticker},'',url);
+    }
+  }
+  openDetailWithoutHistory(ticker);
+};
+const showOverviewFromHistory=()=>{
+  document.querySelector('#detail').classList.add('hidden');
+  document.querySelector('#overview').classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+window.addEventListener('popstate',()=>{
+  const ticker=new URL(window.location.href).searchParams.get('stock');
+  if(ticker&&stocks.some(stock=>stock.ticker===ticker)){
+    restoringDetailFromHistory=true;
+    openDetail(ticker);
+    restoringDetailFromHistory=false;
+  }else showOverviewFromHistory();
+});
+document.querySelector('#back').addEventListener('click',event=>{
+  if(!window.history.state?.market10Detail)return;
+  event.stopImmediatePropagation();
+  window.history.back();
+},true);
 document.querySelectorAll('#chart-mode button').forEach(button=>button.addEventListener('click',()=>setChartMode(button.dataset.chartMode)));
 rankingDirection.pcf=1;
 metricHelp.pcf=['市现率（P/CF）','市现率 = 市值 ÷ 过去 12 个月经营现金流。它衡量市场为公司实际经营产生的现金支付了多少倍价格；经营现金流为负或缺失时显示“—”。'];
