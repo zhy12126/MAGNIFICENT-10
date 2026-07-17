@@ -1,8 +1,10 @@
 [CmdletBinding()]
 param(
-  [ValidateSet('daily', 'fundamentals')]
+  [ValidateSet('daily', 'fundamentals', 'history')]
   [string]$Mode = 'daily',
-  [string]$ApiKey
+  [string]$ApiKey,
+  [ValidateSet('auto', 'stooq', 'eodhd')]
+  [string]$PriceSource = 'auto'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -15,15 +17,16 @@ function Import-LocalEnv {
     $line = $_.Trim()
     if (-not $line -or $line.StartsWith('#') -or -not $line.Contains('=')) { return }
     $name, $value = $line -split '=', 2
-    if ($name.Trim() -eq 'ALPHA_VANTAGE_API_KEY' -and -not $env:ALPHA_VANTAGE_API_KEY) {
-      $env:ALPHA_VANTAGE_API_KEY = $value.Trim().Trim('"').Trim("'")
+    if ($name.Trim() -in @('ALPHA_VANTAGE_API_KEY', 'SEC_EDGAR_USER_AGENT', 'EODHD_API_KEY', 'HISTORICAL_PRICE_SOURCE') -and -not (Get-Item "Env:$($name.Trim())" -ErrorAction SilentlyContinue)) {
+      Set-Item "Env:$($name.Trim())" $value.Trim().Trim('"').Trim("'")
     }
   }
 }
 
 Import-LocalEnv (Join-Path $root '.env')
 if ($ApiKey) { $env:ALPHA_VANTAGE_API_KEY = $ApiKey }
-if (-not $env:ALPHA_VANTAGE_API_KEY) {
+if ($PriceSource -ne 'auto') { $env:HISTORICAL_PRICE_SOURCE = $PriceSource }
+if ($Mode -ne 'history' -and -not $env:ALPHA_VANTAGE_API_KEY) {
   throw "找不到 Alpha Vantage Key。请复制 .env.example 为 .env 并填入 ALPHA_VANTAGE_API_KEY，或运行时传入 -ApiKey。"
 }
 
@@ -40,14 +43,23 @@ if ($py) {
 }
 
 Set-Location $root
-if ($Mode -eq 'daily') {
-  Write-Host "开始本地日更：更新 11 家公司的行情、估值快照和历史曲线。"
-  Write-Host "预计使用 22 次 Alpha Vantage 请求；请勿在同一天再运行 fundamentals。" -ForegroundColor Yellow
-  & $runner @runnerArgs (Join-Path $PSScriptRoot 'fetch_market_data.py')
-} else {
-  Write-Host "开始本地财报刷新：更新公司级现金流模型输入。"
-  Write-Host "预计使用 22 次 Alpha Vantage 请求；建议在不运行日更的周末执行。" -ForegroundColor Yellow
-  & $runner @runnerArgs (Join-Path $PSScriptRoot 'fetch_fundamentals.py')
+switch ($Mode) {
+  'daily' {
+    Write-Host "开始本地日更：更新 12 家公司的行情、估值快照和历史曲线，并刷新 SPY 口径的集中度。"
+    Write-Host "预计使用 24 次 Alpha Vantage 请求；请勿在同一天再运行 fundamentals。" -ForegroundColor Yellow
+    & $runner @runnerArgs (Join-Path $PSScriptRoot 'fetch_market_data.py')
+  }
+  'fundamentals' {
+    Write-Host "开始本地财报刷新：更新公司级现金流模型输入。"
+    Write-Host "预计使用 24 次 Alpha Vantage 请求；建议在不运行日更的周末执行。" -ForegroundColor Yellow
+    & $runner @runnerArgs (Join-Path $PSScriptRoot 'fetch_fundamentals.py')
+  }
+  'history' {
+    if (-not $env:SEC_EDGAR_USER_AGENT) { throw "找不到 SEC 联系方式。请在 .env 中填入 SEC_EDGAR_USER_AGENT，例如 Market10 your-email@example.com。" }
+    Write-Host "开始从 SEC EDGAR 财报 TTM + 历史 EOD 收盘价回填五年 P/E、P/CF 与 P/S；不会运行 Alpha Vantage。" -ForegroundColor Yellow
+    if ($env:HISTORICAL_PRICE_SOURCE -eq 'stooq') { Write-Host "价格源：强制使用 Stooq；无数据时回退 Yahoo Finance。" -ForegroundColor Yellow } elseif ($env:EODHD_API_KEY) { Write-Host "价格源：EODHD adjusted EOD。可传入 -PriceSource stooq 强制使用免费 Stooq。" -ForegroundColor Yellow } else { Write-Host "价格源：Stooq；无数据时回退 Yahoo Finance。可在 .env 配置 EODHD_API_KEY 使用商业 EOD。" -ForegroundColor Yellow }
+    & $runner @runnerArgs (Join-Path $PSScriptRoot 'fetch_free_valuation_history.py')
+  }
 }
 
 if ($LASTEXITCODE -ne 0) { throw "数据更新失败，退出码：$LASTEXITCODE" }

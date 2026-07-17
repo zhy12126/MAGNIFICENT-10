@@ -1,6 +1,6 @@
 """Refresh company-specific reverse-DCF inputs from Alpha Vantage financial statements.
 
-This job is intentionally separate from the daily snapshot.  It makes 22 calls
+This job is intentionally separate from the daily snapshot.  It makes 24 calls
 (income statement + cash flow for each company) and should run on a Saturday,
 when the 22-call weekday market job is not running.
 """
@@ -29,10 +29,11 @@ COMPANIES = {
     "AMZN": ("Amazon", .75, "AWS 与物流网络均在加大投入，当前现金转化优先。"),
     "META": ("Meta", .75, "AI 资本开支处于高投入阶段，避免用旧年高 FCF 率高估。"),
     "TSLA": ("Tesla", .40, "交付、库存和营运资本波动较大，以三年中位数为主。"),
-    "SPCX": ("SpaceX", .00, "需要至少四季公开现金流后才计算。"),
     "TSM": ("TSMC", .45, "晶圆厂资本开支与景气周期显著，三年中位数为主。"),
     "MU": ("Micron", .35, "存储价格周期显著，三年中位数为主以降低周期高低点影响。"),
-    "SKHY": ("SK hynix", .35, "存储价格周期显著，三年中位数为主以降低周期高低点影响。"),
+    "AVGO": ("Broadcom", .60, "基础设施软件整合与半导体业务并行，当前现金转化权重略高。"),
+    "ORCL": ("Oracle", .65, "云基础设施扩张带来较高资本开支，当前现金流率更具代表性。"),
+    "PLTR": ("Palantir", .70, "商业化规模仍在快速变化，较重视最新已披露的现金流表现。"),
 }
 RISK_FREE_RATE = .0425       # US 10Y reference, refreshed with each methodology review
 EQUITY_RISK_PREMIUM = .0500  # long-run mature-market ERP assumption
@@ -129,6 +130,17 @@ def main():
             }
         except Exception as exc:
             companies[ticker] = {"status": "unavailable", "company": name, "reason": str(exc), "rationale": rationale}
+    # A rate-limit response for every symbol is not a successful refresh. In
+    # that situation keep the last known file intact and return a non-zero
+    # exit code so the PowerShell wrapper and GitHub Action cannot report a
+    # misleading success.
+    ready_count = sum(company.get("status") == "ready" for company in companies.values())
+    if ready_count == 0:
+        raise SystemExit(
+            "No usable fundamentals were returned. Alpha Vantage likely hit its "
+            "daily limit; fundamentals.json was left unchanged."
+        )
+
     target = Path("outputs/data/fundamentals.json")
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps({"updatedAt": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "companies": companies}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

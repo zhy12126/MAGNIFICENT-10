@@ -1,0 +1,77 @@
+{
+  "updatedAt": "2026-07-17T03:00:54Z",
+  "companies": {
+    "NVDA": {
+      "status": "unavailable",
+      "company": "NVIDIA",
+      "reason": "Alpha Vantage NVDA/INCOME_STATEMENT rejected the request: We have detected your API key and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.",
+      "rationale": "AI 数据中心利润率出现结构性抬升；保留 40% 三年中位数以避免只外推峰值。"
+    },
+    "AAPL": {
+      "status": "unavailable",
+      "company": "Apple",
+      "reason": "Alpha Vantage AAPL/INCOME_STATEMENT rejected the request: Thank you for using Alpha Vantage! Please consider spreading out your free API requests more sparingly (1 request per second). You may subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to lift the free key rate limit (25 requests per day), raise the per-second burst limit, and instantly unlock all premium endpoints",
+      "rationale": "硬件与服务组合成熟，TTM 与三年现金转化各占一半。"
+    },
+    "MSFT": {
+      "status": "unavailable",
+      "company": "Microsoft",
+      "reason": "Alpha Vantage MSFT/INCOME_STATEMENT rejected the request: Thank you for using Alpha Vantage! Please consider spreading out your free API requests more sparingly (1 request per second). You may subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to lift the free key rate limit (25 requests per day), raise the per-second burst limit, and instantly unlock all premium endpoints",
+      "rationale": "AI 基础设施资本开支已显著上升，较多采用当前现金流率。"
+    },
+    "GOOGL": {
+      "status": "unavailable",
+      "company": "Alphabet",
+      "reason": "Alpha Vantage GOOGL/INCOME_STATEMENT rejected the request: Thank you for using Alpha Vantage! Please consider spreading out your free API requests more sparingly (1 request per second). You may subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to lift the free key rate limit (25 requests per day), raise the per-second burst limit, and instantly unlock all premium endpoints",
+      "rationale": "数据中心投资快速增加，当前现金流率比过去轻资本年份更具代表性。"
+    },
+    "AMZN": {
+      "status": "unavailable",
+      "company": "Amazon",
+      "reason": "Alpha Vantage AMZN/INCOME_STATEMENT rejected the request: Thank you for using Alpha Vantage! Please consider spreading out your free API requests more sparingly (1 request per second). You may subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to lift the free key rate limit (25 requests per day), raise the per-second burst limit, and instantly unlock all premium endpoints",
+      "rationale": "AWS 与物流网络均在加大投入，当前现金转化优先。"
+    },
+    "META": {
+      "status": "unavailable",
+      "company": "Meta",
+      "reason": "Alpha Vantage META/INCOME_STATEMENT rejected the request: We have detected your API key and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.",
+      "rationale": "AI 资本开支处于高投入阶段，避免用旧年高 FCF 率高估。"
+    },
+    "TSLA": {
+      "status": "unavailable",
+      "company": "Tesla",
+      "reason": "Alpha Vantage TSLA/INCOME_STATEMENT rejected the request: Thank you for using Alpha Vantage! Please consider spreading out your free API requests more sparingly (1 request per second). You may subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to lift the free key rate limit (25 requests per day), raise the per-second burst limit, and instantly unlock all premium endpoints",
+      "rationale": "交付、库存和营运资本波动较大，以三年中位数为主。"
+    },
+    "TSM": {
+      "status": "unavailable",
+      "company": "TSMC",
+      "reason": "Alpha Vantage TSM/INCOME_STATEMENT rejected the request: Thank you for using Alpha Vantage! Please consider spreading out your free API requests more sparingly (1 request per second). You may subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to lift the free key rate limit (25 requests per day), raise the per-second burst limit, and instantly unlock all premium endpoints",
+      "rationale": "晶圆厂资本开支与景气周期显著，三年中位数为主。"
+    },
+    "MU": {
+      "status": "unavailable",
+      "company": "Micron",
+      "reason": "Alpha Vantage MU/INCOME_STATEMENT rejected the request: Thank you for using Alpha Vantage! Please consider spreading out your free API requests more sparingly (1 request per second). You may subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to lift the free key rate limit (25 requests per day), raise the per-second burst limit, and instantly unlock all premium endpoints",
+      "rationale": "存储价格周期显著，三年中位数为主以降低周期高低点影响。"
+    },
+    "AVGO": {
+      "status": "unavailable",
+      "company": "Broadcom",
+      "reason": "Alpha Vantage AVGO/INCOME_STATEMENT rejected the request: We have detected your API key and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.",
+      "rationale": "基础设施软件整合与半导体业务并行，当前现金转化权重略高。"
+    },
+    "ORCL": {
+      "status": "unavailable",
+      "company": "Oracle",
+      "reason": "Alpha Vantage ORCL/INCOME_STATEMENT rejected the request: Thank you for using Alpha Vantage! Please consider spreading out your free API requests more sparingly (1 request per second). You may subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to lift the free key rate limit (25 requests per day), raise the per-second burst limit, and instantly unlock all premium endpoints",
+      "rationale": "云基础设施扩张带来较高资本开支，当前现金流率更具代表性。"
+    },
+    "PLTR": {
+      "status": "unavailable",
+      "company": "Palantir",
+      "reason": "Alpha Vantage PLTR/INCOME_STATEMENT rejected the request: Thank you for using Alpha Vantage! Please consider spreading out your free API requests more sparingly (1 request per second). You may subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to lift the free key rate limit (25 requests per day), raise the per-second burst limit, and instantly unlock all premium endpoints",
+      "rationale": "商业化规模仍在快速变化，较重视最新已披露的现金流表现。"
+    }
+  }
+}

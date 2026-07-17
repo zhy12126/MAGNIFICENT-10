@@ -1,0 +1,22 @@
+{
+  "source": "State Street SPY daily fund holdings",
+  "sourceUrl": "https://www.ssga.com/us/en/individual/etfs/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
+  "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. TSM is excluded from the US semiconductor basket.",
+  "updatedAt": null,
+  "asOf": null,
+  "metrics": {
+    "mag7": {
+      "share": null,
+      "dailyChangePp": null,
+      "holdings": {},
+      "notInSpy": []
+    },
+    "semiconductors": {
+      "share": null,
+      "dailyChangePp": null,
+      "holdings": {},
+      "notInSpy": []
+    }
+  },
+  "history": []
+}

@@ -1,6 +1,6 @@
 """Fetch a daily, static valuation snapshot from Alpha Vantage.
 
-The job makes 22 calls (OVERVIEW + GLOBAL_QUOTE for 11 tickers), which is
+The job makes 24 calls (OVERVIEW + GLOBAL_QUOTE for 12 tickers), which is
 within Alpha Vantage's 25 requests/day free allowance.  It intentionally uses
 end-of-day data; it is not a real-time market-data service.
 """
@@ -26,10 +26,11 @@ COMPANIES = [
     ("Amazon", "AMZN", "a", "#fff0dc", "#111"),
     ("Meta", "META", "∞", "#eaf1ff", "#1768df"),
     ("Tesla", "TSLA", "T", "#ffe8e8", "#d93232"),
-    ("SpaceX", "SPCX", "✦", "#e9eef9", "#182c50"),
     ("TSMC", "TSM", "◌", "#eaf8fb", "#20899b"),
     ("Micron", "MU", "μ", "#e8f7ed", "#16834c"),
-    ("SK hynix", "SKHY", "H", "#ffece6", "#e6482e"),
+    ("Broadcom", "AVGO", "B", "#fff0ea", "#d34b28"),
+    ("Oracle", "ORCL", "O", "#fff0f0", "#c74634"),
+    ("Palantir", "PLTR", "P", "#eef2f6", "#1f2a35"),
 ]
 
 def call(function, symbol):
@@ -127,7 +128,7 @@ def main():
             "growth": "—" if growth is None else f"{growth * 100:.0f}%",
             "price": "—" if price is None else f"${price:,.2f}", "change": change,
             "valuationModel": model,
-            "note": "数据来源：Alpha Vantage。隐含增长率采用公司自身财报现金流反推，并非分析师预测。"
+            "note": "数据口径：行情与部分基本面来自 Alpha Vantage；历史估值以 SEC EDGAR 财报 TTM 和历史收盘价计算。隐含增长率为公司级 FCFE 反推，不是分析师预测或投行评级。"
         })
     now = datetime.now(timezone.utc)
     output = {"source": "Alpha Vantage", "updatedAt": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "stocks": stocks}
@@ -141,7 +142,7 @@ def main():
     day = now.strftime("%Y-%m-%d")
     for stock in stocks:
         rows = history.setdefault("stocks", {}).setdefault(stock["ticker"], [])
-        snapshot = {"date": day, "pe": number(stock["pe"]), "pcf": number(stock["pcf"]), "ps": number(stock["ps"])}
+        snapshot = {"date": day, "price": number(str(stock.get("price", "")).replace("$", "").replace(",", "")), "pe": number(stock["pe"]), "pcf": number(stock["pcf"]), "ps": number(stock["ps"])}
         if rows and rows[-1]["date"] == day:
             rows[-1] = snapshot
         else:
@@ -149,6 +150,14 @@ def main():
         history["stocks"][stock["ticker"]] = [row for row in rows if row["date"] >= f"{now.year - 10}-01-01"]
     history["updatedAt"] = output["updatedAt"]
     history_target.write_text(json.dumps(history, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    try:
+        from fetch_spy_concentration import main as refresh_spy_concentration
+
+        refresh_spy_concentration()
+    except Exception as exc:
+        # Keep the last successful concentration snapshot if the public SPY
+        # workbook is temporarily unavailable; the stock refresh is still valid.
+        print(f"Warning: SPY concentration refresh skipped: {exc}")
 
 if __name__ == "__main__":
     main()
