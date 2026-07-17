@@ -105,7 +105,8 @@ def main():
             time.sleep(13)
         market_cap = number(overview.get("MarketCapitalization"))
         ps = number(overview.get("PriceToSalesRatioTTM"))
-        growth = number(overview.get("QuarterlyRevenueGrowthYOY"))
+        revenue_growth = number(overview.get("QuarterlyRevenueGrowthYOY"))
+        eps_growth = number(overview.get("QuarterlyEarningsGrowthYOY"))
         price = number(quote.get("05. price"))
         change = quote.get("10. change percent", "—")
         model = dict(fundamentals.get(ticker, {}))
@@ -125,7 +126,14 @@ def main():
             "fpe": ratio(number(overview.get("ForwardPE"))), "peg": ratio(number(overview.get("PEGRatio"))),
             "ps": ratio(ps), "pcf": ratio(pcf), "evEbitda": ratio(number(overview.get("EVToEBITDA"))),
             "implied": implied_growth(market_cap, model),
-            "growth": "—" if growth is None else f"{growth * 100:.0f}%",
+            # These are most-recent reported-quarter growth rates, not forecasts.
+            # Future EPS growth is derived in the browser from trailing and
+            # forward PE. Alpha Vantage's free OVERVIEW endpoint does not expose
+            # a reliable company-level forward revenue consensus, so we leave
+            # that field absent rather than presenting a proxy as an estimate.
+            "growth": "—" if revenue_growth is None else f"{revenue_growth * 100:.0f}%",
+            "revenueGrowthCurrent": "—" if revenue_growth is None else f"{revenue_growth * 100:.0f}%",
+            "epsGrowthCurrent": "—" if eps_growth is None else f"{eps_growth * 100:.0f}%",
             "price": "—" if price is None else f"${price:,.2f}", "change": change,
             "valuationModel": model,
             "note": "数据口径：行情与部分基本面来自 Alpha Vantage；历史估值以 SEC EDGAR 财报 TTM 和历史收盘价计算。隐含增长率为公司级 FCFE 反推，不是分析师预测或投行评级。"
