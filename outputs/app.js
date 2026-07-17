@@ -102,6 +102,24 @@ document.addEventListener('pointermove',event=>{
   tooltip.style.top=`${Math.max(8,event.clientY-rect.top+10)}px`;
   tooltip.classList.remove('hidden');
 });
+
+// Phones do not emit mousemove while a finger is on the chart. Translate the
+// finger position into the existing hover interaction so the crosshair, dots
+// and transparent data card work on both chart modes.
+['touchstart','touchmove'].forEach(type=>document.addEventListener(type,event=>{
+  const touch=event.touches[0],target=touch&&document.elementFromPoint(touch.clientX,touch.clientY);
+  if(!(target instanceof Element)||!target.closest('#chart'))return;
+  event.preventDefault();
+  target.dispatchEvent(new MouseEvent('mousemove',{bubbles:true,clientX:touch.clientX,clientY:touch.clientY}));
+},{passive:false}));
+document.addEventListener('touchend',()=>{
+  const svg=document.querySelector('#chart'),tooltip=document.querySelector('#chart-tooltip');
+  if(!svg)return;
+  svg.querySelectorAll('.hover-guide').forEach(guide=>guide.style.setProperty('display','none'));
+  const points=svg.querySelector('.hover-points');
+  if(points)points.innerHTML='';
+  if(tooltip)tooltip.classList.add('hidden');
+});
 document.addEventListener('pointerout',event=>{
   const from=event.target instanceof Element?event.target.closest('#chart'):null;
   const to=event.relatedTarget instanceof Element?event.relatedTarget.closest('#chart'):null;
@@ -339,7 +357,7 @@ document.addEventListener('mousemove',event=>{
     const items=isPrice?[['price','#1ba6a0']]:[['pe','#ee8b2d'],['pcf','#1ba6a0'],['ps','#b547c3']];
     pointGroup.innerHTML=items.filter(([key])=>numericValue(point[key])).map(([key,color])=>{
       const pointY=314-(Number(point[key])-min)/(max-min)*252;
-      return `<circle cx="${guideX}" cy="${pointY}" r="4.6" fill="#fff" stroke="${color}" stroke-width="2.5"/>`;
+      return `<circle cx="${guideX}" cy="${pointY}" r="6" fill="#fff" stroke="${color}" stroke-width="3" vector-effect="non-scaling-stroke"/>`;
     }).join('');
   }
   const rows=(isPrice?[['price','日收盘价','#1ba6a0']]:[['pe','PE（TTM）','#ee8b2d'],['pcf','Price / CF（TTM）','#1ba6a0'],['ps','Price / Sales（TTM）','#b547c3']])
