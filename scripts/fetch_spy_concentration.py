@@ -105,11 +105,19 @@ def parse_weights(payload: bytes):
             weight = float(raw_weight)
         except ValueError:
             continue
-        # XLSX percentage cells are commonly stored as 0.0763 while some
-        # provider exports use 7.63.  Store all weights in percentage points.
-        weights[ticker] = weight * 100 if 0 < weight <= 1 else weight
+        weights[ticker] = weight
     if not weights:
         raise ValueError("Could not find Ticker and Weight columns in SPY workbook")
+    # State Street normally exports percentage points (for example 7.63 for
+    # a 7.63% holding).  Some spreadsheet exporters instead expose every
+    # percentage as fractions, so decide once from the complete portfolio —
+    # never per security.  Per-row conversion was inflating all sub-1% names
+    # by 100x while leaving mega-cap holdings apparently correct.
+    total_weight = sum(weights.values())
+    if 0.95 <= total_weight <= 1.05:
+        weights = {ticker: weight * 100 for ticker, weight in weights.items()}
+    elif not 95 <= total_weight <= 105:
+        raise ValueError(f"Unexpected SPY holding-weight total: {total_weight:.4f}")
     return weights, as_of
 
 
