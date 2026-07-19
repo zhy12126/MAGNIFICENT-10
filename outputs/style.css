@@ -36,3 +36,4 @@
 .model-result-unavailable{margin:12px 0 0!important;padding:8px 10px;border-left:2px solid #e5b36b;border-radius:0 6px 6px 0;background:#fffaf2;color:#80643b!important;font-size:11px!important;line-height:1.65!important}
 @media(max-width:680px){.model-result-unavailable{font-size:9px!important;padding:8px!important}}
 @media(max-width:680px){html,body{min-height:100%;overflow-x:clip;overscroll-behavior-y:none}.shell{padding-bottom:16px!important}.overview,.detail{padding-bottom:0!important;margin-bottom:0!important}.detail>.model-inputs:last-child{margin-bottom:0!important}}
+nav a{font-size:13px;color:#7c8582;padding:31px 0 27px;text-decoration:none}nav a:hover{color:var(--ink)}@media(max-width:680px){.topbar nav a{padding:8px 0 10px;font-size:13px}}

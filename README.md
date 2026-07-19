@@ -1,6 +1,41 @@
-# Market10 日更部署
+# HY 的个人工具小站
 
-这是一个静态网页：Cloudflare Pages 提供网页，GitHub Actions 每天收盘后从 Alpha Vantage 生成公司快照，并从 State Street 的 SPY 每日持仓生成集中度数据。
+这是一个由个人开发和维护的 Web 工具小站，用来整理我长期关注的数据，并把复杂信息转换成更容易理解的图表和分析。项目目前包含“巨头估值”和“人民币/日元汇率分析”两个板块。
+
+网站采用静态部署方案：Cloudflare Pages 提供网页，GitHub Actions 负责定时更新数据。所有结果仅用于个人研究与信息参考，不构成投资、交易或换汇建议。
+
+## 巨头估值
+
+巨头估值板块关注美国大型科技公司和半导体产业链，帮助快速了解：
+
+- 主要公司的市值、估值水平、收入增长和现金流表现；
+- 当前估值相对于历史区间所处的位置；
+- 市场价格隐含了怎样的未来增长预期；
+- MAG7 与半导体产业链在标普 500 中的集中度变化。
+
+公司日度快照主要来自 Alpha Vantage，历史财务数据可通过 SEC EDGAR 回填；标普 500 集中度使用 State Street 每日披露的 SPY 持仓作为可审计代理。数据缺失时页面保留空值，不使用模拟数据补齐。
+
+## 人民币/日元汇率分析
+
+汇率分析板块不是实时外汇报价工具，也不预测日元或人民币未来一定上涨或下跌。它主要回答：
+
+- 一段时间内人民币兑日元发生了怎样的变化；
+- 变化主要来自日元侧，还是人民币侧；
+- USD/JPY 与 USD/CNY 分别贡献了多少；
+- 哪些经济数据、政策和资金流线索与这段行情一致；
+- 未来30天有哪些值得留意的官方事件。
+
+`Update yen analysis data` 工作流优先从欧洲央行（ECB）取得同日 EUR/USD、EUR/JPY 与 EUR/CNY 参考汇率，由此推导 USD/JPY、USD/CNY 和 CNY/JPY；ECB 失败时回退到 FRED 的 DEXJPUS 与 DEXCHUS。结果写入 `outputs/data/yen-rates.json`。这些数据属于日频研究数据，不是实时成交报价。
+
+未来事件日历由 `outputs/data/yen-events-source.json` 中经过人工核对的官方日程生成。`scripts/build_yen_events.py` 会校验官方域名、移除过期事件，并生成未来30天的 `outputs/data/yen-events.json`。新增或调整事件时，需要先依据发布机构官网修改 source 文件并更新 `reviewedThrough`，不从第三方财经日历自动推断。
+
+本地更新汇率分析数据无需 API Key，可以双击 `scripts/run_yen_update.cmd`，或在项目根目录运行：
+
+```powershell
+.\scripts\run_yen_update.ps1
+```
+
+脚本会校验生成的JSON并显示最新共同交易日及三组汇率。网络失败时不会覆盖已有的 `yen-rates.json`。
 
 ## 首次配置
 

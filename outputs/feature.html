@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="人民币兑日元汇率解读与换汇决策辅助工具" />
+  <title>HY的工具小站 · 人民币/日元汇率分析</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260719-03" />
+  <link rel="stylesheet" href="yen.css?v=20260719-14" />
+</head>
+<body>
+  <main class="shell yen-shell">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="返回主页"><span class="brand-mark">H</span><span>HY的工具小站</span></a>
+      <nav aria-label="主要功能"><button type="button" onclick="window.location.href='index.html'">巨头估值</button><button type="button" class="nav-active" aria-current="page">人民币/日元汇率分析</button></nav>
+      <div class="header-right"><span class="demo-dot"></span><span data-status-label>正在加载数据</span><span class="updated">数据截至 <b data-updated>—</b></span></div>
+    </header>
+
+    <section class="yen-section trend-first" aria-labelledby="trend-title">
+      <div class="section-head trend-head">
+        <div><p class="eyebrow">EXCHANGE RATE TREND</p><h1 id="trend-title">过去6个月汇率走势</h1><p id="trend-description" class="chart-description">1人民币可以兑换多少日元；数值上升表示人民币换日元更划算。</p></div>
+      </div>
+      <div class="global-period-selector">
+        <div class="global-period-copy"><b>统一分析周期</b><span>同时更新汇率走势与“谁在主导”</span></div>
+        <div class="period-switch global-periods" role="group" aria-label="选择页面分析周期"><button type="button" data-chart-period="30">1个月</button><button type="button" class="active" data-chart-period="180">6个月</button><button type="button" data-chart-period="365">1年</button><button type="button" data-chart-period="1095">3年</button><button type="button" data-chart-period="1825">5年</button></div>
+      </div>
+      <div class="trend-card">
+        <div class="trend-summary"><span id="trend-pair">CNY / JPY</span><strong id="trend-current">—</strong><em id="trend-change">等待日频数据</em></div>
+        <div class="fx-canvas-wrap"><canvas id="fx-trend-chart" height="310" role="img" aria-label="过去6个月人民币兑日元走势图"></canvas><div id="fx-chart-tooltip" class="fx-chart-tooltip hidden" role="status"></div></div>
+        <div class="chart-legend"><span id="chart-period-start">—</span><b id="chart-data-source">官方日频数据</b><span>最近交易日</span></div>
+        <div class="trend-controls trend-controls-bottom"><span class="control-label">切换走势图</span><div class="pair-switch" role="group" aria-label="选择汇率走势"><button type="button" class="active" data-chart-pair="cnyjpy">人民币 / 日元</button><button type="button" data-chart-pair="usdjpy">美元 / 日元</button><button type="button" data-chart-pair="usdcny">美元 / 人民币</button></div></div>
+      </div>
+    </section>
+
+    <section class="yen-section" aria-labelledby="drivers-title">
+      <div class="section-head"><div><p class="eyebrow">WHAT DROVE THE PERIOD</p><h2 id="drivers-title">这段时间，谁在主导？</h2></div><button class="text-button" type="button" data-toggle="method">查看计算方法⌄</button></div>
+      <div class="driver-card">
+        <div class="driver-row"><div><span class="driver-flag jp">日</span><b>日元侧</b><small id="jpy-driver-copy">等待数据</small></div><div class="driver-track"><i id="jpy-driver-bar" class="driver-fill positive-fill" style="width:0"></i></div><strong id="jpy-driver-value">—</strong></div>
+        <div class="driver-row"><div><span class="driver-flag cn">中</span><b>人民币侧</b><small id="cny-driver-copy">等待数据</small></div><div class="driver-track negative-track"><i id="cny-driver-bar" class="driver-fill negative-fill" style="width:0"></i></div><strong id="cny-driver-value">—</strong></div>
+        <div class="driver-total"><span id="driver-total-label">等待真实汇率数据</span><strong id="driver-total-value">—</strong></div>
+        <div class="method-box hidden" id="method-box"><b>这是数学拆解，不是新闻归因</b><p>人民币兑日元 = 美元兑日元 ÷ 美元兑人民币。贡献采用对数变化计算，因此日元侧与人民币侧可以相加；四舍五入后可能有极小误差。</p><code>CNY/JPY 变化 ≈ USD/JPY 变化 − USD/CNY 变化</code></div>
+      </div>
+      <div class="driver-explainer driver-explainer-compact"><div class="explainer-intro"><span class="explainer-mark">?</span><div><b>为什么人民币兑日元要看美元汇率？</b><p>人民币兑日元可以直接报价，但市场价格通常会与两条更活跃的美元汇率保持一致。因此，把它拆成“日元相对美元”和“人民币相对美元”，更容易看清究竟是哪一侧变化更大。</p></div></div></div>
+    </section>
+
+    <section class="yen-section" aria-labelledby="events-title">
+      <div class="section-head"><div><p class="eyebrow">SIX-MONTH MARKET CONTEXT</p><h2 id="events-title">近6个月，两侧发生了什么？</h2></div><span class="analysis-maintained">由AI分析研报得到，不确保真实性</span></div>
+      <div class="side-analysis-grid">
+        <article class="side-analysis-card jpy-analysis">
+          <header><div><span class="side-symbol">¥</span><span><small>日元侧</small><b>为什么日元兑美元走弱？</b></span></div><em>USD / JPY</em></header>
+          <p class="side-conclusion">核心线索：市场认为日本难以快速加息，而美国利率仍处高位，日美利差继续支持美元资产与套息交易。</p>
+          <ol class="reason-list">
+            <li><span>01</span><div><b>日美利差仍然较大</b><p>美国通胀回落有限、降息预期反复后移，美债收益率保持高位；日本央行加息节奏较慢，市场预期的利率终点仍明显低于美国。借入日元、配置美元资产的套息交易因而仍有吸引力。</p></div></li>
+            <li><span>02</span><div><b>日本经济对连续加息的支撑有限</b><p>工资有所上涨，但消费和经济增长表现并不均衡，市场因此降低了对日本央行快速、连续加息的期待，日元继续被视作低成本融资货币。</p></div></li>
+            <li><span>03</span><div><b>养老金海外配置预期扰动情绪</b><p>市场曾讨论GPIF是否可能提高海外资产配置。即使政策没有立即变化，“卖出日元、配置海外资产”的预期也可能阶段性影响日元情绪。</p></div></li>
+            <li><span>04</span><div><b>能源进口增加美元需求</b><p>日本依赖石油和LNG进口。能源价格上涨时，进口成本及企业购汇需求可能上升，成为日元供求的一项不利背景。</p></div></li>
+            <li><span>05</span><div><b>汇率干预难以替代利率变化</b><p>政府买入日元可以短期影响价格，但如果日美利差和资金交易逻辑没有改变，市场通常认为干预效果难以长期维持。</p></div></li>
+          </ol>
+        </article>
+        <article class="side-analysis-card cny-analysis">
+          <header><div><span class="side-symbol">¥</span><span><small>人民币侧</small><b>为什么人民币兑美元走强？</b></span></div><em>USD / CNY</em></header>
+          <p class="side-conclusion">核心线索：出口与结汇需求提供基本面支撑，美元整体强势有所缓和，同时人民币汇率受到政策管理，波动明显小于日元。</p>
+          <ol class="reason-list">
+            <li><span>01</span><div><b>出口与结汇形成支撑</b><p>出口保持韧性意味着外汇收入持续流入；企业将部分美元收入兑换成人民币，会增加市场上的美元供给和人民币需求。这是经常账户层面的重要支持，但仍需结合实际结汇率观察。</p></div></li>
+            <li><span>02</span><div><b>美元整体强势有所缓和</b><p>市场重新评估未来美国利率下降的可能性，美元不再维持此前一边倒的强势环境，为人民币等非美货币提供了相对友好的外部背景。</p></div></li>
+            <li><span>03</span><div><b>汇率受到政策管理</b><p>人民币并非完全自由浮动。中间价、离岸流动性和宏观审慎工具会影响市场预期与波动节奏，因此人民币通常比日元更平稳。</p></div></li>
+            <li><span>04</span><div><b>风险偏好改善带来增量支持</b><p>全球风险情绪改善时，资金对亚洲资产的配置意愿可能提高，人民币也可能受益；但这一线索波动较快，需要结合跨境收付款数据验证。</p></div></li>
+          </ol>
+        </article>
+      </div>
+      <p class="context-note"><b>阅读口径：</b>上面的数学归因回答“哪一侧贡献更大”；这里整理的是与走势一致的市场线索，并不证明任何单一事件是汇率变化的确定原因。</p>
+    </section>
+
+    <section class="yen-section" aria-labelledby="calendar-title">
+      <div class="section-head"><div><p class="eyebrow">UPCOMING CALENDAR</p><h2 id="calendar-title">未来事件日历</h2><p class="chart-description">以下时间统一换算为北京时间；日程可能由发布机构调整。</p></div><span class="calendar-window">未来30天</span></div>
+      <div class="future-calendar" id="future-calendar" aria-live="polite"><p class="calendar-loading">正在加载已审核的官方日程…</p></div>
+      <p class="calendar-note">事件日历只提示潜在波动节点，不提供结果预测。点击事件名称可查看发布机构的官方日程。</p>
+    </section>
+
+    <footer class="yen-footer"><p><b>重要说明：</b>汇率走势优先使用ECB工作日参考汇率，失败时回退FRED；人民币兑日元由同日USD/JPY与USD/CNY计算，不属于实时成交报价。事件与经济数据仅作为市场背景，不代表已经证明其与汇率变化之间存在确定因果关系。</p><a href="index.html">返回巨头估值 →</a></footer>
+  </main>
+  <script src="yen.js?v=20260719-09"></script>
+</body>
+</html>
