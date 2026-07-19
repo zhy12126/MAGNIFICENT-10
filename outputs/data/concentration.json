@@ -1,8 +1,8 @@
 {
   "source": "State Street SPY daily fund holdings",
   "sourceUrl": "https://www.ssga.com/us/en/individual/etfs/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
-  "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. TSM is excluded from the US semiconductor basket.",
-  "updatedAt": "2026-07-19T05:29:57Z",
+  "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
+  "updatedAt": "2026-07-19T05:47:35Z",
   "asOf": "2026-07-19",
   "metrics": {
     "mag7": {
@@ -20,36 +20,35 @@
       "notInSpy": [],
       "dailyChangePp": null
     },
-    "semiconductors": {
-      "share": 17.9921,
+    "aiHardware": {
+      "share": 19.1961,
       "holdings": {
         "ADI": 0.2868,
         "AMAT": 0.6873,
         "AMD": 1.2609,
+        "ANET": 0.2687,
         "AVGO": 2.7365,
-        "COHR": 0.0836,
+        "CDNS": 0.1553,
+        "CSCO": 0.6683,
+        "DELL": 0.1748,
+        "ETN": 0.2375,
+        "HPE": 0.0924,
         "INTC": 0.7073,
+        "JCI": 0.1331,
         "KLAC": 0.4424,
         "LRCX": 0.6197,
-        "MCHP": 0.0682,
         "MPWR": 0.099,
         "MRVL": 0.2544,
         "MU": 1.4852,
         "NVDA": 7.7533,
-        "NXPI": 0.1055,
-        "ON": 0.0533,
-        "QCOM": 0.2776,
-        "SNDK": 0.3224,
-        "SWKS": 0.0134,
+        "PH": 0.1865,
+        "SNPS": 0.1233,
         "TER": 0.0779,
+        "TT": 0.1621,
         "TXN": 0.4091,
-        "WDC": 0.2483
+        "VRT": 0.1743
       },
-      "notInSpy": [
-        "CRDO",
-        "ENTG",
-        "RMBS"
-      ],
+      "notInSpy": [],
       "dailyChangePp": null
     }
   },
@@ -57,7 +56,7 @@
     {
       "date": "2026-07-19",
       "mag7": 33.424,
-      "semiconductors": 17.9921
+      "aiHardware": 19.1961
     }
   ]
 }

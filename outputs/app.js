@@ -14,13 +14,13 @@ const fallbackStocks=[
 ];
 let stocks=fallbackStocks,historyByTicker={},nasdaqData=null,activeIndex=0,activePeriod='3年',activeValuationPeriod='3年',activePricePeriod='1年',lastUpdated='等待日更数据',activeNasdaqMetrics=new Set(['pe','forwardPe','pb']),sortKey='cap',sortDirection=-1,chartMode='valuation',activeValuationMetric='pe';
 const formatJapanTime=value=>{const date=new Date(value);if(Number.isNaN(date.getTime()))return value||'等待日更数据';return `${new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).format(date)} Asia/Japan`};
-const rankingDirection={pe:1,fpe:1,peg:1,ps:1,pcf:1,evEbitda:1,implied:1,growth:-1,epsGrowthCurrent:-1};
+const rankingDirection={pe:1,fpe:1,peg:1,ps:1,pcf:1,evEbitda:1,growth:-1,epsGrowthCurrent:-1};
 const metricNumber=(stock,key)=>{if(key==='cap'){const text=String(stock.cap||'');const value=Number.parseFloat(text);return Number.isFinite(value)?value*(text.includes('T')?1e3:1):null}if(key==='name')return null;const value=Number.parseFloat(String(stock[key]??'').replace(/[$,%>]/g,''));return Number.isFinite(value)?value:null};
-const rankClass=(stock,key)=>{if(!(key in rankingDirection))return'';const value=metricNumber(stock,key);if(value===null)return'';const valid=stocks.filter(s=>metricNumber(s,key)!==null).sort((a,b)=>(metricNumber(a,key)-metricNumber(b,key))*rankingDirection[key]);if(valid.length<4)return'';const ticker=stock.ticker;if(valid.slice(0,2).some(s=>s.ticker===ticker))return'rank-good';if(valid.slice(-2).some(s=>s.ticker===ticker))return'rank-bad';return''};
+const rankClass=(stock,key)=>{if(!(key in rankingDirection))return'';const value=metricNumber(stock,key);if(value===null)return'';const valid=stocks.filter(s=>metricNumber(s,key)!==null).sort((a,b)=>(metricNumber(a,key)-metricNumber(b,key))*rankingDirection[key]),ticker=stock.ticker;if(key==='growth'||key==='epsGrowthCurrent')return valid.slice(0,2).some(s=>s.ticker===ticker)?'rank-good':'';if(valid.length<4)return'';if(valid.slice(0,2).some(s=>s.ticker===ticker))return'rank-good';if(valid.slice(-2).some(s=>s.ticker===ticker))return'rank-bad';return''};
 const formatChange=value=>{const n=Number.parseFloat(String(value??'').replace('%',''));if(!Number.isFinite(n))return{label:'—',className:''};return{label:`${n>0?'+':''}${n.toFixed(1)}%`,className:n>0?'positive':n<0?'negative':''}};
 let concentrationData=null;
 const renderShareMetric=(key,valueId,noteId)=>{const metric=concentrationData?.metrics?.[key],value=document.querySelector(valueId),note=document.querySelector(noteId),hasShare=metric?.share!==null&&metric?.share!==undefined&&metric?.share!==''&&Number.isFinite(Number(metric.share));if(value)value.textContent=hasShare?`${Number(metric.share).toFixed(1)}%`:'—';if(note){const hasDelta=metric?.dailyChangePp!==null&&metric?.dailyChangePp!==undefined&&Number.isFinite(Number(metric.dailyChangePp)),delta=Number(metric?.dailyChangePp);if(hasDelta){note.textContent=`较前一份持仓 ${delta>0?'+':''}${delta.toFixed(2)}pp`;note.className=delta>0?'positive':delta<0?'negative':''}else{note.textContent=hasShare?'首个快照，等待下一交易日':'等待 SPY 日持仓更新';note.className=''}}};
-const renderMag7Share=()=>{renderShareMetric('mag7','#mag7-share','#mag7-share-note');renderShareMetric('semiconductors','#semi-share','#semi-share-note')};
+const renderMag7Share=()=>{renderShareMetric('mag7','#mag7-share','#mag7-share-note');renderShareMetric('aiHardware','#semi-share','#semi-share-note')};
 const brandDomains={NVDA:'nvidia.com',AAPL:'apple.com',MSFT:'microsoft.com',GOOGL:'google.com',AMZN:'amazon.com',META:'meta.com',TSLA:'tesla.com',TSM:'tsmc.com',MU:'micron.com',AVGO:'broadcom.com',ORCL:'oracle.com',PLTR:'palantir.com'};
 const logo=(s,large=false)=>s.ticker==='MU'?`<div class="logo micron-mark${large?' lg':''}" aria-label="Micron logo"><span>micron</span></div>`:s.ticker==='TSM'?`<div class="logo tsmc-mark${large?' lg':''}" aria-label="TSMC logo"><span>tsmc</span></div>`:`<div class="logo${large?' lg':''}" style="background:${s.color};color:${s.ink}"><img src="https://www.google.com/s2/favicons?domain=${brandDomains[s.ticker]||''}&sz=128" alt="${s.name} logo" onload="this.nextElementSibling.style.display='none'" onerror="this.remove()"><span>${s.logo}</span></div>`;
 function renderStocks(){const ordered=stocks.map(stock=>({stock}));if(sortKey)ordered.sort((a,b)=>{if(sortKey==='name')return a.stock.name.localeCompare(b.stock.name)*sortDirection;const av=metricNumber(a.stock,sortKey),bv=metricNumber(b.stock,sortKey);if(av===null)return 1;if(bv===null)return-1;return(av-bv)*sortDirection});document.querySelector('#stock-rows').innerHTML=ordered.map(({stock:s})=>{const change=formatChange(s.change);return`<article class="stock-row" data-ticker="${s.ticker}"><div class="company">${logo(s)}<div><div class="company-name">${s.name}</div><div class="ticker">${s.ticker}</div></div></div><div class="quote-cell"><span>${s.price||'—'}</span><small class="change ${change.className}">${change.label}</small></div><div class="cell">$${s.cap}</div><div class="cell ${rankClass(s,'pe')}">${s.pe}</div><div class="cell ${rankClass(s,'fpe')}">${s.fpe}</div><div class="cell ${rankClass(s,'peg')}">${s.peg}</div><div class="cell ${rankClass(s,'ps')}">${s.ps}</div><div class="cell ${rankClass(s,'pcf')}">${s.pcf||'—'}</div><div class="cell ${rankClass(s,'evEbitda')}">${s.evEbitda||'—'}</div><div class="implied ${rankClass(s,'implied')}">${s.implied}</div><div class="grow ${rankClass(s,'growth')}">${s.growth}</div><div class="grow ${rankClass(s,'epsGrowthCurrent')}">${s.epsGrowthCurrent||'—'}</div><div class="row-arrow">›</div></article>`}).join('');document.querySelectorAll('.stock-row').forEach(row=>row.addEventListener('click',()=>openDetail(row.dataset.ticker)));document.querySelectorAll('.sort-header').forEach(button=>{const active=button.dataset.sort===sortKey;button.classList.toggle('active-sort',active);button.textContent=button.dataset.sort===sortKey?`${button.dataset.sort==='evEbitda'?'EV/EBITDA':button.textContent.replace(/[↑↓]$/,'')}${sortDirection===1?' ↑':' ↓'}`:button.textContent.replace(/[↑↓]$/,'')});renderNasdaq()}
@@ -176,6 +176,39 @@ document.addEventListener('mousemove',event=>{
   tooltip.style.top=`${Math.min(window.innerHeight-125,event.clientY+14)}px`;
   tooltip.classList.remove('hidden');
 });
+
+// SPY weight cards open their own history view.  These histories are built
+// from daily State Street holdings snapshots, so a newly introduced basket may
+// initially have only one observation.
+const concentrationConfigs={
+  mag7:{title:'MAG7 占标普 500 权重历史',subtitle:'以 SPY 每日持仓作为标普 500 代理；数值为 MAG7 在 SPY 中的合计权重。',color:'#1aa774'},
+  aiHardware:{title:'AI 算力硬件指数占标普 500 权重历史',subtitle:'以 SPY 每日持仓作为标普 500 代理；覆盖芯片、设备、EDA、服务器、网络与基础设施。',color:'#5579d8'}
+};
+const concentrationModal=document.querySelector('#concentration-modal');
+const closeConcentrationModal=()=>concentrationModal.classList.add('hidden');
+const drawConcentrationHistory=key=>{
+  const config=concentrationConfigs[key],wrap=document.querySelector('#concentration-chart-wrap');
+  if(!config||!wrap)return;
+  document.querySelector('#concentration-title').textContent=config.title;
+  document.querySelector('#concentration-subtitle').textContent=config.subtitle;
+  const points=(concentrationData?.history||[]).filter(item=>numericValue(item?.[key])).map(item=>({date:String(item.date),value:Number(item[key])})).sort((a,b)=>a.date.localeCompare(b.date));
+  if(points.length<2){
+    const current=points[0]?.value;
+    wrap.innerHTML=`<div class="concentration-empty">${current===undefined?'暂无可用历史快照。':'当前快照为 '+current.toFixed(1)+'%。'}<br>需要至少两个交易日的 SPY 日持仓快照后才能绘制趋势线。</div>`;
+    return;
+  }
+  const width=760,left=56,right=730,top=22,bottom=270,values=points.map(point=>point.value),rawMin=Math.min(...values),rawMax=Math.max(...values),padding=Math.max((rawMax-rawMin)*.18,.25),min=Math.max(0,rawMin-padding),max=rawMax+padding,range=max-min||1;
+  const x=index=>left+(right-left)*index/(points.length-1),y=value=>bottom-(value-min)/range*(bottom-top);
+  let grid='';
+  for(let index=0;index<5;index++){const yy=top+(bottom-top)*index/4,value=max-(max-min)*index/4;grid+=`<line class="grid" x1="${left}" y1="${yy}" x2="${right}" y2="${yy}"/><text class="axis" x="4" y="${yy+4}">${value.toFixed(1)}%</text>`}
+  const path=points.map((point,index)=>`${index?'L':'M'}${x(index).toFixed(1)},${y(point.value).toFixed(1)}`).join(' ');
+  const last=points.at(-1),lastX=x(points.length-1),lastY=y(last.value);
+  wrap.innerHTML=`<svg class="concentration-chart" viewBox="0 0 ${width} 312" role="img" aria-label="${config.title}">${grid}<path class="line" stroke="${config.color}" d="${path}"/><circle class="dot" cx="${lastX}" cy="${lastY}" r="5" fill="${config.color}"/><text class="axis" x="${left}" y="298">${points[0].date}</text><text class="axis" x="${right}" y="298" text-anchor="end">${last.date}</text><text class="axis" x="${Math.max(left,lastX-6)}" y="${Math.max(16,lastY-10)}" text-anchor="end">${last.value.toFixed(1)}%</text></svg>`;
+};
+document.querySelectorAll('[data-concentration-metric]').forEach(button=>button.addEventListener('click',()=>{drawConcentrationHistory(button.dataset.concentrationMetric);concentrationModal.classList.remove('hidden')}));
+document.querySelector('#concentration-close').addEventListener('click',closeConcentrationModal);
+concentrationModal.addEventListener('click',event=>{if(event.target===concentrationModal)closeConcentrationModal()});
+document.addEventListener('keydown',event=>{if(event.key==='Escape')closeConcentrationModal()});
 document.addEventListener('mouseout',event=>{
   const leaving=event.target instanceof Element?event.target.closest('.chart-wrap'):null;
   const entering=event.relatedTarget instanceof Element?event.relatedTarget.closest('.chart-wrap'):null;

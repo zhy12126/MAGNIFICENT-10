@@ -25,14 +25,22 @@ OUTPUT = Path("outputs/data/concentration.json")
 
 MAG7 = {"NVDA", "AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "META", "TSLA"}
 
-# US semiconductor value chain.  The calculation only includes symbols which
-# actually appear in SPY's published daily holdings; this keeps the numerator
-# consistent with the S&P 500 denominator.  SNDK is retained for when it is an
-# eligible constituent, while TSM is intentionally excluded (a Taiwan issuer).
-SEMICONDUCTOR_VALUE_CHAIN = {
-    "NVDA", "AVGO", "AMD", "QCOM", "TXN", "AMAT", "LRCX", "KLAC", "ADI",
-    "MU", "MCHP", "MRVL", "ON", "MPWR", "TER", "WDC", "SNDK", "SWKS",
-    "NXPI", "ENTG", "COHR", "CRDO", "RMBS", "INTC",
+# AI compute-hardware value chain. This is a transparent thematic basket, not
+# an official benchmark index. Only symbols actually held by SPY are included,
+# keeping the numerator comparable with the SPY (S&P 500 proxy) denominator.
+AI_COMPUTE_HARDWARE = {
+    # Chips
+    "NVDA", "AMD", "AVGO", "MRVL", "MU", "INTC", "MPWR", "ADI", "TXN",
+    # Semiconductor equipment
+    "AMAT", "LRCX", "KLAC", "TER",
+    # EDA
+    "SNPS", "CDNS",
+    # Servers
+    "DELL", "HPE",
+    # Networking
+    "ANET", "CSCO",
+    # Physical infrastructure
+    "VRT", "ETN", "PH", "JCI", "TT",
 }
 
 NS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
@@ -136,29 +144,29 @@ def main():
     if OUTPUT.exists():
         previous = json.loads(OUTPUT.read_text(encoding="utf-8"))
     mag7 = basket(weights, MAG7)
-    semis = basket(weights, SEMICONDUCTOR_VALUE_CHAIN)
+    ai_hardware = basket(weights, AI_COMPUTE_HARDWARE)
     history = previous.get("history", [])
     today = now.strftime("%Y-%m-%d")
     # Compare with the latest prior trading-day snapshot rather than a second
     # run on the same calendar day.
     prior = next((item for item in reversed(history) if item.get("date") != today), {})
-    for key, metric in (("mag7", mag7), ("semiconductors", semis)):
+    for key, metric in (("mag7", mag7), ("aiHardware", ai_hardware)):
         old_share = prior.get(key)
         metric["dailyChangePp"] = None if old_share is None else round(metric["share"] - float(old_share), 4)
     history = [item for item in history if item.get("date") != today]
-    history.append({"date": today, "mag7": mag7["share"], "semiconductors": semis["share"]})
+    history.append({"date": today, "mag7": mag7["share"], "aiHardware": ai_hardware["share"]})
     output = {
         "source": "State Street SPY daily fund holdings",
         "sourceUrl": SPY_HOLDINGS_URL,
-        "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. TSM is excluded from the US semiconductor basket.",
+        "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
         "updatedAt": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "asOf": as_of or today,
-        "metrics": {"mag7": mag7, "semiconductors": semis},
+        "metrics": {"mag7": mag7, "aiHardware": ai_hardware},
         "history": history[-400:],
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"Updated SPY concentration metrics as of {output['asOf']}: MAG7 {mag7['share']:.2f}%, semiconductors {semis['share']:.2f}%")
+    print(f"Updated SPY concentration metrics as of {output['asOf']}: MAG7 {mag7['share']:.2f}%, AI compute hardware {ai_hardware['share']:.2f}%")
 
 
 if __name__ == "__main__":
