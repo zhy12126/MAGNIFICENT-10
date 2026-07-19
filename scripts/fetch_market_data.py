@@ -32,6 +32,7 @@ COMPANIES = [
     ("Oracle", "ORCL", "O", "#fff0f0", "#c74634"),
     ("Palantir", "PLTR", "P", "#eef2f6", "#1f2a35"),
 ]
+MIN_RELIABLE_NORMALIZED_FCF_MARGIN = .03
 
 def call(function, symbol):
     query = urlencode({"function": function, "symbol": symbol, "apikey": API_KEY})
@@ -60,16 +61,20 @@ def money(value):
 def implied_growth(market_cap, model):
     """Company-specific reverse FCFE model, using cached reported fundamentals."""
     if market_cap is None or market_cap <= 0 or not model:
-        return "—"
+        return "—", "unavailable", "缺少市值或公司级财报模型输入。"
     revenue = number(model.get("revenueTTM"))
     current_margin = number(model.get("fcfMarginTTM"))
     target_margin = number(model.get("normalizedFcfMargin"))
     cost_of_equity = number(model.get("costOfEquity"))
     terminal = number(model.get("terminalGrowth"))
     if not all(x is not None for x in (revenue, current_margin, target_margin, cost_of_equity, terminal)):
-        return "—"
+        return "—", "unavailable", "模型输入不完整，暂不反推隐含增长率。"
     if revenue <= 0 or cost_of_equity <= terminal:
-        return "—"
+        return "—", "unavailable", "收入或折现参数不满足模型计算条件。"
+    if target_margin <= 0:
+        return "—", "unavailable", "归一化自由现金流率为负，终值模型没有经济上有效的解。"
+    if target_margin < MIN_RELIABLE_NORMALIZED_FCF_MARGIN:
+        return "—", "high_uncertainty", f"归一化自由现金流率仅为 {target_margin * 100:.1f}%，受大额资本开支影响，暂不将反推结果作为常规增长率展示。"
 
     def equity_value(growth):
         pv = 0
@@ -88,8 +93,8 @@ def implied_growth(market_cap, model):
         else:
             high = mid
     if equity_value(high) < market_cap:
-        return ">150%"
-    return f"{max(-30, min(150, high * 100)):.0f}%"
+        return ">150%", "ready", None
+    return f"{max(-30, min(150, high * 100)):.0f}%", "ready", None
 
 def main():
     fundamentals_path = Path("outputs/data/fundamentals.json")
@@ -120,12 +125,16 @@ def main():
             else:
                 model["beta"] = beta
                 model["costOfEquity"] = model["riskFreeRate"] + beta * model["equityRiskPremium"]
+        implied, implied_status, implied_note = implied_growth(market_cap, model)
+        if model:
+            model["impliedGrowthStatus"] = implied_status
+            model["impliedGrowthNote"] = implied_note
         stocks.append({
             "name": name, "ticker": ticker, "logo": logo, "color": color, "ink": ink,
             "cap": money(market_cap), "pe": ratio(number(overview.get("PERatio"))),
             "fpe": ratio(number(overview.get("ForwardPE"))), "peg": ratio(number(overview.get("PEGRatio"))),
             "ps": ratio(ps), "pcf": ratio(pcf), "evEbitda": ratio(number(overview.get("EVToEBITDA"))),
-            "implied": implied_growth(market_cap, model),
+            "implied": implied,
             # These are most-recent reported-quarter growth rates, not forecasts.
             # Future EPS growth is derived in the browser from trailing and
             # forward PE. Alpha Vantage's free OVERVIEW endpoint does not expose

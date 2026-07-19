@@ -39,6 +39,13 @@ RISK_FREE_RATE = .0425       # US 10Y reference, refreshed with each methodology
 EQUITY_RISK_PREMIUM = .0500  # long-run mature-market ERP assumption
 TERMINAL_GROWTH = .025
 
+# Alpha Vantage returns TSMC's primary financial statements in TWD, while the
+# TSM ADR market capitalization is quoted in USD.  Amounts must therefore be
+# normalized before the reverse-FCFE model compares cash flow with equity value.
+# The model uses a transparent rounded spot proxy; margins are unaffected by
+# this conversion, and the rate can be refreshed during the methodology review.
+TSM_TWD_PER_USD = 30.0
+
 def call(function, symbol):
     query = urlencode({"function": function, "symbol": symbol, "apikey": API_KEY})
     with urlopen(f"https://www.alphavantage.co/query?{query}", timeout=30) as response:
@@ -117,6 +124,14 @@ def main():
             revenue, operating_cashflow, fcf, ttm_margin, fiscal_end = ttm
             median_margin = statistics.median(margins)
             normalized = ttm_weight * ttm_margin + (1 - ttm_weight) * median_margin
+            reporting_currency = "USD"
+            fx_rate_to_usd = 1.0
+            if ticker == "TSM":
+                revenue /= TSM_TWD_PER_USD
+                operating_cashflow /= TSM_TWD_PER_USD
+                fcf /= TSM_TWD_PER_USD
+                reporting_currency = "TWD"
+                fx_rate_to_usd = 1 / TSM_TWD_PER_USD
             # Alpha OVERVIEW beta is refreshed by the daily job.  Use a neutral
             # temporary beta here; fetch_market_data replaces it when available.
             companies[ticker] = {
@@ -126,7 +141,8 @@ def main():
                 "fcfMargin3yMedian": median_margin, "normalizedFcfMargin": normalized,
                 "ttmWeight": ttm_weight, "terminalGrowth": TERMINAL_GROWTH,
                 "riskFreeRate": RISK_FREE_RATE, "equityRiskPremium": EQUITY_RISK_PREMIUM,
-                "rationale": rationale, "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
+                "reportingCurrency": reporting_currency, "modelCurrency": "USD", "fxRateToUsd": fx_rate_to_usd,
+                "rationale": rationale, "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）" + (f"；TSMC 金额按 1 USD = {TSM_TWD_PER_USD:.1f} TWD 换算" if ticker == "TSM" else ""),
             }
         except Exception as exc:
             companies[ticker] = {"status": "unavailable", "company": name, "reason": str(exc), "rationale": rationale}

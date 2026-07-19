@@ -83,6 +83,8 @@
       "terminalGrowth": 0.025,
       "riskFreeRate": 0.0425,
       "equityRiskPremium": 0.05,
+      "impliedGrowthStatus": "high_uncertainty",
+      "impliedGrowthNote": "归一化自由现金流率仅为 1.0%，受大额资本开支影响，暂不将反推结果作为常规增长率展示。",
       "rationale": "AWS 与物流网络均在加大投入，当前现金转化优先。",
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）"
     },
@@ -124,9 +126,9 @@
       "status": "ready",
       "company": "TSMC",
       "fiscalPeriodEnd": "2026-06-30",
-      "revenueTTM": 4450378591000.0,
-      "operatingCashflowTTM": 2683421026000.0,
-      "fcfTTM": 1192023589000.0,
+      "revenueTTM": 148345953033.33334,
+      "operatingCashflowTTM": 89447367533.33333,
+      "fcfTTM": 39734119633.333336,
       "fcfMarginTTM": 0.2678476818602869,
       "fcfMargin3yMedian": 0.2851970594718451,
       "normalizedFcfMargin": 0.2773898395466439,
@@ -134,8 +136,11 @@
       "terminalGrowth": 0.025,
       "riskFreeRate": 0.0425,
       "equityRiskPremium": 0.05,
+      "reportingCurrency": "TWD",
+      "modelCurrency": "USD",
+      "fxRateToUsd": 0.03333333333333333,
       "rationale": "晶圆厂资本开支与景气周期显著，三年中位数为主。",
-      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）"
+      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）；TSMC 金额按 1 USD = 30.0 TWD 换算"
     },
     "MU": {
       "status": "ready",
@@ -185,6 +190,8 @@
       "terminalGrowth": 0.025,
       "riskFreeRate": 0.0425,
       "equityRiskPremium": 0.05,
+      "impliedGrowthStatus": "unavailable",
+      "impliedGrowthNote": "归一化自由现金流率为负，终值模型没有经济上有效的解。",
       "rationale": "云基础设施扩张带来较高资本开支，当前现金流率更具代表性。",
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）"
     },
