@@ -2,54 +2,54 @@
   "source": "State Street SPY daily fund holdings",
   "sourceUrl": "https://www.ssga.com/us/en/individual/etfs/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
   "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
-  "updatedAt": "2026-07-21T01:22:26Z",
+  "updatedAt": "2026-07-21T23:30:38Z",
   "asOf": "2026-07-21",
   "metrics": {
     "mag7": {
-      "share": 33.242,
+      "share": 33.336,
       "holdings": {
-        "AAPL": 7.6428,
-        "AMZN": 3.7735,
-        "GOOG": 2.5508,
-        "GOOGL": 3.1705,
-        "META": 2.2121,
-        "MSFT": 4.5614,
-        "NVDA": 7.659,
-        "TSLA": 1.6719
+        "AAPL": 7.4933,
+        "AMZN": 3.8229,
+        "GOOG": 2.5944,
+        "GOOGL": 3.2243,
+        "META": 2.2158,
+        "MSFT": 4.6684,
+        "NVDA": 7.6914,
+        "TSLA": 1.6255
       },
       "notInSpy": [],
-      "dailyChangePp": -0.182
+      "dailyChangePp": -0.088
     },
     "aiHardware": {
-      "share": 19.0658,
+      "share": 19.2023,
       "holdings": {
-        "ADI": 0.2858,
-        "AMAT": 0.6556,
-        "AMD": 1.2606,
-        "ANET": 0.2715,
-        "AVGO": 2.7376,
-        "CDNS": 0.142,
-        "CSCO": 0.6891,
-        "DELL": 0.1788,
-        "ETN": 0.2422,
-        "HPE": 0.0948,
-        "INTC": 0.7002,
-        "JCI": 0.1337,
-        "KLAC": 0.4335,
-        "LRCX": 0.6111,
-        "MPWR": 0.1005,
-        "MRVL": 0.2575,
-        "MU": 1.4929,
-        "NVDA": 7.659,
-        "PH": 0.1874,
-        "SNPS": 0.1148,
-        "TER": 0.0787,
-        "TT": 0.162,
-        "TXN": 0.4031,
-        "VRT": 0.1734
+        "ADI": 0.2841,
+        "AMAT": 0.6519,
+        "AMD": 1.2829,
+        "ANET": 0.2732,
+        "AVGO": 2.7971,
+        "CDNS": 0.1422,
+        "CSCO": 0.6828,
+        "DELL": 0.1723,
+        "ETN": 0.2435,
+        "HPE": 0.0923,
+        "INTC": 0.7165,
+        "JCI": 0.1329,
+        "KLAC": 0.4238,
+        "LRCX": 0.5994,
+        "MPWR": 0.1019,
+        "MRVL": 0.2666,
+        "MU": 1.5248,
+        "NVDA": 7.6914,
+        "PH": 0.1873,
+        "SNPS": 0.1133,
+        "TER": 0.0816,
+        "TT": 0.1617,
+        "TXN": 0.4039,
+        "VRT": 0.1749
       },
       "notInSpy": [],
-      "dailyChangePp": -0.1303
+      "dailyChangePp": 0.0062
     }
   },
   "history": [
@@ -60,8 +60,8 @@
     },
     {
       "date": "2026-07-21",
-      "mag7": 33.242,
-      "aiHardware": 19.0658
+      "mag7": 33.336,
+      "aiHardware": 19.2023
     }
   ]
 }
