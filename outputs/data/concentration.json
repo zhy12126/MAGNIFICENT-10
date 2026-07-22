@@ -1,55 +1,59 @@
 {
   "source": "State Street SPY daily fund holdings",
   "sourceUrl": "https://www.ssga.com/us/en/individual/etfs/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
-  "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
-  "updatedAt": "2026-07-21T23:30:38Z",
-  "asOf": "2026-07-21",
+  "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. The market-value change is the daily change in the basket's disclosed SPY holding market value, not a change in the total market capitalization of all listed shares. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
+  "updatedAt": "2026-07-22T23:33:04Z",
+  "asOf": "2026-07-22",
   "metrics": {
     "mag7": {
-      "share": 33.336,
+      "share": 33.0798,
       "holdings": {
-        "AAPL": 7.4933,
-        "AMZN": 3.8229,
-        "GOOG": 2.5944,
-        "GOOGL": 3.2243,
-        "META": 2.2158,
-        "MSFT": 4.6684,
-        "NVDA": 7.6914,
-        "TSLA": 1.6255
+        "AAPL": 7.4532,
+        "AMZN": 3.752,
+        "GOOG": 2.5333,
+        "GOOGL": 3.1517,
+        "META": 2.189,
+        "MSFT": 4.5748,
+        "NVDA": 7.7738,
+        "TSLA": 1.652
       },
+      "spyHoldingMarketValue": null,
       "notInSpy": [],
-      "dailyChangePp": -0.088
+      "dailyChangePp": -0.2562,
+      "dailyMarketValueChangePct": null
     },
     "aiHardware": {
-      "share": 19.2023,
+      "share": 19.7952,
       "holdings": {
-        "ADI": 0.2841,
-        "AMAT": 0.6519,
-        "AMD": 1.2829,
-        "ANET": 0.2732,
-        "AVGO": 2.7971,
-        "CDNS": 0.1422,
-        "CSCO": 0.6828,
-        "DELL": 0.1723,
-        "ETN": 0.2435,
-        "HPE": 0.0923,
-        "INTC": 0.7165,
-        "JCI": 0.1329,
-        "KLAC": 0.4238,
-        "LRCX": 0.5994,
-        "MPWR": 0.1019,
-        "MRVL": 0.2666,
-        "MU": 1.5248,
-        "NVDA": 7.6914,
-        "PH": 0.1873,
-        "SNPS": 0.1133,
-        "TER": 0.0816,
-        "TT": 0.1617,
-        "TXN": 0.4039,
-        "VRT": 0.1749
+        "ADI": 0.2894,
+        "AMAT": 0.6939,
+        "AMD": 1.3748,
+        "ANET": 0.2792,
+        "AVGO": 2.8337,
+        "CDNS": 0.1472,
+        "CSCO": 0.6859,
+        "DELL": 0.1811,
+        "ETN": 0.2423,
+        "HPE": 0.096,
+        "INTC": 0.7716,
+        "JCI": 0.1339,
+        "KLAC": 0.4402,
+        "LRCX": 0.6237,
+        "MPWR": 0.1052,
+        "MRVL": 0.2819,
+        "MU": 1.6954,
+        "NVDA": 7.7738,
+        "PH": 0.1874,
+        "SNPS": 0.1154,
+        "TER": 0.0907,
+        "TT": 0.1609,
+        "TXN": 0.4106,
+        "VRT": 0.181
       },
+      "spyHoldingMarketValue": null,
       "notInSpy": [],
-      "dailyChangePp": 0.0062
+      "dailyChangePp": 0.5929,
+      "dailyMarketValueChangePct": null
     }
   },
   "history": [
@@ -62,6 +66,13 @@
       "date": "2026-07-21",
       "mag7": 33.336,
       "aiHardware": 19.2023
+    },
+    {
+      "date": "2026-07-22",
+      "mag7": 33.0798,
+      "aiHardware": 19.7952,
+      "mag7SpyHoldingMarketValue": null,
+      "aiHardwareSpyHoldingMarketValue": null
     }
   ]
 }
