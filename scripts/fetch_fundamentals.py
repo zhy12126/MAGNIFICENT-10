@@ -32,8 +32,8 @@ COMPANIES = {
     "TSM": ("TSMC", .45, "晶圆厂资本开支与景气周期显著，三年中位数为主。"),
     "MU": ("Micron", .35, "存储价格周期显著，三年中位数为主以降低周期高低点影响。"),
     "AVGO": ("Broadcom", .60, "基础设施软件整合与半导体业务并行，当前现金转化权重略高。"),
-    "ORCL": ("Oracle", .65, "云基础设施扩张带来较高资本开支，当前现金流率更具代表性。"),
-    "PLTR": ("Palantir", .70, "商业化规模仍在快速变化，较重视最新已披露的现金流表现。"),
+    "AMD": ("AMD", .45, "数据中心与客户端业务均具周期性，采用三年中位数以避免只外推单一景气阶段。"),
+    "SNDK": ("Sandisk", .35, "NAND 存储价格与资本开支周期显著，采用三年中位数降低周期高低点影响。"),
 }
 RISK_FREE_RATE = .0425       # US 10Y reference, refreshed with each methodology review
 EQUITY_RISK_PREMIUM = .0500  # long-run mature-market ERP assumption

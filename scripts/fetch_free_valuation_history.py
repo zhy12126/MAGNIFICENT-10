@@ -34,8 +34,8 @@ COMPANIES = {
     "TSM": {"cik": "0001046179", "stooq": "tsm.us"},
     "MU": {"cik": "0000723125", "stooq": "mu.us"},
     "AVGO": {"cik": "0001730168", "stooq": "avgo.us"},
-    "ORCL": {"cik": "0001341439", "stooq": "orcl.us"},
-    "PLTR": {"cik": "0001321655", "stooq": "pltr.us"},
+    "AMD": {"cik": "0000002488", "stooq": "amd.us"},
+    "SNDK": {"cik": "0002023554", "stooq": "sndk.us"},
 }
 
 REVENUE_TAGS = ("RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet", "Revenues")

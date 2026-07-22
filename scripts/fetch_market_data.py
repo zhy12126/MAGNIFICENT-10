@@ -29,8 +29,8 @@ COMPANIES = [
     ("TSMC", "TSM", "◌", "#eaf8fb", "#20899b"),
     ("Micron", "MU", "μ", "#e8f7ed", "#16834c"),
     ("Broadcom", "AVGO", "B", "#fff0ea", "#d34b28"),
-    ("Oracle", "ORCL", "O", "#fff0f0", "#c74634"),
-    ("Palantir", "PLTR", "P", "#eef2f6", "#1f2a35"),
+    ("AMD", "AMD", "A", "#fff2eb", "#d34b28"),
+    ("Sandisk", "SNDK", "S", "#fff0ea", "#d04d34"),
 ]
 MIN_RELIABLE_NORMALIZED_FCF_MARGIN = .03
 
