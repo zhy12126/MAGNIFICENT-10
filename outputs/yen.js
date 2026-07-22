@@ -57,7 +57,7 @@ document.querySelectorAll('[data-chart-pair]').forEach(button=>button.addEventLi
 document.querySelectorAll('[data-chart-period]').forEach(button=>button.addEventListener('click',()=>{if(!dataReady)return;activeChartPeriod=button.dataset.chartPeriod;document.querySelectorAll('[data-chart-period]').forEach(item=>item.classList.toggle('active',item===button));drawFxChart(activePair);renderDrivers(activeChartPeriod)}));
 let chartResizeTimer;window.addEventListener('resize',()=>{clearTimeout(chartResizeTimer);chartResizeTimer=setTimeout(()=>drawFxChart(activePair),100)});
 const trendCanvas=document.querySelector('#fx-trend-chart');
-trendCanvas.addEventListener('pointermove',event=>{if(!dataReady)return;const rect=trendCanvas.getBoundingClientRect(),period=chartSeries[activePair].periods[activeChartPeriod],plotLeft=16,plotRight=62,plotWidth=Math.max(1,rect.width-plotLeft-plotRight),x=Math.min(plotWidth,Math.max(0,event.clientX-rect.left-plotLeft)),index=Math.round(x/plotWidth*(period.values.length-1));drawFxChart(activePair,index)});
+trendCanvas.addEventListener('pointermove',event=>{if(!dataReady||event.pointerType==='touch')return;const rect=trendCanvas.getBoundingClientRect(),period=chartSeries[activePair].periods[activeChartPeriod],plotLeft=16,plotRight=62,plotWidth=Math.max(1,rect.width-plotLeft-plotRight),x=Math.min(plotWidth,Math.max(0,event.clientX-rect.left-plotLeft)),index=Math.round(x/plotWidth*(period.values.length-1));drawFxChart(activePair,index)});
 trendCanvas.addEventListener('pointerleave',()=>drawFxChart(activePair));trendCanvas.addEventListener('pointercancel',()=>drawFxChart(activePair));
 
 function applyPayload(payload){
