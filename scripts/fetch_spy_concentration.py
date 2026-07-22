@@ -84,9 +84,10 @@ def xlsx_rows(payload: bytes):
                 yield [cells.get(index, "") for index in range(max(cells) + 1)]
 
 
-def parse_weights(payload: bytes):
-    header = ticker_index = weight_index = None
+def parse_holdings(payload: bytes):
+    header = ticker_index = weight_index = market_value_index = None
     weights = {}
+    market_values = {}
     as_of = None
     for row in xlsx_rows(payload):
         text = " | ".join(str(value) for value in row)
@@ -101,6 +102,8 @@ def parse_weights(payload: bytes):
             if not weight_candidates:
                 continue
             weight_index = weight_candidates[-1]
+            market_value_candidates = [index for index, value in enumerate(normalized) if "market value" in value]
+            market_value_index = market_value_candidates[-1] if market_value_candidates else None
             header = True
             continue
         if header is None or ticker_index >= len(row) or weight_index >= len(row):
@@ -114,6 +117,14 @@ def parse_weights(payload: bytes):
         except ValueError:
             continue
         weights[ticker] = weight
+        if market_value_index is not None and market_value_index < len(row):
+            raw_market_value = re.sub(r"[^0-9.\-]", "", str(row[market_value_index]))
+            try:
+                market_value = float(raw_market_value)
+            except ValueError:
+                market_value = None
+            if market_value is not None and market_value >= 0:
+                market_values[ticker] = market_value
     if not weights:
         raise ValueError("Could not find Ticker and Weight columns in SPY workbook")
     # State Street normally exports percentage points (for example 7.63 for
@@ -126,25 +137,31 @@ def parse_weights(payload: bytes):
         weights = {ticker: weight * 100 for ticker, weight in weights.items()}
     elif not 95 <= total_weight <= 105:
         raise ValueError(f"Unexpected SPY holding-weight total: {total_weight:.4f}")
-    return weights, as_of
+    return weights, market_values, as_of
 
 
-def basket(weights: dict[str, float], symbols: set[str]):
+def basket(weights: dict[str, float], market_values: dict[str, float], symbols: set[str]):
     included = {symbol: round(weights[symbol], 4) for symbol in sorted(symbols & weights.keys())}
     missing = sorted(symbols - weights.keys())
-    return {"share": round(sum(included.values()), 4), "holdings": included, "notInSpy": missing}
+    included_market_values = {symbol: market_values[symbol] for symbol in sorted(symbols & market_values.keys())}
+    return {
+        "share": round(sum(included.values()), 4),
+        "holdings": included,
+        "spyHoldingMarketValue": round(sum(included_market_values.values()), 2) if included_market_values else None,
+        "notInSpy": missing,
+    }
 
 
 def main():
     request = Request(SPY_HOLDINGS_URL, headers={"User-Agent": "HY-Market10/1.0 research contact@example.com"})
     with urlopen(request, timeout=60) as response:
-        weights, as_of = parse_weights(response.read())
+        weights, market_values, as_of = parse_holdings(response.read())
     now = datetime.now(timezone.utc)
     previous = {}
     if OUTPUT.exists():
         previous = json.loads(OUTPUT.read_text(encoding="utf-8"))
-    mag7 = basket(weights, MAG7)
-    ai_hardware = basket(weights, AI_COMPUTE_HARDWARE)
+    mag7 = basket(weights, market_values, MAG7)
+    ai_hardware = basket(weights, market_values, AI_COMPUTE_HARDWARE)
     history = previous.get("history", [])
     today = now.strftime("%Y-%m-%d")
     # Compare with the latest prior trading-day snapshot rather than a second
@@ -153,12 +170,25 @@ def main():
     for key, metric in (("mag7", mag7), ("aiHardware", ai_hardware)):
         old_share = prior.get(key)
         metric["dailyChangePp"] = None if old_share is None else round(metric["share"] - float(old_share), 4)
+        old_market_value = prior.get(f"{key}SpyHoldingMarketValue")
+        current_market_value = metric["spyHoldingMarketValue"]
+        metric["dailyMarketValueChangePct"] = (
+            None
+            if not current_market_value or not old_market_value
+            else round((current_market_value / float(old_market_value) - 1) * 100, 4)
+        )
     history = [item for item in history if item.get("date") != today]
-    history.append({"date": today, "mag7": mag7["share"], "aiHardware": ai_hardware["share"]})
+    history.append({
+        "date": today,
+        "mag7": mag7["share"],
+        "aiHardware": ai_hardware["share"],
+        "mag7SpyHoldingMarketValue": mag7["spyHoldingMarketValue"],
+        "aiHardwareSpyHoldingMarketValue": ai_hardware["spyHoldingMarketValue"],
+    })
     output = {
         "source": "State Street SPY daily fund holdings",
         "sourceUrl": SPY_HOLDINGS_URL,
-        "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
+        "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. The market-value change is the daily change in the basket's disclosed SPY holding market value, not a change in the total market capitalization of all listed shares. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
         "updatedAt": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "asOf": as_of or today,
         "metrics": {"mag7": mag7, "aiHardware": ai_hardware},
