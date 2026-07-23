@@ -21,12 +21,20 @@ function renderDrivers(period){
   document.querySelector('#jpy-driver-copy').textContent=data.jpy>=0?'日元相对美元走弱':'日元相对美元走强';
   document.querySelector('#cny-driver-copy').textContent=data.cny>=0?'人民币相对美元走强':'人民币相对美元走弱';
   document.querySelector('#driver-total-label').textContent=`过去${periodLabels[period]}人民币兑日元变化（对数）`;
+  const logExample=document.querySelector('#log-example-values'),logFormula=document.querySelector('#log-example-formula');
+  if(logExample){logExample.textContent=`对数变化 ${signed(data.total)} → 普通涨幅 ${signed(data.ordinary)}`;logFormula.innerHTML=`e<sup>${(data.total/100).toFixed(4)}</sup> − 1 = ${signed(data.ordinary)}`}
   const scale=Math.max(Math.abs(data.jpy),Math.abs(data.cny),.01);
   const jpyBar=document.querySelector('#jpy-driver-bar'),cnyBar=document.querySelector('#cny-driver-bar');
   for(const [bar,value] of [[jpyBar,data.jpy],[cnyBar,data.cny]]){bar.style.width=`${Math.max(5,Math.abs(value)/scale*82)}%`;bar.classList.toggle('positive-fill',value>=0);bar.classList.toggle('negative-fill',value<0)}
 }
 
 document.querySelector('[data-toggle="method"]').addEventListener('click',event=>{const box=document.querySelector('#method-box');box.classList.toggle('hidden');event.currentTarget.textContent=box.classList.contains('hidden')?'查看计算方法⌄':'收起计算方法⌃'});
+const logModal=document.querySelector('#log-help-modal'),logOpenButton=document.querySelector('[data-open-log-help]'),logCloseButton=document.querySelector('[data-close-log-help]');
+function closeLogModal(){logModal.classList.add('hidden');document.body.classList.remove('modal-open');logOpenButton.focus()}
+logOpenButton.addEventListener('click',()=>{logModal.classList.remove('hidden');document.body.classList.add('modal-open');logCloseButton.focus()});
+logCloseButton.addEventListener('click',closeLogModal);
+logModal.addEventListener('click',event=>{if(event.target===logModal)closeLogModal()});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!logModal.classList.contains('hidden'))closeLogModal()});
 
 function emptyChart(message){
   const canvas=document.querySelector('#fx-trend-chart'),ctx=canvas.getContext('2d'),dpr=window.devicePixelRatio||1,box=canvas.getBoundingClientRect(),width=Math.max(1,box.width),height=canvas.clientHeight||310;
@@ -49,6 +57,8 @@ function drawFxChart(pair,hoverIndex=null){
   const tooltip=document.querySelector('#fx-chart-tooltip');
   if(Number.isInteger(hoverIndex)&&hoverIndex>=0&&hoverIndex<values.length){const selected=point(values[hoverIndex],hoverIndex),relative=(values[hoverIndex]/values[0]-1)*100,decimals=pair==='usdjpy'?2:4;ctx.beginPath();ctx.moveTo(selected.x,pad.top);ctx.lineTo(selected.x,height-pad.bottom);ctx.strokeStyle='#86938d';ctx.lineWidth=1;ctx.setLineDash([4,4]);ctx.stroke();ctx.setLineDash([]);ctx.beginPath();ctx.arc(selected.x,selected.y,5,0,Math.PI*2);ctx.fillStyle=series.color;ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2.5;ctx.stroke();tooltip.innerHTML=`<b>${series.pair} · ${hoverLabel(period,hoverIndex)}</b><strong>${values[hoverIndex].toFixed(decimals)}</strong><span>相对周期起点</span><em class="${relative>=0?'positive':'negative'}">${signed(relative)}</em>`;tooltip.style.left=`${selected.x}px`;tooltip.style.top=`${selected.y}px`;tooltip.classList.toggle('flip',selected.x>width*.68);tooltip.classList.remove('hidden')}else tooltip.classList.add('hidden');
   document.querySelector('#trend-pair').textContent=series.pair;document.querySelector('#trend-current').textContent=series.current;
+  const conversion=document.querySelector('#trend-conversion');
+  if(pair==='cnyjpy'){conversion.textContent=`10,000日元 ≈ ${(10000/Number(series.current)).toFixed(2)}人民币`;conversion.classList.remove('hidden')}else{conversion.classList.add('hidden')}
   const label=periodLabels[activeChartPeriod],change=document.querySelector('#trend-change');change.textContent=`过去${label} ${signed(period.change)}`;setDirection(change,period.change);
   document.querySelector('#trend-title').textContent=`过去${label}汇率走势`;document.querySelector('#chart-period-start').textContent=period.dates[0];document.querySelector('#trend-description').textContent=series.description;canvas.setAttribute('aria-label',`过去${label}${series.pair}走势图`);
 }
@@ -67,7 +77,7 @@ function applyPayload(payload){
     chartSeries[key].current=Number(payload.latest[key]).toFixed(key==='usdjpy'?2:4);
     for(const period of Object.keys(periodLabels)){const raw=periods[period];if(!raw?.points?.length)throw new Error(`missing ${key}/${period}`);chartSeries[key].periods[period]={change:Number(raw.change),values:raw.points.map(point=>Number(point.value)),dates:raw.points.map(point=>point.date)}}
   }
-  for(const period of Object.keys(periodLabels)){const raw=payload.attribution[period];driverPeriods[period]={jpy:Number(raw.jpyContribution),cny:Number(raw.cnyContribution),total:Number(raw.totalLogChange),dominant:raw.dominant}}
+  for(const period of Object.keys(periodLabels)){const raw=payload.attribution[period];driverPeriods[period]={jpy:Number(raw.jpyContribution),cny:Number(raw.cnyContribution),total:Number(raw.totalLogChange),ordinary:Number(raw.ordinaryChange),dominant:raw.dominant}}
   const provider=String(payload.source?.provider||'官方日频数据'),shortProvider=provider.includes('European Central Bank')?'ECB':'FRED';
   const latest=new Date(`${payload.latestCommonDate}T00:00:00Z`),today=new Date(),cursor=new Date(latest);let businessLag=0;
   while(cursor<today){cursor.setUTCDate(cursor.getUTCDate()+1);const day=cursor.getUTCDay();if(day!==0&&day!==6&&cursor<=today)businessLag++}

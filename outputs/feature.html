@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20260719-03" />
-  <link rel="stylesheet" href="yen.css?v=20260722-07" />
+  <link rel="stylesheet" href="yen.css?v=20260723-02" />
 </head>
 <body>
   <main class="shell yen-shell">
@@ -28,7 +28,7 @@
         <div class="period-switch global-periods" role="group" aria-label="选择页面分析周期"><button type="button" data-chart-period="30">1个月</button><button type="button" class="active" data-chart-period="180">6个月</button><button type="button" data-chart-period="365">1年</button><button type="button" data-chart-period="1095">3年</button><button type="button" data-chart-period="1825">5年</button></div>
       </div>
       <div class="trend-card">
-        <div class="trend-summary"><span id="trend-pair">CNY / JPY</span><strong id="trend-current">—</strong><em id="trend-change">等待日频数据</em></div>
+        <div class="trend-summary"><span id="trend-pair">CNY / JPY</span><strong id="trend-current">—</strong><span id="trend-conversion" class="trend-conversion">10,000日元 ≈ — 人民币</span><em id="trend-change">等待日频数据</em></div>
         <div class="fx-canvas-wrap"><canvas id="fx-trend-chart" height="310" role="img" aria-label="过去6个月人民币兑日元走势图"></canvas><div id="fx-chart-tooltip" class="fx-chart-tooltip hidden" role="status"></div></div>
         <div class="chart-legend"><span id="chart-period-start">—</span><b id="chart-data-source">官方日频数据</b><span>最近交易日</span></div>
         <div class="trend-controls trend-controls-bottom"><span class="control-label">切换走势图</span><div class="pair-switch" role="group" aria-label="选择汇率走势"><button type="button" class="active" data-chart-pair="cnyjpy">人民币 / 日元</button><button type="button" data-chart-pair="usdjpy">美元 / 日元</button><button type="button" data-chart-pair="usdcny">美元 / 人民币</button></div></div>
@@ -40,7 +40,7 @@
       <div class="driver-card">
         <div class="driver-row"><div><span class="driver-flag jp">日</span><b>日元侧</b><small id="jpy-driver-copy">等待数据</small></div><div class="driver-track"><i id="jpy-driver-bar" class="driver-fill positive-fill" style="width:0"></i></div><strong id="jpy-driver-value">—</strong></div>
         <div class="driver-row"><div><span class="driver-flag cn">中</span><b>人民币侧</b><small id="cny-driver-copy">等待数据</small></div><div class="driver-track negative-track"><i id="cny-driver-bar" class="driver-fill negative-fill" style="width:0"></i></div><strong id="cny-driver-value">—</strong></div>
-        <div class="driver-total"><span id="driver-total-label">等待真实汇率数据</span><strong id="driver-total-value">—</strong></div>
+        <div class="driver-total"><span><span id="driver-total-label">等待真实汇率数据</span><button class="log-help-button" type="button" aria-label="解释对数变化" aria-haspopup="dialog" data-open-log-help>?</button></span><strong id="driver-total-value">—</strong></div>
         <div class="method-box hidden" id="method-box"><b>这是数学拆解，不是新闻归因</b><p>人民币兑日元 = 美元兑日元 ÷ 美元兑人民币。贡献采用对数变化计算，因此日元侧与人民币侧可以相加；四舍五入后可能有极小误差。</p><code>CNY/JPY 变化 ≈ USD/JPY 变化 − USD/CNY 变化</code></div>
       </div>
       <div class="driver-explainer driver-explainer-compact"><div class="explainer-intro"><span class="explainer-mark">?</span><div><b>为什么人民币兑日元要看美元汇率？</b><p>人民币兑日元可以直接报价，但市场价格通常会与两条更活跃的美元汇率保持一致。因此，把它拆成“日元相对美元”和“人民币相对美元”，更容易看清究竟是哪一侧变化更大。</p></div></div></div>
@@ -114,6 +114,21 @@
 
     <footer class="yen-footer"><p><b>重要说明：</b>汇率走势优先使用ECB工作日参考汇率，失败时回退FRED；人民币兑日元由同日USD/JPY与USD/CNY计算，不属于实时成交报价。事件与经济数据仅作为市场背景，不代表已经证明其与汇率变化之间存在确定因果关系。</p><a href="index.html">返回巨头估值 →</a></footer>
   </main>
-  <script src="yen.js?v=20260722-02"></script>
+  <div class="log-modal hidden" id="log-help-modal" role="dialog" aria-modal="true" aria-labelledby="log-help-title">
+    <div class="log-modal-panel">
+      <button class="log-modal-close" type="button" aria-label="关闭对数说明" data-close-log-help>×</button>
+      <p class="eyebrow">CALCULATION NOTE</p>
+      <h2 id="log-help-title">“对数变化”是什么意思？</h2>
+      <p class="log-modal-lead">它把一段汇率涨跌转换为可以直接相加的口径，用来拆分日元侧和人民币侧各自贡献了多少。</p>
+      <div class="log-formula">
+        <code>对数变化 = ln（期末汇率 ÷ 期初汇率）× 100%</code>
+        <code>CNY/JPY 对数变化 = USD/JPY 对数变化 − USD/CNY 对数变化</code>
+      </div>
+      <section><b>为什么不直接使用普通涨幅？</b><p>普通百分比需要连乘，不能把两侧直接相加；对数变化具有可加性，因此“日元侧贡献 + 人民币侧贡献”能够得到总变化。</p></section>
+      <section><b>为什么它和走势图涨幅不完全一样？</b><p>走势图显示普通涨幅，归因模块显示对数变化。二者描述的是同一段行情，只是计算与表达口径不同。</p></section>
+      <div class="log-example"><span>当前所选周期</span><b id="log-example-values">等待汇率数据</b><small id="log-example-formula">普通涨幅 = e<sup>对数变化</sup> − 1</small></div>
+    </div>
+  </div>
+  <script src="yen.js?v=20260723-01"></script>
 </body>
 </html>
