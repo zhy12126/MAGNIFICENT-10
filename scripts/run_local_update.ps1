@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-  [ValidateSet('daily', 'fundamentals', 'history')]
+  [ValidateSet('daily', 'fundamentals', 'history', 'spy')]
   [string]$Mode = 'daily',
   [string]$ApiKey,
   [ValidateSet('auto', 'stooq', 'eodhd')]
@@ -45,14 +45,19 @@ if ($py) {
 Set-Location $root
 switch ($Mode) {
   'daily' {
-    Write-Host "开始本地日更：更新 12 家公司的行情、估值快照和历史曲线，并刷新 SPY 口径的集中度。"
-    Write-Host "预计使用 24 次 Alpha Vantage 请求；请勿在同一天再运行 fundamentals。" -ForegroundColor Yellow
+    Write-Host "开始本地日更：更新 12 家公司的行情、估值快照和历史曲线，并刷新 SPY 权重及每份额篮子价值。"
+    Write-Host "预计使用 25 次 Alpha Vantage 请求；请勿在同一天再运行 fundamentals。" -ForegroundColor Yellow
     & $runner @runnerArgs (Join-Path $PSScriptRoot 'fetch_market_data.py')
   }
   'fundamentals' {
     Write-Host "开始本地财报刷新：更新公司级现金流模型输入。"
     Write-Host "预计使用 24 次 Alpha Vantage 请求；建议在不运行日更的周末执行。" -ForegroundColor Yellow
     & $runner @runnerArgs (Join-Path $PSScriptRoot 'fetch_fundamentals.py')
+  }
+  'spy' {
+    Write-Host "开始仅刷新 SPY 权重与每份额篮子价值。" -ForegroundColor Cyan
+    Write-Host "预计使用 1 次 Alpha Vantage 请求；不会更新公司行情或基本面。" -ForegroundColor Yellow
+    & $runner @runnerArgs (Join-Path $PSScriptRoot 'fetch_spy_concentration.py')
   }
   'history' {
     if (-not $env:SEC_EDGAR_USER_AGENT) { throw "找不到 SEC 联系方式。请在 .env 中填入 SEC_EDGAR_USER_AGENT，例如 Market10 your-email@example.com。" }

@@ -1,7 +1,7 @@
 """Fetch a daily, static valuation snapshot from Alpha Vantage.
 
-The job makes 24 calls (OVERVIEW + GLOBAL_QUOTE for 12 tickers), which is
-within Alpha Vantage's 25 requests/day free allowance.  It intentionally uses
+The job makes 25 calls (OVERVIEW + GLOBAL_QUOTE for 12 tickers, plus SPY),
+which is within Alpha Vantage's 25 requests/day free allowance.  It intentionally uses
 end-of-day data; it is not a real-time market-data service.
 """
 import json
@@ -170,7 +170,10 @@ def main():
     try:
         from fetch_spy_concentration import main as refresh_spy_concentration
 
-        refresh_spy_concentration()
+        # SPY's end-of-day market price is used as a per-share NAV proxy.
+        # This lets the basket-value series ignore ETF creations/redemptions.
+        spy_quote = call("GLOBAL_QUOTE", "SPY").get("Global Quote", {})
+        refresh_spy_concentration(number(spy_quote.get("05. price")))
     except Exception as exc:
         # Keep the last successful concentration snapshot if the public SPY
         # workbook is temporarily unavailable; the stock refresh is still valid.

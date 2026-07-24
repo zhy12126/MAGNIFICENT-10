@@ -9,10 +9,13 @@ from __future__ import annotations
 
 import io
 import json
+import os
 import re
 import zipfile
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
 from pathlib import Path
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree as ET
 
@@ -84,18 +87,51 @@ def xlsx_rows(payload: bytes):
                 yield [cells.get(index, "") for index in range(max(cells) + 1)]
 
 
+def parse_as_of_date(value: object) -> str | None:
+    """Normalize workbook dates, including Excel's numeric serial format."""
+    text = str(value).strip()
+    for pattern in ("%m/%d/%Y", "%m-%d-%Y", "%Y-%m-%d", "%Y/%m/%d"):
+        try:
+            return datetime.strptime(text, pattern).strftime("%Y-%m-%d")
+        except ValueError:
+            pass
+    try:
+        serial = float(text)
+        if 40_000 <= serial <= 60_000:
+            return (datetime(1899, 12, 30) + timedelta(days=serial)).strftime("%Y-%m-%d")
+    except ValueError:
+        pass
+    return None
+
+
 def parse_holdings(payload: bytes):
     header = ticker_index = weight_index = market_value_index = None
     weights = {}
     market_values = {}
     as_of = None
+    preamble_dates = []
     for row in xlsx_rows(payload):
         text = " | ".join(str(value) for value in row)
         if as_of is None:
-            match = re.search(r"(?:As of|As Of)\s*[:\-]?\s*(\d{1,2}[/-]\d{1,2}[/-]\d{2,4})", text)
+            match = re.search(r"(?:As\s*of|As\s*Of)\s*(?:Date)?\s*[:\-]?\s*(\d{1,2}[/-]\d{1,2}[/-]\d{2,4}|\d{4}[/-]\d{1,2}[/-]\d{1,2})", text)
             if match:
-                as_of = match.group(1)
+                as_of = parse_as_of_date(match.group(1))
+            else:
+                normalized_row = [str(value).strip().lower() for value in row]
+                for index, label in enumerate(normalized_row):
+                    if "as of" not in label and "as-of" not in label:
+                        continue
+                    for candidate in row[index + 1:]:
+                        as_of = parse_as_of_date(candidate)
+                        if as_of:
+                            break
+                    if as_of:
+                        break
         normalized = [str(value).strip().lower() for value in row]
+        # Some State Street workbook versions omit an "As of" label but put a
+        # plain Excel date in the preamble above the holdings header.
+        if header is None:
+            preamble_dates.extend(parsed for parsed in (parse_as_of_date(value) for value in row) if parsed)
         if header is None and any(value == "ticker" for value in normalized):
             ticker_index = normalized.index("ticker")
             weight_candidates = [index for index, value in enumerate(normalized) if "weight" in value and "market" not in value]
@@ -127,6 +163,8 @@ def parse_holdings(payload: bytes):
                 market_values[ticker] = market_value
     if not weights:
         raise ValueError("Could not find Ticker and Weight columns in SPY workbook")
+    if as_of is None and preamble_dates:
+        as_of = max(preamble_dates)
     # State Street normally exports percentage points (for example 7.63 for
     # a 7.63% holding).  Some spreadsheet exporters instead expose every
     # percentage as fractions, so decide once from the complete portfolio —
@@ -140,7 +178,16 @@ def parse_holdings(payload: bytes):
     return weights, market_values, as_of
 
 
-def basket(weights: dict[str, float], market_values: dict[str, float], symbols: set[str]):
+def http_last_modified_date(value: str | None) -> str | None:
+    if not value:
+        return None
+    try:
+        return parsedate_to_datetime(value).astimezone(timezone.utc).strftime("%Y-%m-%d")
+    except (TypeError, ValueError, IndexError):
+        return None
+
+
+def basket(weights: dict[str, float], market_values: dict[str, float], symbols: set[str], spy_unit_price: float | None = None):
     included = {symbol: round(weights[symbol], 4) for symbol in sorted(symbols & weights.keys())}
     missing = sorted(symbols - weights.keys())
     included_market_values = {symbol: market_values[symbol] for symbol in sorted(symbols & market_values.keys())}
@@ -148,25 +195,61 @@ def basket(weights: dict[str, float], market_values: dict[str, float], symbols: 
         "share": round(sum(included.values()), 4),
         "holdings": included,
         "spyHoldingMarketValue": round(sum(included_market_values.values()), 2) if included_market_values else None,
+        # A per-SPY-share basket value avoids changes caused by ETF creations
+        # and redemptions.  SPY's market price is a close public proxy for NAV.
+        "spyBasketUnitValue": round(sum(included.values()) / 100 * spy_unit_price, 4) if spy_unit_price else None,
         "notInSpy": missing,
     }
 
 
-def main():
+def fetch_spy_unit_price() -> float | None:
+    """Fetch SPY's end-of-day price when this script runs standalone."""
+    api_key = os.environ.get("ALPHA_VANTAGE_API_KEY")
+    if not api_key:
+        return None
+    query = urlencode({"function": "GLOBAL_QUOTE", "symbol": "SPY", "apikey": api_key})
+    request = Request(f"https://www.alphavantage.co/query?{query}")
+    with urlopen(request, timeout=30) as response:
+        quote = json.load(response).get("Global Quote", {})
+    try:
+        return float(quote.get("05. price"))
+    except (TypeError, ValueError):
+        return None
+
+
+def main(spy_unit_price: float | None = None):
     request = Request(SPY_HOLDINGS_URL, headers={"User-Agent": "HY-Market10/1.0 research contact@example.com"})
     with urlopen(request, timeout=60) as response:
+        workbook_last_modified = http_last_modified_date(response.headers.get("Last-Modified"))
         weights, market_values, as_of = parse_holdings(response.read())
     now = datetime.now(timezone.utc)
     previous = {}
     if OUTPUT.exists():
         previous = json.loads(OUTPUT.read_text(encoding="utf-8"))
-    mag7 = basket(weights, market_values, MAG7)
-    ai_hardware = basket(weights, market_values, AI_COMPUTE_HARDWARE)
-    history = previous.get("history", [])
-    today = now.strftime("%Y-%m-%d")
+    if spy_unit_price is None:
+        spy_unit_price = fetch_spy_unit_price()
+    mag7 = basket(weights, market_values, MAG7, spy_unit_price)
+    ai_hardware = basket(weights, market_values, AI_COMPUTE_HARDWARE, spy_unit_price)
+    # Keep only the latest snapshot for each data date.  This also repairs
+    # legacy files where the same date was written more than once.
+    history_by_date = {}
+    for item in previous.get("history", []):
+        date = item.get("date")
+        if date:
+            history_by_date[str(date)] = item
+    history = [history_by_date[date] for date in sorted(history_by_date)]
+    run_date = now.strftime("%Y-%m-%d")
+    # The State Street workbook can still show the prior US trading day when
+    # this job runs in Asia.  Never turn that same file into a new daily point.
+    snapshot_date = as_of or workbook_last_modified or run_date
+    if as_of is None and workbook_last_modified is None:
+        print(f"Warning: SPY workbook as-of date and Last-Modified header were unreadable; using run date {run_date}.")
+    elif as_of is None:
+        print(f"Info: SPY workbook as-of date came from HTTP Last-Modified: {snapshot_date}.")
     # Compare with the latest prior trading-day snapshot rather than a second
     # run on the same calendar day.
-    prior = next((item for item in reversed(history) if item.get("date") != today), {})
+    prior_candidates = [item for item in history if str(item.get("date", "")) < snapshot_date]
+    prior = max(prior_candidates, key=lambda item: item["date"], default={})
     for key, metric in (("mag7", mag7), ("aiHardware", ai_hardware)):
         old_share = prior.get(key)
         metric["dailyChangePp"] = None if old_share is None else round(metric["share"] - float(old_share), 4)
@@ -177,26 +260,37 @@ def main():
             if not current_market_value or not old_market_value
             else round((current_market_value / float(old_market_value) - 1) * 100, 4)
         )
-    history = [item for item in history if item.get("date") != today]
+        old_unit_value = prior.get(f"{key}SpyBasketUnitValue")
+        current_unit_value = metric["spyBasketUnitValue"]
+        metric["dailyBasketUnitValueChangePct"] = (
+            None
+            if not current_unit_value or not old_unit_value
+            else round((current_unit_value / float(old_unit_value) - 1) * 100, 4)
+        )
+    history = [item for item in history if item.get("date") != snapshot_date]
     history.append({
-        "date": today,
+        "date": snapshot_date,
         "mag7": mag7["share"],
         "aiHardware": ai_hardware["share"],
         "mag7SpyHoldingMarketValue": mag7["spyHoldingMarketValue"],
         "aiHardwareSpyHoldingMarketValue": ai_hardware["spyHoldingMarketValue"],
+        "mag7SpyBasketUnitValue": mag7["spyBasketUnitValue"],
+        "aiHardwareSpyBasketUnitValue": ai_hardware["spyBasketUnitValue"],
     })
     output = {
         "source": "State Street SPY daily fund holdings",
         "sourceUrl": SPY_HOLDINGS_URL,
-        "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. The market-value change is the daily change in the basket's disclosed SPY holding market value, not a change in the total market capitalization of all listed shares. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
+        "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. Basket unit value equals basket weight times SPY's end-of-day market price per share, which avoids changes caused by SPY fund creations and redemptions. It is not the total market capitalization of all listed shares. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
         "updatedAt": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "asOf": as_of or today,
+        "asOf": snapshot_date,
+        "spyUnitPrice": spy_unit_price,
         "metrics": {"mag7": mag7, "aiHardware": ai_hardware},
         "history": history[-400:],
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"Updated SPY concentration metrics as of {output['asOf']}: MAG7 {mag7['share']:.2f}%, AI compute hardware {ai_hardware['share']:.2f}%")
+    unit_value_message = f"SPY per-share price ${spy_unit_price:.2f}" if spy_unit_price else "SPY per-share value unavailable (set ALPHA_VANTAGE_API_KEY)"
+    print(f"Updated SPY concentration metrics as of {output['asOf']}: MAG7 {mag7['share']:.2f}%, AI compute hardware {ai_hardware['share']:.2f}%; {unit_value_message}")
 
 
 if __name__ == "__main__":

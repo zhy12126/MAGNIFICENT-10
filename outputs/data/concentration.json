@@ -1,9 +1,10 @@
 {
   "source": "State Street SPY daily fund holdings",
   "sourceUrl": "https://www.ssga.com/us/en/individual/etfs/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
-  "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. The market-value change is the daily change in the basket's disclosed SPY holding market value, not a change in the total market capitalization of all listed shares. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
-  "updatedAt": "2026-07-23T23:30:34Z",
+  "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. Basket unit value equals basket weight times SPY's end-of-day market price per share, which avoids changes caused by SPY fund creations and redemptions. It is not the total market capitalization of all listed shares. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
+  "updatedAt": "2026-07-24T00:36:47Z",
   "asOf": "2026-07-23",
+  "spyUnitPrice": 738.18,
   "metrics": {
     "mag7": {
       "share": 32.9797,
@@ -18,9 +19,11 @@
         "TSLA": 1.6328
       },
       "spyHoldingMarketValue": null,
+      "spyBasketUnitValue": 243.4495,
       "notInSpy": [],
       "dailyChangePp": -0.1001,
-      "dailyMarketValueChangePct": null
+      "dailyMarketValueChangePct": null,
+      "dailyBasketUnitValueChangePct": null
     },
     "aiHardware": {
       "share": 20.0616,
@@ -51,9 +54,11 @@
         "VRT": 0.1793
       },
       "spyHoldingMarketValue": null,
+      "spyBasketUnitValue": 148.0907,
       "notInSpy": [],
       "dailyChangePp": 0.2664,
-      "dailyMarketValueChangePct": null
+      "dailyMarketValueChangePct": null,
+      "dailyBasketUnitValueChangePct": null
     }
   },
   "history": [
@@ -75,11 +80,22 @@
       "aiHardwareSpyHoldingMarketValue": null
     },
     {
+      "date": "2026-07-24",
+      "mag7": 32.9797,
+      "aiHardware": 20.0616,
+      "mag7SpyHoldingMarketValue": null,
+      "aiHardwareSpyHoldingMarketValue": null,
+      "mag7SpyBasketUnitValue": 243.4495,
+      "aiHardwareSpyBasketUnitValue": 148.0907
+    },
+    {
       "date": "2026-07-23",
       "mag7": 32.9797,
       "aiHardware": 20.0616,
       "mag7SpyHoldingMarketValue": null,
-      "aiHardwareSpyHoldingMarketValue": null
+      "aiHardwareSpyHoldingMarketValue": null,
+      "mag7SpyBasketUnitValue": 243.4495,
+      "aiHardwareSpyBasketUnitValue": 148.0907
     }
   ]
 }
