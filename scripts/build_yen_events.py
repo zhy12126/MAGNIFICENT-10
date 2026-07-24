@@ -23,6 +23,8 @@ OFFICIAL_DOMAINS = {
     "safe.gov.cn",
     "customs.gov.cn",
     "bls.gov",
+    "stat.go.jp",
+    "mof.go.jp",
 }
 REQUIRED = {"id", "datetime", "timeLabel", "country", "title", "summary", "impact", "sourceUrl"}
 
