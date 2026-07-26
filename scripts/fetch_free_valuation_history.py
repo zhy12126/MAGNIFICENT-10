@@ -35,8 +35,10 @@ COMPANIES = {
     "MU": {"cik": "0000723125", "stooq": "mu.us"},
     "AVGO": {"cik": "0001730168", "stooq": "avgo.us"},
     "AMD": {"cik": "0000002488", "stooq": "amd.us"},
-    "SNDK": {"cik": "0002023554", "stooq": "sndk.us"},
+    # SK hynix is a foreign issuer; do not fabricate a SEC-derived valuation line.
+    "SKHY": {"cik": None, "stooq": "skhy.us"},
 }
+TARGET_TICKERS = {ticker.strip().upper() for ticker in os.environ.get("HISTORY_TICKERS", "").split(",") if ticker.strip()}
 
 REVENUE_TAGS = ("RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet", "Revenues")
 NET_INCOME_TAGS = ("NetIncomeLoss",)
@@ -323,6 +325,8 @@ def main():
         history = json.loads(target.read_text(encoding="utf-8"))
     results, errors, price_sources = {}, {}, {}
     for ticker, config in COMPANIES.items():
+        if TARGET_TICKERS and ticker not in TARGET_TICKERS:
+            continue
         try:
             results[ticker], source = history_for_ticker(ticker, config, start, end)
             price_sources[ticker] = source

@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-  [ValidateSet('daily', 'fundamentals', 'history', 'spy')]
+  [ValidateSet('daily', 'fundamentals', 'history', 'spy', 'rebuild-selected-history', 'verified-amd-history', 'verified-tsm-history')]
   [string]$Mode = 'daily',
   [string]$ApiKey,
   [ValidateSet('auto', 'stooq', 'eodhd')]
@@ -64,6 +64,23 @@ switch ($Mode) {
     Write-Host "开始从 SEC EDGAR 财报 TTM + 历史 EOD 收盘价回填五年 P/E、P/CF 与 P/S；不会运行 Alpha Vantage。" -ForegroundColor Yellow
     if ($env:HISTORICAL_PRICE_SOURCE -eq 'stooq') { Write-Host "价格源：强制使用 Stooq；无数据时回退 Yahoo Finance。" -ForegroundColor Yellow } elseif ($env:EODHD_API_KEY) { Write-Host "价格源：EODHD adjusted EOD。可传入 -PriceSource stooq 强制使用免费 Stooq。" -ForegroundColor Yellow } else { Write-Host "价格源：Stooq；无数据时回退 Yahoo Finance。可在 .env 配置 EODHD_API_KEY 使用商业 EOD。" -ForegroundColor Yellow }
     & $runner @runnerArgs (Join-Path $PSScriptRoot 'fetch_free_valuation_history.py')
+  }
+  'rebuild-selected-history' {
+    Write-Host "重建 AMD、TSM、SKHY 的历史价格；重建 AMD、TSM 的 TTM 历史估值。" -ForegroundColor Cyan
+    Write-Host "SKHY 仅保留 2026-07-10 美股 ADR 上市后的真实数据；预计使用 9 次 Alpha Vantage 请求。" -ForegroundColor Yellow
+    & $runner @runnerArgs (Join-Path $PSScriptRoot 'rebuild_selected_history.py')
+  }
+  'verified-amd-history' {
+    if (-not $env:SEC_EDGAR_USER_AGENT) { throw "找不到 SEC 联系方式。请在 .env 中填入 SEC_EDGAR_USER_AGENT。" }
+    $env:HISTORY_TICKERS = 'AMD'
+    Write-Host "从 SEC EDGAR 重建 AMD 的逐季披露 TTM 历史估值；不调用 Alpha Vantage。" -ForegroundColor Cyan
+    & $runner @runnerArgs (Join-Path $PSScriptRoot 'fetch_free_valuation_history.py')
+  }
+  'verified-tsm-history' {
+    $env:REBUILD_TICKERS = 'TSM'
+    Write-Host "按 TSMC 的 ADS EPS、普通股数及台币/美元换算重建 TSM 历史估值。" -ForegroundColor Cyan
+    Write-Host "预计使用 3 次 Alpha Vantage 请求；不会更新 AMD 或 SKHY。" -ForegroundColor Yellow
+    & $runner @runnerArgs (Join-Path $PSScriptRoot 'rebuild_selected_history.py')
   }
 }
 

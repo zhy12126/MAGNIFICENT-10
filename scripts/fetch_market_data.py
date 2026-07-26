@@ -30,7 +30,7 @@ COMPANIES = [
     ("Micron", "MU", "μ", "#e8f7ed", "#16834c"),
     ("Broadcom", "AVGO", "B", "#fff0ea", "#d34b28"),
     ("AMD", "AMD", "A", "#fff2eb", "#d34b28"),
-    ("Sandisk", "SNDK", "S", "#fff0ea", "#d04d34"),
+    ("SK hynix", "SKHY", "H", "#fff0ea", "#d04d34"),
 ]
 MIN_RELIABLE_NORMALIZED_FCF_MARGIN = .03
 

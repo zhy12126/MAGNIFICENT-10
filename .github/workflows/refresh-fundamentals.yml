@@ -3,8 +3,9 @@ name: Refresh company fundamentals
 on:
   workflow_dispatch:
   schedule:
-    # Saturday; the job below only runs the API refresh on the first Saturday.
-    - cron: '15 01 * * 6'
+    # Sunday 01:15 UTC = Sunday 10:15 Asia/Japan. The job below only runs
+    # the API refresh on the first Sunday, separate from Friday's market run.
+    - cron: '15 01 * * 0'
 
 permissions:
   contents: write
@@ -13,8 +14,8 @@ jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
-      - name: Check whether this is the first Saturday
-        id: first-saturday
+      - name: Check whether this is the first Sunday
+        id: first-sunday
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "$(date -u +%d)" -le 07 ]; then
             echo "run=true" >> "$GITHUB_OUTPUT"
@@ -22,17 +23,17 @@ jobs:
             echo "run=false" >> "$GITHUB_OUTPUT"
           fi
       - uses: actions/checkout@v4
-        if: steps.first-saturday.outputs.run == 'true'
+        if: steps.first-sunday.outputs.run == 'true'
       - uses: actions/setup-python@v5
-        if: steps.first-saturday.outputs.run == 'true'
+        if: steps.first-sunday.outputs.run == 'true'
         with:
           python-version: '3.12'
       - run: python scripts/fetch_fundamentals.py
-        if: steps.first-saturday.outputs.run == 'true'
+        if: steps.first-sunday.outputs.run == 'true'
         env:
           ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
       - name: Commit refreshed fundamentals
-        if: steps.first-saturday.outputs.run == 'true'
+        if: steps.first-sunday.outputs.run == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

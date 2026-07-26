@@ -2,7 +2,8 @@ name: Update market data
 
 on:
   schedule:
-    # 每个美股交易日收盘后运行；UTC 22:30 = 美东夏令时 18:30
+    # 每个美股交易日收盘后运行；UTC 22:30 = 美东夏令时 18:30。
+    # 因此周五美股数据会在日本时间周六 07:30 更新。
     - cron: '30 22 * * 1-5'
   workflow_dispatch:
 

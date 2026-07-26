@@ -221,25 +221,11 @@
       "rationale": "数据中心与客户端业务均具周期性，采用三年中位数以避免只外推单一景气阶段。",
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）"
     },
-    "SNDK": {
-      "status": "ready",
-      "company": "Sandisk",
-      "fiscalPeriodEnd": "2026-03-31",
-      "revenueTTM": 13184000000.0,
-      "operatingCashflowTTM": 4639000000.0,
-      "fcfTTM": 4460000000.0,
-      "fcfMarginTTM": 0.3382888349514563,
-      "fcfMargin3yMedian": -0.07128920906498575,
-      "normalizedFcfMargin": 0.07206310634076896,
-      "ttmWeight": 0.35,
-      "terminalGrowth": 0.025,
-      "riskFreeRate": 0.0425,
-      "equityRiskPremium": 0.05,
-      "reportingCurrency": "USD",
-      "modelCurrency": "USD",
-      "fxRateToUsd": 1.0,
-      "rationale": "NAND 存储价格与资本开支周期显著，采用三年中位数降低周期高低点影响。",
-      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）"
+    "SKHY": {
+      "status": "unavailable",
+      "company": "SK hynix",
+      "reason": "SKHY 为新上市的美国 ADR，当前免费财报接口未提供可与该 ADS 单位一致比较的历史季度财务数据。",
+      "rationale": "DRAM 与 NAND 的供需和资本开支周期显著，采用三年中位数降低周期高低点影响。"
     }
   }
 }
