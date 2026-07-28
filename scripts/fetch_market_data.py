@@ -277,17 +277,5 @@ def main():
         history["stocks"][stock["ticker"]] = [row for row in rows if row["date"] >= f"{now.year - 10}-01-01"]
     history["updatedAt"] = output["updatedAt"]
     history_target.write_text(json.dumps(history, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    try:
-        from fetch_spy_concentration import main as refresh_spy_concentration
-
-        # SPY's end-of-day market price is used as a per-share NAV proxy.
-        # This lets the basket-value series ignore ETF creations/redemptions.
-        spy_quote = call("GLOBAL_QUOTE", "SPY").get("Global Quote", {})
-        refresh_spy_concentration(number(spy_quote.get("05. price")))
-    except Exception as exc:
-        # Keep the last successful concentration snapshot if the public SPY
-        # workbook is temporarily unavailable; the stock refresh is still valid.
-        print(f"Warning: SPY concentration refresh skipped: {exc}")
-
 if __name__ == "__main__":
     main()
