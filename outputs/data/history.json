@@ -11365,6 +11365,13 @@
         "pe": 31.6,
         "pcf": 39.9,
         "ps": 19.8
+      },
+      {
+        "date": "2026-07-28",
+        "price": 197.01,
+        "pe": 30.1,
+        "pcf": 37.9,
+        "ps": 18.8
       }
     ],
     "AAPL": [
@@ -22731,6 +22738,13 @@
         "pe": 40.3,
         "pcf": 34.9,
         "ps": 10.8
+      },
+      {
+        "date": "2026-07-28",
+        "price": 340.08,
+        "pe": 40.8,
+        "pcf": 35.3,
+        "ps": 11.0
       }
     ],
     "MSFT": [
@@ -34097,6 +34111,13 @@
         "pe": 22.7,
         "pcf": 16.7,
         "ps": 8.9
+      },
+      {
+        "date": "2026-07-28",
+        "price": 393.35,
+        "pe": 22.7,
+        "pcf": 17.0,
+        "ps": 9.1
       }
     ],
     "GOOGL": [
@@ -38038,6 +38059,13 @@
         "pe": 16.1,
         "pcf": 22.4,
         "ps": 8.8
+      },
+      {
+        "date": "2026-07-28",
+        "price": 333.71,
+        "pe": 16.4,
+        "pcf": 22.9,
+        "ps": 9.0
       }
     ],
     "AMZN": [
@@ -49404,6 +49432,13 @@
         "pe": 27.8,
         "pcf": 16.8,
         "ps": 3.4
+      },
+      {
+        "date": "2026-07-28",
+        "price": 230.86,
+        "pe": 27.7,
+        "pcf": 16.8,
+        "ps": 3.4
       }
     ],
     "META": [
@@ -60767,6 +60802,13 @@
       {
         "date": "2026-07-27",
         "price": 593.87,
+        "pe": 21.6,
+        "pcf": 12.2,
+        "ps": 7.0
+      },
+      {
+        "date": "2026-07-28",
+        "price": 593.41,
         "pe": 21.6,
         "pcf": 12.2,
         "ps": 7.0
@@ -72136,6 +72178,13 @@
         "pe": 284.6,
         "pcf": 74.8,
         "ps": 11.9
+      },
+      {
+        "date": "2026-07-28",
+        "price": 307.44,
+        "pe": 281.1,
+        "pcf": 73.9,
+        "ps": 11.8
       }
     ],
     "SPCX": [
@@ -87226,6 +87275,13 @@
         "pe": 35.6,
         "pcf": 23.4,
         "ps": 0.5
+      },
+      {
+        "date": "2026-07-28",
+        "price": 392.31,
+        "pe": 35.6,
+        "pcf": 23.1,
+        "ps": 0.5
       }
     ],
     "MU": [
@@ -98592,6 +98648,13 @@
         "pe": null,
         "pcf": null,
         "ps": null
+      },
+      {
+        "date": "2026-07-28",
+        "price": 820.53,
+        "pe": 20.4,
+        "pcf": 19.8,
+        "ps": 11.6
       }
     ],
     "SKHY": [
@@ -98671,6 +98734,13 @@
       {
         "date": "2026-07-27",
         "price": 143.02,
+        "pe": null,
+        "pcf": null,
+        "ps": null
+      },
+      {
+        "date": "2026-07-28",
+        "price": 130.17,
         "pe": null,
         "pcf": null,
         "ps": null
@@ -100977,6 +101047,13 @@
         "pe": 63.6,
         "pcf": 54.0,
         "ps": 24.1
+      },
+      {
+        "date": "2026-07-28",
+        "price": 380.91,
+        "pe": 63.9,
+        "pcf": 54.2,
+        "ps": 24.2
       }
     ],
     "ORCL": [
@@ -137235,10 +137312,17 @@
         "pe": 175.2,
         "pcf": 87.5,
         "ps": 22.9
+      },
+      {
+        "date": "2026-07-28",
+        "price": 454.62,
+        "pe": 175.5,
+        "pcf": 83.0,
+        "ps": 22.9
       }
     ]
   },
-  "updatedAt": "2026-07-27T23:36:27Z",
+  "updatedAt": "2026-07-28T23:32:19Z",
   "backfillUpdatedAt": "2026-07-27",
   "backfillErrors": {},
   "methodology": "For each trading date: EOD close divided by the latest already-filed rolling-four-quarter EPS, operating cash flow per share, and revenue per share. Per-share denominators use the average diluted weighted shares of the same four quarters.",
