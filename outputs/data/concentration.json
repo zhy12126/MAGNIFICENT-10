@@ -2,63 +2,63 @@
   "source": "State Street SPY daily fund holdings",
   "sourceUrl": "https://www.ssga.com/us/en/individual/etfs/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
   "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. Basket unit value equals basket weight times SPY's end-of-day market price per share, which avoids changes caused by SPY fund creations and redemptions. It is not the total market capitalization of all listed shares. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
-  "updatedAt": "2026-07-24T00:36:47Z",
-  "asOf": "2026-07-23",
-  "spyUnitPrice": 738.18,
+  "updatedAt": "2026-07-28T00:35:37Z",
+  "asOf": "2026-07-27",
+  "spyUnitPrice": 739.09,
   "metrics": {
     "mag7": {
-      "share": 32.9797,
+      "share": 32.2788,
       "holdings": {
-        "AAPL": 7.4212,
-        "AMZN": 3.7161,
-        "GOOG": 2.5054,
-        "GOOGL": 3.1099,
-        "META": 2.1353,
-        "MSFT": 4.4956,
-        "NVDA": 7.9634,
-        "TSLA": 1.6328
+        "AAPL": 7.6717,
+        "AMZN": 3.5637,
+        "GOOG": 2.3654,
+        "GOOGL": 2.9406,
+        "META": 2.05,
+        "MSFT": 4.4472,
+        "NVDA": 7.8577,
+        "TSLA": 1.3825
       },
       "spyHoldingMarketValue": null,
-      "spyBasketUnitValue": 243.4495,
+      "spyBasketUnitValue": 238.5694,
       "notInSpy": [],
-      "dailyChangePp": -0.1001,
+      "dailyChangePp": -0.7009,
       "dailyMarketValueChangePct": null,
-      "dailyBasketUnitValueChangePct": null
+      "dailyBasketUnitValueChangePct": -2.0046
     },
     "aiHardware": {
-      "share": 20.0616,
+      "share": 19.6408,
       "holdings": {
-        "ADI": 0.2928,
-        "AMAT": 0.6818,
-        "AMD": 1.3966,
-        "ANET": 0.28,
-        "AVGO": 2.9132,
-        "CDNS": 0.1442,
-        "CSCO": 0.687,
-        "DELL": 0.1982,
-        "ETN": 0.245,
-        "HPE": 0.099,
-        "INTC": 0.7519,
-        "JCI": 0.1348,
-        "KLAC": 0.435,
-        "LRCX": 0.6193,
-        "MPWR": 0.1065,
-        "MRVL": 0.2864,
-        "MU": 1.6779,
-        "NVDA": 7.9634,
-        "PH": 0.1898,
+        "ADI": 0.2848,
+        "AMAT": 0.6677,
+        "AMD": 1.3352,
+        "ANET": 0.2818,
+        "AVGO": 2.8365,
+        "CDNS": 0.1412,
+        "CSCO": 0.7071,
+        "DELL": 0.1986,
+        "ETN": 0.2462,
+        "HPE": 0.0992,
+        "INTC": 0.6843,
+        "JCI": 0.1372,
+        "KLAC": 0.4315,
+        "LRCX": 0.5989,
+        "MPWR": 0.1027,
+        "MRVL": 0.2667,
+        "MU": 1.6292,
+        "NVDA": 7.8577,
+        "PH": 0.1953,
         "SNPS": 0.1122,
-        "TER": 0.0897,
-        "TT": 0.1624,
-        "TXN": 0.4152,
-        "VRT": 0.1793
+        "TER": 0.0859,
+        "TT": 0.1668,
+        "TXN": 0.3992,
+        "VRT": 0.1749
       },
       "spyHoldingMarketValue": null,
-      "spyBasketUnitValue": 148.0907,
+      "spyBasketUnitValue": 145.1632,
       "notInSpy": [],
-      "dailyChangePp": 0.2664,
+      "dailyChangePp": -0.4208,
       "dailyMarketValueChangePct": null,
-      "dailyBasketUnitValueChangePct": null
+      "dailyBasketUnitValueChangePct": -1.9768
     }
   },
   "history": [
@@ -80,6 +80,15 @@
       "aiHardwareSpyHoldingMarketValue": null
     },
     {
+      "date": "2026-07-23",
+      "mag7": 32.9797,
+      "aiHardware": 20.0616,
+      "mag7SpyHoldingMarketValue": null,
+      "aiHardwareSpyHoldingMarketValue": null,
+      "mag7SpyBasketUnitValue": 243.4495,
+      "aiHardwareSpyBasketUnitValue": 148.0907
+    },
+    {
       "date": "2026-07-24",
       "mag7": 32.9797,
       "aiHardware": 20.0616,
@@ -89,13 +98,13 @@
       "aiHardwareSpyBasketUnitValue": 148.0907
     },
     {
-      "date": "2026-07-23",
-      "mag7": 32.9797,
-      "aiHardware": 20.0616,
+      "date": "2026-07-27",
+      "mag7": 32.2788,
+      "aiHardware": 19.6408,
       "mag7SpyHoldingMarketValue": null,
       "aiHardwareSpyHoldingMarketValue": null,
-      "mag7SpyBasketUnitValue": 243.4495,
-      "aiHardwareSpyBasketUnitValue": 148.0907
+      "mag7SpyBasketUnitValue": 238.5694,
+      "aiHardwareSpyBasketUnitValue": 145.1632
     }
   ]
 }

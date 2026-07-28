@@ -1,8 +1,8 @@
-"""Fetch a daily, static valuation snapshot from Alpha Vantage.
+"""Fetch a daily, static valuation snapshot from Alpha Vantage and Yahoo Finance.
 
-The job makes 25 calls (OVERVIEW + GLOBAL_QUOTE for 12 tickers, plus SPY),
-which is within Alpha Vantage's 25 requests/day free allowance.  It intentionally uses
-end-of-day data; it is not a real-time market-data service.
+SKHY uses Yahoo Finance because Alpha Vantage's free OVERVIEW endpoint does not
+publish fundamental fields for that new US ADR.  The remaining 11 stocks plus
+SPY consume 23 Alpha Vantage requests/day.  Data is end-of-day, not real-time.
 """
 import json
 import math
@@ -12,7 +12,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlencode
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 
 API_KEY = os.environ.get("ALPHA_VANTAGE_API_KEY")
 if not API_KEY:
@@ -43,6 +43,90 @@ def call(function, symbol):
         message = re.sub(r"API key as\s+[A-Za-z0-9_-]+", "API key", message, flags=re.I)
         raise RuntimeError(f"Alpha Vantage {symbol}/{function} rejected the request: {message}")
     return payload
+
+def yahoo_value(value):
+    """Yahoo quoteSummary returns most values as {raw, fmt}; accept either."""
+    return value.get("raw") if isinstance(value, dict) else value
+
+def yahoo_skhY_snapshot():
+    """Return SKHY fields mapped to the Alpha Vantage-shaped keys used below."""
+    modules = "price,summaryDetail,defaultKeyStatistics,financialData"
+    url = f"https://query1.finance.yahoo.com/v10/finance/quoteSummary/SKHY?modules={modules}"
+    request = Request(url, headers={"User-Agent": "Mozilla/5.0 HY-Market10/1.0"})
+    try:
+        with urlopen(request, timeout=30) as response:
+            payload = json.load(response)
+        result = payload.get("quoteSummary", {}).get("result", [])
+        if not result:
+            raise RuntimeError("Yahoo Finance returned no SKHY quoteSummary result")
+        data = result[0]
+        price_data = data.get("price", {})
+        summary = data.get("summaryDetail", {})
+        statistics = data.get("defaultKeyStatistics", {})
+        financial = data.get("financialData", {})
+        price = yahoo_value(price_data.get("regularMarketPrice"))
+        change = yahoo_value(price_data.get("regularMarketChangePercent"))
+        overview = {
+            "MarketCapitalization": yahoo_value(price_data.get("marketCap")),
+            "PERatio": yahoo_value(summary.get("trailingPE")),
+            "ForwardPE": yahoo_value(summary.get("forwardPE")),
+            "PEGRatio": yahoo_value(statistics.get("pegRatio")),
+            "PriceToSalesRatioTTM": yahoo_value(summary.get("priceToSalesTrailing12Months")),
+            "EVToEBITDA": yahoo_value(statistics.get("enterpriseToEbitda")),
+            "QuarterlyRevenueGrowthYOY": yahoo_value(financial.get("revenueGrowth")),
+            "QuarterlyEarningsGrowthYOY": yahoo_value(financial.get("earningsGrowth")),
+            "Beta": yahoo_value(statistics.get("beta")),
+        }
+        quote = {
+            "05. price": price,
+            "10. change percent": "—" if change is None else f"{float(change) * 100:.4f}%",
+        }
+        return overview, quote
+    except Exception as exc:
+        # Some Yahoo regions expose the compact quote endpoint while blocking
+        # quoteSummary's crumb-protected route. It carries the same core
+        # valuation fields, so try it before falling back to price-only chart.
+        try:
+            quote_url = "https://query1.finance.yahoo.com/v7/finance/quote?symbols=SKHY"
+            with urlopen(Request(quote_url, headers={"User-Agent": "Mozilla/5.0 HY-Market10/1.0"}), timeout=30) as response:
+                result = json.load(response).get("quoteResponse", {}).get("result", [])
+            if not result:
+                raise RuntimeError("Yahoo Finance quote returned no SKHY result")
+            row = result[0]
+            overview = {
+                "MarketCapitalization": row.get("marketCap"),
+                "PERatio": row.get("trailingPE"),
+                "ForwardPE": row.get("forwardPE"),
+                "PEGRatio": row.get("pegRatio"),
+                "PriceToSalesRatioTTM": row.get("priceToSalesTrailing12Months"),
+                "EVToEBITDA": row.get("enterpriseToEbitda"),
+                "QuarterlyRevenueGrowthYOY": row.get("revenueGrowth"),
+                "QuarterlyEarningsGrowthYOY": row.get("earningsGrowth"),
+                "Beta": row.get("beta"),
+            }
+            quote = {
+                "05. price": row.get("regularMarketPrice"),
+                "10. change percent": "—" if row.get("regularMarketChangePercent") is None else f"{float(row['regularMarketChangePercent']) * 100:.4f}%",
+            }
+            return overview, quote
+        except Exception as quote_exc:
+            quote_error = quote_exc
+        # Yahoo's chart endpoint has a broader public availability and at
+        # least preserves a fresh ADR quote if valuation routes are rate-limited.
+        # Fundamental values then fall back to the prior successful snapshot.
+        chart_url = "https://query1.finance.yahoo.com/v8/finance/chart/SKHY?range=5d&interval=1d"
+        try:
+            with urlopen(Request(chart_url, headers={"User-Agent": "Mozilla/5.0 HY-Market10/1.0"}), timeout=30) as response:
+                chart = json.load(response).get("chart", {}).get("result", [])[0]
+            closes = [value for value in chart.get("indicators", {}).get("quote", [{}])[0].get("close", []) if value is not None]
+            if not closes:
+                raise RuntimeError("Yahoo Finance chart returned no SKHY closes")
+            price = closes[-1]
+            previous = closes[-2] if len(closes) > 1 else None
+            change = "—" if not previous else f"{(price / previous - 1) * 100:.4f}%"
+            return {}, {"05. price": price, "10. change percent": change}
+        except Exception as chart_exc:
+            raise RuntimeError(f"Yahoo Finance SKHY snapshot failed: {exc}; quote fallback failed: {quote_error}; chart fallback failed: {chart_exc}") from chart_exc
 
 def number(value):
     try:
@@ -101,19 +185,46 @@ def main():
     fundamentals = {}
     if fundamentals_path.exists():
         fundamentals = json.loads(fundamentals_path.read_text(encoding="utf-8")).get("companies", {})
+    # A temporary Alpha Vantage OVERVIEW omission must not erase the last
+    # successful fundamental snapshot. Quotes are independent and may still be
+    # fresh, so we retain the prior ratios/model and update only price/change.
+    target = Path("outputs/data/stocks.json")
+    previous_stocks = {}
+    if target.exists():
+        previous_stocks = {
+            stock.get("ticker"): stock
+            for stock in json.loads(target.read_text(encoding="utf-8")).get("stocks", [])
+            if stock.get("ticker")
+        }
     stocks = []
     for i, (name, ticker, logo, color, ink) in enumerate(COMPANIES):
-        overview = call("OVERVIEW", ticker)
-        time.sleep(13)  # stay below the free-tier minute rate limit
-        quote = call("GLOBAL_QUOTE", ticker).get("Global Quote", {})
-        if i < len(COMPANIES) - 1:
-            time.sleep(13)
+        if ticker == "SKHY":
+            overview, quote = yahoo_skhY_snapshot()
+        else:
+            overview = call("OVERVIEW", ticker)
+            time.sleep(13)  # stay below the free-tier minute rate limit
+            quote = call("GLOBAL_QUOTE", ticker).get("Global Quote", {})
+            if i < len(COMPANIES) - 2:
+                time.sleep(13)
         market_cap = number(overview.get("MarketCapitalization"))
         ps = number(overview.get("PriceToSalesRatioTTM"))
         revenue_growth = number(overview.get("QuarterlyRevenueGrowthYOY"))
         eps_growth = number(overview.get("QuarterlyEarningsGrowthYOY"))
         price = number(quote.get("05. price"))
         change = quote.get("10. change percent", "—")
+        prior = previous_stocks.get(ticker, {})
+        # Market cap is required for every displayed valuation ratio. If it is
+        # absent, OVERVIEW did not return a usable fundamental record (common
+        # when the free endpoint is throttled for one symbol).
+        if market_cap is None and prior.get("cap") not in (None, "—"):
+            retained = dict(prior)
+            retained.update({
+                "name": name, "ticker": ticker, "logo": logo, "color": color, "ink": ink,
+                "price": "—" if price is None else f"${price:,.2f}", "change": change,
+            })
+            retained["fundamentalsStatus"] = "沿用最近一次有效基本面快照；当日 Alpha Vantage OVERVIEW 未返回该公司数据。"
+            stocks.append(retained)
+            continue
         model = dict(fundamentals.get(ticker, {}))
         operating_cashflow = number(model.get("operatingCashflowTTM"))
         pcf = market_cap / operating_cashflow if market_cap and operating_cashflow and operating_cashflow > 0 else None
@@ -145,11 +256,10 @@ def main():
             "epsGrowthCurrent": "—" if eps_growth is None else f"{eps_growth * 100:.0f}%",
             "price": "—" if price is None else f"${price:,.2f}", "change": change,
             "valuationModel": model,
-            "note": "数据口径：行情与部分基本面来自 Alpha Vantage；历史估值以 SEC EDGAR 财报 TTM 和历史收盘价计算。隐含增长率为公司级 FCFE 反推，不是分析师预测或投行评级。"
+            "note": "数据口径：行情与部分基本面来自 Yahoo Finance（SKHY 美国 ADR）" if ticker == "SKHY" else "数据口径：行情与部分基本面来自 Alpha Vantage；历史估值以 SEC EDGAR 财报 TTM 和历史收盘价计算。隐含增长率为公司级 FCFE 反推，不是分析师预测或投行评级。"
         })
     now = datetime.now(timezone.utc)
-    output = {"source": "Alpha Vantage", "updatedAt": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "stocks": stocks}
-    target = Path("outputs/data/stocks.json")
+    output = {"source": "Alpha Vantage + Yahoo Finance (SKHY)", "updatedAt": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "stocks": stocks}
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     history_target = Path("outputs/data/history.json")
