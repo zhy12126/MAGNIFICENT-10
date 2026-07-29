@@ -1,6 +1,6 @@
 {
   "source": "Alpha Vantage + Yahoo Finance (SKHY)",
-  "updatedAt": "2026-07-28T23:32:19Z",
+  "updatedAt": "2026-07-29T00:09:57Z",
   "stocks": [
     {
       "name": "NVIDIA",
@@ -503,17 +503,17 @@
       "logo": "H",
       "color": "#fff0ea",
       "ink": "#d04d34",
-      "cap": "—",
-      "pe": "—",
-      "fpe": "—",
-      "peg": "—",
-      "ps": "—",
+      "cap": "924B",
+      "pe": "19.8",
+      "fpe": "3.2",
+      "peg": "0.5",
+      "ps": "0.0",
       "pcf": "—",
-      "evEbitda": "—",
+      "evEbitda": "-0.3",
       "implied": "—",
-      "growth": "—",
-      "revenueGrowthCurrent": "—",
-      "epsGrowthCurrent": "—",
+      "growth": "198%",
+      "revenueGrowthCurrent": "198%",
+      "epsGrowthCurrent": "397%",
       "price": "$130.17",
       "change": "-8.9848%",
       "valuationModel": {
@@ -522,7 +522,7 @@
         "reason": "SKHY 为新上市的美国 ADR，当前免费财报接口未提供可与该 ADS 单位一致比较的历史季度财务数据。",
         "rationale": "DRAM 与 NAND 的供需和资本开支周期显著，采用三年中位数降低周期高低点影响。",
         "impliedGrowthStatus": "unavailable",
-        "impliedGrowthNote": "缺少市值或公司级财报模型输入。"
+        "impliedGrowthNote": "模型输入不完整，暂不反推隐含增长率。"
       },
       "note": "数据口径：行情与部分基本面来自 Yahoo Finance（SKHY 美国 ADR）"
     }

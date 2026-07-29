@@ -98744,6 +98744,13 @@
         "pe": null,
         "pcf": null,
         "ps": null
+      },
+      {
+        "date": "2026-07-29",
+        "price": 130.17,
+        "pe": 19.8,
+        "pcf": null,
+        "ps": 0.0
       }
     ],
     "AVGO": [
@@ -137322,7 +137329,7 @@
       }
     ]
   },
-  "updatedAt": "2026-07-28T23:32:19Z",
+  "updatedAt": "2026-07-29T00:09:57Z",
   "backfillUpdatedAt": "2026-07-27",
   "backfillErrors": {},
   "methodology": "For each trading date: EOD close divided by the latest already-filed rolling-four-quarter EPS, operating cash flow per share, and revenue per share. Per-share denominators use the average diluted weighted shares of the same four quarters.",

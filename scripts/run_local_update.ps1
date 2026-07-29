@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-  [ValidateSet('daily', 'fundamentals', 'history', 'spy', 'rebuild-selected-history', 'verified-amd-history', 'verified-tsm-history')]
+  [ValidateSet('daily', 'skhy', 'fundamentals', 'history', 'spy', 'rebuild-selected-history', 'verified-amd-history', 'verified-tsm-history')]
   [string]$Mode = 'daily',
   [string]$ApiKey,
   [ValidateSet('auto', 'stooq', 'eodhd')]
@@ -26,7 +26,7 @@ function Import-LocalEnv {
 Import-LocalEnv (Join-Path $root '.env')
 if ($ApiKey) { $env:ALPHA_VANTAGE_API_KEY = $ApiKey }
 if ($PriceSource -ne 'auto') { $env:HISTORICAL_PRICE_SOURCE = $PriceSource }
-if ($Mode -ne 'history' -and -not $env:ALPHA_VANTAGE_API_KEY) {
+if ($Mode -notin @('history', 'skhy') -and -not $env:ALPHA_VANTAGE_API_KEY) {
   throw "找不到 Alpha Vantage Key。请复制 .env.example 为 .env 并填入 ALPHA_VANTAGE_API_KEY，或运行时传入 -ApiKey。"
 }
 
@@ -47,6 +47,25 @@ switch ($Mode) {
   'daily' {
     Write-Host "开始本地日更：更新 12 家公司的行情、估值快照和历史曲线，并刷新 SPY 权重及每份额篮子价值。"
     Write-Host "预计使用 25 次 Alpha Vantage 请求；请勿在同一天再运行 fundamentals。" -ForegroundColor Yellow
+    & $runner @runnerArgs (Join-Path $PSScriptRoot 'fetch_market_data.py')
+  }
+  'skhy' {
+    $env:MARKET_TICKERS = 'SKHY'
+    Write-Host "开始仅刷新 SK hynix（SKHY）行情与基本面快照。" -ForegroundColor Cyan
+    Write-Host "数据源：Yahoo Finance；不调用 Alpha Vantage，不会改动其他公司数据。" -ForegroundColor Yellow
+    # In PowerShell 7, a missing Python module writes stderr that can be
+    # promoted to a terminating NativeCommandError by $ErrorActionPreference.
+    # Probe it with non-terminating handling, then install when absent.
+    $previousErrorActionPreference = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    & $runner @runnerArgs '-c' 'import yfinance' 2>$null
+    $yfinanceAvailable = ($LASTEXITCODE -eq 0)
+    $ErrorActionPreference = $previousErrorActionPreference
+    if (-not $yfinanceAvailable) {
+      Write-Host "首次使用：安装 Yahoo Finance 连接依赖 yfinance..." -ForegroundColor Yellow
+      & $runner @runnerArgs '-m' 'pip' 'install' '--disable-pip-version-check' 'yfinance'
+      if ($LASTEXITCODE -ne 0) { throw "无法安装 yfinance。请检查网络后重试：py -3 -m pip install yfinance" }
+    }
     & $runner @runnerArgs (Join-Path $PSScriptRoot 'fetch_market_data.py')
   }
   'fundamentals' {

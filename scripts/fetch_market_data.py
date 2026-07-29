@@ -1,8 +1,9 @@
 """Fetch a daily, static valuation snapshot from Alpha Vantage and Yahoo Finance.
 
 SKHY uses Yahoo Finance because Alpha Vantage's free OVERVIEW endpoint does not
-publish fundamental fields for that new US ADR.  The remaining 11 stocks plus
-SPY consume 23 Alpha Vantage requests/day.  Data is end-of-day, not real-time.
+publish fundamental fields for that new US ADR. The remaining 11 stocks consume
+22 Alpha Vantage requests/day; SPY is refreshed by its separate workflow.
+Data is end-of-day, not real-time.
 """
 import json
 import math
@@ -10,12 +11,19 @@ import os
 import re
 import time
 from datetime import datetime, timezone
+from http.cookiejar import CookieJar
 from pathlib import Path
 from urllib.parse import urlencode
-from urllib.request import Request, urlopen
+from urllib.request import HTTPCookieProcessor, Request, build_opener, urlopen
+
+try:
+    import yfinance as yf
+except ImportError:  # Installed by the SKHY local mode / GitHub workflow.
+    yf = None
 
 API_KEY = os.environ.get("ALPHA_VANTAGE_API_KEY")
-if not API_KEY:
+REQUESTED_TICKERS = {ticker.strip().upper() for ticker in os.environ.get("MARKET_TICKERS", "").split(",") if ticker.strip()}
+if not API_KEY and (not REQUESTED_TICKERS or REQUESTED_TICKERS - {"SKHY"}):
     raise SystemExit("Missing ALPHA_VANTAGE_API_KEY GitHub secret.")
 
 COMPANIES = [
@@ -48,85 +56,248 @@ def yahoo_value(value):
     """Yahoo quoteSummary returns most values as {raw, fmt}; accept either."""
     return value.get("raw") if isinstance(value, dict) else value
 
-def yahoo_skhY_snapshot():
-    """Return SKHY fields mapped to the Alpha Vantage-shaped keys used below."""
-    modules = "price,summaryDetail,defaultKeyStatistics,financialData"
-    url = f"https://query1.finance.yahoo.com/v10/finance/quoteSummary/SKHY?modules={modules}"
-    request = Request(url, headers={"User-Agent": "Mozilla/5.0 HY-Market10/1.0"})
-    try:
-        with urlopen(request, timeout=30) as response:
-            payload = json.load(response)
-        result = payload.get("quoteSummary", {}).get("result", [])
-        if not result:
-            raise RuntimeError("Yahoo Finance returned no SKHY quoteSummary result")
-        data = result[0]
-        price_data = data.get("price", {})
-        summary = data.get("summaryDetail", {})
-        statistics = data.get("defaultKeyStatistics", {})
-        financial = data.get("financialData", {})
-        price = yahoo_value(price_data.get("regularMarketPrice"))
-        change = yahoo_value(price_data.get("regularMarketChangePercent"))
-        overview = {
-            "MarketCapitalization": yahoo_value(price_data.get("marketCap")),
-            "PERatio": yahoo_value(summary.get("trailingPE")),
-            "ForwardPE": yahoo_value(summary.get("forwardPE")),
-            "PEGRatio": yahoo_value(statistics.get("pegRatio")),
-            "PriceToSalesRatioTTM": yahoo_value(summary.get("priceToSalesTrailing12Months")),
-            "EVToEBITDA": yahoo_value(statistics.get("enterpriseToEbitda")),
-            "QuarterlyRevenueGrowthYOY": yahoo_value(financial.get("revenueGrowth")),
-            "QuarterlyEarningsGrowthYOY": yahoo_value(financial.get("earningsGrowth")),
-            "Beta": yahoo_value(statistics.get("beta")),
-        }
-        quote = {
-            "05. price": price,
-            "10. change percent": "—" if change is None else f"{float(change) * 100:.4f}%",
-        }
-        return overview, quote
-    except Exception as exc:
-        # Some Yahoo regions expose the compact quote endpoint while blocking
-        # quoteSummary's crumb-protected route. It carries the same core
-        # valuation fields, so try it before falling back to price-only chart.
+def yahoo_embedded_object(html, marker):
+    """Read one JSON object at `marker` without depending on script newlines.
+
+    Yahoo has changed its hydration markup several times. A non-greedy regular
+    expression can stop at a nested brace and silently miss QuoteSummaryStore,
+    so match braces while respecting quoted JSON strings instead.
+    """
+    marker_index = html.find(marker)
+    if marker_index < 0:
+        raise RuntimeError(f"Yahoo Finance page had no {marker} state")
+    start = html.find("{", marker_index + len(marker))
+    if start < 0:
+        raise RuntimeError(f"Yahoo Finance page had malformed {marker} state")
+    depth = 0
+    quoted = False
+    escaped = False
+    for index in range(start, len(html)):
+        char = html[index]
+        if quoted:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                quoted = False
+            continue
+        if char == '"':
+            quoted = True
+        elif char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+            if depth == 0:
+                return json.loads(html[start:index + 1])
+    raise RuntimeError(f"Yahoo Finance page had an incomplete {marker} state")
+
+def yahoo_overview_from_stores(stores):
+    """Map Yahoo's server-rendered QuoteSummaryStore into dashboard fields."""
+    summary = stores.get("QuoteSummaryStore", stores)
+    price_data = summary.get("price", {})
+    detail = summary.get("summaryDetail", {})
+    statistics = summary.get("defaultKeyStatistics", {})
+    financial = summary.get("financialData", {})
+    overview = {
+        "MarketCapitalization": yahoo_value(price_data.get("marketCap")),
+        "PERatio": yahoo_value(detail.get("trailingPE")),
+        "ForwardPE": yahoo_value(detail.get("forwardPE")),
+        "PEGRatio": yahoo_value(statistics.get("pegRatio")),
+        "PriceToSalesRatioTTM": yahoo_value(detail.get("priceToSalesTrailing12Months")),
+        "EVToEBITDA": yahoo_value(statistics.get("enterpriseToEbitda")),
+        "QuarterlyRevenueGrowthYOY": yahoo_value(financial.get("revenueGrowth")),
+        "QuarterlyEarningsGrowthYOY": yahoo_value(financial.get("earningsGrowth")),
+        "Beta": yahoo_value(statistics.get("beta")),
+    }
+    price = yahoo_value(price_data.get("regularMarketPrice"))
+    change = yahoo_value(price_data.get("regularMarketChangePercent"))
+    quote = {
+        "05. price": price,
+        "10. change percent": "—" if change is None else f"{float(change) * 100:.4f}%",
+    }
+    return overview, quote
+
+def yahoo_timeseries_value(result, key):
+    """Return Yahoo fundamentals-timeseries' newest raw value for one type."""
+    values = []
+    for group in result:
+        for row in group.get(key, []) or []:
+            raw = yahoo_value(row.get("reportedValue"))
+            if raw is not None:
+                values.append((row.get("asOfDate", ""), raw))
+    return max(values, default=("", None))[1]
+
+def yahoo_skhY_chart_quote(headers):
+    """Get the fresh ADR quote from Yahoo's broadest public endpoint."""
+    errors = []
+    for host in ("query1.finance.yahoo.com", "query2.finance.yahoo.com"):
         try:
-            quote_url = "https://query1.finance.yahoo.com/v7/finance/quote?symbols=SKHY"
-            with urlopen(Request(quote_url, headers={"User-Agent": "Mozilla/5.0 HY-Market10/1.0"}), timeout=30) as response:
-                result = json.load(response).get("quoteResponse", {}).get("result", [])
-            if not result:
-                raise RuntimeError("Yahoo Finance quote returned no SKHY result")
-            row = result[0]
-            overview = {
-                "MarketCapitalization": row.get("marketCap"),
-                "PERatio": row.get("trailingPE"),
-                "ForwardPE": row.get("forwardPE"),
-                "PEGRatio": row.get("pegRatio"),
-                "PriceToSalesRatioTTM": row.get("priceToSalesTrailing12Months"),
-                "EVToEBITDA": row.get("enterpriseToEbitda"),
-                "QuarterlyRevenueGrowthYOY": row.get("revenueGrowth"),
-                "QuarterlyEarningsGrowthYOY": row.get("earningsGrowth"),
-                "Beta": row.get("beta"),
-            }
-            quote = {
-                "05. price": row.get("regularMarketPrice"),
-                "10. change percent": "—" if row.get("regularMarketChangePercent") is None else f"{float(row['regularMarketChangePercent']) * 100:.4f}%",
-            }
-            return overview, quote
-        except Exception as quote_exc:
-            quote_error = quote_exc
-        # Yahoo's chart endpoint has a broader public availability and at
-        # least preserves a fresh ADR quote if valuation routes are rate-limited.
-        # Fundamental values then fall back to the prior successful snapshot.
-        chart_url = "https://query1.finance.yahoo.com/v8/finance/chart/SKHY?range=5d&interval=1d"
-        try:
-            with urlopen(Request(chart_url, headers={"User-Agent": "Mozilla/5.0 HY-Market10/1.0"}), timeout=30) as response:
+            url = f"https://{host}/v8/finance/chart/SKHY?range=5d&interval=1d"
+            with urlopen(Request(url, headers=headers), timeout=30) as response:
                 chart = json.load(response).get("chart", {}).get("result", [])[0]
             closes = [value for value in chart.get("indicators", {}).get("quote", [{}])[0].get("close", []) if value is not None]
             if not closes:
-                raise RuntimeError("Yahoo Finance chart returned no SKHY closes")
+                raise RuntimeError("no historical closes")
             price = closes[-1]
             previous = closes[-2] if len(closes) > 1 else None
             change = "—" if not previous else f"{(price / previous - 1) * 100:.4f}%"
-            return {}, {"05. price": price, "10. change percent": change}
-        except Exception as chart_exc:
-            raise RuntimeError(f"Yahoo Finance SKHY snapshot failed: {exc}; quote fallback failed: {quote_error}; chart fallback failed: {chart_exc}") from chart_exc
+            return {"05. price": price, "10. change percent": change}
+        except Exception as error:
+            errors.append(f"{host}: {error}")
+    raise RuntimeError("chart unavailable: " + "; ".join(errors))
+
+def yahoo_cookie_quote_summary(headers, modules):
+    """Fetch quoteSummary with Yahoo's cookie/crumb session handshake."""
+    cookies = CookieJar()
+    opener = build_opener(HTTPCookieProcessor(cookies))
+    # fc.yahoo.com issues the consent/session cookie used by Yahoo's protected
+    # JSON routes. The crumb is short-lived and must stay with this cookie jar.
+    opener.open(Request("https://fc.yahoo.com/", headers=headers), timeout=30).read()
+    with opener.open(Request("https://query1.finance.yahoo.com/v1/test/getcrumb", headers=headers), timeout=30) as response:
+        crumb = response.read().decode("utf-8").strip()
+    if not crumb or "<" in crumb:
+        raise RuntimeError("Yahoo Finance returned no usable crumb")
+    query = urlencode({"modules": modules, "crumb": crumb})
+    url = f"https://query1.finance.yahoo.com/v10/finance/quoteSummary/SKHY?{query}"
+    with opener.open(Request(url, headers=headers), timeout=30) as response:
+        result = json.load(response).get("quoteSummary", {}).get("result", [])
+    if not result:
+        raise RuntimeError("cookie/crumb quoteSummary returned no result")
+    overview, quote = yahoo_overview_from_stores(result[0])
+    if number(overview.get("MarketCapitalization")) is None:
+        raise RuntimeError("cookie/crumb quoteSummary had no market cap")
+    return overview, quote
+
+def yahoo_yfinance_snapshot():
+    """Read SKHY through yfinance's maintained Yahoo cookie/session client."""
+    if yf is None:
+        raise RuntimeError("yfinance is not installed")
+    instrument = yf.Ticker("SKHY")
+    info = instrument.get_info()
+    fast = instrument.fast_info
+
+    def first(*values):
+        return next((value for value in values if value is not None), None)
+
+    market_cap = first(info.get("marketCap"), fast.get("market_cap"))
+    overview = {
+        "MarketCapitalization": market_cap,
+        "PERatio": first(info.get("trailingPE"), info.get("trailingPeRatio")),
+        "ForwardPE": first(info.get("forwardPE"), info.get("forwardPeRatio")),
+        "PEGRatio": first(info.get("pegRatio"), info.get("trailingPegRatio")),
+        "PriceToSalesRatioTTM": first(info.get("priceToSalesTrailing12Months"), info.get("trailingPsRatio")),
+        "EVToEBITDA": first(info.get("enterpriseToEbitda"), info.get("enterpriseToEbitdaRatio")),
+        "QuarterlyRevenueGrowthYOY": first(info.get("revenueGrowth"), info.get("quarterlyRevenueGrowth")),
+        "QuarterlyEarningsGrowthYOY": first(info.get("earningsGrowth"), info.get("quarterlyEarningsGrowth")),
+        "Beta": first(info.get("beta"), info.get("beta3Year")),
+    }
+    if number(market_cap) is None:
+        raise RuntimeError("yfinance returned no SKHY market cap")
+    price = first(info.get("regularMarketPrice"), info.get("currentPrice"), fast.get("last_price"))
+    previous = first(info.get("regularMarketPreviousClose"), info.get("previousClose"), fast.get("previous_close"))
+    change = "—" if number(price) is None or number(previous) in (None, 0) else f"{(float(price) / float(previous) - 1) * 100:.4f}%"
+    return overview, {"05. price": price, "10. change percent": change}
+
+def yahoo_skhY_snapshot():
+    """Return SKHY fields mapped to the Alpha Vantage-shaped keys used below."""
+    modules = "price,summaryDetail,defaultKeyStatistics,financialData"
+    headers = {"User-Agent": "Mozilla/5.0 HY-Market10/1.0", "Accept-Language": "en-US,en;q=0.8"}
+    summary_errors = []
+    for host in ("query1.finance.yahoo.com", "query2.finance.yahoo.com"):
+        try:
+            url = f"https://{host}/v10/finance/quoteSummary/SKHY?modules={modules}"
+            with urlopen(Request(url, headers=headers), timeout=30) as response:
+                result = json.load(response).get("quoteSummary", {}).get("result", [])
+            if not result:
+                raise RuntimeError("no quoteSummary result")
+            overview, quote = yahoo_overview_from_stores(result[0])
+            if number(overview.get("MarketCapitalization")) is not None:
+                return overview, quote
+            raise RuntimeError("quoteSummary had no market cap")
+        except Exception as error:
+            summary_errors.append(f"{host}: {error}")
+
+    try:
+        return yahoo_cookie_quote_summary(headers, modules)
+    except Exception as error:
+        summary_errors.append(f"cookie/crumb quoteSummary: {error}")
+
+    quote_errors = []
+    for host in ("query1.finance.yahoo.com", "query2.finance.yahoo.com"):
+        try:
+            url = f"https://{host}/v7/finance/quote?symbols=SKHY"
+            with urlopen(Request(url, headers=headers), timeout=30) as response:
+                result = json.load(response).get("quoteResponse", {}).get("result", [])
+            if not result:
+                raise RuntimeError("no compact quote result")
+            row = result[0]
+            overview = {
+                "MarketCapitalization": row.get("marketCap"), "PERatio": row.get("trailingPE"),
+                "ForwardPE": row.get("forwardPE"), "PEGRatio": row.get("pegRatio"),
+                "PriceToSalesRatioTTM": row.get("priceToSalesTrailing12Months"),
+                "EVToEBITDA": row.get("enterpriseToEbitda"),
+                "QuarterlyRevenueGrowthYOY": row.get("revenueGrowth"),
+                "QuarterlyEarningsGrowthYOY": row.get("earningsGrowth"), "Beta": row.get("beta"),
+            }
+            if number(overview.get("MarketCapitalization")) is None:
+                raise RuntimeError("compact quote had no market cap")
+            return overview, {
+                "05. price": row.get("regularMarketPrice"),
+                "10. change percent": "—" if row.get("regularMarketChangePercent") is None else f"{float(row['regularMarketChangePercent']) * 100:.4f}%",
+            }
+        except Exception as error:
+            quote_errors.append(f"{host}: {error}")
+
+    page_errors = []
+    for page_url in ("https://finance.yahoo.com/quote/SKHY/", "https://sg.finance.yahoo.com/quote/SKHY/"):
+        try:
+            with urlopen(Request(page_url, headers=headers), timeout=30) as response:
+                html = response.read().decode("utf-8", errors="replace")
+            try:
+                state = yahoo_embedded_object(html, "root.App.main")
+                stores = state.get("context", {}).get("dispatcher", {}).get("stores", {})
+            except Exception:
+                stores = {"QuoteSummaryStore": yahoo_embedded_object(html, '"QuoteSummaryStore":')}
+            overview, quote = yahoo_overview_from_stores(stores)
+            if number(overview.get("MarketCapitalization")) is None:
+                raise RuntimeError("page state had no market cap")
+            return overview, quote
+        except Exception as error:
+            page_errors.append(f"{page_url}: {error}")
+
+    # Yahoo's public fundamentals-timeseries service is a separate product
+    # from quoteSummary. It frequently remains available when quote pages are
+    # cookie-gated, and supplies the directly reported rolling valuation data.
+    timeseries_errors = []
+    types = ",".join((
+        "trailingMarketCap", "trailingPeRatio", "trailingForwardPeRatio",
+        "trailingPegRatio", "trailingPsRatio", "trailingEnterprisesValueEBITDARatio",
+    ))
+    for host in ("query1.finance.yahoo.com", "query2.finance.yahoo.com"):
+        try:
+            url = f"https://{host}/ws/fundamentals-timeseries/v1/finance/timeseries/SKHY?symbol=SKHY&type={types}"
+            with urlopen(Request(url, headers=headers), timeout=30) as response:
+                result = json.load(response).get("timeseries", {}).get("result", [])
+            overview = {
+                "MarketCapitalization": yahoo_timeseries_value(result, "trailingMarketCap"),
+                "PERatio": yahoo_timeseries_value(result, "trailingPeRatio"),
+                "ForwardPE": yahoo_timeseries_value(result, "trailingForwardPeRatio"),
+                "PEGRatio": yahoo_timeseries_value(result, "trailingPegRatio"),
+                "PriceToSalesRatioTTM": yahoo_timeseries_value(result, "trailingPsRatio"),
+                "EVToEBITDA": yahoo_timeseries_value(result, "trailingEnterprisesValueEBITDARatio"),
+            }
+            if number(overview.get("MarketCapitalization")) is None:
+                raise RuntimeError("fundamentals-timeseries had no market cap")
+            return overview, yahoo_skhY_chart_quote(headers)
+        except Exception as error:
+            timeseries_errors.append(f"{host}: {error}")
+
+    try:
+        return yahoo_yfinance_snapshot()
+    except Exception as error:
+        yfinance_error = error
+    raise RuntimeError("Yahoo Finance SKHY valuation snapshot failed; " + "; ".join(summary_errors + quote_errors + page_errors + timeseries_errors + [f"yfinance: {yfinance_error}"]))
 
 def number(value):
     try:
@@ -196,8 +367,21 @@ def main():
             for stock in json.loads(target.read_text(encoding="utf-8")).get("stocks", [])
             if stock.get("ticker")
         }
+    known_tickers = {ticker for _, ticker, *_ in COMPANIES}
+    unknown_tickers = REQUESTED_TICKERS - known_tickers
+    if unknown_tickers:
+        raise SystemExit(f"Unknown MARKET_TICKERS: {', '.join(sorted(unknown_tickers))}")
     stocks = []
+    updated_tickers = set()
     for i, (name, ticker, logo, color, ink) in enumerate(COMPANIES):
+        prior = previous_stocks.get(ticker, {})
+        # A targeted refresh must preserve every untouched row. This makes the
+        # SKHY-only command safe to run without spending Alpha Vantage quota.
+        if REQUESTED_TICKERS and ticker not in REQUESTED_TICKERS:
+            if not prior:
+                raise RuntimeError(f"Cannot preserve {ticker}: outputs/data/stocks.json has no prior snapshot")
+            stocks.append(prior)
+            continue
         if ticker == "SKHY":
             overview, quote = yahoo_skhY_snapshot()
         else:
@@ -212,7 +396,11 @@ def main():
         eps_growth = number(overview.get("QuarterlyEarningsGrowthYOY"))
         price = number(quote.get("05. price"))
         change = quote.get("10. change percent", "—")
-        prior = previous_stocks.get(ticker, {})
+        if ticker == "SKHY" and market_cap is None and prior.get("cap") in (None, "—"):
+            raise RuntimeError(
+                "Yahoo Finance returned only an SKHY price, not a valuation snapshot. "
+                "The existing row was left unchanged; retry later instead of publishing blank metrics."
+            )
         # Market cap is required for every displayed valuation ratio. If it is
         # absent, OVERVIEW did not return a usable fundamental record (common
         # when the free endpoint is throttled for one symbol).
@@ -224,6 +412,7 @@ def main():
             })
             retained["fundamentalsStatus"] = "沿用最近一次有效基本面快照；当日 Alpha Vantage OVERVIEW 未返回该公司数据。"
             stocks.append(retained)
+            updated_tickers.add(ticker)
             continue
         model = dict(fundamentals.get(ticker, {}))
         operating_cashflow = number(model.get("operatingCashflowTTM"))
@@ -258,6 +447,7 @@ def main():
             "valuationModel": model,
             "note": "数据口径：行情与部分基本面来自 Yahoo Finance（SKHY 美国 ADR）" if ticker == "SKHY" else "数据口径：行情与部分基本面来自 Alpha Vantage；历史估值以 SEC EDGAR 财报 TTM 和历史收盘价计算。隐含增长率为公司级 FCFE 反推，不是分析师预测或投行评级。"
         })
+        updated_tickers.add(ticker)
     now = datetime.now(timezone.utc)
     output = {"source": "Alpha Vantage + Yahoo Finance (SKHY)", "updatedAt": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "stocks": stocks}
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -268,6 +458,8 @@ def main():
         history = json.loads(history_target.read_text(encoding="utf-8"))
     day = now.strftime("%Y-%m-%d")
     for stock in stocks:
+        if stock["ticker"] not in updated_tickers:
+            continue
         rows = history.setdefault("stocks", {}).setdefault(stock["ticker"], [])
         snapshot = {"date": day, "price": number(str(stock.get("price", "")).replace("$", "").replace(",", "")), "pe": number(stock["pe"]), "pcf": number(stock["pcf"]), "ps": number(stock["ps"])}
         if rows and rows[-1]["date"] == day:
