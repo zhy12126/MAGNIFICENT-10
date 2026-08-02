@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-  [ValidateSet('daily', 'skhy', 'fundamentals', 'history', 'spy', 'rebuild-selected-history', 'verified-amd-history', 'verified-tsm-history')]
+  [ValidateSet('daily', 'skhy', 'skhy-history', 'skhy-fundamentals', 'fundamentals', 'history', 'validate', 'spy', 'rebuild-selected-history', 'verified-amd-history', 'verified-tsm-history')]
   [string]$Mode = 'daily',
   [string]$ApiKey,
   [ValidateSet('auto', 'stooq', 'eodhd')]
@@ -68,9 +68,18 @@ switch ($Mode) {
     }
     & $runner @runnerArgs (Join-Path $PSScriptRoot 'fetch_market_data.py')
   }
+  'skhy-history' {
+    Write-Host "开始独立回填 SKHY 历史估值；不会运行或改写其他股票的回填逻辑。" -ForegroundColor Cyan
+    Write-Host "上市后使用 SKHY 实际收盘价；上市前使用明确标注的 000660.KS ADS 等价代理。" -ForegroundColor Yellow
+    & $runner @runnerArgs (Join-Path $PSScriptRoot 'fetch_skhy_history.py')
+  }
+  'skhy-fundamentals' {
+    Write-Host "开始独立建立 SKHY 公司财报模型；其他公司记录保持原样。" -ForegroundColor Cyan
+    & $runner @runnerArgs (Join-Path $PSScriptRoot 'fetch_skhy_fundamentals.py')
+  }
   'fundamentals' {
     Write-Host "开始本地财报刷新：更新公司级现金流模型输入。"
-    Write-Host "预计使用 24 次 Alpha Vantage 请求；建议在不运行日更的周末执行。" -ForegroundColor Yellow
+    Write-Host "预计使用 22 次 Alpha Vantage 请求；SKHY 由独立 K-IFRS 更新路径维护。" -ForegroundColor Yellow
     & $runner @runnerArgs (Join-Path $PSScriptRoot 'fetch_fundamentals.py')
     if ($LASTEXITCODE -eq 0) {
       Write-Host "同步最新财报输入到网页快照..." -ForegroundColor Cyan
@@ -87,6 +96,10 @@ switch ($Mode) {
     Write-Host "开始从 SEC EDGAR 财报 TTM + 历史 EOD 收盘价回填五年 P/E、P/CF 与 P/S；不会运行 Alpha Vantage。" -ForegroundColor Yellow
     if ($env:HISTORICAL_PRICE_SOURCE -eq 'stooq') { Write-Host "价格源：强制使用 Stooq；无数据时回退 Yahoo Finance。" -ForegroundColor Yellow } elseif ($env:EODHD_API_KEY) { Write-Host "价格源：EODHD adjusted EOD。可传入 -PriceSource stooq 强制使用免费 Stooq。" -ForegroundColor Yellow } else { Write-Host "价格源：Stooq；无数据时回退 Yahoo Finance。可在 .env 配置 EODHD_API_KEY 使用商业 EOD。" -ForegroundColor Yellow }
     & $runner @runnerArgs (Join-Path $PSScriptRoot 'fetch_free_valuation_history.py')
+  }
+  'validate' {
+    Write-Host "清理非交易日、孤立代码和无财报元数据的估值，并校验每日快照与历史曲线。" -ForegroundColor Cyan
+    & $runner @runnerArgs (Join-Path $PSScriptRoot 'validate_valuation_consistency.py') '--fix'
   }
   'rebuild-selected-history' {
     Write-Host "重建 AMD、TSM、SKHY 的历史价格；重建 AMD、TSM 的 TTM 历史估值。" -ForegroundColor Cyan

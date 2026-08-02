@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-02T04:41:59Z",
+  "updatedAt": "2026-08-02T06:45:14Z",
   "companies": {
     "NVDA": {
       "status": "ready",
@@ -233,10 +233,29 @@
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）"
     },
     "SKHY": {
-      "status": "insufficient",
+      "status": "ready",
       "company": "SK hynix",
-      "reason": "公开财报不足四个季度或三年可比现金流，暂不计算隐含增长率。",
-      "rationale": "DRAM 与 NAND 的供需和资本开支周期显著，采用三年中位数降低周期高低点影响。"
+      "fiscalPeriodEnd": "2026-06-30",
+      "revenueTTM": 131679394552.99246,
+      "operatingCashflowTTM": 88558684506.52739,
+      "fcfTTM": 63471998155.094894,
+      "netIncomeTTM": 112742163965.2612,
+      "fcfMarginTTM": 0.4820192131848807,
+      "fcfMargin3yMedian": 0.19840848634054134,
+      "normalizedFcfMargin": 0.29767224073606013,
+      "ttmWeight": 0.35,
+      "terminalGrowth": 0.025,
+      "riskFreeRate": 0.0425,
+      "equityRiskPremium": 0.05,
+      "reportingCurrency": "KRW",
+      "modelCurrency": "USD",
+      "fxRateToUsd": 0.000696087997350923,
+      "beta": 2.322,
+      "costOfEquity": 0.15860000000000002,
+      "rationale": "DRAM 与 NAND 周期显著，TTM 权重 35%，三年中位数权重 65%。",
+      "source": "SK hynix 2Q26 official K-IFRS results (SEC 6-K + earnings presentation); KRW translated at latest KRW/USD",
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2120882/000119312526321989/d115239d6k.htm",
+      "availableFrom": "2026-07-29"
     }
   }
 }

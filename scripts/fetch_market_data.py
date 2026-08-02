@@ -11,7 +11,7 @@ import math
 import os
 import re
 import time
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from http.cookiejar import CookieJar
 from pathlib import Path
 from urllib.parse import urlencode
@@ -111,6 +111,66 @@ def finviz_snapshot(ticker):
         "10. change percent": "—" if change is None else f"{change * 100:.4f}%",
     }
     return overview, quote
+
+
+def yahoo_eod_quote(ticker):
+    """Return the latest real trading date and closes, including on weekends."""
+    headers = {"User-Agent": "Mozilla/5.0 HY-Market10/1.0"}
+    errors = []
+    for host in ("query1.finance.yahoo.com", "query2.finance.yahoo.com"):
+        try:
+            url = f"https://{host}/v8/finance/chart/{ticker}?range=10d&interval=1d"
+            with urlopen(Request(url, headers=headers), timeout=30) as response:
+                result = (json.load(response).get("chart", {}).get("result") or [None])[0]
+            if not result:
+                raise RuntimeError("no chart result")
+            closes = ((result.get("indicators", {}).get("quote") or [{}])[0]).get("close") or []
+            rows = [
+                (datetime.fromtimestamp(stamp, timezone.utc).date(), number(close))
+                for stamp, close in zip(result.get("timestamp") or [], closes)
+                if number(close) is not None and number(close) > 0
+            ]
+            if not rows:
+                raise RuntimeError("no usable closes")
+            latest_date, latest_close = rows[-1]
+            previous_close = rows[-2][1] if len(rows) > 1 else None
+            return latest_date, latest_close, previous_close
+        except Exception as exc:
+            errors.append(f"{host}: {exc}")
+    raise RuntimeError("Yahoo EOD chart unavailable: " + "; ".join(errors))
+
+
+def latest_point_in_time_denominators(rows, trade_date):
+    """Recover the latest filed TTM per-share denominators from history."""
+    candidates = [
+        row for row in rows
+        if row.get("date", "") <= trade_date.isoformat()
+        and row.get("ttmPeriodEnd")
+        and number(row.get("price")) not in (None, 0)
+    ]
+    if not candidates:
+        return None
+    row = candidates[-1]
+    price = number(row.get("price"))
+    result = {
+        "ttmPeriodEnd": row.get("ttmPeriodEnd"),
+        "ttmAvailableFrom": row.get("ttmAvailableFrom"),
+        "valuationMethod": row.get("valuationMethod", "SEC filing point-in-time quarterly TTM"),
+    }
+    for metric, key in (("pe", "eps"), ("pcf", "cashPerShare"), ("ps", "salesPerShare")):
+        multiple = number(row.get(metric))
+        result[key] = price / multiple if multiple not in (None, 0) else None
+    return result
+
+
+def trailing_valuations(price, denominators):
+    if price is None or not denominators:
+        return {"pe": None, "pcf": None, "ps": None}
+    return {
+        "pe": price / denominators["eps"] if denominators.get("eps") not in (None, 0) else None,
+        "pcf": price / denominators["cashPerShare"] if denominators.get("cashPerShare") not in (None, 0) else None,
+        "ps": price / denominators["salesPerShare"] if denominators.get("salesPerShare") not in (None, 0) else None,
+    }
 
 def yahoo_value(value):
     """Yahoo quoteSummary returns most values as {raw, fmt}; accept either."""
@@ -422,6 +482,10 @@ def main():
     fundamentals = {}
     if fundamentals_path.exists():
         fundamentals = json.loads(fundamentals_path.read_text(encoding="utf-8")).get("companies", {})
+    history_target = Path("outputs/data/history.json")
+    history = {"source": "Finviz daily snapshots + separate filing historical backfill", "stocks": {}}
+    if history_target.exists():
+        history = json.loads(history_target.read_text(encoding="utf-8"))
     # A temporary Finviz page failure must not erase the last successful
     # snapshot.  Keeping the prior row is safer than publishing empty metrics.
     target = Path("outputs/data/stocks.json")
@@ -439,6 +503,7 @@ def main():
     stocks = []
     updated_tickers = set()
     source_by_ticker = {}
+    calculated_by_ticker = {}
     for i, (name, ticker, logo, color, ink) in enumerate(COMPANIES):
         prior = previous_stocks.get(ticker, {})
         # A targeted refresh must preserve every untouched row. This makes the
@@ -480,11 +545,27 @@ def main():
             time.sleep(1.2)
         source_by_ticker[ticker] = source
         market_cap = number(overview.get("MarketCapitalization"))
-        ps = number(overview.get("PriceToSalesRatioTTM"))
         revenue_growth = number(overview.get("QuarterlyRevenueGrowthYOY"))
         eps_growth = number(overview.get("QuarterlyEarningsGrowthYOY"))
         price = number(quote.get("05. price"))
         change = quote.get("10. change percent", "—")
+        try:
+            trade_date, eod_price, previous_close = yahoo_eod_quote(ticker)
+            # Finviz can publish a live/pre-market value while history is EOD.
+            # The static dashboard and backtest both use the completed EOD close.
+            price = eod_price
+            change = "—" if previous_close in (None, 0) else f"{(price / previous_close - 1) * 100:.4f}%"
+        except Exception as exc:
+            print(f"{ticker}: actual EOD date unavailable ({exc})")
+            # Do not invent a weekend/holiday observation. On a weekday only,
+            # retain the provider price and date as a fail-soft compatibility path.
+            today = datetime.now(timezone.utc).date()
+            if today.weekday() >= 5:
+                if prior:
+                    stocks.append(prior)
+                    continue
+                raise RuntimeError(f"{ticker}: cannot determine the latest trading date") from exc
+            trade_date = today
         if ticker == "SKHY" and market_cap is None and prior.get("cap") in (None, "—"):
             raise RuntimeError(
                 "Yahoo Finance returned only an SKHY price, not a valuation snapshot. "
@@ -503,20 +584,25 @@ def main():
             updated_tickers.add(ticker)
             continue
         model = dict(fundamentals.get(ticker, {}))
-        # PE and P/S are direct daily-provider values.  P/CF is different:
-        # Finviz's P/C is price-to-cash-on-balance-sheet, not a TTM cash-flow
-        # multiple.  Calculate true P/CF from today's market cap and the
-        # latest reported operating cash flow TTM instead.
-        pe = number(overview.get("PERatio"))
+        # All trailing multiples reuse the exact point-in-time financial
+        # denominator used by the historical backfill. Finviz trailing values
+        # are intentionally ignored; only forward/enterprise metrics remain.
+        denominators = latest_point_in_time_denominators(
+            history.get("stocks", {}).get(ticker, []), trade_date
+        )
+        calculated = trailing_valuations(price, denominators)
+        calculated_by_ticker[ticker] = {**calculated, **(denominators or {})}
+        pe, pcf, ps = calculated["pe"], calculated["pcf"], calculated["ps"]
         peg = number(overview.get("PEGRatio"))
-        operating_cashflow = number(model.get("operatingCashflowTTM"))
-        pcf = market_cap / operating_cashflow if market_cap and operating_cashflow and operating_cashflow > 0 else None
         beta = number(overview.get("Beta"))
         if model.get("status") == "ready":
+            if beta is None:
+                beta = number(model.get("beta"))
             if beta is None:
                 model["status"] = "unavailable"
                 model["reason"] = "缺少可用 Beta，暂不计算权益成本。"
             else:
+                model.pop("reason", None)
                 model["beta"] = beta
                 model["costOfEquity"] = model["riskFreeRate"] + beta * model["equityRiskPremium"]
         implied, implied_status, implied_note = implied_growth(market_cap, model)
@@ -539,20 +625,19 @@ def main():
             "epsGrowthCurrent": "—" if eps_growth is None else f"{eps_growth * 100:.0f}%",
             "price": "—" if price is None else f"${price:,.2f}", "change": change,
             "valuationModel": model,
+            "valuationAsOf": trade_date.isoformat(),
+            "ttmPeriodEnd": denominators.get("ttmPeriodEnd") if denominators else None,
+            "ttmAvailableFrom": denominators.get("ttmAvailableFrom") if denominators else None,
+            "trailingValuationSource": "point-in-time filing TTM shared with history",
             "cashMultipleKind": "pcf-ttm",
-            "dataSource": source,
-            "note": "数据口径：当日行情与估值快照来自 Finviz；公司级模型使用已披露财报 TTM；历史估值以 SEC EDGAR 财报 TTM 和历史收盘价计算。" if source == "Finviz" else "数据口径：SKHY 的当日行情与估值快照由 Yahoo Finance 回退提供；公司级模型使用可获取的已披露财报。"
+            "dataSource": f"{source} supplemental + Yahoo Finance EOD",
+            "note": "数据口径：收盘价和实际交易日来自 Yahoo Finance EOD；Trailing P/E、P/CF、P/S 与历史曲线共用已披露财报 TTM 分母；Finviz 仅提供前瞻及企业价值补充指标。"
         })
         updated_tickers.add(ticker)
     now = datetime.now(timezone.utc)
-    output = {"source": "Finviz + Yahoo Finance fallback (SKHY)", "updatedAt": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "sourceByTicker": source_by_ticker, "stocks": stocks}
+    output = {"source": "Yahoo Finance EOD + point-in-time filing TTM; Finviz supplemental metrics", "updatedAt": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "sourceByTicker": source_by_ticker, "stocks": stocks}
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    history_target = Path("outputs/data/history.json")
-    history = {"source": "Finviz daily snapshots + separate SEC historical backfill", "stocks": {}}
-    if history_target.exists():
-        history = json.loads(history_target.read_text(encoding="utf-8"))
-    day = now.strftime("%Y-%m-%d")
     for stock in stocks:
         if stock["ticker"] not in updated_tickers:
             continue
@@ -560,19 +645,28 @@ def main():
         # The daily point uses the same true P/CF TTM calculation as the
         # homepage.  It is safe to place in the detail history because it is
         # not Finviz's P/C balance-sheet-cash ratio.
-        existing = rows[-1] if rows and rows[-1].get("date") == day else None
+        day = stock.get("valuationAsOf")
+        if not day:
+            continue
+        existing = next((row for row in rows if row.get("date") == day), None)
         snapshot = {
             "date": day,
             "price": number(str(stock.get("price", "")).replace("$", "").replace(",", "")),
-            "pe": number(stock.get("pe")),
-            "pcf": number(stock.get("pcf")),
-            "ps": number(stock.get("ps")),
+            "pe": round(calculated_by_ticker.get(stock["ticker"], {}).get("pe"), 4) if calculated_by_ticker.get(stock["ticker"], {}).get("pe") is not None else None,
+            "pcf": round(calculated_by_ticker.get(stock["ticker"], {}).get("pcf"), 4) if calculated_by_ticker.get(stock["ticker"], {}).get("pcf") is not None else None,
+            "ps": round(calculated_by_ticker.get(stock["ticker"], {}).get("ps"), 4) if calculated_by_ticker.get(stock["ticker"], {}).get("ps") is not None else None,
+            "ttmPeriodEnd": stock.get("ttmPeriodEnd"),
+            "ttmAvailableFrom": stock.get("ttmAvailableFrom"),
+            "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator",
         }
         if existing:
-            rows[-1] = snapshot
+            rows[rows.index(existing)] = snapshot
         else:
             rows.append(snapshot)
-        history["stocks"][stock["ticker"]] = [row for row in rows if row["date"] >= f"{now.year - 10}-01-01"]
+        history["stocks"][stock["ticker"]] = sorted(
+            [row for row in rows if row["date"] >= f"{now.year - 10}-01-01"],
+            key=lambda row: row["date"],
+        )
     history["updatedAt"] = output["updatedAt"]
     history_target.write_text(json.dumps(history, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 if __name__ == "__main__":

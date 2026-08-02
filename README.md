@@ -52,7 +52,7 @@
 本地更新与 GitHub Action 使用同一套 Python 脚本，但不会连接 GitHub。
 
 1. 安装 Python 3.11 或更高版本（安装时勾选 **Add Python to PATH**）。
-2. 将 `.env.example` 复制为 `.env`，填入 `ALPHA_VANTAGE_API_KEY`，供每月财报刷新与少数专项历史重建使用；`.env` 已被 Git 忽略，不会上传。日更本身不读取该 Key。
+2. 将 `.env.example` 复制为 `.env`，填入 `ALPHA_VANTAGE_API_KEY`，供每周财报检查与少数专项历史重建使用；`.env` 已被 Git 忽略，不会上传。日更本身不读取该 Key。
 3. 在项目根目录执行：
 
    ```powershell
@@ -61,7 +61,18 @@
 
    或双击/命令行运行 `scripts\run_local_update.cmd`。
 
-`daily` 从 Finviz 读取当日价格与估值快照；SKHY 在 Finviz 不可用时回退 Yahoo Finance，其他代码保留最近一次有效快照，不会改用 Alpha Vantage。它会更新 `stocks.json`、`history.json` 和 `concentration.json`，供本地网页立即读取。`fundamentals` 会更新公司级现金流模型输入：
+`daily` 从 Yahoo Finance EOD 读取实际交易日与收盘价，从 Finviz 读取 Forward P/E、PEG、EV/EBITDA 等补充指标；SKHY 的行情同样使用 Yahoo Finance。数据源临时不可用时保留最近一次有效快照。它会更新 `stocks.json`、`history.json` 和 `concentration.json`，供本地网页立即读取。`fundamentals` 会更新公司级现金流模型输入：
+
+Trailing P/E、P/CF、P/S 不直接采用 Finviz：每日点复用历史回填最近一期已披露
+TTM 的每股分母，并使用 Yahoo EOD 返回的实际交易日期和收盘价。Finviz 仅继续提供
+Forward P/E、PEG、EV/EBITDA 等补充指标。周末运行不会生成虚假的周末历史点。
+
+```powershell
+.\scripts\run_local_update.ps1 -Mode validate
+```
+
+该命令会清理非交易日、已移除代码及没有 `ttmPeriodEnd` 的旧估值，并检查当前快照和
+同日历史点的 P/E、P/CF、P/S 与财报期间是否一致。
 
 ```powershell
 .\scripts\run_local_update.ps1 -Mode fundamentals
@@ -69,11 +80,28 @@
 
 ### 免费个股历史估值回填
 
+SKHY 不走 SEC Company Facts 的美股通用回填。它使用独立命令读取韩国主上市
+`000660.KS` 的 K-IFRS 合并财报和股价，并按 **1 股普通股 = 10 ADS** 换算：
+
+```powershell
+.\scripts\run_local_update.ps1 -Mode skhy-history
+.\scripts\run_local_update.ps1 -Mode skhy-fundamentals
+```
+
+2026-07-10 起使用 SKHY 的实际 Nasdaq 收盘价；此前数据会以
+`underlying-ads-equivalent-proxy` 明确标记为韩国普通股折算的 ADS 等价代理，不会冒充
+SKHY 的真实成交价。脚本只覆盖 `history.json` 中的 `SKHY` 数组，不修改其他股票。
+财报命令只替换 `fundamentals.json` 和 `stocks.json` 中的 SKHY 公司模型；收入、净利润、
+经营现金流和资本开支取 `000660.KS` 的 K-IFRS 合并报表，最近四季形成 TTM，三年年度
+FCF 利润率用于周期归一化，之后按最新 KRW/USD 汇率换成模型使用的美元。
+
 在 `.env` 中增加 `SEC_EDGAR_USER_AGENT`（描述 + 真实联系邮箱）后，可通过 SEC EDGAR 的季度公开财报（最近四季滚动汇总，TTM）和历史日收盘价，回填详情页最近五年的 P/E、P/CF、P/S：
 
 ```powershell
 .\scripts\run_local_update.ps1 -Mode history
 ```
+
+GitHub 上的 `Refresh company fundamentals` 每周检查通用公司和 SKHY 的最新财报；发现财报期变化时，会自动回填美国公司、TSM 与 SKHY 各自的历史估值，再执行一致性验证。SKHY 始终使用独立 K-IFRS 路径，不进入美国公司的 SEC 通用逻辑。`Backfill free valuation history` 会在每月第一个周一进行一次全量历史审计，也可手动运行。
 
 若要免费回填 Stooq 的五年日收盘价，即使 `.env` 中已配置 EODHD Key，也可明确指定：
 
@@ -81,17 +109,17 @@
 .\scripts\run_local_update.ps1 -Mode history -PriceSource stooq
 ```
 
-这会覆盖同日期的历史估值点，不会伪造 Forward PE；历史 Forward PE 需要带时间戳的分析师一致预期数据。每一个交易日的分母均使用当日已经披露的最近四个季度 TTM，且以这四个季度的平均稀释加权股数换算为每股指标；因此不会在财报披露日前提前使用新数据。每条记录还会保存 `ttmPeriodEnd` 与 `ttmAvailableFrom`，可用于核查口径。若在 `.env` 配置 `EODHD_API_KEY`，价格优先使用 EODHD 的调整后 EOD 收盘价；否则使用 Stooq，Stooq 返回空数据时回退 Yahoo Finance。后两者是低频本地回填的兼容措施，不应视为有 SLA 的商业数据授权。GitHub 部署时，在 **Settings → Secrets and variables → Actions** 新建 `SEC_EDGAR_USER_AGENT`（以及可选的 `EODHD_API_KEY`），随后在 **Actions → Backfill free valuation history → Run workflow** 手动执行一次。该工作流不设定时任务。若 SEC 或价格源缺少某美股代码，页面会保留空值，不混用其他市场数据。
+这会覆盖同日期的历史估值点，不会伪造 Forward PE；历史 Forward PE 需要带时间戳的分析师一致预期数据。每一个交易日的分母均使用当日已经披露的最近四个季度 TTM，且以这四个季度的平均稀释加权股数换算为每股指标；因此不会在财报披露日前提前使用新数据。每条记录还会保存 `ttmPeriodEnd` 与 `ttmAvailableFrom`，可用于核查口径。若在 `.env` 配置 `EODHD_API_KEY`，价格优先使用 EODHD 的调整后 EOD 收盘价；否则使用 Stooq，Stooq 返回空数据时回退 Yahoo Finance。后两者是低频本地回填的兼容措施，不应视为有 SLA 的商业数据授权。GitHub 部署时，在 **Settings → Secrets and variables → Actions** 新建 `SEC_EDGAR_USER_AGENT`（以及可选的 `EODHD_API_KEY`）。该工作流每月第一个周一自动执行，也可在 Actions 页面手动运行。若 SEC 或价格源缺少某美股代码，页面会保留空值，不混用其他市场数据。
 
-Alpha Vantage 免费 Key 每天限额约 25 次请求。只有 `fundamentals` 与少数专项历史重建会使用约 24 次请求；`daily` 不使用该 Key。财报刷新适合周末测试。GitHub Action 仍会照常保留。
+Alpha Vantage 免费 Key 每天限额约 25 次请求。通用 `fundamentals` 使用 22 次请求；财报变化时 TSM 专项历史重建再使用 3 次，合计不超过 25 次。SKHY 专用更新和 `daily` 不使用该 Key。
 
 ## 数据口径
 
-- Alpha Vantage 免费 Key 每日最多 25 次请求；本工作流每天 24 次。
+- Alpha Vantage 免费 Key 每日最多约 25 次请求；通用财报检查使用 22 次，必要时 TSM 历史重建使用另外 3 次。
 - `收入同比（最近）` 是最新披露季度的收入同比，不是分析师预测。
 - `市现率` 在免费 25 次/日额度内无法可靠同时取得，暂显示 `—`；要补齐可使用付费数据源或降低其他调用。
 - `隐含增长率` 是公司级反向 FCFE：基于各公司最近四季收入、经营现金流、资本开支、三年现金流率中位数和该股 Beta，反向计算未来五年收入 CAGR；不会使用行业统一自由现金流率。
-- 每月首个周六，`Refresh company fundamentals` 会使用 24 次免费 API 调用更新 `outputs/data/fundamentals.json`，不与工作日的 24 次日更调用冲突。部署后请先在 GitHub Actions 手动运行一次该工作流，再运行 `Update market data`。
+- 每周日，`Refresh company fundamentals` 会检查 11 家通用公司的 Alpha Vantage 财报，并通过独立 K-IFRS 路径检查 SKHY；只有财报期发生变化才回填相关历史估值。每日行情更新后会强制执行快照/历史一致性验证，验证失败不会提交数据。
 - 对公开财报不足四个季度或三年可比现金流的公司，隐含增长率显示 `—`，不会补造行业假设。
 - `outputs/data/history.json` 由日更任务累积真实 PE、Forward PE 与 P/S 快照；详情页的 1 年、3 年、5 年、10 年筛选均只展示这些真实快照。首次部署前的历史不会用模拟数据补齐。
 - 首页的 MAG7 与半导体产业链集中度使用 State Street 每日披露的 SPY 持仓权重，作为标普 500 的可审计代理。半导体篮子覆盖 NVIDIA、Broadcom、AMD、Qualcomm、Texas Instruments、Applied Materials、Lam Research、KLA、ADI、Micron、Western Digital、SanDisk、Marvell、ON Semiconductor、Microchip 等设计、设备、存储和通信芯片公司；仅计入当天确实在 SPY 持仓内的标的。TSMC 不属于这个美国指数篮子，因此不计入该比例。

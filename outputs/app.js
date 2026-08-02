@@ -49,7 +49,13 @@ function filterToAvailablePeriod(values){
 // issuer-level, unit-consistent statements.
 function filteredHistory(ticker){return filterToAvailablePeriod((historyByTicker[ticker]||[]).filter(p=>!String(p.valuationMethod||'').includes('Alpha Vantage EARNINGS reported dates')&&['pe','pcf','ps'].some(key=>numericValue(p[key]))))}
 function filteredPriceHistory(ticker){return filterToAvailablePeriod((historyByTicker[ticker]||[]).filter(point=>numericValue(point.price)))}
+function updateHistorySourceNote(stock){
+  const note=document.querySelector('#history-source-note');if(!note)return;
+  const isSkhy=stock?.ticker==='SKHY';note.classList.toggle('hidden',!isSkhy);
+  if(isSkhy)note.innerHTML='<strong>SKHY 上市前数据说明：</strong>2026-07-10 之前并非 SKHY 的美股成交记录，而是韩国主板 SK hynix（000660.KS）的历史数据，按 1 股韩国普通股 = 10 股 ADS，并结合当日 KRW/USD 汇率折算为 ADS 等价美元价格；2026-07-10 起才使用 Nasdaq SKHY 的实际成交数据。';
+}
 function drawChart(s){
+  updateHistorySourceNote(s);
   const allPoints=(historyByTicker[s.ticker]||[]).filter(p=>!String(p.valuationMethod||'').includes('Alpha Vantage EARNINGS reported dates')&&['pe','pcf','ps'].some(key=>numericValue(p[key]))).sort((a,b)=>String(a.date).localeCompare(String(b.date)));
   const points=filterToAvailablePeriod(allPoints),svg=document.querySelector('#chart'),tooltip=document.querySelector('#chart-tooltip');
   const metrics=valuationMetrics,selectedMetric=selectedValuationMetric();
@@ -302,7 +308,7 @@ alignHistoryAxisDates();
 const refreshInsightDisclosure=()=>{
   const detail=document.querySelector('#detail');
   if(detail.classList.contains('hidden'))return;
-  document.querySelector('#insight-copy').textContent='数据口径：最新价格与部分基本面来自 Alpha Vantage；可用的历史估值以 SEC EDGAR 公开财报的 TTM 数据和历史日收盘价计算。隐含增长率是公司级 FCFE 反推，不是分析师预测、目标价或投行评级。';
+  document.querySelector('#insight-copy').textContent='数据口径：最新收盘价来自 Yahoo Finance EOD；Trailing P/E、P/CF、P/S 与历史曲线共用当时已披露的 TTM 财报分母。隐含增长率是公司级 FCFE 反推，不是分析师预测、目标价或投行评级。';
 };
 new MutationObserver(refreshInsightDisclosure).observe(document.querySelector('#detail'),{attributes:true,attributeFilter:['class']});
 
@@ -323,7 +329,7 @@ const syncImpliedGrowthSection=()=>{
   const detail=document.querySelector('#detail');
   if(detail.classList.contains('hidden'))return;
   document.querySelector('#model-inputs').classList.remove('hidden');
-  document.querySelector('#insight-copy').textContent='数据口径：最新价格与部分基本面来自 Alpha Vantage；可用的历史估值以 SEC EDGAR 公开财报的 TTM 数据和历史日收盘价计算。';
+  document.querySelector('#insight-copy').textContent='数据口径：最新收盘价来自 Yahoo Finance EOD；Trailing P/E、P/CF、P/S 与历史曲线共用当时已披露的 TTM 财报分母。';
 };
 new MutationObserver(syncImpliedGrowthSection).observe(document.querySelector('#detail'),{attributes:true,attributeFilter:['class']});
 
@@ -404,6 +410,7 @@ renderStocks=()=>{
 renderMag7Share();
 
 const drawPriceChart=stock=>{
+  updateHistorySourceNote(stock);
   const allPoints=(historyByTicker[stock.ticker]||[]).filter(point=>numericValue(point.price)).sort((a,b)=>String(a.date).localeCompare(String(b.date)));
   const points=filterToAvailablePeriod(allPoints);
   const svg=document.querySelector('#chart');

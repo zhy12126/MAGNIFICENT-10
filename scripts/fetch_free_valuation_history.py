@@ -6,9 +6,11 @@ Stooq returns no rows.  Every valuation point uses only the four quarters that
 had already been filed on that trading date; no analyst estimates are used.
 """
 import csv
+import html
 import io
 import json
 import os
+import re
 import time
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
@@ -51,6 +53,7 @@ REVENUE_TAGS = (
 NET_INCOME_TAGS = ("NetIncomeLoss", "ProfitLoss")
 CFO_TAGS = ("NetCashProvidedByUsedInOperatingActivities", "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations")
 SHARES_TAGS = ("WeightedAverageNumberOfDilutedSharesOutstanding", "WeightedAverageNumberOfSharesOutstandingDiluted")
+EPS_TAGS = ("EarningsPerShareDiluted",)
 
 
 def parsed_date(value):
@@ -77,6 +80,80 @@ def fetch_sec(cik):
     )
     with urlopen(request, timeout=45) as response:
         return json.load(response)
+
+
+def fetch_sec_json(url):
+    with urlopen(Request(url, headers={"User-Agent": SEC_USER_AGENT}), timeout=45) as response:
+        return json.load(response)
+
+
+def augment_latest_inline_filing(cik, company_facts):
+    """Merge a just-filed 10-Q before Company Facts finishes indexing it."""
+    submissions = fetch_sec_json(f"https://data.sec.gov/submissions/CIK{cik}.json")
+    recent = submissions.get("filings", {}).get("recent", {})
+    latest = None
+    for index, form in enumerate(recent.get("form", [])):
+        if form == "10-Q":
+            latest = {
+                "filed": parsed_date(recent["filingDate"][index]),
+                "report": parsed_date(recent["reportDate"][index]),
+                "accession": recent["accessionNumber"][index].replace("-", ""),
+                "document": recent["primaryDocument"][index],
+            }
+            break
+    if not latest or not latest["report"] or not latest["filed"]:
+        return company_facts
+    newest_fact_end = max(
+        (parsed_date(entry.get("end")) for tag in REVENUE_TAGS for entry in fact_entries(company_facts, (tag,), "USD")),
+        default=None,
+    )
+    if newest_fact_end and newest_fact_end >= latest["report"]:
+        return company_facts
+    url = f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/{latest['accession']}/{latest['document']}"
+    request = Request(url, headers={"User-Agent": SEC_USER_AGENT})
+    with urlopen(request, timeout=45) as response:
+        document = response.read().decode("utf-8", errors="replace")
+    contexts = {}
+    for match in re.finditer(r'<(?:xbrli:)?context\b[^>]*\bid=["\']([^"\']+)["\'][^>]*>(.*?)</(?:xbrli:)?context>', document, re.I | re.S):
+        body = match.group(2)
+        start = re.search(r'<(?:xbrli:)?startdate[^>]*>([^<]+)', body, re.I)
+        end = re.search(r'<(?:xbrli:)?enddate[^>]*>([^<]+)', body, re.I)
+        if start and end:
+            contexts[match.group(1)] = (parsed_date(start.group(1)), parsed_date(end.group(1)))
+    wanted = set(REVENUE_TAGS + NET_INCOME_TAGS + CFO_TAGS + SHARES_TAGS)
+    taxonomy = company_facts.setdefault("facts", {}).setdefault("us-gaap", {})
+    pattern = re.compile(r'<ix:nonfraction\b([^>]*)>(.*?)</ix:nonfraction>', re.I | re.S)
+    added = 0
+    for match in pattern.finditer(document):
+        attrs, raw = match.groups()
+        name = re.search(r'\bname=["\'](?:us-gaap:)?([^"\']+)["\']', attrs, re.I)
+        context = re.search(r'\bcontextref=["\']([^"\']+)["\']', attrs, re.I)
+        if not name or not context or name.group(1) not in wanted or context.group(1) not in contexts:
+            continue
+        start, end = contexts[context.group(1)]
+        if not start or not end or end != latest["report"]:
+            continue
+        text = html.unescape(re.sub(r"<[^>]+>", "", raw)).replace(",", "").replace("$", "").strip()
+        negative = text.startswith("(") and text.endswith(")")
+        text = text.strip("() ")
+        try:
+            value = float(text)
+        except ValueError:
+            continue
+        scale = re.search(r'\bscale=["\'](-?\d+)["\']', attrs, re.I)
+        value *= 10 ** int(scale.group(1)) if scale else 1
+        if negative or re.search(r'\bsign=["\']-["\']', attrs, re.I):
+            value = -value
+        unit = "shares" if name.group(1) in SHARES_TAGS else "USD"
+        units = taxonomy.setdefault(name.group(1), {}).setdefault("units", {}).setdefault(unit, [])
+        units.append({
+            "start": start.isoformat(), "end": end.isoformat(), "val": value,
+            "filed": latest["filed"].isoformat(), "form": "10-Q", "source": "inline-xbrl-fallback",
+        })
+        added += 1
+    if added:
+        print(f"CIK {cik}: merged {added} latest Inline XBRL facts from {latest['document']}")
+    return company_facts
 
 
 def fetch_eodhd(ticker, start, end):
@@ -121,9 +198,16 @@ def fetch_stooq(symbol, start, end):
     if not rows:
         rows = download({"s": symbol, "i": "d"})
     rows = [(trade_date, close) for trade_date, close in rows if start <= trade_date <= end]
+    yahoo_rows = []
+    # A non-empty response can still contain only a newly listed/re-keyed
+    # fragment. Compare coverage and choose Yahoo when it is materially longer.
+    if not rows or (rows[-1][0] - rows[0][0]).days < (end - start).days * .8:
+        yahoo_rows = fetch_yahoo(symbol.removesuffix(".us").upper(), start, end)
+    if yahoo_rows and len(yahoo_rows) > len(rows):
+        return yahoo_rows, "Yahoo Finance fallback (longer coverage than Stooq)"
     if rows:
         return sorted(rows), "Stooq"
-    return fetch_yahoo(symbol.removesuffix(".us").upper(), start, end), "Yahoo Finance fallback"
+    return yahoo_rows, "Yahoo Finance fallback"
 
 
 def fetch_prices(ticker, symbol, start, end):
@@ -133,7 +217,13 @@ def fetch_prices(ticker, symbol, start, end):
         raise RuntimeError("EODHD was selected but EODHD_API_KEY is not configured")
     if EODHD_API_KEY:
         try:
-            return fetch_eodhd(ticker, start, end), "EODHD adjusted EOD"
+            licensed = fetch_eodhd(ticker, start, end)
+            if (licensed[-1][0] - licensed[0][0]).days >= (end - start).days * .8:
+                return licensed, "EODHD adjusted EOD"
+            free_rows, free_source = fetch_stooq(symbol, start, end)
+            if len(free_rows) > len(licensed):
+                return free_rows, f"{free_source} (longer coverage than EODHD plan)"
+            return licensed, "EODHD adjusted EOD (limited configured-plan coverage)"
         except Exception as exc:
             # Preserve the no-key path as a local, low-cost fallback.  The
             # source recorded in history.json makes this visible to the UI.
@@ -183,7 +273,7 @@ def fact_entries(facts, tags, unit):
     return merged
 
 
-def select_by_end(entries, minimum_days, maximum_days):
+def select_by_end(entries, minimum_days, maximum_days, prefer_latest=False):
     values = {}
     for entry in entries:
         if entry.get("form") not in {"10-K", "20-F", "40-F"}:
@@ -200,17 +290,17 @@ def select_by_end(entries, minimum_days, maximum_days):
         old = values.get(end)
         # Use the first public filing for that fiscal year; amendments do not
         # retroactively change what the market knew on earlier dates.
-        if old is None or filed < old["filed"]:
+        if old is None or (filed > old["filed"] if prefer_latest else filed < old["filed"]):
             values[end] = {"value": value, "filed": filed}
     return values
 
 
-def quarterly_flow(facts, tags):
-    entries = fact_entries(facts, tags, "USD")
-    individual = select_by_end(entries, 60, 120)
-    half_year = select_by_end(entries, 150, 220)
-    nine_month = select_by_end(entries, 230, 300)
-    annual = select_by_end(entries, 300, 400)
+def quarterly_flow(facts, tags, unit="USD", prefer_latest=False):
+    entries = fact_entries(facts, tags, unit)
+    individual = select_by_end(entries, 60, 120, prefer_latest)
+    half_year = select_by_end(entries, 150, 220, prefer_latest)
+    nine_month = select_by_end(entries, 230, 300, prefer_latest)
+    annual = select_by_end(entries, 300, 400, prefer_latest)
 
     # Some companies report Q2/Q3 as year-to-date values only. Convert those
     # cumulative figures to standalone quarters whenever the prior period is
@@ -301,6 +391,30 @@ def quarterly_ttm_periods(company_facts):
     net_income = quarterly_flow(company_facts, NET_INCOME_TAGS)
     operating_cashflow = quarterly_flow(company_facts, CFO_TAGS)
     shares = quarterly_shares(company_facts)
+    # Alphabet and a few reorganized issuers stopped exposing weighted-average
+    # shares for older comparative periods after a split. Infer the split-
+    # adjusted denominator from net income / the latest restated diluted EPS,
+    # while retaining the original income filing date as market availability.
+    diluted_eps = quarterly_flow(company_facts, EPS_TAGS, "USD/shares", prefer_latest=True)
+    inferred_ends = []
+    for end, income_row in net_income.items():
+        eps_row = diluted_eps.get(end)
+        stale_share_fact = end in shares and (shares[end]["filed"] - income_row["filed"]).days > 180
+        if (end not in shares or stale_share_fact) and eps_row and eps_row["value"] not in (None, 0):
+            inferred = income_row["value"] / eps_row["value"]
+            if inferred > 0:
+                shares[end] = {"value": inferred, "filed": income_row["filed"], "source": "net-income/restated-diluted-eps"}
+                inferred_ends.append(end)
+    direct_values = [row["value"] for row in shares.values() if row.get("source") != "net-income/restated-diluted-eps" and row["value"] > 0]
+    if direct_values:
+        reference = sorted(direct_values)[len(direct_values) // 2]
+        for end in inferred_ends:
+            value = shares[end]["value"]
+            ratio = reference / value
+            split = min((2, 3, 4, 5, 10, 20, 40), key=lambda candidate: abs(candidate - ratio))
+            if split >= 2 and abs(split - ratio) / split <= .30:
+                shares[end]["value"] *= split
+                shares[end]["source"] += f"; split-adjusted-x{split}"
     periods = []
     common_ends = sorted(set(revenue) & set(net_income) & set(operating_cashflow))
     for index, end in enumerate(common_ends):
@@ -353,7 +467,7 @@ def ttm_series_diagnostic(company_facts):
 def history_for_ticker(ticker, config, start, end):
     if not config["cik"]:
         raise RuntimeError("no SEC CIK configured for this US ticker")
-    company_facts = fetch_sec(config["cik"])
+    company_facts = augment_latest_inline_filing(config["cik"], fetch_sec(config["cik"]))
     periods = quarterly_ttm_periods(company_facts)
     if not periods:
         raise RuntimeError("no comparable quarterly SEC financial facts")

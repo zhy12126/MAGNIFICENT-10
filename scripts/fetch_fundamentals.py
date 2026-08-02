@@ -1,8 +1,8 @@
 """Refresh company-specific reverse-DCF inputs from Alpha Vantage financial statements.
 
-This job is intentionally separate from the daily snapshot.  It makes 24 calls
-(income statement + cash flow for each company) and should run on a Saturday,
-when the 22-call weekday market job is not running.
+This job is intentionally separate from the daily snapshot.  It makes 22 calls
+(income statement + cash flow for each of the 11 generic companies).  SKHY is
+refreshed by its own K-IFRS workflow and must be preserved here.
 """
 import json
 import os
@@ -33,7 +33,6 @@ COMPANIES = {
     "MU": ("Micron", .35, "存储价格周期显著，三年中位数为主以降低周期高低点影响。"),
     "AVGO": ("Broadcom", .60, "基础设施软件整合与半导体业务并行，当前现金转化权重略高。"),
     "AMD": ("AMD", .45, "数据中心与客户端业务均具周期性，采用三年中位数以避免只外推单一景气阶段。"),
-    "SKHY": ("SK hynix", .35, "DRAM 与 NAND 的供需和资本开支周期显著，采用三年中位数降低周期高低点影响。"),
 }
 RISK_FREE_RATE = .0425       # US 10Y reference, refreshed with each methodology review
 EQUITY_RISK_PREMIUM = .0500  # long-run mature-market ERP assumption
@@ -165,6 +164,11 @@ def main():
 
     target = Path("outputs/data/fundamentals.json")
     target.parent.mkdir(parents=True, exist_ok=True)
+    if target.exists():
+        previous = json.loads(target.read_text(encoding="utf-8"))
+        skhy = previous.get("companies", {}).get("SKHY")
+        if skhy:
+            companies["SKHY"] = skhy
     target.write_text(json.dumps({"updatedAt": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "companies": companies}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 if __name__ == "__main__":
