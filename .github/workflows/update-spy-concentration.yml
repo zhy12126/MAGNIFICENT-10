@@ -2,10 +2,9 @@ name: Update SPY concentration
 
 on:
   schedule:
-    # 每个美股交易日收盘后运行；UTC 22:45 = 美东夏令时 18:45。
-    # 比行情任务（22:30 UTC）晚 15 分钟，降低同时写入 main 的冲突概率。
-    # 周五美股收盘后会在日本时间周六 07:45 执行。
-    - cron: '45 22 * * 1-5'
+    # 次日美东清晨运行，给 State Street 足够时间发布正式持仓文件。
+    # UTC 10:15 = 美东夏令时 06:15；周五数据在日本时间周六更新。
+    - cron: '15 10 * * 2-6'
   workflow_dispatch:
 
 permissions:

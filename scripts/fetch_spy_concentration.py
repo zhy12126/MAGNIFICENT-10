@@ -15,7 +15,7 @@ import zipfile
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
-from urllib.parse import urlencode
+from urllib.parse import quote, urlencode
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree as ET
 
@@ -91,7 +91,8 @@ def xlsx_rows(payload: bytes):
 def parse_as_of_date(value: object) -> str | None:
     """Normalize workbook dates, including Excel's numeric serial format."""
     text = str(value).strip()
-    for pattern in ("%m/%d/%Y", "%m-%d-%Y", "%Y-%m-%d", "%Y/%m/%d"):
+    text = re.sub(r"^.*?As\s+of\s*", "", text, flags=re.I).strip()
+    for pattern in ("%m/%d/%Y", "%m-%d-%Y", "%Y-%m-%d", "%Y/%m/%d", "%d-%b-%Y", "%d %b %Y"):
         try:
             return datetime.strptime(text, pattern).strftime("%Y-%m-%d")
         except ValueError:
@@ -114,7 +115,7 @@ def parse_holdings(payload: bytes):
     for row in xlsx_rows(payload):
         text = " | ".join(str(value) for value in row)
         if as_of is None:
-            match = re.search(r"(?:As\s*of|As\s*Of)\s*(?:Date)?\s*[:\-]?\s*(\d{1,2}[/-]\d{1,2}[/-]\d{2,4}|\d{4}[/-]\d{1,2}[/-]\d{1,2})", text)
+            match = re.search(r"(?:As\s*of|As\s*Of)\s*(?:Date)?\s*[:\-]?\s*(\d{1,2}[/-](?:\d{1,2}|[A-Za-z]{3})[/-]\d{2,4}|\d{4}[/-]\d{1,2}[/-]\d{1,2})", text)
             if match:
                 as_of = parse_as_of_date(match.group(1))
             else:
@@ -182,6 +183,10 @@ def parse_holdings(payload: bytes):
 def http_last_modified_date(value: str | None) -> str | None:
     if not value:
         return None
+    try:
+        return parsedate_to_datetime(value).astimezone(timezone.utc).strftime("%Y-%m-%d")
+    except (TypeError, ValueError, IndexError):
+        return None
 
 
 def fetch_fund_top_holdings_as_of() -> str | None:
@@ -227,9 +232,95 @@ def basket(weights: dict[str, float], market_values: dict[str, float], symbols: 
 
 def fetch_spy_unit_price(as_of_date: str | None = None) -> tuple[float | None, str | None]:
     """Return SPY's close on the same date as the holdings snapshot."""
+    if as_of_date:
+        try:
+            close = fetch_yahoo_closes("SPY", as_of_date).get(as_of_date)
+            if close is not None:
+                return close, as_of_date
+        except (OSError, ValueError, KeyError, TypeError, IndexError):
+            pass
     api_key = os.environ.get("ALPHA_VANTAGE_API_KEY")
     if not api_key:
         return None, None
+    if as_of_date:
+        query = urlencode({"function": "TIME_SERIES_DAILY", "symbol": "SPY", "outputsize": "compact", "apikey": api_key})
+        try:
+            with urlopen(Request(f"https://www.alphavantage.co/query?{query}"), timeout=30) as response:
+                prices = json.load(response).get("Time Series (Daily)", {})
+            close = prices.get(as_of_date, {}).get("4. close")
+            if close is not None:
+                return float(close), as_of_date
+        except (OSError, ValueError, TypeError):
+            pass
+    return None, None
+
+
+def fetch_yahoo_closes(symbol: str, start_date: str) -> dict[str, float]:
+    """Fetch split-adjusted daily closes without adding a Python dependency."""
+    start = datetime.strptime(start_date, "%Y-%m-%d").replace(tzinfo=timezone.utc) - timedelta(days=7)
+    end = datetime.now(timezone.utc) + timedelta(days=2)
+    url = (
+        f"https://query1.finance.yahoo.com/v8/finance/chart/{quote(symbol)}?"
+        + urlencode({"period1": int(start.timestamp()), "period2": int(end.timestamp()), "interval": "1d", "events": "history"})
+    )
+    request = Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    with urlopen(request, timeout=30) as response:
+        result = json.load(response)["chart"]["result"][0]
+    timestamps = result.get("timestamp", [])
+    indicators = result.get("indicators", {})
+    adjclose = (indicators.get("adjclose") or [{}])[0].get("adjclose")
+    closes = adjclose or (indicators.get("quote") or [{}])[0].get("close", [])
+    return {
+        datetime.fromtimestamp(ts, timezone.utc).strftime("%Y-%m-%d"): float(close)
+        for ts, close in zip(timestamps, closes)
+        if close is not None
+    }
+
+
+def revalue_weights(weights: dict[str, float], holdings_date: str) -> tuple[dict[str, float], str, int, list[str]]:
+    """Estimate current weights from official weights and same-date price returns.
+
+    Dividing each constituent return by SPY's return keeps the denominator tied
+    to the fund and avoids downloading all ~500 constituents.
+    """
+    try:
+        spy_prices = fetch_yahoo_closes("SPY", holdings_date)
+        target_date = max(spy_prices)
+        spy_base = spy_prices[holdings_date]
+        spy_target = spy_prices[target_date]
+    except (OSError, ValueError, KeyError, TypeError, IndexError):
+        return weights, holdings_date, 0, sorted(MAG7 | AI_COMPUTE_HARDWARE)
+    if target_date <= holdings_date:
+        return weights, holdings_date, 0, []
+    estimated = dict(weights)
+    missing = []
+    for symbol in sorted((MAG7 | AI_COMPUTE_HARDWARE) & weights.keys()):
+        try:
+            prices = fetch_yahoo_closes(symbol, holdings_date)
+            estimated[symbol] = weights[symbol] * (prices[target_date] / prices[holdings_date]) / (spy_target / spy_base)
+        except (OSError, ValueError, KeyError, TypeError, IndexError):
+            missing.append(symbol)
+    return estimated, target_date, us_weekday_sessions_between(holdings_date, target_date) or 0, missing
+
+
+def backfill_history_unit_values(history: list[dict]) -> None:
+    """Repair legacy snapshots that have shares but lack per-SPY-share values."""
+    dated = [str(item.get("date")) for item in history if item.get("date")]
+    if not dated:
+        return
+    try:
+        spy_prices = fetch_yahoo_closes("SPY", min(dated))
+    except (OSError, ValueError, KeyError, TypeError, IndexError):
+        return
+    for item in history:
+        price = spy_prices.get(str(item.get("date")))
+        if price is None:
+            continue
+        for key in ("mag7", "aiHardware"):
+            value_key = f"{key}SpyBasketUnitValue"
+            share = item.get(key)
+            if item.get(value_key) is None and isinstance(share, (int, float)):
+                item[value_key] = round(float(share) / 100 * price, 4)
 
 
 def us_weekday_sessions_between(start_date: str | None, end_date: str | None) -> int | None:
@@ -248,27 +339,6 @@ def us_weekday_sessions_between(start_date: str | None, end_date: str | None) ->
             sessions += 1
         current += timedelta(days=1)
     return sessions
-    if as_of_date:
-        query = urlencode({"function": "TIME_SERIES_DAILY", "symbol": "SPY", "outputsize": "compact", "apikey": api_key})
-        try:
-            with urlopen(Request(f"https://www.alphavantage.co/query?{query}"), timeout=30) as response:
-                prices = json.load(response).get("Time Series (Daily)", {})
-            close = prices.get(as_of_date, {}).get("4. close")
-            if close is not None:
-                return float(close), as_of_date
-        except (OSError, ValueError, TypeError):
-            pass
-    # Do not claim the latest quote belongs to an older holdings date. It is
-    # retained only as a last-resort current value and its date stays unknown.
-    query = urlencode({"function": "GLOBAL_QUOTE", "symbol": "SPY", "apikey": api_key})
-    with urlopen(Request(f"https://www.alphavantage.co/query?{query}"), timeout=30) as response:
-        quote = json.load(response).get("Global Quote", {})
-    try:
-        return float(quote.get("05. price")), None
-    except (TypeError, ValueError):
-        return None, None
-
-
 def main(spy_unit_price: float | None = None):
     request = Request(SPY_HOLDINGS_URL, headers={"User-Agent": "HY-Market10/1.0 research contact@example.com"})
     with urlopen(request, timeout=60) as response:
@@ -282,7 +352,8 @@ def main(spy_unit_price: float | None = None):
     run_date = now.strftime("%Y-%m-%d")
     # Prefer the date an investor sees beside “Fund Top Holdings”. The workbook
     # label is a fallback only, because it can be one business day ahead.
-    snapshot_date = page_as_of or workbook_as_of or workbook_last_modified or run_date
+    holdings_date = page_as_of or workbook_as_of or workbook_last_modified or run_date
+    weights, snapshot_date, estimated_sessions, revaluation_missing = revalue_weights(weights, holdings_date)
     spy_price_date = snapshot_date if spy_unit_price is not None else None
     if spy_unit_price is None:
         spy_unit_price, spy_price_date = fetch_spy_unit_price(snapshot_date)
@@ -303,6 +374,7 @@ def main(spy_unit_price: float | None = None):
     if page_as_of and workbook_as_of and page_as_of < workbook_as_of:
         history_by_date.pop(workbook_as_of, None)
         history = [history_by_date[date] for date in sorted(history_by_date)]
+    backfill_history_unit_values(history)
     if page_as_of is None and workbook_as_of is None and workbook_last_modified is None:
         print(f"Warning: SPY workbook as-of date and Last-Modified header were unreadable; using run date {run_date}.")
     elif page_as_of is None and workbook_as_of is None:
@@ -342,12 +414,21 @@ def main(spy_unit_price: float | None = None):
         "mag7SpyBasketUnitValue": mag7["spyBasketUnitValue"],
         "aiHardwareSpyBasketUnitValue": ai_hardware["spyBasketUnitValue"],
     })
+    if snapshot_date != holdings_date:
+        freshness_status = "stale-estimate" if estimated_sessions > 1 or revaluation_missing else "current-estimate"
+    else:
+        freshness_status = "official"
     output = {
-        "source": "State Street SPY daily fund holdings",
+        "source": "State Street SPY daily fund holdings; price revaluation via Yahoo Finance when needed",
         "sourceUrl": SPY_HOLDINGS_URL,
-        "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. The holdings date is taken from State Street's public Fund Top Holdings label. Basket unit value is calculated only when an SPY close for that exact date is available; it is not the total market capitalization of all listed shares. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
+        "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. When State Street has not yet published the latest session, basket weights are estimated from each holding's split-adjusted return relative to SPY, using Yahoo Finance daily closes. Official and estimated dates are exposed separately. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
         "updatedAt": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "asOf": snapshot_date,
+        "holdingsAsOf": holdings_date,
+        "isEstimated": snapshot_date != holdings_date,
+        "estimatedTradingSessions": estimated_sessions,
+        "revaluationMissingSymbols": revaluation_missing,
+        "freshnessStatus": freshness_status,
         "spyUnitPrice": spy_unit_price,
         "spyUnitPriceDate": spy_price_date,
         "metrics": {"mag7": mag7, "aiHardware": ai_hardware},

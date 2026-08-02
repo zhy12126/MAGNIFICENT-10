@@ -1,65 +1,74 @@
 {
-  "source": "State Street SPY daily fund holdings",
+  "source": "State Street SPY daily fund holdings; price revaluation via Yahoo Finance when needed",
   "sourceUrl": "https://www.ssga.com/us/en/individual/etfs/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
-  "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. The holdings date is verified against State Street's public Fund Top Holdings label. Basket unit value is shown only when an SPY close for that exact date is available; it is not the total market capitalization of all listed shares. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
-  "updatedAt": "2026-08-02T02:50:40Z",
-  "asOf": "2026-07-30",
-  "spyUnitPrice": 747.03,
-  "spyUnitPriceDate": "2026-07-30",
+  "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. When State Street has not yet published the latest session, basket weights are estimated from each holding's split-adjusted return relative to SPY, using Yahoo Finance daily closes. Official and estimated dates are exposed separately. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
+  "updatedAt": "2026-08-02T09:14:39Z",
+  "asOf": "2026-07-31",
+  "holdingsAsOf": "2026-07-30",
+  "isEstimated": true,
+  "estimatedTradingSessions": 1,
+  "revaluationMissingSymbols": [],
+  "freshnessStatus": "current-estimate",
+  "spyUnitPrice": 747.030029296875,
+  "spyUnitPriceDate": "2026-07-31",
   "metrics": {
     "mag7": {
-      "share": 32.6117,
+      "share": 33.1829,
       "holdings": {
-        "AAPL": 7.6546,
-        "AMZN": 3.6032,
-        "GOOG": 2.465,
-        "GOOGL": 3.058,
-        "META": 1.8501,
-        "MSFT": 5.2377,
-        "NVDA": 7.3838,
-        "TSLA": 1.3593
+        "AAPL": 7.041,
+        "AMZN": 4.1256,
+        "GOOG": 2.6158,
+        "GOOGL": 3.2406,
+        "META": 1.8971,
+        "MSFT": 5.3572,
+        "NVDA": 7.5457,
+        "TSLA": 1.3599
       },
       "spyHoldingMarketValue": null,
-      "spyBasketUnitValue": 243.6192,
+      "spyBasketUnitValue": 247.8862,
       "notInSpy": [],
-      "dailyChangePp": 0.2343,
+      "comparisonDate": "2026-07-30",
+      "comparisonTradingSessions": 1,
+      "dailyChangePp": 0.5712,
       "dailyMarketValueChangePct": null,
-      "dailyBasketUnitValueChangePct": 1.4489
+      "dailyBasketUnitValueChangePct": 2.4841
     },
     "aiHardware": {
-      "share": 18.759,
+      "share": 18.8214,
       "holdings": {
-        "ADI": 0.2799,
-        "AMAT": 0.6226,
-        "AMD": 1.2373,
-        "ANET": 0.2761,
-        "AVGO": 2.8705,
-        "CDNS": 0.1435,
-        "CSCO": 0.7009,
-        "DELL": 0.1831,
-        "ETN": 0.2349,
-        "HPE": 0.0978,
-        "INTC": 0.6731,
-        "JCI": 0.1373,
-        "KLAC": 0.3683,
-        "LRCX": 0.5821,
-        "MPWR": 0.101,
-        "MRVL": 0.2508,
-        "MU": 1.542,
-        "NVDA": 7.3838,
-        "PH": 0.1898,
-        "SNPS": 0.1115,
-        "TER": 0.0894,
-        "TT": 0.1522,
-        "TXN": 0.3946,
-        "VRT": 0.1365
+        "ADI": 0.2784,
+        "AMAT": 0.6254,
+        "AMD": 1.2051,
+        "ANET": 0.2891,
+        "AVGO": 2.8606,
+        "CDNS": 0.1456,
+        "CSCO": 0.7108,
+        "DELL": 0.182,
+        "ETN": 0.2503,
+        "HPE": 0.0986,
+        "INTC": 0.6615,
+        "JCI": 0.1389,
+        "KLAC": 0.3708,
+        "LRCX": 0.5689,
+        "MPWR": 0.1087,
+        "MRVL": 0.2548,
+        "MU": 1.4406,
+        "NVDA": 7.5457,
+        "PH": 0.1911,
+        "SNPS": 0.1156,
+        "TER": 0.0893,
+        "TT": 0.1561,
+        "TXN": 0.3895,
+        "VRT": 0.144
       },
       "spyHoldingMarketValue": null,
-      "spyBasketUnitValue": 140.1354,
+      "spyBasketUnitValue": 140.6015,
       "notInSpy": [],
-      "dailyChangePp": 0.8008,
+      "comparisonDate": "2026-07-30",
+      "comparisonTradingSessions": 1,
+      "dailyChangePp": 0.0624,
       "dailyMarketValueChangePct": null,
-      "dailyBasketUnitValueChangePct": 5.2113
+      "dailyBasketUnitValueChangePct": 1.055
     }
   },
   "history": [
@@ -71,14 +80,18 @@
     {
       "date": "2026-07-21",
       "mag7": 33.336,
-      "aiHardware": 19.2023
+      "aiHardware": 19.2023,
+      "mag7SpyBasketUnitValue": 249.4466,
+      "aiHardwareSpyBasketUnitValue": 143.687
     },
     {
       "date": "2026-07-22",
       "mag7": 33.0798,
       "aiHardware": 19.7952,
       "mag7SpyHoldingMarketValue": null,
-      "aiHardwareSpyHoldingMarketValue": null
+      "aiHardwareSpyHoldingMarketValue": null,
+      "mag7SpyBasketUnitValue": 247.2417,
+      "aiHardwareSpyBasketUnitValue": 147.9513
     },
     {
       "date": "2026-07-23",
@@ -127,21 +140,21 @@
     },
     {
       "date": "2026-07-30",
-      "mag7": 32.3774,
-      "aiHardware": 17.9582,
-      "mag7SpyHoldingMarketValue": null,
-      "aiHardwareSpyHoldingMarketValue": null,
-      "mag7SpyBasketUnitValue": 240.1399,
-      "aiHardwareSpyBasketUnitValue": 133.1942
-    },
-    {
-      "date": "2026-07-30",
       "mag7": 32.6117,
       "aiHardware": 18.759,
       "mag7SpyHoldingMarketValue": null,
       "aiHardwareSpyHoldingMarketValue": null,
-      "mag7SpyBasketUnitValue": null,
-      "aiHardwareSpyBasketUnitValue": null
+      "mag7SpyBasketUnitValue": 241.8777,
+      "aiHardwareSpyBasketUnitValue": 139.1336
+    },
+    {
+      "date": "2026-07-31",
+      "mag7": 33.1829,
+      "aiHardware": 18.8214,
+      "mag7SpyHoldingMarketValue": null,
+      "aiHardwareSpyHoldingMarketValue": null,
+      "mag7SpyBasketUnitValue": 247.8862,
+      "aiHardwareSpyBasketUnitValue": 140.6015
     }
   ]
 }
