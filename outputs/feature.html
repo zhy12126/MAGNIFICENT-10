@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20260719-03" />
-  <link rel="stylesheet" href="yen.css?v=20260723-02" />
+  <link rel="stylesheet" href="yen.css?v=20260802-03" />
 </head>
 <body>
   <main class="shell yen-shell">
@@ -47,34 +47,35 @@
     </section>
 
     <section class="yen-section" aria-labelledby="events-title">
-      <div class="section-head"><div><p class="eyebrow">SIX-MONTH MARKET CONTEXT</p><h2 id="events-title">近6个月，两侧发生了什么？</h2></div><span class="analysis-maintained">由AI分析研报得到，不确保真实性</span></div>
+      <div class="section-head"><div><p class="eyebrow">MARKET CONTEXT</p><h2 id="events-title">近6个月，两侧发生了什么？</h2></div><span id="context-period-date" class="analysis-maintained">数据截至 2026.07.31</span></div>
       <div class="side-analysis-grid">
         <article class="side-analysis-card jpy-analysis">
-          <header><div><span class="side-symbol">¥</span><span><small>日元侧</small><b>为什么日元兑美元走弱？</b></span></div><em>USD / JPY</em></header>
-          <p class="side-conclusion">核心线索：市场认为日本难以快速加息，而美国利率仍处高位，日美利差继续支持美元资产与套息交易。</p>
-          <ol class="reason-list">
-            <li><span>01</span><div><b>日美利差仍然较大</b><p>美国通胀回落有限、降息预期反复后移，美债收益率保持高位；日本央行加息节奏较慢，市场预期的利率终点仍明显低于美国。借入日元、配置美元资产的套息交易因而仍有吸引力。</p></div></li>
-            <li><span>02</span><div><b>日本经济对连续加息的支撑有限</b><p>工资有所上涨，但消费和经济增长表现并不均衡，市场因此降低了对日本央行快速、连续加息的期待，日元继续被视作低成本融资货币。</p></div></li>
-            <li><span>03</span><div><b>养老金海外配置预期扰动情绪</b><p>市场曾讨论GPIF是否可能提高海外资产配置。即使政策没有立即变化，“卖出日元、配置海外资产”的预期也可能阶段性影响日元情绪。</p></div></li>
-            <li><span>04</span><div><b>能源进口增加美元需求</b><p>日本依赖石油和LNG进口。能源价格上涨时，进口成本及企业购汇需求可能上升，成为日元供求的一项不利背景。</p></div></li>
-            <li><span>05</span><div><b>汇率干预难以替代利率变化</b><p>政府买入日元可以短期影响价格，但如果日美利差和资金交易逻辑没有改变，市场通常认为干预效果难以长期维持。</p></div></li>
+          <header><div><span class="side-symbol">¥</span><span><small>日元侧</small><b id="jpy-context-title">为什么日元兑美元走弱？</b></span></div><em>USD / JPY</em></header>
+          <p id="jpy-context-conclusion" class="side-conclusion">核心结论：日本央行虽然继续退出宽松，但政策利率仍明显低于美国；利差、资本流向和能源进口需求继续压制日元。</p>
+          <ol id="jpy-context-reasons" class="reason-list">
+            <li><span>01</span><div><b>日本央行加息仍不足以消除日美利差</b><p>日本央行6月进一步收紧政策，并表示若经济和物价符合预期，将继续提高政策利率；但日本金融环境整体仍偏宽松。同期美联储将联邦基金利率维持在3.50%—3.75%，美元资产收益率仍明显高于日元资产。</p></div></li>
+            <li><span>02</span><div><b>市场关注加息速度，而不只是加息方向</b><p>市场已经接受日本利率将逐步上升，但对连续快速加息仍较谨慎。日本消费、实际工资和外部需求存在不确定性，使日本央行需要在通胀风险与经济承受能力之间权衡。</p></div></li>
+            <li><span>03</span><div><b>套息与海外配置需求仍然存在</b><p>只要日元融资成本明显低于美元资产收益率，借入日元、持有海外资产的交易就仍有吸引力。日本机构和家庭持续配置海外资产，也形成结构性的日元卖盘。</p></div></li>
+            <li><span>04</span><div><b>能源价格加大日本的进口压力</b><p>日本高度依赖能源进口。能源价格上涨会增加美元结算需求并恶化贸易条件，尤其在中东局势引发能源价格波动时，日元容易承受额外压力。</p></div></li>
+            <li><span>05</span><div><b>干预风险限制跌速，但难以改变趋势基础</b><p>日本政府可以通过口头警告或直接买入日元抑制无序波动，但如果日美利差和跨境资金流没有明显逆转，干预更可能改变短期速度，而不是长期方向。</p></div></li>
           </ol>
         </article>
         <article class="side-analysis-card cny-analysis">
-          <header><div><span class="side-symbol">¥</span><span><small>人民币侧</small><b>为什么人民币兑美元走强？</b></span></div><em>USD / CNY</em></header>
-          <p class="side-conclusion">核心线索：出口与结汇需求提供基本面支撑，美元整体强势有所缓和，同时人民币汇率受到政策管理，波动明显小于日元。</p>
-          <ol class="reason-list">
-            <li><span>01</span><div><b>出口与结汇形成支撑</b><p>出口保持韧性意味着外汇收入持续流入；企业将部分美元收入兑换成人民币，会增加市场上的美元供给和人民币需求。这是经常账户层面的重要支持，但仍需结合实际结汇率观察。</p></div></li>
-            <li><span>02</span><div><b>美元整体强势有所缓和</b><p>市场重新评估未来美国利率下降的可能性，美元不再维持此前一边倒的强势环境，为人民币等非美货币提供了相对友好的外部背景。</p></div></li>
-            <li><span>03</span><div><b>汇率受到政策管理</b><p>人民币并非完全自由浮动。中间价、离岸流动性和宏观审慎工具会影响市场预期与波动节奏，因此人民币通常比日元更平稳。</p></div></li>
-            <li><span>04</span><div><b>风险偏好改善带来增量支持</b><p>全球风险情绪改善时，资金对亚洲资产的配置意愿可能提高，人民币也可能受益；但这一线索波动较快，需要结合跨境收付款数据验证。</p></div></li>
+          <header><div><span class="side-symbol">¥</span><span><small>人民币侧</small><b id="cny-context-title">为什么人民币兑美元走强？</b></span></div><em>USD / CNY</em></header>
+          <p id="cny-context-conclusion" class="side-conclusion">核心结论：近6个月 USD/CNY 从约6.94下降至6.75，人民币升值约2.77%。美元阶段性走弱、企业结汇和政策稳定预期共同提供支持。</p>
+          <ol id="cny-context-reasons" class="reason-list">
+            <li><span>01</span><div><b>美元环境较年初缓和</b><p>虽然美联储利率仍高，但市场开始交易未来政策转向的可能性，美元不再保持此前单边强势。美元回落为人民币升值提供了外部窗口。</p></div></li>
+            <li><span>02</span><div><b>出口收入与企业结汇形成支撑</b><p>出口企业持有的美元收入在人民币升值预期增强时，更可能提前或增加结汇。这会增加市场上的美元供给，并强化人民币阶段性升值趋势。</p></div></li>
+            <li><span>03</span><div><b>人民币升值预期具有自我强化效应</b><p>当 USD/CNY 持续下降时，企业延后购汇、加快结汇，可能进一步增加人民币需求。不过这种行为容易随市场预期变化而逆转，不能简单外推。</p></div></li>
+            <li><span>04</span><div><b>政策管理降低了汇率波动</b><p>人民币实行参考一篮子货币的有管理浮动制度。中间价、跨境资金管理和宏观审慎工具有助于稳定预期，因此人民币通常不会像日元一样快速单边波动。</p></div></li>
+            <li><span>05</span><div><b>国内宽松需求限制升值空间</b><p>人民币仍面临国内低利率、内需恢复和资本流动等约束。政策重点并非推动人民币单边升值，而是避免汇率超调、保持双向波动。因此近期走强更适合理解为阶段性再平衡。</p></div></li>
           </ol>
         </article>
       </div>
-      <p class="context-note"><b>阅读口径：</b>上面的数学归因回答“哪一侧贡献更大”；这里整理的是与走势一致的市场线索，并不证明任何单一事件是汇率变化的确定原因。</p>
+      <p id="context-period-note" class="context-note"><b>阅读口径：</b>近6个月人民币兑日元上涨约6.28%，并非只由“日元贬值”造成。数学拆分显示，日元走弱与人民币走强分别贡献约54%和46%，两侧作用较为接近。这里整理的是与走势一致的政策及资金线索，不证明任何单一因素与汇率之间存在确定因果关系。</p>
     </section>
 
-    <section class="yen-section" aria-labelledby="research-title">
+    <section class="yen-section hidden" aria-labelledby="research-title">
       <div class="section-head research-section-head"><div><p class="eyebrow">INSTITUTIONAL RESEARCH</p><h2 id="research-title">投行研报</h2><p class="chart-description">由站长个人筛选、阅读与维护，只保留和人民币/日元汇率分析相关的观点。</p></div><span class="research-maintained">个人维护</span></div>
       <article class="research-card">
         <div class="research-topline"><div class="research-target"><small>高盛12个月目标</small><strong>USD/CNY&nbsp; 6.50</strong><em>人民币继续走强</em></div><div class="research-meta"><span class="research-bank">Goldman Sachs</span><time datetime="2026-06-07">2026.06.07</time><span>中国外汇与利率</span></div></div>
@@ -129,6 +130,6 @@
       <div class="log-example"><span>当前所选周期</span><b id="log-example-values">等待汇率数据</b><small id="log-example-formula">普通涨幅 = e<sup>对数变化</sup> − 1</small></div>
     </div>
   </div>
-  <script src="yen.js?v=20260723-01"></script>
+  <script src="yen.js?v=20260802-07"></script>
 </body>
 </html>

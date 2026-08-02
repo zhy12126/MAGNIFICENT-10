@@ -236,19 +236,11 @@ const resetRouteScroll=()=>{
   window.scrollTo({top:0,left:0,behavior:'auto'});
   requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:'auto'}));
 };
-const clampRouteScroll=()=>{
-  const maxScroll=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
-  if(window.scrollY>maxScroll+1)window.scrollTo({top:maxScroll,left:0,behavior:'auto'});
-};
-const stabilizeRouteScroll=()=>{
-  resetRouteScroll();
-  requestAnimationFrame(clampRouteScroll);
-};
+const stabilizeRouteScroll=resetRouteScroll;
 const routeOpenDetail=openDetail;
 openDetail=ticker=>{routeOpenDetail(ticker);stabilizeRouteScroll()};
 window.addEventListener('popstate',stabilizeRouteScroll);
 window.addEventListener('pageshow',stabilizeRouteScroll);
-window.addEventListener('resize',()=>requestAnimationFrame(clampRouteScroll));
 document.querySelectorAll('nav button').forEach(button=>button.addEventListener('click',stabilizeRouteScroll));
 
 // SPY weight cards open their own history view.  These histories are built
