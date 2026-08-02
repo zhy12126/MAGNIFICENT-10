@@ -8,16 +8,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260719-03" />
-  <link rel="stylesheet" href="yen.css?v=20260802-03" />
+  <link rel="stylesheet" href="style.css?v=20260802-20" />
+  <link rel="stylesheet" href="yen.css?v=20260802-06" />
 </head>
 <body>
   <main class="shell yen-shell">
-    <header class="topbar">
-      <a class="brand" href="index.html" aria-label="返回主页"><span class="brand-mark">H</span><span>HY的工具小站</span></a>
-      <nav aria-label="主要功能"><button type="button" onclick="window.location.href='index.html'">巨头估值</button><button type="button" class="nav-coming" disabled aria-disabled="true" title="功能完善中">纳指估值</button><button type="button" class="nav-active" aria-current="page">人民币/日元汇率分析</button></nav>
-      <div class="header-right"><span class="demo-dot"></span><span data-status-label>正在加载数据</span><span class="updated">更新时间（日本） <b data-updated>—</b></span></div>
-    </header>
+    <header class="topbar" data-site-header data-page="fx"></header>
+    <script src="site-nav.js?v=20260802-10"></script>
 
     <section class="yen-section trend-first" aria-labelledby="trend-title">
       <div class="section-head trend-head">
