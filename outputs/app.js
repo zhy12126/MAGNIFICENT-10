@@ -12,11 +12,15 @@ const fallbackStocks=[
  {name:'AMD',ticker:'AMD',logo:'A',color:'#fff2eb',ink:'#d34b28',cap:'—',pe:'—',fpe:'—',peg:'—',ps:'—',pcf:'—',implied:'—',growth:'—',price:'等待日终更新',note:'等待 Alpha Vantage 日更数据。'},
  {name:'SK hynix',ticker:'SKHY',logo:'H',color:'#fff0ea',ink:'#d04d34',cap:'—',pe:'—',fpe:'—',peg:'—',ps:'—',pcf:'—',implied:'—',growth:'—',price:'等待日终更新',note:'等待 Alpha Vantage 日更数据。'}
 ];
-let stocks=fallbackStocks,historyByTicker={},nasdaqData=null,activeIndex=0,activePeriod='3年',activeValuationPeriod='3年',activePricePeriod='1年',lastUpdated='等待日更数据',activeNasdaqMetrics=new Set(['pe','forwardPe','pb']),sortKey='cap',sortDirection=-1,chartMode='valuation',activeValuationMetric='pe',marketDataReady=false;
+let stocks=fallbackStocks,historyByTicker={},nasdaqData=null,activeIndex=0,activePeriod='3年',activeValuationPeriod='3年',activePricePeriod='1年',lastUpdated='等待日更数据',activeNasdaqMetrics=new Set(['pe','forwardPe','pb']),sortKey='cap',sortDirection=-1,chartMode='valuation',activeValuationMetric='pe',showPriceOverlay=true,marketDataReady=false;
+const syncTouchMobileClass=()=>{const mobileSignal=navigator.maxTouchPoints>0||window.matchMedia('(pointer: coarse)').matches||/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);document.documentElement.classList.toggle('touch-mobile',window.innerWidth<=680&&mobileSignal)};
+syncTouchMobileClass();window.addEventListener('resize',syncTouchMobileClass);
 const formatJapanTime=value=>{const date=new Date(value);if(Number.isNaN(date.getTime()))return value||'等待日更数据';return `${new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).format(date)} Asia/Japan`};
-const rankingDirection={pe:1,fpe:1,peg:1,ps:1,pcf:1,evEbitda:1,growth:-1,epsGrowthCurrent:-1};
+const rankingDirection={pe:1,peg:1,ps:1,pcf:1};
 const metricNumber=(stock,key)=>{if(key==='cap'){const text=String(stock.cap||'');const value=Number.parseFloat(text);return Number.isFinite(value)?value*(text.includes('T')?1e3:1):null}if(key==='name')return null;const value=Number.parseFloat(String(stock[key]??'').replace(/[$,%>]/g,''));return Number.isFinite(value)?value:null};
-const rankClass=(stock,key)=>{if(!(key in rankingDirection))return'';const value=metricNumber(stock,key);if(value===null)return'';const valid=stocks.filter(s=>metricNumber(s,key)!==null).sort((a,b)=>(metricNumber(a,key)-metricNumber(b,key))*rankingDirection[key]),ticker=stock.ticker;if(key==='growth'||key==='epsGrowthCurrent'){if(valid.slice(0,2).some(s=>s.ticker===ticker))return'rank-good';if(valid.slice(-2).some(s=>s.ticker===ticker))return'rank-bad';return''}if(valid.length<4)return'';if(valid.slice(0,2).some(s=>s.ticker===ticker))return'rank-good';if(valid.slice(-2).some(s=>s.ticker===ticker))return'rank-bad';return''};
+const homepageValuationHistory=(stock,key)=>{const ordered=(historyByTicker[stock.ticker]||[]).filter(point=>!String(point.valuationMethod||'').includes('Alpha Vantage EARNINGS reported dates')&&Number.isFinite(Number(point[key]))&&Number(point[key])>0).sort((a,b)=>String(a.date).localeCompare(String(b.date)));const latest=ordered.at(-1);if(!latest)return[];const cutoff=new Date(`${latest.date}T00:00:00Z`);cutoff.setUTCFullYear(cutoff.getUTCFullYear()-3);return ordered.filter(point=>new Date(`${point.date}T00:00:00Z`)>=cutoff)};
+const historicalQuantile=(stock,key,p)=>{const values=homepageValuationHistory(stock,key).map(point=>Number(point[key])).sort((a,b)=>a-b);if(values.length<5)return null;const position=(values.length-1)*p,low=Math.floor(position),high=Math.ceil(position);return values[low]+(values[high]-values[low])*(position-low)};
+const rankClass=(stock,key)=>{const value=metricNumber(stock,key);if(value===null||value<=0)return'';if(key==='peg')return value<=1?'rank-good':value>=2.5?'rank-bad':'';if(!['pe','ps','pcf'].includes(key))return'';const low=historicalQuantile(stock,key,.2),high=historicalQuantile(stock,key,.8);if(low===null||high===null)return'';return value<=low?'rank-good':value>=high?'rank-bad':''};
 const formatChange=value=>{const n=Number.parseFloat(String(value??'').replace('%',''));if(!Number.isFinite(n))return{label:'—',className:''};return{label:`${n>0?'+':''}${n.toFixed(1)}%`,className:n>0?'positive':n<0?'negative':''}};
 let concentrationData=null;
 const renderShareMetric=(key,valueId,noteId,marketValueNoteId)=>{const metric=concentrationData?.metrics?.[key],value=document.querySelector(valueId),note=document.querySelector(noteId),marketValueNote=document.querySelector(marketValueNoteId),hasShare=metric?.share!==null&&metric?.share!==undefined&&metric?.share!==''&&Number.isFinite(Number(metric.share)),comparisonDate=metric?.comparisonDate?String(metric.comparisonDate):'',sessions=Number(metric?.comparisonTradingSessions),comparisonLabel=Number.isFinite(sessions)&&sessions===1?'较前一交易日':Number.isFinite(sessions)&&sessions>1?`较上次快照（${comparisonDate||'—'}，跨 ${sessions} 个交易日）`:comparisonDate?`较上次快照（${comparisonDate}）`:'较上次快照';if(value)value.textContent=hasShare?`${Number(metric.share).toFixed(2)}%`:'—';if(note){const hasDelta=metric?.dailyChangePp!==null&&metric?.dailyChangePp!==undefined&&Number.isFinite(Number(metric.dailyChangePp)),delta=Number(metric?.dailyChangePp);if(hasDelta){note.textContent=`权重${comparisonLabel} ${delta>0?'+':''}${delta.toFixed(2)}pp`;note.className=delta>0?'positive':delta<0?'negative':''}else{note.textContent=hasShare?'首个快照，等待下一交易日':'等待 SPY 日持仓更新';note.className=''}}if(marketValueNote){const rawChange=metric?.dailyBasketUnitValueChangePct,hasBasketUnitValueChange=rawChange!==null&&rawChange!==undefined&&rawChange!==''&&Number.isFinite(Number(rawChange)),change=Number(rawChange);if(hasBasketUnitValueChange){marketValueNote.textContent=`SPY 篮子${comparisonLabel} ${change>0?'+':''}${change.toFixed(2)}%`;marketValueNote.className=change>0?'positive':change<0?'negative':''}else{marketValueNote.textContent='SPY 篮子变化：等待数据';marketValueNote.className=''}}};
@@ -31,6 +35,8 @@ const selectedValuationMetric=()=>valuationMetrics.find(([key])=>key===activeVal
 const valuationScale=(points,metric)=>{const key=metric[0],values=points.map(point=>Number(point[key])).filter(value=>validValuationValue(value,key)).sort((a,b)=>a-b),quantile=p=>{const pos=(values.length-1)*p,base=Math.floor(pos),next=Math.ceil(pos);return values[base]+(values[next]-values[base])*(pos-base)};const band=values.length?{low:quantile(.2),high:quantile(.8)}:null;if(!values.length)return{min:0,max:5,band:null};let min=Math.max(0,Math.floor(Math.min(...values)/5)*5),max=Math.ceil(Math.max(...values)/5)*5;if(max<=min)max=min+5;return{min,max,band}};
 const syncValuationMetricControls=()=>document.querySelectorAll('[data-valuation-metric]').forEach(button=>{const selected=button.dataset.valuationMetric===activeValuationMetric;button.classList.toggle('active',selected);button.setAttribute('aria-pressed',String(selected))});
 function historicalLinePath(points,key,min,max){const left=76,right=980,top=62,bottom=314;let drawing=false;return points.map((point,index)=>{if(!validValuationValue(point[key],key)){drawing=false;return ''}const x=left+(right-left)*index/Math.max(1,points.length-1),y=bottom-(Number(point[key])-min)/(max-min)*(bottom-top),command=drawing?'L':'M';drawing=true;return `${command}${x.toFixed(1)},${y.toFixed(1)}`}).filter(Boolean).join(' ')}
+function priceLinePath(points,min,max){const left=76,right=980,top=62,bottom=314;let drawing=false;return points.map((point,index)=>{if(!numericValue(point.price)){drawing=false;return ''}const x=left+(right-left)*index/Math.max(1,points.length-1),y=bottom-(Number(point.price)-min)/(max-min)*(bottom-top),command=drawing?'L':'M';drawing=true;return `${command}${x.toFixed(1)},${y.toFixed(1)}`}).filter(Boolean).join(' ')}
+const priceScale=points=>{const values=points.map(point=>Number(point.price)).filter(Number.isFinite);if(!values.length)return null;const low=Math.min(...values),high=Math.max(...values),padding=Math.max((high-low)*.1,1);return{min:Math.max(0,low-padding),max:high+padding}};
 const numericValue=value=>value!==null&&value!==undefined&&value!==''&&Number.isFinite(Number(value));
 const validValuationValue=(value,key)=>numericValue(value)&&Number(value)>0;
 function filterToAvailablePeriod(values){
@@ -67,17 +73,18 @@ function drawChart(s){
   const selectedYears=Number.parseInt(activePeriod,10),range=points.length?`${points[0].date} 至 ${points.at(-1).date}`:'暂无可用估值历史';
   const availability=allPoints.length>1?`可用估值历史约 ${availableYears.toFixed(1)} 年（${allPoints[0].date} 至 ${allPoints.at(-1).date}）。`:'';
   const limitNotice=Number.isFinite(selectedYears)&&availableYears<selectedYears-.05?'所选范围超过可用数据，已显示全部可用历史。':'已按所选范围筛选。';
-  document.querySelector('.chart-hover-hint').textContent=`按历史日收盘价和当时已公开的滚动四季财报重建；当前显示 ${range}。当前曲线：${selectedMetric[1]}；虚线分别为该时间范围的低估区阈值（20% 分位）与高估区阈值（80% 分位）。${availability}${limitNotice}`;
+  document.querySelector('.chart-hover-hint').textContent=`按历史日收盘价和当时已公开的滚动四季财报重建；当前显示 ${range}。当前曲线：${selectedMetric[1]}${showPriceOverlay?'，蓝线为股价（右轴）':''}；虚线分别为该时间范围的低估区阈值（20% 分位）与高估区阈值（80% 分位）。${availability}${limitNotice}`;
   tooltip.classList.add('hidden');if(points.length<2){svg.innerHTML=`<line class="grid" x1="76" y1="188" x2="980" y2="188"/><text class="axis" x="520" y="184" text-anchor="middle">真实估值历史会从每日快照开始累积（当前 ${points.length} 个数据点）</text>`;return}
-  const {min,max,band}=valuationScale(points,selectedMetric),yFor=value=>314-(value-min)/(max-min)*252;let grid='';
-  for(let i=0;i<5;i++){const y=62+i*63,val=(max-(max-min)*i/4).toFixed(0);grid+=`<line class="grid" x1="76" y1="${y}" x2="980" y2="${y}"/><text class="axis" x="12" y="${y+4}">${val}</text>`}
+  const {min,max,band}=valuationScale(points,selectedMetric),prices=showPriceOverlay?priceScale(points):null,yFor=value=>314-(value-min)/(max-min)*252,mobile=window.matchMedia('(max-width: 680px)').matches,tickCount=mobile?3:5;let grid='';
+  for(let i=0;i<tickCount;i++){const y=62+i*252/(tickCount-1),val=(max-(max-min)*i/(tickCount-1)).toFixed(0);grid+=`<line class="grid" x1="76" y1="${y}" x2="980" y2="${y}"/><text class="axis" x="12" y="${y+4}">${val}x</text>${prices?`<text class="axis price-axis" x="1028" y="${y+4}" text-anchor="end">$${(prices.max-(prices.max-prices.min)*i/(tickCount-1)).toFixed(mobile?0:2)}</text>`:''}`}
   const labels=[points[0].date,points[Math.floor(points.length/2)].date,points.at(-1).date];labels.forEach((d,i)=>grid+=`<text class="axis" x="${76+i*452}" y="350">${d}</text>`);
   const availableCount=points.filter(point=>validValuationValue(point[selectedMetric[0]],selectedMetric[0])).length;
-  const lines=availableCount>1?`<path class="line" stroke="${selectedMetric[2]}" d="${historicalLinePath(points,selectedMetric[0],min,max)}"/>`:'';
-  const bandMarkup=band?`<rect x="76" y="62" width="904" height="${Math.max(0,yFor(band.high)-62).toFixed(1)}" fill="#ee8b2d" opacity=".055"/><rect x="76" y="${yFor(band.low).toFixed(1)}" width="904" height="${Math.max(0,314-yFor(band.low)).toFixed(1)}" fill="#1aa774" opacity=".055"/><line x1="76" y1="${yFor(band.high).toFixed(1)}" x2="980" y2="${yFor(band.high).toFixed(1)}" stroke="#d66f18" stroke-width="1.25" stroke-dasharray="5 5" opacity=".82"/><line x1="76" y1="${yFor(band.low).toFixed(1)}" x2="980" y2="${yFor(band.low).toFixed(1)}" stroke="#16885f" stroke-width="1.25" stroke-dasharray="5 5" opacity=".82"/><text class="axis" x="976" y="${Math.max(72,yFor(band.high)-5).toFixed(1)}" text-anchor="end">高估区 · 80% 分位 ${band.high.toFixed(1)}x</text><text class="axis" x="976" y="${Math.min(308,yFor(band.low)-5).toFixed(1)}" text-anchor="end">低估区 · 20% 分位 ${band.low.toFixed(1)}x</text>`:'';
+  const valuationLine=availableCount>1?`<path class="line" stroke="${selectedMetric[2]}" d="${historicalLinePath(points,selectedMetric[0],min,max)}"/>`:'';
+  const overlayLine=prices?`<path class="line price-overlay-line" stroke="var(--blue)" stroke-width="2.25" d="${priceLinePath(points,prices.min,prices.max)}"/><text class="axis price-axis price-axis-title" x="1028" y="48" text-anchor="end">股价</text>`:'';
+  const bandMarkup=band?`<rect x="76" y="62" width="904" height="${Math.max(0,yFor(band.high)-62).toFixed(1)}" fill="#ee8b2d" opacity=".055"/><rect x="76" y="${yFor(band.low).toFixed(1)}" width="904" height="${Math.max(0,314-yFor(band.low)).toFixed(1)}" fill="#1aa774" opacity=".055"/><line x1="76" y1="${yFor(band.high).toFixed(1)}" x2="980" y2="${yFor(band.high).toFixed(1)}" stroke="#d66f18" stroke-width="1.25" stroke-dasharray="5 5" opacity=".82"/><line x1="76" y1="${yFor(band.low).toFixed(1)}" x2="980" y2="${yFor(band.low).toFixed(1)}" stroke="#16885f" stroke-width="1.25" stroke-dasharray="5 5" opacity=".82"/><text class="axis" x="976" y="${Math.max(72,yFor(band.high)-5).toFixed(1)}" text-anchor="end">${mobile?'高估 80%':`高估区 · 80% 分位 ${band.high.toFixed(1)}x`}</text><text class="axis" x="976" y="${Math.min(308,yFor(band.low)-5).toFixed(1)}" text-anchor="end">${mobile?'低估 20%':`低估区 · 20% 分位 ${band.low.toFixed(1)}x`}</text>`:'';
   const peGaps=[];let gapStart=null;if(selectedMetric[0]==='pe')points.forEach((point,index)=>{const valid=validValuationValue(point.pe,'pe');if(!valid&&gapStart===null)gapStart=index;if((valid||index===points.length-1)&&gapStart!==null){const end=valid?index-1:index;if(end-gapStart>=4)peGaps.push([gapStart,end]);gapStart=null}});
   const gapNotes=peGaps.map(([start,end])=>{const x=76+904*((start+end)/2)/Math.max(1,points.length-1);return `<g class="pe-loss-gap"><rect x="${(x-86).toFixed(1)}" y="69" width="172" height="28" rx="14" fill="#fff4e8" stroke="#f2c896" stroke-width="1"/><text x="${x.toFixed(1)}" y="87" text-anchor="middle" fill="#b46117" style="font:600 10px DM Mono,monospace">亏损期，市盈率（TTM）不适用</text></g>`}).join('');
-  svg.innerHTML=`${grid}<line class="grid" x1="76" y1="314" x2="980" y2="314"/>${bandMarkup}${lines}${gapNotes}<rect class="chart-hover-overlay" x="76" y="62" width="904" height="252" fill="transparent"/><line class="hover-guide hover-guide-x" y1="62" y2="314" style="display:none"/><line class="hover-guide hover-guide-y" x1="76" x2="980" style="display:none"/><g class="hover-points"></g>`;
+  svg.innerHTML=`${grid}<line class="grid" x1="76" y1="314" x2="980" y2="314"/>${bandMarkup}${overlayLine}${valuationLine}${gapNotes}<rect class="chart-hover-overlay" x="76" y="62" width="904" height="252" fill="transparent"/><line class="hover-guide hover-guide-x" y1="62" y2="314" style="display:none"/><line class="hover-guide hover-guide-y" x1="76" x2="980" style="display:none"/><g class="hover-points"></g>`;
 }
 const modelOverrideStorageKey='hy-model-assumptions-v1';
 const readModelOverrides=()=>{try{return JSON.parse(localStorage.getItem(modelOverrideStorageKey)||'{}')}catch{return{}}};
@@ -91,14 +98,15 @@ function reverseImpliedGrowth(s,m){
   let low=-.30,high=1.50;for(let i=0;i<60;i++){const middle=(low+high)/2;if(equityValue(middle)<marketCap)low=middle;else high=middle}
   return equityValue(high)<marketCap?'>150%':`${Math.max(-30,Math.min(150,high*100)).toFixed(0)}%`;
 }
-const editableAssumption=(label,key,value,{percent=false,step='0.1',min,max}={})=>`<label class="model-assumption editable"><span>${label}<em>可编辑</em></span><input type="number" inputmode="decimal" data-model-input="${key}" value="${percent?(Number(value)*100).toFixed(1):Number(value).toFixed(2)}" step="${step}"${min!==undefined?` min="${min}"`:''}${max!==undefined?` max="${max}"`:''}/>${percent?'<small>%</small>':''}</label>`;
+const modelHelpButton=(key,label)=>`<button type="button" class="model-metric-help" data-model-help="${key}" aria-label="${label}说明">?</button>`;
+const editableAssumption=(label,key,value,{percent=false,step='0.1',min,max}={})=>`<label class="model-assumption editable"><span class="assumption-label"><span>${label} ${modelHelpButton(key,label)}</span><em>可编辑</em></span><span class="assumption-input-row"><input type="number" inputmode="decimal" data-model-input="${key}" value="${percent?(Number(value)*100).toFixed(1):Number(value).toFixed(2)}" step="${step}"${min!==undefined?` min="${min}"`:''}${max!==undefined?` max="${max}"`:''}/>${percent?'<small>%</small>':''}</span></label>`;
 function modelInputs(s){
   const m=modelForStock(s),ready=m?.status==='ready';
   if(!ready)return `<p class="eyebrow">IMPLIED-GROWTH INPUTS</p><h3>公司级模型输入</h3><p class="model-result-unavailable">未展示推算结果：当前没有足够的公司公开财报数据，无法建立可靠的公司级现金流模型，因此隐含增长率显示为“—”。</p>`;
   const pct=v=>`${(Number(v)*100).toFixed(1)}%`,requiredGrowth=reverseImpliedGrowth(s,m),reason=m.impliedGrowthNote||'归一化自由现金流率过低、折现率不高于永续增长率，或模型输入不完整。';
-  const comparison=requiredGrowth?`<div class="growth-compare" aria-label="增长对比"><div><span>未来 5 年所需增长</span><b id="model-required-growth">${requiredGrowth}</b><small>按当前假设反推的收入 CAGR</small></div><i aria-hidden="true">对比</i><div><span>最近季度实际增长</span><b>${s.growth||'—'}</b><small>已披露收入同比</small></div></div>`:'';
+  const quarter=reportedQuarterLabel(s),comparison=requiredGrowth?`<div class="growth-compare" aria-label="增长对比"><div><span>未来 5 年所需增长 ${modelHelpButton('required-growth','未来 5 年所需增长')}</span><b id="model-required-growth">${requiredGrowth}</b><small>按当前假设反推的收入 CAGR</small></div><i aria-hidden="true">对比</i><div><span>${quarter}实际增长 ${modelHelpButton('actual-growth','实际增长')}</span><b>${s.growth||'—'}</b><small>已披露收入同比</small></div></div>`:'';
   const disclosure=requiredGrowth?'':`<p id="model-result-unavailable" class="model-result-unavailable">未展示推算结果：${reason}</p>`;
-  return `<div class="model-head"><div><p class="eyebrow">IMPLIED-GROWTH INPUTS</p><h3>公司级模型输入</h3></div>${comparison}</div><div class="model-grid"><span>TTM 自由现金流率<b>${pct(m.fcfMarginTTM)}</b></span><span>三年中位数<b>${pct(m.fcfMargin3yMedian)}</b></span><span>归一化 FCF 率<b>${pct(m.normalizedFcfMargin)}</b></span>${editableAssumption('权益成本','costOfEquity',m.costOfEquity,{percent:true,min:0.1,max:50})}${editableAssumption('Beta','beta',m.beta,{step:'0.01',min:0,max:5})}${editableAssumption('永续增长','terminalGrowth',m.terminalGrowth,{percent:true,min:-5,max:10})}</div><p class="model-assumption-hint">带“可编辑”的数值是估值假设，不来自公司财报；修改后会立即重算上方“未来 5 年所需增长”。Beta 改动会按无风险利率与权益风险溢价同步重算权益成本；手动改权益成本则以手动值为准。本设备浏览器会记住你的输入。</p>${disclosure}<p class="model-formula-note">未来 5 年所需增长 g：求解 <b>当前市值 = Σ（第 t 年收入 × 自由现金流率 ÷ (1 + 权益成本)<sup>t</sup>）+ 终值折现</b>，其中第 t 年收入 = 当前收入 × (1 + g)<sup>t</sup>。</p><p class="model-note">截止财报期：${m.fiscalPeriodEnd}。${m.rationale} 数据来源：${m.source}。</p>`
+  return `<div class="model-head"><div><p class="eyebrow">IMPLIED-GROWTH INPUTS</p><h3>公司级模型输入</h3></div>${comparison}</div><div class="model-grid"><span><span class="model-metric-name">TTM 自由现金流率 ${modelHelpButton('fcf-ttm','TTM 自由现金流率')}</span><b>${pct(m.fcfMarginTTM)}</b></span><span><span class="model-metric-name">三年中位数 ${modelHelpButton('fcf-median','三年中位数')}</span><b>${pct(m.fcfMargin3yMedian)}</b></span><span><span class="model-metric-name">归一化 FCF 率 ${modelHelpButton('fcf-normalized','归一化 FCF 率')}</span><b>${pct(m.normalizedFcfMargin)}</b></span>${editableAssumption('权益成本','costOfEquity',m.costOfEquity,{percent:true,min:0.1,max:50})}${editableAssumption('Beta','beta',m.beta,{step:'0.01',min:0,max:5})}${editableAssumption('永续增长','terminalGrowth',m.terminalGrowth,{percent:true,min:-5,max:10})}</div><p class="model-assumption-hint">这些数值是估值假设，并非公司财报数据。修改后会立即重算“未来 5 年所需增长”；调整 Beta 会同步更新权益成本，手动填写权益成本则优先采用手动值。输入仅保存在本设备。</p>${disclosure}<p class="model-formula-note">未来 5 年所需增长 g：求解 <b>当前市值 = Σ（第 t 年收入 × 自由现金流率 ÷ (1 + 权益成本)<sup>t</sup>）+ 终值折现</b>，其中第 t 年收入 = 当前收入 × (1 + g)<sup>t</sup>。</p><p class="model-note">截止财报期：${m.fiscalPeriodEnd}。${m.rationale} 数据来源：${m.source}。</p>`
 }
 function updateModelGrowthPreview(){
   const s=stocks[activeIndex],container=document.querySelector('#model-inputs');if(!s||!container)return;
@@ -121,6 +129,14 @@ document.querySelector('#model-inputs').addEventListener('input',event=>{
   }else override[input.dataset.modelInput]=value/100;
   saved[s.ticker]=override;writeModelOverrides(saved);updateModelGrowthPreview();
 });
+document.querySelector('#model-inputs').addEventListener('click',event=>{
+  const button=event.target instanceof Element?event.target.closest('[data-model-help]'):null;if(!button)return;
+  event.preventDefault();event.stopPropagation();
+  const [title,content]=metricHelp[button.dataset.modelHelp]||metricHelp.company;
+  document.querySelector('#modal-title').textContent=title;
+  document.querySelector('#modal-content').innerHTML=content.includes('<')?content:`<p>${content}</p>`;
+  document.querySelector('#metric-modal').classList.remove('hidden');
+});
 function openDetail(ticker){const i=stocks.findIndex(stock=>stock.ticker===ticker);if(i<0)return;activeIndex=i;const s=stocks[i];document.querySelector('#overview').classList.add('hidden');document.querySelector('#detail').classList.remove('hidden');const detailLogo=document.querySelector('#detail-logo');if(detailLogo)detailLogo.outerHTML=logo(s,true).replace('<div class="','<div id="detail-logo" class="');document.querySelector('#detail-ticker').textContent=s.ticker+' · NASDAQ';document.querySelector('#detail-name').textContent=s.name;document.querySelector('#detail-price').textContent=`${s.price}  ·  ${s.change||'—'}  ·  市值 $${s.cap}`;document.querySelector('#chart-title').textContent=`${s.name} 估值历史（TTM 估算）`;document.querySelector('#insight-copy').textContent=s.note;document.querySelector('#model-inputs').innerHTML=modelInputs(s);drawChart(s);window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelector('#back').addEventListener('click',()=>{document.querySelector('#detail').classList.add('hidden');document.querySelector('#overview').classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'})});document.querySelectorAll('.periods button').forEach(b=>b.addEventListener('click',()=>{document.querySelector('.periods .active').classList.remove('active');b.classList.add('active');activePeriod=b.textContent;if(chartMode==='price')activePricePeriod=activePeriod;else activeValuationPeriod=activePeriod;drawSelectedChart(stocks[activeIndex])}));document.querySelectorAll('nav button').forEach(button=>button.addEventListener('click',()=>{const view=button.dataset.view;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('nav-active',b===button));document.querySelector('#overview').classList.toggle('hidden',view!=='overview');document.querySelector('#nasdaq').classList.toggle('hidden',view!=='nasdaq');document.querySelector('#detail').classList.add('hidden');if(view==='nasdaq')renderNasdaq();window.scrollTo({top:0,behavior:'smooth'})}));
 document.querySelectorAll('.sort-header').forEach(button=>button.addEventListener('click',()=>{const key=button.dataset.sort;if(sortKey===key)sortDirection*=-1;else{sortKey=key;sortDirection=key==='name'?1:-1}renderStocks()}));
@@ -128,7 +144,7 @@ document.querySelectorAll('.sort-header').forEach(button=>button.addEventListene
 // never leave the two concentration cards blank.  The query parameter also
 // ensures a newly deployed daily snapshot is not served from a stale CDN cache.
 const loadConcentration=async()=>{try{const response=await fetch(`data/concentration.json?v=${Date.now()}`,{cache:'no-store'});if(!response.ok)throw new Error(`SPY snapshot HTTP ${response.status}`);const data=await response.json();if(!data?.metrics)throw new Error('Invalid SPY snapshot');concentrationData=data;renderMag7Share()}catch(error){console.warn('Unable to load SPY concentration snapshot',error);renderMag7Share()}};
-Promise.all([fetch('data/stocks.json',{cache:'no-store'}),fetch('data/history.json',{cache:'no-store'}),fetch('data/nasdaq.json',{cache:'no-store'})]).then(async([market,history,nasdaq])=>{if(market.ok){const data=await market.json();if(Array.isArray(data.stocks)&&data.stocks.length){const fetched=data.stocks;const missing=fallbackStocks.filter(stock=>!fetched.some(item=>item.ticker===stock.ticker));stocks=[...fetched,...missing];lastUpdated=formatJapanTime(data.updatedAt)||lastUpdated;renderStocks();const stamp=document.querySelector('.updated b');if(stamp)stamp.textContent=lastUpdated}}if(history.ok){const data=await history.json();historyByTicker=data.stocks||{}}if(nasdaq.ok){nasdaqData=await nasdaq.json();renderNasdaq()}marketDataReady=true;syncDetailRoute();if(!document.querySelector('#detail').classList.contains('hidden'))drawSelectedChart(stocks[activeIndex])}).catch(error=>{console.warn('Unable to load primary market data',error);marketDataReady=true;syncDetailRoute()});loadConcentration();renderStocks();
+Promise.all([fetch('data/stocks.json',{cache:'no-store'}),fetch('data/history.json',{cache:'no-store'}),fetch('data/nasdaq.json',{cache:'no-store'})]).then(async([market,history,nasdaq])=>{if(market.ok){const data=await market.json();if(Array.isArray(data.stocks)&&data.stocks.length){const fetched=data.stocks;const missing=fallbackStocks.filter(stock=>!fetched.some(item=>item.ticker===stock.ticker));stocks=[...fetched,...missing];lastUpdated=formatJapanTime(data.updatedAt)||lastUpdated;renderStocks();const stamp=document.querySelector('.updated b');if(stamp)stamp.textContent=lastUpdated}}if(history.ok){const data=await history.json();historyByTicker=data.stocks||{};renderStocks()}if(nasdaq.ok){nasdaqData=await nasdaq.json();renderNasdaq()}marketDataReady=true;syncDetailRoute();if(!document.querySelector('#detail').classList.contains('hidden'))drawSelectedChart(stocks[activeIndex])}).catch(error=>{console.warn('Unable to load primary market data',error);marketDataReady=true;syncDetailRoute()});loadConcentration();renderStocks();
 document.querySelectorAll('[data-ndx-metric]').forEach(input=>input.addEventListener('change',()=>{input.checked?activeNasdaqMetrics.add(input.dataset.ndxMetric):activeNasdaqMetrics.delete(input.dataset.ndxMetric);renderNasdaq()}));
 const metricHelp={company:['公司与股票代码','公司名称对应主要交易证券，股票代码用于从数据源匹配公开市场数据。点击公司行可查看详情。'],price:['最新股价','来自 Alpha Vantage Global Quote 的最近可用日终价格；免费方案不保证盘中实时。'], 'market-cap':['市值','市值 = 最新股价 × 流通在外普通股股数。它代表普通股权益价值，不包含净债务。'],pe:['PE（TTM）','PE = 市值 ÷ 过去十二个月归母净利润。亏损公司没有有意义的 PE，通常显示为“—”。'],'forward-pe':['预期 PE','Forward PE = 当前市值 ÷ 未来十二个月预期净利润。它随分析师预测变化，免费数据源可能有延迟。'],peg:['PEG','PEG = PE ÷ 预期盈利增长率（%）。它适合将估值和增长一并比较，但不能单独作为投资判断。'],ps:['市销率（P/S）','P/S = 市值 ÷ 过去十二个月营业收入。高毛利、高现金转化率的业务通常能承受更高的 P/S。'],'ev-ebitda':['EV/EBITDA','EV/EBITDA = 企业价值 ÷ EBITDA。它考虑资本结构，适合比较不同负债水平的公司。'],'revenue-growth':['收入同比（最近）','收入同比 = （本季收入 ÷ 去年同期收入 − 1）× 100%。这是最近已披露数据，不是分析师预测。'],'implied-growth':['隐含增长率','这是公司级反向 FCFE 模型的情景推算，不再使用行业统一自由现金流率。每家公司使用自身最近四季收入、经营现金流、资本开支和过去三年现金流中位数；权益成本则由该股 Beta、无风险利率和股权风险溢价计算。<h3>计算逻辑</h3><div class="modal-formula">权益价值 = Σ[t=1..5] 收入₀(1+g)ᵗ × FCF率ₜ ÷ (1+Ke)ᵗ + 终值 ÷ (1+Ke)⁵</div><p>FCF率会从公司当前 TTM 值，逐年过渡到该公司自己的归一化现金流率；归一化值按该公司设定的权重结合 TTM 与三年中位数。Ke = 无风险利率 + Beta × 股权风险溢价，永续增长率为 2.5%。通过二分法求解 g，使模型权益价值等于当前市值。</p><p>资本开支快速上升的平台公司更重视当前现金流；汽车、晶圆厂和存储公司更重视自身三年中位数以降低周期影响。公开财报不足的公司显示“—”，不会套用行业数据。详情页会列出每家公司的实际输入、截止期与计算依据。</p>']};
 const modal=document.querySelector('#metric-modal');const closeModal=()=>modal.classList.add('hidden');document.querySelectorAll('.help[data-metric],.detail-metric-help[data-metric]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();const [title,content]=metricHelp[link.dataset.metric]||metricHelp.company;document.querySelector('#modal-title').textContent=title;document.querySelector('#modal-content').innerHTML=content.includes('<')?content:`<p>${content}</p>`;modal.classList.remove('hidden')}));document.querySelector('#modal-close').addEventListener('click',closeModal);modal.addEventListener('click',event=>{if(event.target===modal)closeModal()});document.addEventListener('keydown',event=>{if(event.key==='Escape')closeModal()});
@@ -229,6 +245,32 @@ document.addEventListener('mousemove',event=>{
   tooltip.classList.remove('hidden');
 });
 
+const resetTransientMobileLayers=()=>{
+  if(!window.matchMedia('(max-width:680px)').matches)return;
+  const body=document.body;
+  const landscapeCard=document.querySelector('.chart-card');
+  if(landscapeCard&&!document.fullscreenElement&&!document.webkitFullscreenElement){
+    landscapeCard.classList.remove('landscape-fallback','force-landscape');
+    body.classList.remove('chart-landscape-open');
+  }
+};
+window.addEventListener('pageshow',resetTransientMobileLayers);
+window.addEventListener('orientationchange',resetTransientMobileLayers);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')resetTransientMobileLayers()});
+if(new URL(location.href).searchParams.has('_resume')){
+  const cleanUrl=new URL(location.href);cleanUrl.searchParams.delete('_resume');history.replaceState(history.state,'',cleanUrl);
+}
+Object.assign(metricHelp,{
+  'required-growth':['未来 5 年所需增长',`<p class="plain-lead">在当前市值、现金流率和风险假设下，公司未来五年收入平均每年需要增长多少，才能使模型价值接近当前市值。</p><h3>计算方式</h3><p>模型反向求解收入 CAGR，并逐年把自由现金流折现回今天。数值越高，代表当前价格对未来增长的要求越高。</p><div class="beginner-tip">这是估值模型反推的要求，不是公司指引或分析师预测。</div>`],
+  'actual-growth':['最近季度实际增长',`<p class="plain-lead">最近已披露季度的营业收入，相比上年同一季度的实际同比变化。</p><div class="modal-formula">收入同比 =（本季度收入 ÷ 去年同期收入 − 1）× 100%</div><p>标题中的年份和季度来自最近财报截止日期。它反映已经发生的增长，不代表未来仍会保持相同速度。</p>`],
+  'fcf-ttm':['TTM 自由现金流率',`<p class="plain-lead">过去连续 12 个月，公司每 1 元收入最终转化为多少自由现金流。</p><div class="modal-formula">TTM 自由现金流率 =（经营现金流 − 资本开支）÷ TTM 营业收入</div><p>它更接近公司当前经营状态，但可能受到短期营运资金或资本开支波动影响。</p>`],
+  'fcf-median':['三年自由现金流率中位数',`<p class="plain-lead">取公司最近三个完整年度自由现金流率的中间值，用来降低单一年度异常波动的影响。</p><p>相比简单平均数，中位数不容易被某一年极高或极低的现金流率拉偏。</p>`],
+  'fcf-normalized':['归一化 FCF 率',`<p class="plain-lead">模型用于预测未来现金流的长期自由现金流率假设。</p><p>它按公司特征，将当前 TTM 自由现金流率与三年中位数加权组合，避免完全照搬短期高点或低点。</p>`],
+  costOfEquity:['权益成本',`<p class="plain-lead">股东承担这只股票风险时，模型要求的年化回报率，也是未来现金流的折现率。</p><div class="modal-formula">权益成本 = 无风险利率 + Beta × 股权风险溢价</div><p>权益成本越高，未来现金流折算到今天的价值越低。手动编辑后，模型优先使用你填写的数值。</p>`],
+  beta:['Beta',`<p class="plain-lead">衡量股票相对整体市场波动敏感度的指标。</p><p>Beta 为 1 表示波动大致与市场一致；高于 1 通常表示更敏感，低于 1 通常表示相对平稳。修改 Beta 会同步重算权益成本。</p>`],
+  terminalGrowth:['永续增长率',`<p class="plain-lead">五年明确预测期结束后，模型假设公司自由现金流长期持续增长的速度。</p><p>该假设对终值影响很大，通常应采用接近长期经济增长和通胀水平的保守数值，并且必须低于权益成本。</p>`]
+});
+
 let activeNasdaqPeriod=5;
 renderNasdaq=()=>{
   const svg=document.querySelector('#ndx-valuation-chart');
@@ -278,8 +320,10 @@ if(location.hash==='#nasdaq')document.querySelector('nav [data-view="nasdaq"]')?
 // detail chart can never leave a long blank area below the active view.
 if ('scrollRestoration' in window.history) window.history.scrollRestoration='manual';
 const resetRouteScroll=()=>{
+  const shell=document.querySelector('.shell');
+  if(shell)shell.scrollTo({top:0,left:0,behavior:'auto'});
   window.scrollTo({top:0,left:0,behavior:'auto'});
-  requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:'auto'}));
+  requestAnimationFrame(()=>{if(shell)shell.scrollTo({top:0,left:0,behavior:'auto'});window.scrollTo({top:0,left:0,behavior:'auto'})});
 };
 const stabilizeRouteScroll=resetRouteScroll;
 const routeOpenDetail=openDetail;
@@ -351,12 +395,14 @@ new MutationObserver(refreshInsightDisclosure).observe(document.querySelector('#
 
 // Detail-page growth metrics use the most recently reported quarter from the
 // Alpha Vantage company overview, not a forward-estimate proxy.
+const reportedQuarterLabel=stock=>{const raw=stock?.ttmPeriodEnd||stock?.valuationModel?.fiscalPeriodEnd;if(!raw)return'最近已披露季度';const date=new Date(`${raw}T00:00:00Z`);if(Number.isNaN(date.getTime()))return'最近已披露季度';return`${date.getUTCFullYear()} 年第 ${Math.floor(date.getUTCMonth()/3)+1} 季度`};
 const refreshGrowthPanels=()=>{
   const detail=document.querySelector('#detail');
   if(detail.classList.contains('hidden'))return;
   const stock=stocks[activeIndex];
   document.querySelector('#detail-revenue-current').textContent=stock.revenueGrowthCurrent||stock.growth||'—';
   document.querySelector('#detail-eps-current').textContent=stock.epsGrowthCurrent||'—';
+  document.querySelectorAll('.growth-panel em').forEach(node=>node.textContent=reportedQuarterLabel(stock));
 };
 new MutationObserver(refreshGrowthPanels).observe(document.querySelector('#detail'),{attributes:true,attributeFilter:['class']});
 
@@ -384,7 +430,7 @@ const syncHistorySummaryCards=()=>{
     card.querySelector('.stat-label').lastChild.nodeValue=label;
     card.querySelector('.stat-value').innerHTML=`${value.toFixed(1)}<span class="stat-unit">倍</span>`;
     const date=card.querySelector('.stat-date');
-    if(date)date.textContent=`历史最新：${latest.date}`;
+    if(date)date.innerHTML=`<span class="stat-date-prefix">历史最新：</span>${latest.date}`;
   });
 };
 new MutationObserver(syncHistorySummaryCards).observe(document.querySelector('#stats'),{childList:true});
@@ -489,6 +535,7 @@ const openDetailWithoutHistory=openDetail;
 const showOverviewFromHistory=()=>{
   document.querySelector('#detail').classList.add('hidden');
   document.querySelector('#overview').classList.remove('hidden');
+  document.querySelector('.shell')?.scrollTo({top:0,behavior:'smooth'});
   window.scrollTo({top:0,behavior:'smooth'});
 };
 const syncDetailRoute=()=>{
@@ -529,7 +576,27 @@ document.querySelector('#back').addEventListener('click',()=>{
   window.history.replaceState({market10Detail:false},'',url);
   showOverviewFromHistory();
 });
-document.querySelectorAll('#chart-mode button').forEach(button=>button.addEventListener('click',()=>setChartMode(button.dataset.chartMode)));
+document.querySelector('#price-overlay-toggle').addEventListener('change',event=>{
+  showPriceOverlay=event.target.checked;
+  if(chartMode==='valuation')drawChart(stocks[activeIndex]);
+});
+const landscapeButton=document.querySelector('#chart-landscape-toggle'),landscapeCard=document.querySelector('.chart-card');
+const landscapeActive=()=>document.fullscreenElement===landscapeCard||document.webkitFullscreenElement===landscapeCard||landscapeCard.classList.contains('landscape-fallback');
+let landscapePortraitLocked=false;
+const syncForcedLandscape=()=>landscapeCard.classList.toggle('force-landscape',landscapeActive()&&landscapePortraitLocked);
+const syncLandscapeButton=()=>{const active=landscapeActive();landscapeButton.setAttribute('aria-pressed',String(active));landscapeButton.innerHTML=active?'<span aria-hidden="true">×</span> 退出横屏':'<span aria-hidden="true">↔</span> 横屏查看';if(!active){document.body.classList.remove('chart-landscape-open');landscapePortraitLocked=false}syncForcedLandscape()};
+landscapeButton.addEventListener('click',async()=>{
+  const active=document.fullscreenElement===landscapeCard||document.webkitFullscreenElement===landscapeCard||landscapeCard.classList.contains('landscape-fallback');
+  if(active){if(document.fullscreenElement&&document.exitFullscreen)await document.exitFullscreen();else if(document.webkitFullscreenElement&&document.webkitExitFullscreen)document.webkitExitFullscreen();landscapeCard.classList.remove('landscape-fallback');document.body.classList.remove('chart-landscape-open');if(screen.orientation?.unlock)screen.orientation.unlock();syncLandscapeButton();return}
+  try{const request=landscapeCard.requestFullscreen||landscapeCard.webkitRequestFullscreen;if(request)await request.call(landscapeCard);else throw new Error('fullscreen unsupported');try{if(screen.orientation?.lock){await screen.orientation.lock('portrait-primary');landscapePortraitLocked=true}}catch{landscapePortraitLocked=false}}catch{landscapePortraitLocked=false;landscapeCard.classList.add('landscape-fallback');document.body.classList.add('chart-landscape-open')}
+  syncLandscapeButton();
+});
+document.addEventListener('fullscreenchange',syncLandscapeButton);document.addEventListener('webkitfullscreenchange',syncLandscapeButton);
+document.querySelector('#mobile-chart-note-toggle').addEventListener('click',event=>{
+  const wrap=event.currentTarget.closest('.chart-note-wrap'),expanded=wrap.classList.toggle('expanded');
+  event.currentTarget.textContent=expanded?'收起说明':'展开说明';
+  event.currentTarget.setAttribute('aria-expanded',String(expanded));
+});
 document.querySelectorAll('[data-valuation-metric]').forEach(button=>button.addEventListener('click',()=>{
   activeValuationMetric=button.dataset.valuationMetric;
   syncValuationMetricControls();
@@ -596,13 +663,15 @@ document.addEventListener('mousemove',event=>{
   const pointGroup=svg.querySelector('.hover-points');
   if(pointGroup){
     const items=isPrice?[['price','#1ba6a0']]:[[selectedValuationMetric()[0],selectedValuationMetric()[3]==='orange'?'#ee8b2d':selectedValuationMetric()[3]==='teal'?'#1ba6a0':'#b547c3']];
-    pointGroup.innerHTML=items.filter(([key])=>isPrice?numericValue(point[key]):validValuationValue(point[key],key)).map(([key,color])=>{
+    let dots=items.filter(([key])=>isPrice?numericValue(point[key]):validValuationValue(point[key],key)).map(([key,color])=>{
       const pointY=314-(Number(point[key])-min)/(max-min)*252;
       return `<circle cx="${guideX}" cy="${pointY}" r="6" fill="#fff" stroke="${color}" stroke-width="3" vector-effect="non-scaling-stroke"/>`;
     }).join('');
+    if(!isPrice&&showPriceOverlay&&numericValue(point.price)){const scale=priceScale(points);if(scale){const priceY=314-(Number(point.price)-scale.min)/(scale.max-scale.min)*252;dots+=`<circle cx="${guideX}" cy="${priceY}" r="5" fill="#fff" stroke="#2d9ce2" stroke-width="2.5" vector-effect="non-scaling-stroke"/>`}}
+    pointGroup.innerHTML=dots;
   }
-  const rows=(isPrice?[['price','日收盘价','#1ba6a0']]:[[selectedValuationMetric()[0],selectedValuationMetric()[1],selectedValuationMetric()[3]==='orange'?'#ee8b2d':selectedValuationMetric()[3]==='teal'?'#1ba6a0':'#b547c3']])
-    .map(([key,label,color])=>{if(isPrice?numericValue(point[key]):validValuationValue(point[key],key))return`<div style="display:grid;grid-template-columns:10px 1fr auto;align-items:center;gap:7px;margin-top:7px"><i style="display:block;width:8px;height:8px;border-radius:50%;background:${color}"></i><span style="font-size:12px;color:#52615a">${label}</span><strong style="font:700 14px 'DM Mono',monospace;color:#16231d">${isPrice?'$':''}${Number(point[key]).toFixed(isPrice?2:1)}${isPrice?'':'x'}</strong></div>`;if(!isPrice&&key==='pe')return`<div style="display:grid;grid-template-columns:10px 1fr auto;align-items:center;gap:7px;margin-top:7px"><i style="display:block;width:8px;height:8px;border-radius:50%;background:${color}"></i><span style="font-size:12px;color:#52615a">${label}</span><strong style="font:600 11px Manrope;color:#b46117">亏损期不适用</strong></div>`;return''}).join('');
+  const tooltipSeries=isPrice?[['price','日收盘价','#1ba6a0',true]]:[[selectedValuationMetric()[0],selectedValuationMetric()[1],selectedValuationMetric()[3]==='orange'?'#ee8b2d':selectedValuationMetric()[3]==='teal'?'#1ba6a0':'#b547c3',false],...(showPriceOverlay?[['price','日收盘价','#2d9ce2',true]]:[])];
+  const rows=tooltipSeries.map(([key,label,color,priceValue])=>{if(priceValue?numericValue(point[key]):validValuationValue(point[key],key))return`<div style="display:grid;grid-template-columns:10px 1fr auto;align-items:center;gap:7px;margin-top:7px"><i style="display:block;width:8px;height:8px;border-radius:50%;background:${color}"></i><span style="font-size:12px;color:#52615a">${label}</span><strong style="font:700 14px 'DM Mono',monospace;color:#16231d">${priceValue?'$':''}${Number(point[key]).toFixed(priceValue?2:1)}${priceValue?'':'x'}</strong></div>`;if(!priceValue&&key==='pe')return`<div style="display:grid;grid-template-columns:10px 1fr auto;align-items:center;gap:7px;margin-top:7px"><i style="display:block;width:8px;height:8px;border-radius:50%;background:${color}"></i><span style="font-size:12px;color:#52615a">${label}</span><strong style="font:600 11px Manrope;color:#b46117">亏损期不适用</strong></div>`;return''}).join('');
   tooltip.innerHTML=`<div style="font:700 13px 'DM Mono',monospace;color:#14201e;padding-bottom:7px;border-bottom:1px solid rgba(126,145,136,.25)">${point.date}</div>${rows}`;
   tooltip.style.cssText='position:fixed;z-index:50;width:205px;padding:12px 13px;border:1px solid rgba(255,255,255,.65);border-radius:12px;background:rgba(255,255,255,.58);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 12px 30px rgba(20,32,30,.14);pointer-events:none';
   tooltip.style.left=`${Math.min(window.innerWidth-218,event.clientX+14)}px`;
