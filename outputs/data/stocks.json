@@ -23,7 +23,7 @@
       "color": "#d5f4b4",
       "ink": "#55a62f",
       "cap": "4.86T",
-      "pe": "30.7",
+      "pe": "30.4",
       "fpe": "15.7",
       "peg": "0.3",
       "ps": "19.2",
@@ -57,7 +57,8 @@
         "beta": 2.23,
         "costOfEquity": 0.154,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "netIncomeTTM": 159613000000.0
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -70,7 +71,7 @@
       "color": "#111",
       "ink": "#fff",
       "cap": "4.54T",
-      "pe": "35.4",
+      "pe": "35.2",
       "fpe": "32.2",
       "peg": "2.5",
       "ps": "9.7",
@@ -104,7 +105,8 @@
         "beta": 1.07,
         "costOfEquity": 0.096,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "netIncomeTTM": 128930000000.0
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -117,7 +119,7 @@
       "color": "#e9f2ff",
       "ink": "#1676d2",
       "cap": "3.45T",
-      "pe": "25.9",
+      "pe": "25.8",
       "fpe": "20.0",
       "peg": "1.1",
       "ps": "10.4",
@@ -151,7 +153,8 @@
         "beta": 1.09,
         "costOfEquity": 0.097,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "netIncomeTTM": 133749000000.0
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -198,7 +201,8 @@
         "beta": 1.25,
         "costOfEquity": 0.10500000000000001,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "netIncomeTTM": 244205000000.0
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -211,7 +215,7 @@
       "color": "#fff0dc",
       "ink": "#111",
       "cap": "2.92T",
-      "pe": "21.8",
+      "pe": "21.6",
       "fpe": "26.1",
       "peg": "1.1",
       "ps": "3.8",
@@ -245,7 +249,8 @@
         "beta": 1.47,
         "costOfEquity": 0.11599999999999999,
         "impliedGrowthStatus": "high_uncertainty",
-        "impliedGrowthNote": "归一化自由现金流率仅为 0.2%，受大额资本开支影响，暂不将反推结果作为常规增长率展示。"
+        "impliedGrowthNote": "归一化自由现金流率仅为 0.2%，受大额资本开支影响，暂不将反推结果作为常规增长率展示。",
+        "netIncomeTTM": 135281000000.0
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -258,7 +263,7 @@
       "color": "#eaf1ff",
       "ink": "#1768df",
       "cap": "1.42T",
-      "pe": "21.0",
+      "pe": "20.9",
       "fpe": "16.2",
       "peg": "0.8",
       "ps": "6.2",
@@ -292,7 +297,8 @@
         "beta": 1.25,
         "costOfEquity": 0.10500000000000001,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "netIncomeTTM": 68098000000.0
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -305,7 +311,7 @@
       "color": "#ffe8e8",
       "ink": "#d93232",
       "cap": "1.23T",
-      "pe": "289.1",
+      "pe": "322.2",
       "fpe": "138.7",
       "peg": "5.9",
       "ps": "11.9",
@@ -339,7 +345,8 @@
         "beta": 1.84,
         "costOfEquity": 0.1345,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "netIncomeTTM": 3818000000.0
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -352,7 +359,7 @@
       "color": "#eaf8fb",
       "ink": "#20899b",
       "cap": "2.10T",
-      "pe": "29.2",
+      "pe": "28.1",
       "fpe": "18.7",
       "peg": "0.5",
       "ps": "14.7",
@@ -386,7 +393,8 @@
         "beta": 1.4,
         "costOfEquity": 0.11249999999999999,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "netIncomeTTM": 74728926133.33333
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -399,7 +407,7 @@
       "color": "#e8f7ed",
       "ink": "#16834c",
       "cap": "930B",
-      "pe": "18.6",
+      "pe": "18.4",
       "fpe": "5.3",
       "peg": "0.0",
       "ps": "10.3",
@@ -433,7 +441,8 @@
         "beta": 2.2,
         "costOfEquity": 0.15250000000000002,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "netIncomeTTM": 50473000000.0
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -446,7 +455,7 @@
       "color": "#fff0ea",
       "ink": "#d34b28",
       "cap": "1.85T",
-      "pe": "64.8",
+      "pe": "63.1",
       "fpe": "19.9",
       "peg": "0.3",
       "ps": "24.5",
@@ -480,7 +489,8 @@
         "beta": 1.46,
         "costOfEquity": 0.11549999999999999,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "netIncomeTTM": 29317000000.0
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -493,7 +503,7 @@
       "color": "#fff2eb",
       "ink": "#d34b28",
       "cap": "776B",
-      "pe": "156.3",
+      "pe": "154.9",
       "fpe": "34.4",
       "peg": "0.5",
       "ps": "20.7",
@@ -527,7 +537,8 @@
         "beta": 2.49,
         "costOfEquity": 0.167,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "netIncomeTTM": 5009000000.0
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -564,5 +575,6 @@
       "dataSource": "Finviz",
       "note": "数据口径：当日行情与估值快照来自 Finviz；公司级模型使用已披露财报 TTM；历史估值以 SEC EDGAR 财报 TTM 和历史收盘价计算。"
     }
-  ]
+  ],
+  "fundamentalsUpdatedAt": "2026-08-02T04:41:59Z"
 }
