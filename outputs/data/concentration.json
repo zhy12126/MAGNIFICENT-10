@@ -1,10 +1,11 @@
 {
   "source": "State Street SPY daily fund holdings",
   "sourceUrl": "https://www.ssga.com/us/en/individual/etfs/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
-  "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. Basket unit value equals basket weight times SPY's end-of-day market price per share, which avoids changes caused by SPY fund creations and redemptions. It is not the total market capitalization of all listed shares. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
-  "updatedAt": "2026-08-01T00:03:08Z",
-  "asOf": "2026-07-31",
+  "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. The holdings date is verified against State Street's public Fund Top Holdings label. Basket unit value is shown only when an SPY close for that exact date is available; it is not the total market capitalization of all listed shares. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
+  "updatedAt": "2026-08-02T02:50:40Z",
+  "asOf": "2026-07-30",
   "spyUnitPrice": 747.03,
+  "spyUnitPriceDate": "2026-07-30",
   "metrics": {
     "mag7": {
       "share": 32.6117,
@@ -134,13 +135,13 @@
       "aiHardwareSpyBasketUnitValue": 133.1942
     },
     {
-      "date": "2026-07-31",
+      "date": "2026-07-30",
       "mag7": 32.6117,
       "aiHardware": 18.759,
       "mag7SpyHoldingMarketValue": null,
       "aiHardwareSpyHoldingMarketValue": null,
-      "mag7SpyBasketUnitValue": 243.6192,
-      "aiHardwareSpyBasketUnitValue": 140.1354
+      "mag7SpyBasketUnitValue": null,
+      "aiHardwareSpyBasketUnitValue": null
     }
   ]
 }

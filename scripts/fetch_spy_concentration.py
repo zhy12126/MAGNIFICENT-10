@@ -24,6 +24,7 @@ SPY_HOLDINGS_URL = (
     "https://www.ssga.com/us/en/individual/etfs/library-content/products/"
     "fund-data/etfs/us/holdings-daily-us-en-spy.xlsx"
 )
+SPY_FUND_PAGE_URL = "https://www.ssga.com/us/en/individual/etfs/state-street-spdr-sp-500-etf-trust-spy"
 OUTPUT = Path("outputs/data/concentration.json")
 
 MAG7 = {"NVDA", "AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "META", "TSLA"}
@@ -181,6 +182,28 @@ def parse_holdings(payload: bytes):
 def http_last_modified_date(value: str | None) -> str | None:
     if not value:
         return None
+
+
+def fetch_fund_top_holdings_as_of() -> str | None:
+    """Read the public SPY page's displayed Fund Top Holdings date.
+
+    The holdings workbook can carry a production/settlement label one business
+    day ahead of the portfolio date shown to investors. The public fund page
+    explicitly labels the holdings date, so prefer it whenever it is available.
+    """
+    request = Request(
+        SPY_FUND_PAGE_URL,
+        headers={"User-Agent": "HY-Market10/1.0 research contact@example.com", "Accept-Language": "en-US,en;q=0.8"},
+    )
+    try:
+        with urlopen(request, timeout=60) as response:
+            html = response.read().decode("utf-8", errors="replace")
+        match = re.search(r"Fund\s+Top\s+Holdings\s+as\s+of\s+([A-Z][a-z]{2}\s+\d{1,2},?\s+\d{4})", html, flags=re.I)
+        if not match:
+            return None
+        return datetime.strptime(match.group(1).replace(",", ""), "%b %d %Y").strftime("%Y-%m-%d")
+    except (OSError, ValueError):
+        return None
     try:
         return parsedate_to_datetime(value).astimezone(timezone.utc).strftime("%Y-%m-%d")
     except (TypeError, ValueError, IndexError):
@@ -202,34 +225,71 @@ def basket(weights: dict[str, float], market_values: dict[str, float], symbols: 
     }
 
 
-def fetch_spy_unit_price() -> float | None:
-    """Fetch SPY's end-of-day price when this script runs standalone."""
+def fetch_spy_unit_price(as_of_date: str | None = None) -> tuple[float | None, str | None]:
+    """Return SPY's close on the same date as the holdings snapshot."""
     api_key = os.environ.get("ALPHA_VANTAGE_API_KEY")
     if not api_key:
-        return None
-    query = urlencode({"function": "GLOBAL_QUOTE", "symbol": "SPY", "apikey": api_key})
-    request = Request(f"https://www.alphavantage.co/query?{query}")
-    with urlopen(request, timeout=30) as response:
-        quote = json.load(response).get("Global Quote", {})
+        return None, None
+
+
+def us_weekday_sessions_between(start_date: str | None, end_date: str | None) -> int | None:
+    """Count calendar weekdays in (start, end], enough for EOD snapshot labels."""
     try:
-        return float(quote.get("05. price"))
+        start = datetime.strptime(str(start_date), "%Y-%m-%d").date()
+        end = datetime.strptime(str(end_date), "%Y-%m-%d").date()
     except (TypeError, ValueError):
         return None
+    if end <= start:
+        return 0
+    sessions = 0
+    current = start + timedelta(days=1)
+    while current <= end:
+        if current.weekday() < 5:
+            sessions += 1
+        current += timedelta(days=1)
+    return sessions
+    if as_of_date:
+        query = urlencode({"function": "TIME_SERIES_DAILY", "symbol": "SPY", "outputsize": "compact", "apikey": api_key})
+        try:
+            with urlopen(Request(f"https://www.alphavantage.co/query?{query}"), timeout=30) as response:
+                prices = json.load(response).get("Time Series (Daily)", {})
+            close = prices.get(as_of_date, {}).get("4. close")
+            if close is not None:
+                return float(close), as_of_date
+        except (OSError, ValueError, TypeError):
+            pass
+    # Do not claim the latest quote belongs to an older holdings date. It is
+    # retained only as a last-resort current value and its date stays unknown.
+    query = urlencode({"function": "GLOBAL_QUOTE", "symbol": "SPY", "apikey": api_key})
+    with urlopen(Request(f"https://www.alphavantage.co/query?{query}"), timeout=30) as response:
+        quote = json.load(response).get("Global Quote", {})
+    try:
+        return float(quote.get("05. price")), None
+    except (TypeError, ValueError):
+        return None, None
 
 
 def main(spy_unit_price: float | None = None):
     request = Request(SPY_HOLDINGS_URL, headers={"User-Agent": "HY-Market10/1.0 research contact@example.com"})
     with urlopen(request, timeout=60) as response:
         workbook_last_modified = http_last_modified_date(response.headers.get("Last-Modified"))
-        weights, market_values, as_of = parse_holdings(response.read())
+        weights, market_values, workbook_as_of = parse_holdings(response.read())
+    page_as_of = fetch_fund_top_holdings_as_of()
     now = datetime.now(timezone.utc)
     previous = {}
     if OUTPUT.exists():
         previous = json.loads(OUTPUT.read_text(encoding="utf-8"))
+    run_date = now.strftime("%Y-%m-%d")
+    # Prefer the date an investor sees beside “Fund Top Holdings”. The workbook
+    # label is a fallback only, because it can be one business day ahead.
+    snapshot_date = page_as_of or workbook_as_of or workbook_last_modified or run_date
+    spy_price_date = snapshot_date if spy_unit_price is not None else None
     if spy_unit_price is None:
-        spy_unit_price = fetch_spy_unit_price()
-    mag7 = basket(weights, market_values, MAG7, spy_unit_price)
-    ai_hardware = basket(weights, market_values, AI_COMPUTE_HARDWARE, spy_unit_price)
+        spy_unit_price, spy_price_date = fetch_spy_unit_price(snapshot_date)
+    # A quote without a matching date must never be multiplied by old weights.
+    price_for_snapshot = spy_unit_price if spy_price_date == snapshot_date else None
+    mag7 = basket(weights, market_values, MAG7, price_for_snapshot)
+    ai_hardware = basket(weights, market_values, AI_COMPUTE_HARDWARE, price_for_snapshot)
     # Keep only the latest snapshot for each data date.  This also repairs
     # legacy files where the same date was written more than once.
     history_by_date = {}
@@ -238,19 +298,24 @@ def main(spy_unit_price: float | None = None):
         if date:
             history_by_date[str(date)] = item
     history = [history_by_date[date] for date in sorted(history_by_date)]
-    run_date = now.strftime("%Y-%m-%d")
-    # The State Street workbook can still show the prior US trading day when
-    # this job runs in Asia.  Never turn that same file into a new daily point.
-    snapshot_date = as_of or workbook_last_modified or run_date
-    if as_of is None and workbook_last_modified is None:
+    # Repair legacy snapshots that used a workbook production date instead of
+    # the public Fund Top Holdings date for exactly the same holdings file.
+    if page_as_of and workbook_as_of and page_as_of < workbook_as_of:
+        history_by_date.pop(workbook_as_of, None)
+        history = [history_by_date[date] for date in sorted(history_by_date)]
+    if page_as_of is None and workbook_as_of is None and workbook_last_modified is None:
         print(f"Warning: SPY workbook as-of date and Last-Modified header were unreadable; using run date {run_date}.")
-    elif as_of is None:
+    elif page_as_of is None and workbook_as_of is None:
         print(f"Info: SPY workbook as-of date came from HTTP Last-Modified: {snapshot_date}.")
+    elif page_as_of and workbook_as_of and page_as_of != workbook_as_of:
+        print(f"Info: Using public Fund Top Holdings date {page_as_of}; workbook label was {workbook_as_of}.")
     # Compare with the latest prior trading-day snapshot rather than a second
     # run on the same calendar day.
     prior_candidates = [item for item in history if str(item.get("date", "")) < snapshot_date]
     prior = max(prior_candidates, key=lambda item: item["date"], default={})
     for key, metric in (("mag7", mag7), ("aiHardware", ai_hardware)):
+        metric["comparisonDate"] = prior.get("date") or None
+        metric["comparisonTradingSessions"] = us_weekday_sessions_between(prior.get("date"), snapshot_date)
         old_share = prior.get(key)
         metric["dailyChangePp"] = None if old_share is None else round(metric["share"] - float(old_share), 4)
         old_market_value = prior.get(f"{key}SpyHoldingMarketValue")
@@ -280,10 +345,11 @@ def main(spy_unit_price: float | None = None):
     output = {
         "source": "State Street SPY daily fund holdings",
         "sourceUrl": SPY_HOLDINGS_URL,
-        "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. Basket unit value equals basket weight times SPY's end-of-day market price per share, which avoids changes caused by SPY fund creations and redemptions. It is not the total market capitalization of all listed shares. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
+        "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. The holdings date is taken from State Street's public Fund Top Holdings label. Basket unit value is calculated only when an SPY close for that exact date is available; it is not the total market capitalization of all listed shares. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
         "updatedAt": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "asOf": snapshot_date,
         "spyUnitPrice": spy_unit_price,
+        "spyUnitPriceDate": spy_price_date,
         "metrics": {"mag7": mag7, "aiHardware": ai_hardware},
         "history": history[-400:],
     }

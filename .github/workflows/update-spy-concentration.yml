@@ -2,10 +2,10 @@ name: Update SPY concentration
 
 on:
   schedule:
-    # 23:05 UTC = 08:05 JST (next calendar day) / 19:05 ET in daylight saving.
-    # Runs after the main market-data task and after the US close, so SPY has
-    # a dedicated Alpha Vantage request and an independently visible outcome.
-    - cron: '5 23 * * 1-5'
+    # 每个美股交易日收盘后运行；UTC 22:45 = 美东夏令时 18:45。
+    # 比行情任务（22:30 UTC）晚 15 分钟，降低同时写入 main 的冲突概率。
+    # 周五美股收盘后会在日本时间周六 07:45 执行。
+    - cron: '45 22 * * 1-5'
   workflow_dispatch:
 
 permissions:
