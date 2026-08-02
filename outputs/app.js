@@ -395,7 +395,10 @@ const baseRenderStocks=renderStocks;
 renderStocks=()=>{
   // Old snapshots stored Finviz P/C (cash on balance sheet) under `pcf`.
   // Hide those legacy values until a refresh writes a true P/CF TTM value.
-  stocks=stocks.map(stock=>stock.cashMultipleKind==='pcf-ttm'||!stock.dataSource?stock:{...stock,pcf:'—'});
+  stocks=stocks.map(stock=>{
+    const normalized=stock.cashMultipleKind==='pcf-ttm'||!stock.dataSource?stock:{...stock,pcf:'—'};
+    return normalized;
+  });
   baseRenderStocks();renderMag7Share();
 };
 renderMag7Share();

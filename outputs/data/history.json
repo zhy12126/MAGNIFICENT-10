@@ -87128,6 +87128,13 @@
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-16",
         "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
+      },
+      {
+        "date": "2026-08-02",
+        "price": 404.25,
+        "pe": 29.2,
+        "pcf": 23.4,
+        "ps": 14.7
       }
     ],
     "MU": [
@@ -137220,7 +137227,7 @@
       }
     ]
   },
-  "updatedAt": "2026-08-02T04:46:11Z",
+  "updatedAt": "2026-08-02T05:15:50Z",
   "backfillUpdatedAt": "2026-08-02",
   "backfillErrors": {},
   "methodology": "For each trading date: EOD close divided by the latest already-filed rolling-four-quarter EPS, operating cash flow per share, and revenue per share. Per-share denominators use the average diluted weighted shares of the same four quarters.",

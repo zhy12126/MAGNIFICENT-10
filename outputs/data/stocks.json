@@ -1,6 +1,6 @@
 {
   "source": "Finviz + Yahoo Finance fallback (SKHY)",
-  "updatedAt": "2026-08-02T04:46:11Z",
+  "updatedAt": "2026-08-02T05:15:50Z",
   "sourceByTicker": {
     "NVDA": "Finviz",
     "AAPL": "Finviz",
@@ -23,7 +23,7 @@
       "color": "#d5f4b4",
       "ink": "#55a62f",
       "cap": "4.86T",
-      "pe": "30.4",
+      "pe": "30.7",
       "fpe": "15.7",
       "peg": "0.3",
       "ps": "19.2",
@@ -42,6 +42,7 @@
         "revenueTTM": 253491000000.0,
         "operatingCashflowTTM": 125648000000.0,
         "fcfTTM": 119076000000.0,
+        "netIncomeTTM": 159613000000.0,
         "fcfMarginTTM": 0.4697444879699871,
         "fcfMargin3yMedian": 0.44770258129648327,
         "normalizedFcfMargin": 0.46092772530058557,
@@ -57,8 +58,7 @@
         "beta": 2.23,
         "costOfEquity": 0.154,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null,
-        "netIncomeTTM": 159613000000.0
+        "impliedGrowthNote": null
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -71,7 +71,7 @@
       "color": "#111",
       "ink": "#fff",
       "cap": "4.54T",
-      "pe": "35.2",
+      "pe": "35.4",
       "fpe": "32.2",
       "peg": "2.5",
       "ps": "9.7",
@@ -90,6 +90,7 @@
         "revenueTTM": 466823000000.0,
         "operatingCashflowTTM": 146724000000.0,
         "fcfTTM": 134794000000.0,
+        "netIncomeTTM": 128930000000.0,
         "fcfMarginTTM": 0.28874755528326584,
         "fcfMargin3yMedian": 0.25981710737440805,
         "normalizedFcfMargin": 0.27428233132883695,
@@ -105,8 +106,7 @@
         "beta": 1.07,
         "costOfEquity": 0.096,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null,
-        "netIncomeTTM": 128930000000.0
+        "impliedGrowthNote": null
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -119,7 +119,7 @@
       "color": "#e9f2ff",
       "ink": "#1676d2",
       "cap": "3.45T",
-      "pe": "25.8",
+      "pe": "25.9",
       "fpe": "20.0",
       "peg": "1.1",
       "ps": "10.4",
@@ -138,6 +138,7 @@
         "revenueTTM": 331839000000.0,
         "operatingCashflowTTM": 182935000000.0,
         "fcfTTM": 66987000000.0,
+        "netIncomeTTM": 133749000000.0,
         "fcfMarginTTM": 0.20186596512164032,
         "fcfMargin3yMedian": 0.2541884965427156,
         "normalizedFcfMargin": 0.21756272454796288,
@@ -153,8 +154,7 @@
         "beta": 1.09,
         "costOfEquity": 0.097,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null,
-        "netIncomeTTM": 133749000000.0
+        "impliedGrowthNote": null
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -186,6 +186,7 @@
         "revenueTTM": 445934000000.0,
         "operatingCashflowTTM": 185675000000.0,
         "fcfTTM": 53273000000.0,
+        "netIncomeTTM": 244205000000.0,
         "fcfMarginTTM": 0.11946386685025139,
         "fcfMargin3yMedian": 0.20788645155392008,
         "normalizedFcfMargin": 0.14156951302616855,
@@ -201,8 +202,7 @@
         "beta": 1.25,
         "costOfEquity": 0.10500000000000001,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null,
-        "netIncomeTTM": 244205000000.0
+        "impliedGrowthNote": null
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -215,7 +215,7 @@
       "color": "#fff0dc",
       "ink": "#111",
       "cap": "2.92T",
-      "pe": "21.6",
+      "pe": "21.8",
       "fpe": "26.1",
       "peg": "1.1",
       "ps": "3.8",
@@ -234,6 +234,7 @@
         "revenueTTM": 775680000000.0,
         "operatingCashflowTTM": 161403000000.0,
         "fcfTTM": -11625000000.0,
+        "netIncomeTTM": 135281000000.0,
         "fcfMarginTTM": -0.014986850247524752,
         "fcfMargin3yMedian": 0.05153622724971354,
         "normalizedFcfMargin": 0.0016439191267848211,
@@ -249,8 +250,7 @@
         "beta": 1.47,
         "costOfEquity": 0.11599999999999999,
         "impliedGrowthStatus": "high_uncertainty",
-        "impliedGrowthNote": "归一化自由现金流率仅为 0.2%，受大额资本开支影响，暂不将反推结果作为常规增长率展示。",
-        "netIncomeTTM": 135281000000.0
+        "impliedGrowthNote": "归一化自由现金流率仅为 0.2%，受大额资本开支影响，暂不将反推结果作为常规增长率展示。"
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -263,7 +263,7 @@
       "color": "#eaf1ff",
       "ink": "#1768df",
       "cap": "1.42T",
-      "pe": "20.9",
+      "pe": "21.0",
       "fpe": "16.2",
       "peg": "0.8",
       "ps": "6.2",
@@ -282,6 +282,7 @@
         "revenueTTM": 228248000000.0,
         "operatingCashflowTTM": 130301000000.0,
         "fcfTTM": 40976000000.0,
+        "netIncomeTTM": 68098000000.0,
         "fcfMarginTTM": 0.17952402649749397,
         "fcfMargin3yMedian": 0.32502853923588976,
         "normalizedFcfMargin": 0.2159001546820929,
@@ -297,8 +298,7 @@
         "beta": 1.25,
         "costOfEquity": 0.10500000000000001,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null,
-        "netIncomeTTM": 68098000000.0
+        "impliedGrowthNote": null
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -311,7 +311,7 @@
       "color": "#ffe8e8",
       "ink": "#d93232",
       "cap": "1.23T",
-      "pe": "322.2",
+      "pe": "289.1",
       "fpe": "138.7",
       "peg": "5.9",
       "ps": "11.9",
@@ -330,6 +330,7 @@
         "revenueTTM": 103619000000.0,
         "operatingCashflowTTM": 18685000000.0,
         "fcfTTM": 5762000000.0,
+        "netIncomeTTM": 3818000000.0,
         "fcfMarginTTM": 0.055607562319651804,
         "fcfMargin3yMedian": 0.04502288861562626,
         "normalizedFcfMargin": 0.04925675809723648,
@@ -345,8 +346,7 @@
         "beta": 1.84,
         "costOfEquity": 0.1345,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null,
-        "netIncomeTTM": 3818000000.0
+        "impliedGrowthNote": null
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -359,7 +359,7 @@
       "color": "#eaf8fb",
       "ink": "#20899b",
       "cap": "2.10T",
-      "pe": "28.1",
+      "pe": "29.2",
       "fpe": "18.7",
       "peg": "0.5",
       "ps": "14.7",
@@ -378,6 +378,7 @@
         "revenueTTM": 148345953033.33334,
         "operatingCashflowTTM": 89447367533.33333,
         "fcfTTM": 39734119633.333336,
+        "netIncomeTTM": 74728926133.33333,
         "fcfMarginTTM": 0.2678476818602869,
         "fcfMargin3yMedian": 0.2851970594718451,
         "normalizedFcfMargin": 0.2773898395466439,
@@ -393,8 +394,7 @@
         "beta": 1.4,
         "costOfEquity": 0.11249999999999999,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null,
-        "netIncomeTTM": 74728926133.33333
+        "impliedGrowthNote": null
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -407,9 +407,9 @@
       "color": "#e8f7ed",
       "ink": "#16834c",
       "cap": "930B",
-      "pe": "18.4",
+      "pe": "18.6",
       "fpe": "5.3",
-      "peg": "0.0",
+      "peg": "0.03",
       "ps": "10.3",
       "pcf": "18.1",
       "evEbitda": "13.3",
@@ -426,6 +426,7 @@
         "revenueTTM": 90274000000.0,
         "operatingCashflowTTM": 51432000000.0,
         "fcfTTM": 27170000000.0,
+        "netIncomeTTM": 50473000000.0,
         "fcfMarginTTM": 0.30097259454549485,
         "fcfMargin3yMedian": 0.004818605392059257,
         "normalizedFcfMargin": 0.10847250159576172,
@@ -441,8 +442,7 @@
         "beta": 2.2,
         "costOfEquity": 0.15250000000000002,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null,
-        "netIncomeTTM": 50473000000.0
+        "impliedGrowthNote": null
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -455,7 +455,7 @@
       "color": "#fff0ea",
       "ink": "#d34b28",
       "cap": "1.85T",
-      "pe": "63.1",
+      "pe": "64.8",
       "fpe": "19.9",
       "peg": "0.3",
       "ps": "24.5",
@@ -474,6 +474,7 @@
         "revenueTTM": 75465000000.0,
         "operatingCashflowTTM": 33622000000.0,
         "fcfTTM": 32762000000.0,
+        "netIncomeTTM": 29317000000.0,
         "fcfMarginTTM": 0.4341350294838667,
         "fcfMargin3yMedian": 0.4212750637844945,
         "normalizedFcfMargin": 0.4289910432041178,
@@ -489,8 +490,7 @@
         "beta": 1.46,
         "costOfEquity": 0.11549999999999999,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null,
-        "netIncomeTTM": 29317000000.0
+        "impliedGrowthNote": null
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -503,7 +503,7 @@
       "color": "#fff2eb",
       "ink": "#d34b28",
       "cap": "776B",
-      "pe": "154.9",
+      "pe": "156.3",
       "fpe": "34.4",
       "peg": "0.5",
       "ps": "20.7",
@@ -522,6 +522,7 @@
         "revenueTTM": 37454000000.0,
         "operatingCashflowTTM": 9725000000.0,
         "fcfTTM": 8574000000.0,
+        "netIncomeTTM": 5009000000.0,
         "fcfMarginTTM": 0.22892080952635233,
         "fcfMargin3yMedian": 0.09327128175295715,
         "normalizedFcfMargin": 0.154313569250985,
@@ -537,8 +538,7 @@
         "beta": 2.49,
         "costOfEquity": 0.167,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null,
-        "netIncomeTTM": 5009000000.0
+        "impliedGrowthNote": null
       },
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz",
@@ -553,7 +553,7 @@
       "cap": "1.05T",
       "pe": "19.6",
       "fpe": "4.5",
-      "peg": "0.0",
+      "peg": "0.04",
       "ps": "8.1",
       "pcf": "—",
       "evEbitda": "16.1",
@@ -575,6 +575,5 @@
       "dataSource": "Finviz",
       "note": "数据口径：当日行情与估值快照来自 Finviz；公司级模型使用已披露财报 TTM；历史估值以 SEC EDGAR 财报 TTM 和历史收盘价计算。"
     }
-  ],
-  "fundamentalsUpdatedAt": "2026-08-02T04:41:59Z"
+  ]
 }

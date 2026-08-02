@@ -368,6 +368,12 @@ def number(value):
 def ratio(value):
     return "—" if value is None else f"{value:.1f}"
 
+def peg_ratio(value):
+    """Keep sub-0.1 PEG values visible instead of rounding them to 0.0."""
+    if value is None:
+        return "—"
+    return f"{value:.2f}" if abs(value) < 0.1 else f"{value:.1f}"
+
 def money(value):
     if value is None:
         return "—"
@@ -502,6 +508,7 @@ def main():
         # multiple.  Calculate true P/CF from today's market cap and the
         # latest reported operating cash flow TTM instead.
         pe = number(overview.get("PERatio"))
+        peg = number(overview.get("PEGRatio"))
         operating_cashflow = number(model.get("operatingCashflowTTM"))
         pcf = market_cap / operating_cashflow if market_cap and operating_cashflow and operating_cashflow > 0 else None
         beta = number(overview.get("Beta"))
@@ -519,7 +526,7 @@ def main():
         stocks.append({
             "name": name, "ticker": ticker, "logo": logo, "color": color, "ink": ink,
             "cap": money(market_cap), "pe": ratio(pe),
-            "fpe": ratio(number(overview.get("ForwardPE"))), "peg": ratio(number(overview.get("PEGRatio"))),
+            "fpe": ratio(number(overview.get("ForwardPE"))), "peg": peg_ratio(peg),
             "ps": ratio(ps), "pcf": ratio(pcf), "evEbitda": ratio(number(overview.get("EVToEBITDA"))),
             "implied": implied,
             # These are most-recent reported-quarter growth rates, not forecasts.
