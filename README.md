@@ -13,7 +13,7 @@
 - 市场价格隐含了怎样的未来增长预期；
 - MAG7 与半导体产业链在标普 500 中的集中度变化。
 
-公司日度快照主要来自 Alpha Vantage，历史财务数据可通过 SEC EDGAR 回填；标普 500 集中度使用 State Street 每日披露的 SPY 持仓作为可审计代理。数据缺失时页面保留空值，不使用模拟数据补齐。
+公司日度快照主要来自 Finviz；公司级财报模型使用 Alpha Vantage 财报接口，历史财务数据可通过 SEC EDGAR 回填；标普 500 集中度使用 State Street 每日披露的 SPY 持仓作为可审计代理。数据缺失时页面保留空值，不使用模拟数据补齐。
 
 ## 人民币/日元汇率分析
 
@@ -52,7 +52,7 @@
 本地更新与 GitHub Action 使用同一套 Python 脚本，但不会连接 GitHub。
 
 1. 安装 Python 3.11 或更高版本（安装时勾选 **Add Python to PATH**）。
-2. 将 `.env.example` 复制为 `.env`，填入 `ALPHA_VANTAGE_API_KEY`；`.env` 已被 Git 忽略，不会上传。
+2. 将 `.env.example` 复制为 `.env`，填入 `ALPHA_VANTAGE_API_KEY`，供每月财报刷新与少数专项历史重建使用；`.env` 已被 Git 忽略，不会上传。日更本身不读取该 Key。
 3. 在项目根目录执行：
 
    ```powershell
@@ -61,7 +61,7 @@
 
    或双击/命令行运行 `scripts\run_local_update.cmd`。
 
-`daily` 会更新 `stocks.json`、`history.json` 和 `concentration.json`，供本地网页立即读取。`fundamentals` 会更新公司级现金流模型输入：
+`daily` 从 Finviz 读取当日价格与估值快照；SKHY 在 Finviz 不可用时回退 Yahoo Finance，其他代码保留最近一次有效快照，不会改用 Alpha Vantage。它会更新 `stocks.json`、`history.json` 和 `concentration.json`，供本地网页立即读取。`fundamentals` 会更新公司级现金流模型输入：
 
 ```powershell
 .\scripts\run_local_update.ps1 -Mode fundamentals
@@ -83,7 +83,7 @@
 
 这会覆盖同日期的历史估值点，不会伪造 Forward PE；历史 Forward PE 需要带时间戳的分析师一致预期数据。每一个交易日的分母均使用当日已经披露的最近四个季度 TTM，且以这四个季度的平均稀释加权股数换算为每股指标；因此不会在财报披露日前提前使用新数据。每条记录还会保存 `ttmPeriodEnd` 与 `ttmAvailableFrom`，可用于核查口径。若在 `.env` 配置 `EODHD_API_KEY`，价格优先使用 EODHD 的调整后 EOD 收盘价；否则使用 Stooq，Stooq 返回空数据时回退 Yahoo Finance。后两者是低频本地回填的兼容措施，不应视为有 SLA 的商业数据授权。GitHub 部署时，在 **Settings → Secrets and variables → Actions** 新建 `SEC_EDGAR_USER_AGENT`（以及可选的 `EODHD_API_KEY`），随后在 **Actions → Backfill free valuation history → Run workflow** 手动执行一次。该工作流不设定时任务。若 SEC 或价格源缺少某美股代码，页面会保留空值，不混用其他市场数据。
 
-Alpha Vantage 免费 Key 每天限额约 25 次请求。两个模式各使用约 24 次请求，因此不要在同一天连续运行；日更适合交易日测试，财报刷新适合周末测试。GitHub Action 仍会照常保留。
+Alpha Vantage 免费 Key 每天限额约 25 次请求。只有 `fundamentals` 与少数专项历史重建会使用约 24 次请求；`daily` 不使用该 Key。财报刷新适合周末测试。GitHub Action 仍会照常保留。
 
 ## 数据口径
 

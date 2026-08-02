@@ -21,8 +21,6 @@ jobs:
       - name: Install Yahoo Finance client
         run: python -m pip install --disable-pip-version-check yfinance
       - name: Fetch market data
-        env:
-          ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
         run: python scripts/fetch_market_data.py
       - name: Commit daily snapshot
         run: |

@@ -25,6 +25,7 @@ OFFICIAL_DOMAINS = {
     "bls.gov",
     "stat.go.jp",
     "mof.go.jp",
+    "bea.gov",
 }
 REQUIRED = {"id", "datetime", "timeLabel", "country", "title", "summary", "impact", "sourceUrl"}
 

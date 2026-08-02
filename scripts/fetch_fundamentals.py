@@ -94,7 +94,12 @@ def latest_ttm(income, cash):
     revenue = sum(r[0] for r in rows)
     fcf = sum(r[1] for r in rows)
     operating_cashflow = sum(report_value(cash_report, "operatingCashflow") or 0 for _, cash_report in pairs)
-    return revenue, operating_cashflow, fcf, fcf / revenue, max(income_report.get("fiscalDateEnding", "") for income_report, _ in pairs)
+    # Net income is needed by the daily market job to calculate P/E from the
+    # same four reported quarters as P/S and P/CF.  Do not use the provider's
+    # overview P/E here: its earnings denominator can update on a different
+    # schedule from the financial-statement endpoint.
+    net_income = sum(report_value(income_report, "netIncome") or 0 for income_report, _ in pairs)
+    return revenue, operating_cashflow, fcf, net_income, fcf / revenue, max(income_report.get("fiscalDateEnding", "") for income_report, _ in pairs)
 
 def annual_margins(income, cash):
     income_by_year = {r.get("fiscalDateEnding"): r for r in income.get("annualReports", [])}
@@ -121,7 +126,7 @@ def main():
             if not ttm or len(margins) < 3 or ttm_weight == 0:
                 companies[ticker] = {"status": "insufficient", "company": name, "reason": "公开财报不足四个季度或三年可比现金流，暂不计算隐含增长率。", "rationale": rationale}
                 continue
-            revenue, operating_cashflow, fcf, ttm_margin, fiscal_end = ttm
+            revenue, operating_cashflow, fcf, net_income, ttm_margin, fiscal_end = ttm
             median_margin = statistics.median(margins)
             normalized = ttm_weight * ttm_margin + (1 - ttm_weight) * median_margin
             reporting_currency = "USD"
@@ -130,6 +135,7 @@ def main():
                 revenue /= TSM_TWD_PER_USD
                 operating_cashflow /= TSM_TWD_PER_USD
                 fcf /= TSM_TWD_PER_USD
+                net_income /= TSM_TWD_PER_USD
                 reporting_currency = "TWD"
                 fx_rate_to_usd = 1 / TSM_TWD_PER_USD
             # Alpha OVERVIEW beta is refreshed by the daily job.  Use a neutral
@@ -137,7 +143,7 @@ def main():
             companies[ticker] = {
                 "status": "ready", "company": name, "fiscalPeriodEnd": fiscal_end,
                 "revenueTTM": revenue, "operatingCashflowTTM": operating_cashflow,
-                "fcfTTM": fcf, "fcfMarginTTM": ttm_margin,
+                "fcfTTM": fcf, "netIncomeTTM": net_income, "fcfMarginTTM": ttm_margin,
                 "fcfMargin3yMedian": median_margin, "normalizedFcfMargin": normalized,
                 "ttmWeight": ttm_weight, "terminalGrowth": TERMINAL_GROWTH,
                 "riskFreeRate": RISK_FREE_RATE, "equityRiskPremium": EQUITY_RISK_PREMIUM,

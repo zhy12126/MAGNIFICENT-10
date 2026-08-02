@@ -1,10 +1,11 @@
-"""Fetch a daily, static valuation snapshot from Alpha Vantage and Yahoo Finance.
+"""Fetch the daily static valuation snapshot from Finviz.
 
-SKHY uses Yahoo Finance because Alpha Vantage's free OVERVIEW endpoint does not
-publish fundamental fields for that new US ADR. The remaining 11 stocks consume
-22 Alpha Vantage requests/day; SPY is refreshed by its separate workflow.
-Data is end-of-day, not real-time.
+Finviz supplies the visible current quote and valuation multiples.  SKHY uses
+Yahoo Finance only when Finviz is unavailable; other tickers retain their last
+valid snapshot if Finviz cannot be read.  Historical valuation remains a
+separate point-in-time SEC TTM reconstruction.
 """
+import html
 import json
 import math
 import os
@@ -21,10 +22,7 @@ try:
 except ImportError:  # Installed by the SKHY local mode / GitHub workflow.
     yf = None
 
-API_KEY = os.environ.get("ALPHA_VANTAGE_API_KEY")
 REQUESTED_TICKERS = {ticker.strip().upper() for ticker in os.environ.get("MARKET_TICKERS", "").split(",") if ticker.strip()}
-if not API_KEY and (not REQUESTED_TICKERS or REQUESTED_TICKERS - {"SKHY"}):
-    raise SystemExit("Missing ALPHA_VANTAGE_API_KEY GitHub secret.")
 
 COMPANIES = [
     ("NVIDIA", "NVDA", "N", "#d5f4b4", "#55a62f"),
@@ -42,15 +40,78 @@ COMPANIES = [
 ]
 MIN_RELIABLE_NORMALIZED_FCF_MARGIN = .03
 
-def call(function, symbol):
-    query = urlencode({"function": function, "symbol": symbol, "apikey": API_KEY})
-    with urlopen(f"https://www.alphavantage.co/query?{query}", timeout=30) as response:
-        payload = json.load(response)
-    if "Note" in payload or "Information" in payload or "Error Message" in payload:
-        message = payload.get("Note") or payload.get("Information") or payload.get("Error Message") or "request rejected"
-        message = re.sub(r"API key as\s+[A-Za-z0-9_-]+", "API key", message, flags=re.I)
-        raise RuntimeError(f"Alpha Vantage {symbol}/{function} rejected the request: {message}")
-    return payload
+def finviz_number(value):
+    """Read Finviz's compact numbers (4.25T, 2.3%, 14.6) as floats."""
+    text = str(value or "").strip().replace(",", "")
+    if not text or text in {"-", "—", "N/A"}:
+        return None
+    percent = text.endswith("%")
+    if percent:
+        text = text[:-1]
+    multiplier = 1.0
+    if text[-1:].upper() in {"K", "M", "B", "T"}:
+        multiplier = {"K": 1e3, "M": 1e6, "B": 1e9, "T": 1e12}[text[-1:].upper()]
+        text = text[:-1]
+    try:
+        value = float(text) * multiplier
+        return value / 100 if percent else value
+    except ValueError:
+        return None
+
+
+def finviz_cells(document):
+    """Extract table cells without adding a third-party HTML dependency."""
+    cells = []
+    for cell in re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", document, flags=re.I | re.S):
+        text = re.sub(r"<[^>]+>", " ", cell)
+        text = " ".join(html.unescape(text).replace("\xa0", " ").split())
+        if text:
+            cells.append(text)
+    return cells
+
+
+def finviz_snapshot(ticker):
+    """Map Finviz's public quote page into the dashboard's existing schema.
+
+    Only a small, once-per-day request volume is used.  A malformed or blocked
+    page deliberately raises so the normal provider fallback can keep the
+    website publishing rather than writing partial metrics.
+    """
+    url = f"https://finviz.com/stock?t={ticker}&p=d"
+    request = Request(url, headers={
+        "User-Agent": "Mozilla/5.0 (compatible; HYValuationDashboard/1.0; daily end-of-day refresh)",
+        "Accept-Language": "en-US,en;q=0.8",
+    })
+    with urlopen(request, timeout=30) as response:
+        document = response.read().decode("utf-8", errors="replace")
+    cells = finviz_cells(document)
+    values = {}
+    for index, label in enumerate(cells[:-1]):
+        if label in {"P/E", "Forward P/E", "PEG", "P/S", "P/C", "P/FCF", "Market Cap", "EV/EBITDA", "Beta", "Sales Q/Q", "EPS Q/Q", "Price", "Change"}:
+            values.setdefault(label, cells[index + 1])
+
+    market_cap = finviz_number(values.get("Market Cap"))
+    price = finviz_number(values.get("Price"))
+    if market_cap is None or price is None:
+        raise RuntimeError("Finviz page did not expose a usable Market Cap and Price")
+    change = finviz_number(values.get("Change"))
+    overview = {
+        "MarketCapitalization": market_cap,
+        "PERatio": finviz_number(values.get("P/E")),
+        "ForwardPE": finviz_number(values.get("Forward P/E")),
+        "PEGRatio": finviz_number(values.get("PEG")),
+        "PriceToSalesRatioTTM": finviz_number(values.get("P/S")),
+        "PriceToCashFlow": finviz_number(values.get("P/C")),
+        "EVToEBITDA": finviz_number(values.get("EV/EBITDA")),
+        "QuarterlyRevenueGrowthYOY": finviz_number(values.get("Sales Q/Q")),
+        "QuarterlyEarningsGrowthYOY": finviz_number(values.get("EPS Q/Q")),
+        "Beta": finviz_number(values.get("Beta")),
+    }
+    quote = {
+        "05. price": price,
+        "10. change percent": "—" if change is None else f"{change * 100:.4f}%",
+    }
+    return overview, quote
 
 def yahoo_value(value):
     """Yahoo quoteSummary returns most values as {raw, fmt}; accept either."""
@@ -200,7 +261,7 @@ def yahoo_yfinance_snapshot():
     return overview, {"05. price": price, "10. change percent": change}
 
 def yahoo_skhY_snapshot():
-    """Return SKHY fields mapped to the Alpha Vantage-shaped keys used below."""
+    """Return SKHY fields mapped to the common dashboard snapshot schema."""
     modules = "price,summaryDetail,defaultKeyStatistics,financialData"
     headers = {"User-Agent": "Mozilla/5.0 HY-Market10/1.0", "Accept-Language": "en-US,en;q=0.8"}
     summary_errors = []
@@ -356,9 +417,8 @@ def main():
     fundamentals = {}
     if fundamentals_path.exists():
         fundamentals = json.loads(fundamentals_path.read_text(encoding="utf-8")).get("companies", {})
-    # A temporary Alpha Vantage OVERVIEW omission must not erase the last
-    # successful fundamental snapshot. Quotes are independent and may still be
-    # fresh, so we retain the prior ratios/model and update only price/change.
+    # A temporary Finviz page failure must not erase the last successful
+    # snapshot.  Keeping the prior row is safer than publishing empty metrics.
     target = Path("outputs/data/stocks.json")
     previous_stocks = {}
     if target.exists():
@@ -373,23 +433,47 @@ def main():
         raise SystemExit(f"Unknown MARKET_TICKERS: {', '.join(sorted(unknown_tickers))}")
     stocks = []
     updated_tickers = set()
+    source_by_ticker = {}
     for i, (name, ticker, logo, color, ink) in enumerate(COMPANIES):
         prior = previous_stocks.get(ticker, {})
         # A targeted refresh must preserve every untouched row. This makes the
-        # SKHY-only command safe to run without spending Alpha Vantage quota.
+        # A targeted SKHY refresh must preserve every untouched row.
         if REQUESTED_TICKERS and ticker not in REQUESTED_TICKERS:
             if not prior:
                 raise RuntimeError(f"Cannot preserve {ticker}: outputs/data/stocks.json has no prior snapshot")
             stocks.append(prior)
             continue
-        if ticker == "SKHY":
-            overview, quote = yahoo_skhY_snapshot()
-        else:
-            overview = call("OVERVIEW", ticker)
-            time.sleep(13)  # stay below the free-tier minute rate limit
-            quote = call("GLOBAL_QUOTE", ticker).get("Global Quote", {})
-            if i < len(COMPANIES) - 2:
-                time.sleep(13)
+        try:
+            overview, quote = finviz_snapshot(ticker)
+            source = "Finviz"
+        except Exception as exc:
+            print(f"{ticker}: Finviz unavailable ({exc})")
+            if ticker == "SKHY":
+                try:
+                    overview, quote = yahoo_skhY_snapshot()
+                    source = "Yahoo Finance fallback"
+                except Exception as yahoo_exc:
+                    print(f"{ticker}: Yahoo Finance fallback unavailable ({yahoo_exc})")
+                    if prior:
+                        retained = dict(prior)
+                        retained["fundamentalsStatus"] = "Finviz 与 Yahoo Finance 当日快照均不可用，沿用最近一次有效数据。"
+                        retained["dataSource"] = "Last valid snapshot"
+                        stocks.append(retained)
+                        continue
+                    raise RuntimeError(f"{ticker}: no data source and no previous snapshot exists") from yahoo_exc
+            elif prior:
+                retained = dict(prior)
+                retained["fundamentalsStatus"] = "Finviz 当日快照不可用，沿用最近一次有效数据。"
+                retained["dataSource"] = "Last valid Finviz snapshot"
+                stocks.append(retained)
+                continue
+            else:
+                raise RuntimeError(f"{ticker}: Finviz unavailable and no previous snapshot exists") from exc
+        finally:
+            # Respect the public website: this is a low-frequency daily
+            # snapshot, not a high-volume scraping loop.
+            time.sleep(1.2)
+        source_by_ticker[ticker] = source
         market_cap = number(overview.get("MarketCapitalization"))
         ps = number(overview.get("PriceToSalesRatioTTM"))
         revenue_growth = number(overview.get("QuarterlyRevenueGrowthYOY"))
@@ -402,21 +486,43 @@ def main():
                 "The existing row was left unchanged; retry later instead of publishing blank metrics."
             )
         # Market cap is required for every displayed valuation ratio. If it is
-        # absent, OVERVIEW did not return a usable fundamental record (common
-        # when the free endpoint is throttled for one symbol).
+        # absent, retain a prior snapshot instead of writing blank metrics.
         if market_cap is None and prior.get("cap") not in (None, "—"):
             retained = dict(prior)
             retained.update({
                 "name": name, "ticker": ticker, "logo": logo, "color": color, "ink": ink,
                 "price": "—" if price is None else f"${price:,.2f}", "change": change,
             })
-            retained["fundamentalsStatus"] = "沿用最近一次有效基本面快照；当日 Alpha Vantage OVERVIEW 未返回该公司数据。"
+            retained["fundamentalsStatus"] = "沿用最近一次有效基本面快照；当日数据源未返回可用市值。"
             stocks.append(retained)
             updated_tickers.add(ticker)
             continue
         model = dict(fundamentals.get(ticker, {}))
+        # The market endpoint supplies today's market cap, but its OVERVIEW
+        # valuation ratios can still use an older filing.  When our latest
+        # filing snapshot is usable, calculate the trailing ratios ourselves
+        # with exactly the same TTM denominator used by the company model.
+        # This makes a Sunday fundamentals refresh take effect on the very
+        # next daily price run, without waiting for the provider's ratio cache.
+        revenue_ttm = number(model.get("revenueTTM"))
+        net_income_ttm = number(model.get("netIncomeTTM"))
         operating_cashflow = number(model.get("operatingCashflowTTM"))
-        pcf = market_cap / operating_cashflow if market_cap and operating_cashflow and operating_cashflow > 0 else None
+        if source == "Finviz":
+            # Finviz supplies the displayed current valuation multiples
+            # directly.  The separate filing model remains the source for
+            # reverse-FCFE inputs and for reproducible historical TTM series.
+            pe = number(overview.get("PERatio"))
+            pcf = number(overview.get("PriceToCashFlow"))
+        elif model.get("status") == "ready" and market_cap:
+            if revenue_ttm and revenue_ttm > 0:
+                ps = market_cap / revenue_ttm
+            else:
+                ps = None
+            pe = market_cap / net_income_ttm if net_income_ttm and net_income_ttm > 0 else None
+            pcf = market_cap / operating_cashflow if operating_cashflow and operating_cashflow > 0 else None
+        else:
+            pe = number(overview.get("PERatio"))
+            pcf = market_cap / operating_cashflow if market_cap and operating_cashflow and operating_cashflow > 0 else None
         beta = number(overview.get("Beta"))
         if model.get("status") == "ready":
             if beta is None:
@@ -431,29 +537,30 @@ def main():
             model["impliedGrowthNote"] = implied_note
         stocks.append({
             "name": name, "ticker": ticker, "logo": logo, "color": color, "ink": ink,
-            "cap": money(market_cap), "pe": ratio(number(overview.get("PERatio"))),
+            "cap": money(market_cap), "pe": ratio(pe),
             "fpe": ratio(number(overview.get("ForwardPE"))), "peg": ratio(number(overview.get("PEGRatio"))),
             "ps": ratio(ps), "pcf": ratio(pcf), "evEbitda": ratio(number(overview.get("EVToEBITDA"))),
             "implied": implied,
             # These are most-recent reported-quarter growth rates, not forecasts.
             # Future EPS growth is derived in the browser from trailing and
-            # forward PE. Alpha Vantage's free OVERVIEW endpoint does not expose
-            # a reliable company-level forward revenue consensus, so we leave
+            # forward PE.  The daily snapshot does not expose a reliable
+            # company-level forward revenue consensus, so we leave
             # that field absent rather than presenting a proxy as an estimate.
             "growth": "—" if revenue_growth is None else f"{revenue_growth * 100:.0f}%",
             "revenueGrowthCurrent": "—" if revenue_growth is None else f"{revenue_growth * 100:.0f}%",
             "epsGrowthCurrent": "—" if eps_growth is None else f"{eps_growth * 100:.0f}%",
             "price": "—" if price is None else f"${price:,.2f}", "change": change,
             "valuationModel": model,
-            "note": "数据口径：行情与部分基本面来自 Yahoo Finance（SKHY 美国 ADR）" if ticker == "SKHY" else "数据口径：行情与部分基本面来自 Alpha Vantage；历史估值以 SEC EDGAR 财报 TTM 和历史收盘价计算。隐含增长率为公司级 FCFE 反推，不是分析师预测或投行评级。"
+            "dataSource": source,
+            "note": "数据口径：当日行情与估值快照来自 Finviz；公司级模型使用已披露财报 TTM；历史估值以 SEC EDGAR 财报 TTM 和历史收盘价计算。" if source == "Finviz" else "数据口径：SKHY 的当日行情与估值快照由 Yahoo Finance 回退提供；公司级模型使用可获取的已披露财报。"
         })
         updated_tickers.add(ticker)
     now = datetime.now(timezone.utc)
-    output = {"source": "Alpha Vantage + Yahoo Finance (SKHY)", "updatedAt": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "stocks": stocks}
+    output = {"source": "Finviz + Yahoo Finance fallback (SKHY)", "updatedAt": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "sourceByTicker": source_by_ticker, "stocks": stocks}
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     history_target = Path("outputs/data/history.json")
-    history = {"source": "Alpha Vantage", "stocks": {}}
+    history = {"source": "Finviz daily snapshots + separate SEC historical backfill", "stocks": {}}
     if history_target.exists():
         history = json.loads(history_target.read_text(encoding="utf-8"))
     day = now.strftime("%Y-%m-%d")
