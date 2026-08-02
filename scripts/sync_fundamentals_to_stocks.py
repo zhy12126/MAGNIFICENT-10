@@ -35,10 +35,6 @@ def number(value: object) -> float | None:
         return None
 
 
-def ratio(value: float | None) -> str:
-    return "—" if value is None else f"{value:.1f}"
-
-
 def implied_growth(market_capitalization: float | None, model: dict) -> tuple[str, str, str | None]:
     """Same reverse-FCFE calculation as the daily job, without its API setup."""
     if not market_capitalization or market_capitalization <= 0 or not model:
@@ -101,17 +97,6 @@ def main() -> None:
         model["impliedGrowthNote"] = note
         stock["valuationModel"] = model
         stock["implied"] = implied
-        # Keep the visible daily snapshot on the same latest-filing TTM basis
-        # immediately after the fundamentals job.  The next market run uses
-        # the same formula with its refreshed market cap.
-        cap = market_cap(stock.get("cap"))
-        if model.get("status") == "ready" and cap:
-            revenue = number(model.get("revenueTTM"))
-            net_income = number(model.get("netIncomeTTM"))
-            operating_cashflow = number(model.get("operatingCashflowTTM"))
-            stock["pe"] = ratio(cap / net_income if net_income and net_income > 0 else None)
-            stock["ps"] = ratio(cap / revenue if revenue and revenue > 0 else None)
-            stock["pcf"] = ratio(cap / operating_cashflow if operating_cashflow and operating_cashflow > 0 else None)
         changed += 1
 
     payload["fundamentalsUpdatedAt"] = fundamentals.get("updatedAt")

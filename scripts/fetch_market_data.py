@@ -101,7 +101,6 @@ def finviz_snapshot(ticker):
         "ForwardPE": finviz_number(values.get("Forward P/E")),
         "PEGRatio": finviz_number(values.get("PEG")),
         "PriceToSalesRatioTTM": finviz_number(values.get("P/S")),
-        "PriceToCashFlow": finviz_number(values.get("P/C")),
         "EVToEBITDA": finviz_number(values.get("EV/EBITDA")),
         "QuarterlyRevenueGrowthYOY": finviz_number(values.get("Sales Q/Q")),
         "QuarterlyEarningsGrowthYOY": finviz_number(values.get("EPS Q/Q")),
@@ -498,31 +497,13 @@ def main():
             updated_tickers.add(ticker)
             continue
         model = dict(fundamentals.get(ticker, {}))
-        # The market endpoint supplies today's market cap, but its OVERVIEW
-        # valuation ratios can still use an older filing.  When our latest
-        # filing snapshot is usable, calculate the trailing ratios ourselves
-        # with exactly the same TTM denominator used by the company model.
-        # This makes a Sunday fundamentals refresh take effect on the very
-        # next daily price run, without waiting for the provider's ratio cache.
-        revenue_ttm = number(model.get("revenueTTM"))
-        net_income_ttm = number(model.get("netIncomeTTM"))
+        # PE and P/S are direct daily-provider values.  P/CF is different:
+        # Finviz's P/C is price-to-cash-on-balance-sheet, not a TTM cash-flow
+        # multiple.  Calculate true P/CF from today's market cap and the
+        # latest reported operating cash flow TTM instead.
+        pe = number(overview.get("PERatio"))
         operating_cashflow = number(model.get("operatingCashflowTTM"))
-        if source == "Finviz":
-            # Finviz supplies the displayed current valuation multiples
-            # directly.  The separate filing model remains the source for
-            # reverse-FCFE inputs and for reproducible historical TTM series.
-            pe = number(overview.get("PERatio"))
-            pcf = number(overview.get("PriceToCashFlow"))
-        elif model.get("status") == "ready" and market_cap:
-            if revenue_ttm and revenue_ttm > 0:
-                ps = market_cap / revenue_ttm
-            else:
-                ps = None
-            pe = market_cap / net_income_ttm if net_income_ttm and net_income_ttm > 0 else None
-            pcf = market_cap / operating_cashflow if operating_cashflow and operating_cashflow > 0 else None
-        else:
-            pe = number(overview.get("PERatio"))
-            pcf = market_cap / operating_cashflow if market_cap and operating_cashflow and operating_cashflow > 0 else None
+        pcf = market_cap / operating_cashflow if market_cap and operating_cashflow and operating_cashflow > 0 else None
         beta = number(overview.get("Beta"))
         if model.get("status") == "ready":
             if beta is None:
@@ -551,6 +532,7 @@ def main():
             "epsGrowthCurrent": "—" if eps_growth is None else f"{eps_growth * 100:.0f}%",
             "price": "—" if price is None else f"${price:,.2f}", "change": change,
             "valuationModel": model,
+            "cashMultipleKind": "pcf-ttm",
             "dataSource": source,
             "note": "数据口径：当日行情与估值快照来自 Finviz；公司级模型使用已披露财报 TTM；历史估值以 SEC EDGAR 财报 TTM 和历史收盘价计算。" if source == "Finviz" else "数据口径：SKHY 的当日行情与估值快照由 Yahoo Finance 回退提供；公司级模型使用可获取的已披露财报。"
         })
@@ -568,8 +550,18 @@ def main():
         if stock["ticker"] not in updated_tickers:
             continue
         rows = history.setdefault("stocks", {}).setdefault(stock["ticker"], [])
-        snapshot = {"date": day, "price": number(str(stock.get("price", "")).replace("$", "").replace(",", "")), "pe": number(stock["pe"]), "pcf": number(stock["pcf"]), "ps": number(stock["ps"])}
-        if rows and rows[-1]["date"] == day:
+        # The daily point uses the same true P/CF TTM calculation as the
+        # homepage.  It is safe to place in the detail history because it is
+        # not Finviz's P/C balance-sheet-cash ratio.
+        existing = rows[-1] if rows and rows[-1].get("date") == day else None
+        snapshot = {
+            "date": day,
+            "price": number(str(stock.get("price", "")).replace("$", "").replace(",", "")),
+            "pe": number(stock.get("pe")),
+            "pcf": number(stock.get("pcf")),
+            "ps": number(stock.get("ps")),
+        }
+        if existing:
             rows[-1] = snapshot
         else:
             rows.append(snapshot)

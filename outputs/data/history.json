@@ -11333,7 +11333,7 @@
         "date": "2026-08-02",
         "price": 200.75,
         "pe": 30.7,
-        "pcf": 60.3,
+        "pcf": 38.7,
         "ps": 19.2
       }
     ],
@@ -22669,7 +22669,7 @@
         "date": "2026-08-02",
         "price": 308.91,
         "pe": 35.4,
-        "pcf": 72.7,
+        "pcf": 30.9,
         "ps": 9.7
       }
     ],
@@ -34005,7 +34005,7 @@
         "date": "2026-08-02",
         "price": 464.72,
         "pe": 25.9,
-        "pcf": 44.9,
+        "pcf": 18.9,
         "ps": 10.4
       }
     ],
@@ -38024,7 +38024,7 @@
         "date": "2026-08-02",
         "price": 356.13,
         "pe": 17.9,
-        "pcf": 18.0,
+        "pcf": 23.5,
         "ps": 9.8
       }
     ],
@@ -49360,7 +49360,7 @@
         "date": "2026-08-02",
         "price": 271.58,
         "pe": 21.8,
-        "pcf": 23.8,
+        "pcf": 18.1,
         "ps": 3.8
       }
     ],
@@ -60696,7 +60696,7 @@
         "date": "2026-08-02",
         "price": 556.71,
         "pe": 21.0,
-        "pcf": 15.6,
+        "pcf": 10.9,
         "ps": 6.2
       }
     ],
@@ -72032,7 +72032,7 @@
         "date": "2026-08-02",
         "price": 311.21,
         "pe": 289.1,
-        "pcf": 27.9,
+        "pcf": 65.8,
         "ps": 11.9
       }
     ],
@@ -72045,48 +72045,6 @@
       }
     ],
     "TSM": [
-      {
-        "date": "2021-07-23",
-        "price": 116.79,
-        "priceCurrency": "USD",
-        "priceSource": "Yahoo Finance"
-      },
-      {
-        "date": "2021-07-26",
-        "price": 115.65,
-        "priceCurrency": "USD",
-        "priceSource": "Yahoo Finance",
-        "pe": 30.758,
-        "pcf": 19.4569,
-        "ps": 11.58,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-15",
-        "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
-      },
-      {
-        "date": "2021-07-27",
-        "price": 113.54,
-        "priceCurrency": "USD",
-        "priceSource": "Yahoo Finance",
-        "pe": 30.1968,
-        "pcf": 19.0861,
-        "ps": 11.3593,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-15",
-        "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
-      },
-      {
-        "date": "2021-07-28",
-        "price": 115.07,
-        "priceCurrency": "USD",
-        "priceSource": "Yahoo Finance",
-        "pe": 30.6037,
-        "pcf": 19.257,
-        "ps": 11.4611,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-15",
-        "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
-      },
       {
         "date": "2021-07-29",
         "price": 116.15,
@@ -87112,53 +87070,64 @@
         "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
       },
       {
-        "date": "2026-07-26",
-        "price": 403.41,
-        "pe": 35.6,
-        "pcf": 23.4,
-        "ps": 0.5
-      },
-      {
         "date": "2026-07-27",
         "price": 399.09,
-        "pe": 35.6,
-        "pcf": 23.4,
-        "ps": 0.5
+        "priceCurrency": "USD",
+        "priceSource": "Yahoo Finance",
+        "pe": 28.7944,
+        "pcf": 24.914,
+        "ps": 15.0223,
+        "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-07-16",
+        "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
       },
       {
         "date": "2026-07-28",
         "price": 392.31,
-        "pe": 35.6,
-        "pcf": 23.1,
-        "ps": 0.5
+        "priceCurrency": "USD",
+        "priceSource": "Yahoo Finance",
+        "pe": 28.3052,
+        "pcf": 24.5376,
+        "ps": 14.7953,
+        "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-07-16",
+        "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
       },
       {
         "date": "2026-07-29",
         "price": 374.67,
-        "pe": 34.5,
-        "pcf": 22.7,
-        "ps": 0.5
+        "priceCurrency": "USD",
+        "priceSource": "Yahoo Finance",
+        "pe": 27.0325,
+        "pcf": 23.4235,
+        "ps": 14.1236,
+        "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-07-16",
+        "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
       },
       {
         "date": "2026-07-30",
         "price": 403.31,
-        "pe": 32.9,
-        "pcf": 21.7,
-        "ps": 0.4
+        "priceCurrency": "USD",
+        "priceSource": "Yahoo Finance",
+        "pe": 29.0988,
+        "pcf": 25.25,
+        "ps": 15.2248,
+        "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-07-16",
+        "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
       },
       {
         "date": "2026-07-31",
         "price": 404.25,
-        "pe": 35.5,
-        "pcf": 23.4,
-        "ps": 0.5
-      },
-      {
-        "date": "2026-08-02",
-        "price": 404.25,
-        "pe": 29.2,
-        "pcf": 19.0,
-        "ps": 14.7
+        "priceCurrency": "USD",
+        "priceSource": "Yahoo Finance",
+        "pe": 29.1667,
+        "pcf": 25.3088,
+        "ps": 15.2603,
+        "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-07-16",
+        "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
       }
     ],
     "MU": [
@@ -98493,7 +98462,7 @@
         "date": "2026-08-02",
         "price": 823.03,
         "pe": 18.6,
-        "pcf": 35.7,
+        "pcf": 18.1,
         "ps": 10.3
       }
     ],
@@ -98610,7 +98579,7 @@
         "date": "2026-08-02",
         "price": 143.73,
         "pe": 19.6,
-        "pcf": 29.5,
+        "pcf": null,
         "ps": 8.1
       }
     ],
@@ -98726,2153 +98695,2162 @@
       {
         "date": "2025-08-04",
         "price": 295.5315,
-        "pe": 41.732,
-        "pcf": 12.6725,
-        "ps": 5.608,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 109.2657,
+        "pcf": 60.7439,
+        "ps": 24.7412,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-05",
         "price": 290.7767,
-        "pe": 41.0605,
-        "pcf": 12.4686,
-        "ps": 5.5178,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 107.5077,
+        "pcf": 59.7666,
+        "ps": 24.3431,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-06",
         "price": 299.4525,
-        "pe": 42.2857,
-        "pcf": 12.8406,
-        "ps": 5.6824,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 110.7154,
+        "pcf": 61.5498,
+        "ps": 25.0694,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-07",
         "price": 301.5271,
-        "pe": 42.5786,
-        "pcf": 12.9296,
-        "ps": 5.7218,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 111.4824,
+        "pcf": 61.9762,
+        "ps": 25.2431,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-08",
         "price": 302.7282,
-        "pe": 42.7482,
-        "pcf": 12.9811,
-        "ps": 5.7446,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 111.9265,
+        "pcf": 62.2231,
+        "ps": 25.3437,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-11",
         "price": 301.6661,
-        "pe": 42.5982,
-        "pcf": 12.9355,
-        "ps": 5.7244,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 111.5338,
+        "pcf": 62.0048,
+        "ps": 25.2547,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-12",
         "price": 310.5304,
-        "pe": 43.85,
-        "pcf": 13.3156,
-        "ps": 5.8926,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 114.8111,
+        "pcf": 63.8268,
+        "ps": 25.9968,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-13",
         "price": 306.8179,
-        "pe": 43.3257,
-        "pcf": 13.1565,
-        "ps": 5.8222,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 113.4385,
+        "pcf": 63.0637,
+        "ps": 25.686,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-14",
         "price": 308.9422,
-        "pe": 43.6257,
-        "pcf": 13.2475,
-        "ps": 5.8625,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 114.2239,
+        "pcf": 63.5004,
+        "ps": 25.8639,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-15",
         "price": 304.0881,
-        "pe": 42.9402,
-        "pcf": 13.0394,
-        "ps": 5.7704,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 112.4293,
+        "pcf": 62.5026,
+        "ps": 25.4575,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-18",
         "price": 303.5124,
-        "pe": 42.859,
-        "pcf": 13.0147,
-        "ps": 5.7594,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 112.2164,
+        "pcf": 62.3843,
+        "ps": 25.4093,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-19",
         "price": 292.7422,
-        "pe": 41.3381,
-        "pcf": 12.5529,
-        "ps": 5.5551,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 108.2344,
+        "pcf": 60.1706,
+        "ps": 24.5077,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-20",
         "price": 289.0297,
-        "pe": 40.8139,
-        "pcf": 12.3937,
-        "ps": 5.4846,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 106.8618,
+        "pcf": 59.4075,
+        "ps": 24.1969,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-21",
         "price": 287.4712,
-        "pe": 40.5938,
-        "pcf": 12.3269,
-        "ps": 5.455,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 106.2856,
+        "pcf": 59.0872,
+        "ps": 24.0664,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-22",
         "price": 291.8389,
-        "pe": 41.2105,
-        "pcf": 12.5142,
-        "ps": 5.5379,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 107.9004,
+        "pcf": 59.9849,
+        "ps": 24.432,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-25",
         "price": 292.0672,
-        "pe": 41.2428,
-        "pcf": 12.5239,
-        "ps": 5.5423,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 107.9848,
+        "pcf": 60.0318,
+        "ps": 24.4511,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-26",
         "price": 295.8194,
-        "pe": 41.7726,
-        "pcf": 12.6848,
-        "ps": 5.6135,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 109.3721,
+        "pcf": 60.8031,
+        "ps": 24.7653,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-27",
         "price": 298.0429,
-        "pe": 42.0866,
-        "pcf": 12.7802,
-        "ps": 5.6557,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 110.1942,
+        "pcf": 61.2601,
+        "ps": 24.9514,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-28",
         "price": 306.3812,
-        "pe": 43.2641,
-        "pcf": 13.1377,
-        "ps": 5.8139,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 113.2771,
+        "pcf": 62.974,
+        "ps": 25.6495,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-08-29",
         "price": 295.2039,
-        "pe": 41.6857,
-        "pcf": 12.6584,
-        "ps": 5.6018,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 109.1445,
+        "pcf": 60.6766,
+        "ps": 24.7137,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-09-02",
         "price": 296.0477,
-        "pe": 41.8049,
-        "pcf": 12.6946,
-        "ps": 5.6178,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 109.4565,
+        "pcf": 60.85,
+        "ps": 24.7844,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-09-03",
         "price": 300.1672,
-        "pe": 42.3866,
-        "pcf": 12.8713,
-        "ps": 5.696,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 110.9796,
+        "pcf": 61.6967,
+        "ps": 25.1293,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-09-04",
         "price": 303.8499,
-        "pe": 42.9066,
-        "pcf": 13.0292,
-        "ps": 5.7658,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 112.3412,
+        "pcf": 62.4537,
+        "ps": 25.4376,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-09-05",
         "price": 332.4283,
-        "pe": 46.9422,
-        "pcf": 14.2546,
-        "ps": 6.3081,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 122.9074,
+        "pcf": 68.3277,
+        "ps": 27.8301,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-09-08",
         "price": 343.1092,
-        "pe": 48.4504,
-        "pcf": 14.7126,
-        "ps": 6.5108,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 126.8564,
+        "pcf": 70.5231,
+        "ps": 28.7243,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-09-09",
         "price": 334.1952,
-        "pe": 47.1917,
-        "pcf": 14.3304,
-        "ps": 6.3417,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 123.5606,
+        "pcf": 68.6909,
+        "ps": 27.978,
+        "ttmPeriodEnd": "2025-05-04",
+        "ttmAvailableFrom": "2025-06-11"
       },
       {
         "date": "2025-09-10",
         "price": 366.8534,
-        "pe": 51.8033,
-        "pcf": 15.7308,
-        "ps": 6.9614,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 93.4961,
+        "pcf": 69.5836,
+        "ps": 29.5376,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-09-11",
         "price": 356.9864,
-        "pe": 50.41,
-        "pcf": 15.3077,
-        "ps": 6.7742,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 90.9814,
+        "pcf": 67.7121,
+        "ps": 28.7431,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-09-12",
         "price": 357.2247,
-        "pe": 50.4437,
-        "pcf": 15.3179,
-        "ps": 6.7787,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 91.0421,
+        "pcf": 67.7573,
+        "ps": 28.7623,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-09-15",
         "price": 361.4136,
-        "pe": 51.0352,
-        "pcf": 15.4975,
-        "ps": 6.8582,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 92.1097,
+        "pcf": 68.5518,
+        "ps": 29.0996,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-09-16",
         "price": 357.3537,
-        "pe": 50.4619,
-        "pcf": 15.3234,
-        "ps": 6.7811,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 91.075,
+        "pcf": 67.7817,
+        "ps": 28.7727,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-09-17",
         "price": 343.6254,
-        "pe": 48.5233,
-        "pcf": 14.7348,
-        "ps": 6.5206,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 87.5762,
+        "pcf": 65.1778,
+        "ps": 27.6673,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-09-18",
         "price": 342.8114,
-        "pe": 48.4084,
-        "pcf": 14.6999,
-        "ps": 6.5052,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 87.3687,
+        "pcf": 65.0234,
+        "ps": 27.6018,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-09-19",
         "price": 342.4044,
-        "pe": 48.3509,
-        "pcf": 14.6824,
-        "ps": 6.4975,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 87.265,
+        "pcf": 64.9462,
+        "ps": 27.569,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-09-22",
         "price": 336.8758,
-        "pe": 47.5702,
-        "pcf": 14.4453,
-        "ps": 6.3925,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 85.856,
+        "pcf": 63.8975,
+        "ps": 27.1239,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-09-23",
         "price": 337.025,
-        "pe": 47.5913,
-        "pcf": 14.4517,
-        "ps": 6.3954,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 85.894,
+        "pcf": 63.9258,
+        "ps": 27.1359,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-09-24",
         "price": 337.3929,
-        "pe": 47.6432,
-        "pcf": 14.4675,
-        "ps": 6.4024,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 85.9878,
+        "pcf": 63.9956,
+        "ps": 27.1655,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-09-25",
         "price": 334.201,
-        "pe": 47.1925,
-        "pcf": 14.3307,
-        "ps": 6.3418,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 85.1743,
+        "pcf": 63.3902,
+        "ps": 26.9085,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-09-26",
         "price": 332.6399,
-        "pe": 46.972,
-        "pcf": 14.2637,
-        "ps": 6.3122,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 84.7764,
+        "pcf": 63.0941,
+        "ps": 26.7828,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-09-29",
         "price": 326.0473,
-        "pe": 46.0411,
-        "pcf": 13.981,
-        "ps": 6.1871,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 83.0963,
+        "pcf": 61.8436,
+        "ps": 26.252,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-09-30",
         "price": 328.046,
-        "pe": 46.3233,
-        "pcf": 14.0667,
-        "ps": 6.225,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 83.6056,
+        "pcf": 62.2227,
+        "ps": 26.4129,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-01",
         "price": 331.5063,
-        "pe": 46.812,
-        "pcf": 14.2151,
-        "ps": 6.2907,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 84.4875,
+        "pcf": 62.8791,
+        "ps": 26.6916,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-02",
         "price": 336.2693,
-        "pe": 47.4846,
-        "pcf": 14.4193,
-        "ps": 6.381,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 85.7014,
+        "pcf": 63.7825,
+        "ps": 27.075,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-03",
         "price": 336.4582,
-        "pe": 47.5112,
-        "pcf": 14.4274,
-        "ps": 6.3846,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 85.7496,
+        "pcf": 63.8183,
+        "ps": 27.0903,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-06",
         "price": 333.5945,
-        "pe": 47.1068,
-        "pcf": 14.3046,
-        "ps": 6.3303,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 85.0197,
+        "pcf": 63.2752,
+        "ps": 26.8597,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-07",
         "price": 334.5093,
-        "pe": 47.236,
-        "pcf": 14.3439,
-        "ps": 6.3476,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 85.2529,
+        "pcf": 63.4487,
+        "ps": 26.9333,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-08",
         "price": 343.5479,
-        "pe": 48.5124,
-        "pcf": 14.7315,
-        "ps": 6.5192,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 87.5564,
+        "pcf": 65.1631,
+        "ps": 27.6611,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-09",
         "price": 343.0706,
-        "pe": 48.445,
-        "pcf": 14.711,
-        "ps": 6.5101,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 87.4348,
+        "pcf": 65.0726,
+        "ps": 27.6227,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-10",
         "price": 322.7958,
-        "pe": 45.582,
-        "pcf": 13.8416,
-        "ps": 6.1254,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 82.2676,
+        "pcf": 61.2269,
+        "ps": 25.9902,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-13",
         "price": 354.6846,
-        "pe": 50.085,
-        "pcf": 15.209,
-        "ps": 6.7305,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 90.3947,
+        "pcf": 67.2755,
+        "ps": 28.5578,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-14",
         "price": 342.1856,
-        "pe": 48.32,
-        "pcf": 14.673,
-        "ps": 6.4933,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 87.2092,
+        "pcf": 64.9047,
+        "ps": 27.5514,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-15",
         "price": 349.345,
-        "pe": 49.331,
-        "pcf": 14.98,
-        "ps": 6.6292,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 89.0339,
+        "pcf": 66.2627,
+        "ps": 28.1279,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-16",
         "price": 352.149,
-        "pe": 49.7269,
-        "pcf": 15.1003,
-        "ps": 6.6824,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 89.7485,
+        "pcf": 66.7945,
+        "ps": 28.3536,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-17",
         "price": 347.3563,
-        "pe": 49.0501,
-        "pcf": 14.8948,
-        "ps": 6.5914,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 88.5271,
+        "pcf": 65.8855,
+        "ps": 27.9677,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-20",
         "price": 347.2668,
-        "pe": 49.0375,
-        "pcf": 14.8909,
-        "ps": 6.5897,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 88.5042,
+        "pcf": 65.8685,
+        "ps": 27.9605,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-21",
         "price": 340.724,
-        "pe": 48.1136,
-        "pcf": 14.6104,
-        "ps": 6.4656,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 86.8367,
+        "pcf": 64.6275,
+        "ps": 27.4337,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-22",
         "price": 338.3773,
-        "pe": 47.7822,
-        "pcf": 14.5097,
-        "ps": 6.421,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 86.2387,
+        "pcf": 64.1823,
+        "ps": 27.2448,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-23",
         "price": 342.3447,
-        "pe": 48.3425,
-        "pcf": 14.6799,
-        "ps": 6.4963,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 87.2498,
+        "pcf": 64.9349,
+        "ps": 27.5642,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-24",
         "price": 352.1291,
-        "pe": 49.7241,
-        "pcf": 15.0994,
-        "ps": 6.682,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 89.7434,
+        "pcf": 66.7907,
+        "ps": 28.352,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-27",
         "price": 360.0044,
-        "pe": 50.8362,
-        "pcf": 15.4371,
-        "ps": 6.8314,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 91.7505,
+        "pcf": 68.2845,
+        "ps": 28.9861,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-28",
         "price": 370.8627,
-        "pe": 52.3695,
-        "pcf": 15.9027,
-        "ps": 7.0375,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 94.5179,
+        "pcf": 70.3441,
+        "ps": 29.8604,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-29",
         "price": 383.7992,
-        "pe": 54.1962,
-        "pcf": 16.4574,
-        "ps": 7.283,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 97.8149,
+        "pcf": 72.7978,
+        "ps": 30.902,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-30",
         "price": 374.3429,
-        "pe": 52.8609,
-        "pcf": 16.052,
-        "ps": 7.1035,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 95.4048,
+        "pcf": 71.0042,
+        "ps": 30.1406,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-10-31",
         "price": 367.5416,
-        "pe": 51.9005,
-        "pcf": 15.7603,
-        "ps": 6.9745,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 93.6715,
+        "pcf": 69.7141,
+        "ps": 29.593,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-03",
         "price": 360.5016,
-        "pe": 50.9064,
-        "pcf": 15.4584,
-        "ps": 6.8409,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 91.8773,
+        "pcf": 68.3788,
+        "ps": 29.0261,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-04",
         "price": 349.9515,
-        "pe": 49.4166,
-        "pcf": 15.006,
-        "ps": 6.6407,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 89.1885,
+        "pcf": 66.3777,
+        "ps": 28.1767,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-05",
         "price": 356.9517,
-        "pe": 50.4051,
-        "pcf": 15.3062,
-        "ps": 6.7735,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 90.9725,
+        "pcf": 67.7055,
+        "ps": 28.7403,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-06",
         "price": 353.5809,
-        "pe": 49.9291,
-        "pcf": 15.1617,
-        "ps": 6.7095,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 90.1135,
+        "pcf": 67.0661,
+        "ps": 28.4689,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-07",
         "price": 347.4557,
-        "pe": 49.0642,
-        "pcf": 14.899,
-        "ps": 6.5933,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 88.5524,
+        "pcf": 65.9043,
+        "ps": 27.9757,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-10",
         "price": 356.3651,
-        "pe": 50.3223,
-        "pcf": 15.2811,
-        "ps": 6.7624,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 90.823,
+        "pcf": 67.5942,
+        "ps": 28.6931,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-11",
         "price": 349.9714,
-        "pe": 49.4194,
-        "pcf": 15.0069,
-        "ps": 6.641,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 89.1935,
+        "pcf": 66.3815,
+        "ps": 28.1783,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-12",
         "price": 353.213,
-        "pe": 49.8772,
-        "pcf": 15.1459,
-        "ps": 6.7026,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 90.0197,
+        "pcf": 66.9963,
+        "ps": 28.4393,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-13",
         "price": 338.0591,
-        "pe": 47.7373,
-        "pcf": 14.4961,
-        "ps": 6.415,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 86.1576,
+        "pcf": 64.122,
+        "ps": 27.2192,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-14",
         "price": 340.5251,
-        "pe": 48.0855,
-        "pcf": 14.6018,
-        "ps": 6.4618,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 86.7861,
+        "pcf": 64.5897,
+        "ps": 27.4177,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-17",
         "price": 340.714,
-        "pe": 48.1122,
-        "pcf": 14.6099,
-        "ps": 6.4654,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 86.8342,
+        "pcf": 64.6256,
+        "ps": 27.4329,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-18",
         "price": 338.5762,
-        "pe": 47.8103,
-        "pcf": 14.5183,
-        "ps": 6.4248,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 86.2894,
+        "pcf": 64.2201,
+        "ps": 27.2608,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-19",
         "price": 352.4175,
-        "pe": 49.7648,
-        "pcf": 15.1118,
-        "ps": 6.6875,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 89.8169,
+        "pcf": 66.8454,
+        "ps": 28.3752,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-20",
         "price": 344.8604,
-        "pe": 48.6977,
-        "pcf": 14.7877,
-        "ps": 6.5441,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 87.8909,
+        "pcf": 65.412,
+        "ps": 27.7668,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-21",
         "price": 338.2778,
-        "pe": 47.7682,
-        "pcf": 14.5055,
-        "ps": 6.4191,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 86.2133,
+        "pcf": 64.1635,
+        "ps": 27.2368,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-24",
         "price": 375.8245,
-        "pe": 53.0701,
-        "pcf": 16.1155,
-        "ps": 7.1316,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 95.7824,
+        "pcf": 71.2852,
+        "ps": 30.2599,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-25",
         "price": 382.8546,
-        "pe": 54.0629,
-        "pcf": 16.4169,
-        "ps": 7.265,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 97.5741,
+        "pcf": 72.6187,
+        "ps": 30.8259,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-26",
         "price": 395.3237,
-        "pe": 55.8236,
-        "pcf": 16.9516,
-        "ps": 7.5017,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 100.752,
+        "pcf": 74.9838,
+        "ps": 31.8299,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-11-28",
         "price": 400.6833,
-        "pe": 56.5804,
-        "pcf": 17.1814,
-        "ps": 7.6034,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 102.1179,
+        "pcf": 76.0004,
+        "ps": 32.2614,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-12-01",
         "price": 383.8986,
-        "pe": 54.2103,
-        "pcf": 16.4617,
-        "ps": 7.2848,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 97.8402,
+        "pcf": 72.8167,
+        "ps": 30.91,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-12-02",
         "price": 379.4141,
-        "pe": 53.577,
-        "pcf": 16.2694,
-        "ps": 7.1998,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 96.6973,
+        "pcf": 71.9661,
+        "ps": 30.5489,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-12-03",
         "price": 378.4595,
-        "pe": 53.4422,
-        "pcf": 16.2285,
-        "ps": 7.1816,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 96.454,
+        "pcf": 71.785,
+        "ps": 30.472,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-12-04",
         "price": 378.8772,
-        "pe": 53.5012,
-        "pcf": 16.2464,
-        "ps": 7.1896,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 96.5605,
+        "pcf": 71.8642,
+        "ps": 30.5057,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-12-05",
         "price": 388.0351,
-        "pe": 54.7944,
-        "pcf": 16.6391,
-        "ps": 7.3633,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 98.8944,
+        "pcf": 73.6013,
+        "ps": 31.243,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-12-08",
         "price": 398.8338,
-        "pe": 56.3193,
-        "pcf": 17.1021,
-        "ps": 7.5683,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 101.6466,
+        "pcf": 75.6495,
+        "ps": 32.1125,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-12-09",
         "price": 403.9944,
-        "pe": 57.048,
-        "pcf": 17.3234,
-        "ps": 7.6662,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 102.9618,
+        "pcf": 76.6284,
+        "ps": 32.528,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-12-10",
         "price": 410.6367,
-        "pe": 57.986,
-        "pcf": 17.6082,
-        "ps": 7.7922,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 104.6547,
+        "pcf": 77.8883,
+        "ps": 33.0628,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-12-11",
         "price": 404.074,
-        "pe": 57.0592,
-        "pcf": 17.3268,
-        "ps": 7.6677,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 102.9821,
+        "pcf": 76.6435,
+        "ps": 32.5344,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-12-12",
         "price": 357.8964,
-        "pe": 50.5385,
-        "pcf": 15.3467,
-        "ps": 6.7914,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 91.2133,
+        "pcf": 67.8847,
+        "ps": 28.8164,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-12-15",
         "price": 337.8901,
-        "pe": 47.7134,
-        "pcf": 14.4888,
-        "ps": 6.4118,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 86.1145,
+        "pcf": 64.0899,
+        "ps": 27.2055,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-12-16",
         "price": 339.3716,
-        "pe": 47.9226,
-        "pcf": 14.5524,
-        "ps": 6.4399,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 86.4921,
+        "pcf": 64.3709,
+        "ps": 27.3248,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-12-17",
         "price": 324.178,
-        "pe": 45.7771,
-        "pcf": 13.9009,
-        "ps": 6.1516,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 82.6198,
+        "pcf": 61.4891,
+        "ps": 26.1015,
+        "ttmPeriodEnd": "2025-08-03",
+        "ttmAvailableFrom": "2025-09-10"
       },
       {
         "date": "2025-12-18",
         "price": 328.0162,
-        "pe": 46.3191,
-        "pcf": 14.0654,
-        "ps": 6.2244,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 68.7031,
+        "pcf": 57.698,
+        "ps": 24.8694,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2025-12-19",
         "price": 338.4369,
-        "pe": 47.7906,
-        "pcf": 14.5123,
-        "ps": 6.4222,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 70.8857,
+        "pcf": 59.5309,
+        "ps": 25.6594,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2025-12-22",
         "price": 340.1704,
-        "pe": 48.0354,
-        "pcf": 14.5866,
-        "ps": 6.4551,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 71.2488,
+        "pcf": 59.8359,
+        "ps": 25.7909,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2025-12-23",
         "price": 348.0109,
-        "pe": 49.1426,
-        "pcf": 14.9228,
-        "ps": 6.6038,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 72.891,
+        "pcf": 61.215,
+        "ps": 26.3853,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2025-12-24",
         "price": 348.9076,
-        "pe": 49.2692,
-        "pcf": 14.9613,
-        "ps": 6.6209,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 73.0788,
+        "pcf": 61.3727,
+        "ps": 26.4533,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2025-12-26",
         "price": 350.8104,
-        "pe": 49.5379,
-        "pcf": 15.0429,
-        "ps": 6.657,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 73.4774,
+        "pcf": 61.7074,
+        "ps": 26.5976,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2025-12-29",
         "price": 348.0807,
-        "pe": 49.1524,
-        "pcf": 14.9258,
-        "ps": 6.6052,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 72.9056,
+        "pcf": 61.2273,
+        "ps": 26.3906,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2025-12-30",
         "price": 348.5389,
-        "pe": 49.2171,
-        "pcf": 14.9455,
-        "ps": 6.6139,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 73.0016,
+        "pcf": 61.3079,
+        "ps": 26.4253,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2025-12-31",
         "price": 344.803,
-        "pe": 48.6896,
-        "pcf": 14.7853,
-        "ps": 6.543,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 72.2191,
+        "pcf": 60.6507,
+        "ps": 26.1421,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-02",
         "price": 346.3173,
-        "pe": 48.9034,
-        "pcf": 14.8502,
-        "ps": 6.5717,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 72.5363,
+        "pcf": 60.9171,
+        "ps": 26.2569,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-05",
         "price": 342.133,
-        "pe": 48.3126,
-        "pcf": 14.6708,
-        "ps": 6.4923,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 71.6599,
+        "pcf": 60.1811,
+        "ps": 25.9397,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-06",
         "price": 342.4817,
-        "pe": 48.3618,
-        "pcf": 14.6857,
-        "ps": 6.4989,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 71.7329,
+        "pcf": 60.2424,
+        "ps": 25.9661,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-07",
         "price": 342.2127,
-        "pe": 48.3238,
-        "pcf": 14.6742,
-        "ps": 6.4938,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 71.6766,
+        "pcf": 60.1951,
+        "ps": 25.9457,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-08",
         "price": 331.234,
-        "pe": 46.7735,
-        "pcf": 14.2034,
-        "ps": 6.2855,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 69.3771,
+        "pcf": 58.264,
+        "ps": 25.1133,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-09",
         "price": 343.6772,
-        "pe": 48.5306,
-        "pcf": 14.737,
-        "ps": 6.5216,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 71.9833,
+        "pcf": 60.4527,
+        "ps": 26.0567,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-12",
         "price": 350.8901,
-        "pe": 49.5492,
-        "pcf": 15.0463,
-        "ps": 6.6585,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 73.4941,
+        "pcf": 61.7215,
+        "ps": 26.6036,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-13",
         "price": 353.2811,
-        "pe": 49.8868,
-        "pcf": 15.1488,
-        "ps": 6.7039,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 73.9949,
+        "pcf": 62.142,
+        "ps": 26.7849,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-14",
         "price": 338.6163,
-        "pe": 47.816,
-        "pcf": 14.52,
-        "ps": 6.4256,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 70.9233,
+        "pcf": 59.5625,
+        "ps": 25.673,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-15",
         "price": 341.7345,
-        "pe": 48.2563,
-        "pcf": 14.6537,
-        "ps": 6.4847,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 71.5764,
+        "pcf": 60.111,
+        "ps": 25.9094,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-16",
         "price": 350.392,
-        "pe": 49.4788,
-        "pcf": 15.0249,
-        "ps": 6.649,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 73.3897,
+        "pcf": 61.6338,
+        "ps": 26.5658,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-20",
         "price": 331.3536,
-        "pe": 46.7904,
-        "pcf": 14.2086,
-        "ps": 6.2878,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 69.4021,
+        "pcf": 58.285,
+        "ps": 25.1224,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-21",
         "price": 327.5678,
-        "pe": 46.2558,
-        "pcf": 14.0462,
-        "ps": 6.2159,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 68.6092,
+        "pcf": 57.6191,
+        "ps": 24.8354,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-22",
         "price": 324.2702,
-        "pe": 45.7902,
-        "pcf": 13.9048,
-        "ps": 6.1533,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 67.9185,
+        "pcf": 57.039,
+        "ps": 24.5853,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-23",
         "price": 318.8506,
-        "pe": 45.0249,
-        "pcf": 13.6724,
-        "ps": 6.0505,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 66.7834,
+        "pcf": 56.0857,
+        "ps": 24.1744,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-26",
         "price": 323.6326,
-        "pe": 45.7001,
-        "pcf": 13.8775,
-        "ps": 6.1412,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 67.785,
+        "pcf": 56.9269,
+        "ps": 24.537,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-27",
         "price": 331.5429,
-        "pe": 46.8171,
-        "pcf": 14.2167,
-        "ps": 6.2913,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 69.4418,
+        "pcf": 58.3183,
+        "ps": 25.1367,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-28",
         "price": 331.9912,
-        "pe": 46.8804,
-        "pcf": 14.2359,
-        "ps": 6.2999,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 69.5357,
+        "pcf": 58.3972,
+        "ps": 25.1707,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-29",
         "price": 329.4906,
-        "pe": 46.5273,
-        "pcf": 14.1287,
-        "ps": 6.2524,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 69.0119,
+        "pcf": 57.9573,
+        "ps": 24.9811,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-01-30",
         "price": 330.0585,
-        "pe": 46.6075,
-        "pcf": 14.153,
-        "ps": 6.2632,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 69.1309,
+        "pcf": 58.0572,
+        "ps": 25.0242,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-02",
         "price": 329.8692,
-        "pe": 46.5808,
-        "pcf": 14.1449,
-        "ps": 6.2596,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 69.0912,
+        "pcf": 58.0239,
+        "ps": 25.0098,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-03",
         "price": 319.1296,
-        "pe": 45.0643,
-        "pcf": 13.6844,
-        "ps": 6.0558,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 66.8418,
+        "pcf": 56.1348,
+        "ps": 24.1956,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-04",
         "price": 306.8956,
-        "pe": 43.3367,
-        "pcf": 13.1598,
-        "ps": 5.8236,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 64.2794,
+        "pcf": 53.9828,
+        "ps": 23.268,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-05",
         "price": 309.3464,
-        "pe": 43.6828,
-        "pcf": 13.2649,
-        "ps": 5.8701,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 64.7927,
+        "pcf": 54.4139,
+        "ps": 23.4539,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-06",
         "price": 331.6724,
-        "pe": 46.8354,
-        "pcf": 14.2222,
-        "ps": 6.2938,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 69.4689,
+        "pcf": 58.3411,
+        "ps": 25.1466,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-09",
         "price": 342.6511,
-        "pe": 48.3857,
-        "pcf": 14.693,
-        "ps": 6.5021,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 71.7684,
+        "pcf": 60.2722,
+        "ps": 25.9789,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-10",
         "price": 339.1642,
-        "pe": 47.8933,
-        "pcf": 14.5435,
-        "ps": 6.436,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 71.0381,
+        "pcf": 59.6589,
+        "ps": 25.7146,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-11",
         "price": 341.4755,
-        "pe": 48.2197,
-        "pcf": 14.6426,
-        "ps": 6.4798,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 71.5222,
+        "pcf": 60.0654,
+        "ps": 25.8898,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-12",
         "price": 329.9289,
-        "pe": 46.5892,
-        "pcf": 14.1475,
-        "ps": 6.2607,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 69.1037,
+        "pcf": 58.0344,
+        "ps": 25.0144,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-13",
         "price": 323.9514,
-        "pe": 45.7451,
-        "pcf": 13.8911,
-        "ps": 6.1473,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 67.8518,
+        "pcf": 56.983,
+        "ps": 24.5612,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-17",
         "price": 331.2938,
-        "pe": 46.782,
-        "pcf": 14.206,
-        "ps": 6.2866,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 69.3896,
+        "pcf": 58.2745,
+        "ps": 25.1179,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-18",
         "price": 332.2602,
-        "pe": 46.9184,
-        "pcf": 14.2474,
-        "ps": 6.305,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 69.592,
+        "pcf": 58.4445,
+        "ps": 25.1911,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-19",
         "price": 332.7384,
-        "pe": 46.986,
-        "pcf": 14.2679,
-        "ps": 6.314,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 69.6922,
+        "pcf": 58.5286,
+        "ps": 25.2274,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-20",
         "price": 331.4034,
-        "pe": 46.7974,
-        "pcf": 14.2107,
-        "ps": 6.2887,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 69.4126,
+        "pcf": 58.2938,
+        "ps": 25.1262,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-23",
         "price": 329.1021,
-        "pe": 46.4725,
-        "pcf": 14.112,
-        "ps": 6.245,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 68.9306,
+        "pcf": 57.889,
+        "ps": 24.9517,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-24",
         "price": 324.2702,
-        "pe": 45.7902,
-        "pcf": 13.9048,
-        "ps": 6.1533,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 67.9185,
+        "pcf": 57.039,
+        "ps": 24.5853,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-25",
         "price": 331.0647,
-        "pe": 46.7496,
-        "pcf": 14.1962,
-        "ps": 6.2823,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 69.3416,
+        "pcf": 58.2342,
+        "ps": 25.1005,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-26",
         "price": 320.4944,
-        "pe": 45.257,
-        "pcf": 13.7429,
-        "ps": 6.0817,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 67.1277,
+        "pcf": 56.3749,
+        "ps": 24.2991,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-02-27",
         "price": 318.3525,
-        "pe": 44.9545,
-        "pcf": 13.6511,
-        "ps": 6.041,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 66.6791,
+        "pcf": 55.9981,
+        "ps": 24.1367,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-03-02",
         "price": 317.6252,
-        "pe": 44.8518,
-        "pcf": 13.6199,
-        "ps": 6.0272,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 66.5267,
+        "pcf": 55.8702,
+        "ps": 24.0815,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-03-03",
         "price": 312.6639,
-        "pe": 44.1512,
-        "pcf": 13.4071,
-        "ps": 5.9331,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 65.4876,
+        "pcf": 54.9975,
+        "ps": 23.7054,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-03-04",
         "price": 316.3401,
-        "pe": 44.6704,
-        "pcf": 13.5648,
-        "ps": 6.0029,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 66.2576,
+        "pcf": 55.6441,
+        "ps": 23.9841,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-03-05",
         "price": 331.523,
-        "pe": 46.8143,
-        "pcf": 14.2158,
-        "ps": 6.291,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 69.4376,
+        "pcf": 58.3148,
+        "ps": 25.1352,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-03-06",
         "price": 329.2415,
-        "pe": 46.4922,
-        "pcf": 14.118,
-        "ps": 6.2477,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 68.9598,
+        "pcf": 57.9135,
+        "ps": 24.9623,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-03-09",
         "price": 344.4543,
-        "pe": 48.6404,
-        "pcf": 14.7703,
-        "ps": 6.5364,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 72.1461,
+        "pcf": 60.5894,
+        "ps": 26.1156,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-03-10",
         "price": 341.2962,
-        "pe": 48.1944,
-        "pcf": 14.6349,
-        "ps": 6.4764,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 71.4846,
+        "pcf": 60.0339,
+        "ps": 25.8762,
+        "ttmPeriodEnd": "2025-11-02",
+        "ttmAvailableFrom": "2025-12-18"
       },
       {
         "date": "2026-03-11",
         "price": 340.29,
-        "pe": 48.0523,
-        "pcf": 14.5918,
-        "ps": 6.4573,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 66.1823,
+        "pcf": 55.6766,
+        "ps": 24.2041,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-03-12",
         "price": 334.711,
-        "pe": 47.2645,
-        "pcf": 14.3525,
-        "ps": 6.3515,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 65.0972,
+        "pcf": 54.7638,
+        "ps": 23.8073,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-03-13",
         "price": 320.9527,
-        "pe": 45.3217,
-        "pcf": 13.7626,
-        "ps": 6.0904,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 62.4214,
+        "pcf": 52.5127,
+        "ps": 22.8287,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-03-16",
         "price": 323.7024,
-        "pe": 45.71,
-        "pcf": 13.8805,
-        "ps": 6.1426,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 62.9562,
+        "pcf": 52.9626,
+        "ps": 23.0242,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-03-17",
         "price": 320.1059,
-        "pe": 45.2021,
-        "pcf": 13.7263,
-        "ps": 6.0743,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 62.2567,
+        "pcf": 52.3742,
+        "ps": 22.7684,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-03-18",
         "price": 314.7461,
-        "pe": 44.4453,
-        "pcf": 13.4964,
-        "ps": 5.9726,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 61.2143,
+        "pcf": 51.4972,
+        "ps": 22.3872,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-03-19",
         "price": 318.6414,
-        "pe": 44.9953,
-        "pcf": 13.6635,
-        "ps": 6.0465,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 61.9719,
+        "pcf": 52.1345,
+        "ps": 22.6643,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-03-20",
         "price": 309.3464,
-        "pe": 43.6828,
-        "pcf": 13.2649,
-        "ps": 5.8701,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 60.1641,
+        "pcf": 50.6137,
+        "ps": 22.0031,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-03-23",
         "price": 321.9754,
-        "pe": 45.4661,
-        "pcf": 13.8064,
-        "ps": 6.1098,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 62.6203,
+        "pcf": 52.68,
+        "ps": 22.9014,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-03-24",
         "price": 317.7624,
-        "pe": 44.8712,
-        "pcf": 13.6258,
-        "ps": 6.0299,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 61.8009,
+        "pcf": 51.9907,
+        "ps": 22.6017,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-03-25",
         "price": 318.2815,
-        "pe": 44.9445,
-        "pcf": 13.648,
-        "ps": 6.0397,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 61.9019,
+        "pcf": 52.0757,
+        "ps": 22.6387,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-03-26",
         "price": 308.9071,
-        "pe": 43.6207,
-        "pcf": 13.246,
-        "ps": 5.8618,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 60.0787,
+        "pcf": 50.5419,
+        "ps": 21.9719,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-03-27",
         "price": 300.1816,
-        "pe": 42.3886,
-        "pcf": 12.8719,
-        "ps": 5.6962,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 58.3817,
+        "pcf": 49.1142,
+        "ps": 21.3513,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-03-30",
         "price": 292.9236,
-        "pe": 41.3637,
-        "pcf": 12.5607,
-        "ps": 5.5585,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 56.9701,
+        "pcf": 47.9267,
+        "ps": 20.835,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-03-31",
         "price": 308.997,
-        "pe": 43.6334,
-        "pcf": 13.2499,
-        "ps": 5.8635,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 60.0962,
+        "pcf": 50.5566,
+        "ps": 21.9783,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-01",
         "price": 312.9704,
-        "pe": 44.1945,
-        "pcf": 13.4203,
-        "ps": 5.9389,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 60.8689,
+        "pcf": 51.2067,
+        "ps": 22.2609,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-02",
         "price": 314.0286,
-        "pe": 44.3439,
-        "pcf": 13.4657,
-        "ps": 5.959,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 61.0747,
+        "pcf": 51.3798,
+        "ps": 22.3362,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-06",
         "price": 313.9088,
-        "pe": 44.327,
-        "pcf": 13.4605,
-        "ps": 5.9567,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 61.0514,
+        "pcf": 51.3602,
+        "ps": 22.3276,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-07",
         "price": 333.4164,
-        "pe": 47.0817,
-        "pcf": 14.297,
-        "ps": 6.3269,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 64.8454,
+        "pcf": 54.552,
+        "ps": 23.7152,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-08",
         "price": 350.0488,
-        "pe": 49.4304,
-        "pcf": 15.0102,
-        "ps": 6.6425,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 68.0802,
+        "pcf": 57.2733,
+        "ps": 24.8982,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-09",
         "price": 354.3217,
-        "pe": 50.0337,
-        "pcf": 15.1934,
-        "ps": 6.7236,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 68.9113,
+        "pcf": 57.9724,
+        "ps": 25.2021,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-10",
         "price": 370.9341,
-        "pe": 52.3796,
-        "pcf": 15.9058,
-        "ps": 7.0388,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 72.1422,
+        "pcf": 60.6904,
+        "ps": 26.3837,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-13",
         "price": 379.1205,
-        "pe": 53.5356,
-        "pcf": 16.2568,
-        "ps": 7.1942,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 73.7343,
+        "pcf": 62.0298,
+        "ps": 26.966,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-14",
         "price": 380.1488,
-        "pe": 53.6808,
-        "pcf": 16.3009,
-        "ps": 7.2137,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 73.9343,
+        "pcf": 62.1981,
+        "ps": 27.0392,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-15",
         "price": 396.0624,
-        "pe": 55.9279,
-        "pcf": 16.9833,
-        "ps": 7.5157,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 77.0293,
+        "pcf": 64.8018,
+        "ps": 28.1711,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-16",
         "price": 397.8095,
-        "pe": 56.1746,
-        "pcf": 17.0582,
-        "ps": 7.5488,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 77.3691,
+        "pcf": 65.0876,
+        "ps": 28.2953,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-17",
         "price": 405.8661,
-        "pe": 57.3123,
-        "pcf": 17.4037,
-        "ps": 7.7017,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 78.936,
+        "pcf": 66.4058,
+        "ps": 28.8684,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-20",
         "price": 398.9676,
-        "pe": 56.3382,
-        "pcf": 17.1079,
-        "ps": 7.5708,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 77.5943,
+        "pcf": 65.2771,
+        "ps": 28.3777,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-21",
         "price": 401.5034,
-        "pe": 56.6963,
-        "pcf": 17.2166,
-        "ps": 7.6189,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 78.0875,
+        "pcf": 65.692,
+        "ps": 28.5581,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-22",
         "price": 421.9494,
-        "pe": 59.5834,
-        "pcf": 18.0933,
-        "ps": 8.0069,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 82.064,
+        "pcf": 69.0373,
+        "ps": 30.0123,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-23",
         "price": 419.2439,
-        "pe": 59.2014,
-        "pcf": 17.9773,
-        "ps": 7.9556,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 81.5378,
+        "pcf": 68.5946,
+        "ps": 29.8199,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-24",
         "price": 422.0592,
-        "pe": 59.5989,
-        "pcf": 18.098,
-        "ps": 8.009,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 82.0854,
+        "pcf": 69.0552,
+        "ps": 30.0202,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-27",
         "price": 417.5068,
-        "pe": 58.9561,
-        "pcf": 17.9028,
-        "ps": 7.9226,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 81.2,
+        "pcf": 68.3104,
+        "ps": 29.6963,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-28",
         "price": 399.1672,
-        "pe": 56.3664,
-        "pcf": 17.1164,
-        "ps": 7.5746,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 77.6332,
+        "pcf": 65.3098,
+        "ps": 28.3919,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-29",
         "price": 404.7779,
-        "pe": 57.1586,
-        "pcf": 17.357,
-        "ps": 7.6811,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 78.7244,
+        "pcf": 66.2278,
+        "ps": 28.791,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-04-30",
         "price": 416.7381,
-        "pe": 58.8475,
-        "pcf": 17.8699,
-        "ps": 7.908,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 81.0505,
+        "pcf": 68.1846,
+        "ps": 29.6417,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-01",
         "price": 420.5817,
-        "pe": 59.3903,
-        "pcf": 18.0347,
-        "ps": 7.9809,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 81.798,
+        "pcf": 68.8135,
+        "ps": 29.9151,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-04",
         "price": 415.8096,
-        "pe": 58.7164,
-        "pcf": 17.8301,
-        "ps": 7.8904,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 80.8699,
+        "pcf": 68.0327,
+        "ps": 29.5756,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-05",
         "price": 426.6516,
-        "pe": 60.2474,
-        "pcf": 18.295,
-        "ps": 8.0961,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 82.9785,
+        "pcf": 69.8066,
+        "ps": 30.3468,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-06",
         "price": 424.7348,
-        "pe": 59.9768,
-        "pcf": 18.2128,
-        "ps": 8.0598,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 82.6057,
+        "pcf": 69.493,
+        "ps": 30.2105,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-07",
         "price": 411.8761,
-        "pe": 58.161,
-        "pcf": 17.6614,
-        "ps": 7.8157,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 80.1049,
+        "pcf": 67.3891,
+        "ps": 29.2959,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-08",
         "price": 429.2872,
-        "pe": 60.6196,
-        "pcf": 18.408,
-        "ps": 8.1461,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 83.4911,
+        "pcf": 70.2379,
+        "ps": 30.5343,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-11",
         "price": 427.7198,
-        "pe": 60.3983,
-        "pcf": 18.3408,
-        "ps": 8.1164,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 83.1863,
+        "pcf": 69.9814,
+        "ps": 30.4228,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-12",
         "price": 418.605,
-        "pe": 59.1112,
-        "pcf": 17.9499,
-        "ps": 7.9434,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 81.4136,
+        "pcf": 68.4901,
+        "ps": 29.7745,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-13",
         "price": 416.0991,
-        "pe": 58.7573,
-        "pcf": 17.8425,
-        "ps": 7.8959,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 80.9262,
+        "pcf": 68.0801,
+        "ps": 29.5962,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-14",
         "price": 439.061,
-        "pe": 61.9998,
-        "pcf": 18.8271,
-        "ps": 8.3316,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 85.392,
+        "pcf": 71.837,
+        "ps": 31.2295,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-15",
         "price": 424.4852,
-        "pe": 59.9415,
-        "pcf": 18.2021,
-        "ps": 8.055,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 82.5572,
+        "pcf": 69.4522,
+        "ps": 30.1927,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-18",
         "price": 420.0126,
-        "pe": 59.3099,
-        "pcf": 18.0103,
-        "ps": 7.9701,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 81.6873,
+        "pcf": 68.7204,
+        "ps": 29.8746,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-19",
         "price": 410.3886,
-        "pe": 57.9509,
-        "pcf": 17.5976,
-        "ps": 7.7875,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 79.8156,
+        "pcf": 67.1458,
+        "ps": 29.19,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-20",
         "price": 417.0675,
-        "pe": 58.8941,
-        "pcf": 17.884,
-        "ps": 7.9143,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 81.1146,
+        "pcf": 68.2385,
+        "ps": 29.6651,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-21",
         "price": 413.8828,
-        "pe": 58.4443,
-        "pcf": 17.7474,
-        "ps": 7.8538,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 80.4952,
+        "pcf": 67.7175,
+        "ps": 29.4386,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-22",
         "price": 413.4535,
-        "pe": 58.3837,
-        "pcf": 17.729,
-        "ps": 7.8457,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 80.4117,
+        "pcf": 67.6472,
+        "ps": 29.408,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-26",
         "price": 421.3105,
-        "pe": 59.4932,
-        "pcf": 18.0659,
-        "ps": 7.9948,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 81.9398,
+        "pcf": 68.9328,
+        "ps": 29.9669,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-27",
         "price": 421.1607,
-        "pe": 59.4721,
-        "pcf": 18.0595,
-        "ps": 7.9919,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 81.9106,
+        "pcf": 68.9082,
+        "ps": 29.9562,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-28",
         "price": 425.8729,
-        "pe": 60.1375,
-        "pcf": 18.2616,
-        "ps": 8.0814,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 82.8271,
+        "pcf": 69.6792,
+        "ps": 30.2914,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-05-29",
         "price": 446.0294,
-        "pe": 62.9838,
-        "pcf": 19.1259,
-        "ps": 8.4638,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 86.7473,
+        "pcf": 72.9771,
+        "ps": 31.7251,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-06-01",
         "price": 459.2075,
-        "pe": 64.8446,
-        "pcf": 19.691,
-        "ps": 8.7139,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 89.3103,
+        "pcf": 75.1333,
+        "ps": 32.6624,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-06-02",
         "price": 480.7717,
-        "pe": 67.8897,
-        "pcf": 20.6157,
-        "ps": 9.1231,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 93.5042,
+        "pcf": 78.6615,
+        "ps": 34.1962,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-06-03",
         "price": 478.4356,
-        "pe": 67.5598,
-        "pcf": 20.5155,
-        "ps": 9.0788,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 93.0499,
+        "pcf": 78.2793,
+        "ps": 34.0301,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-06-04",
         "price": 418.2156,
-        "pe": 59.0562,
-        "pcf": 17.9332,
-        "ps": 7.936,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 81.3378,
+        "pcf": 68.4264,
+        "ps": 29.7468,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-06-05",
         "price": 385.0906,
-        "pe": 54.3786,
-        "pcf": 16.5128,
-        "ps": 7.3075,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 74.8954,
+        "pcf": 63.0066,
+        "ps": 27.3907,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-06-08",
         "price": 395.9426,
-        "pe": 55.911,
-        "pcf": 16.9782,
-        "ps": 7.5134,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 77.006,
+        "pcf": 64.7822,
+        "ps": 28.1625,
+        "ttmPeriodEnd": "2026-02-01",
+        "ttmAvailableFrom": "2026-03-11"
       },
       {
         "date": "2026-06-09",
         "price": 391.51,
-        "pe": 55.2851,
-        "pcf": 16.7881,
-        "ps": 7.4293,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 65.0258,
+        "pcf": 56.6998,
+        "ps": 25.2615,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-06-10",
         "price": 371.4832,
-        "pe": 52.4571,
-        "pcf": 15.9293,
-        "ps": 7.0493,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 61.6995,
+        "pcf": 53.7994,
+        "ps": 23.9693,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-06-11",
         "price": 384.9309,
-        "pe": 54.3561,
-        "pcf": 16.506,
-        "ps": 7.3044,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 63.933,
+        "pcf": 55.747,
+        "ps": 24.837,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-06-12",
         "price": 381.4367,
-        "pe": 53.8626,
-        "pcf": 16.3561,
-        "ps": 7.2381,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 63.3527,
+        "pcf": 55.2409,
+        "ps": 24.6116,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-06-15",
         "price": 393.287,
-        "pe": 55.536,
-        "pcf": 16.8643,
-        "ps": 7.463,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 65.3209,
+        "pcf": 56.9571,
+        "ps": 25.3762,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-06-16",
         "price": 376.0856,
-        "pe": 53.107,
-        "pcf": 16.1267,
-        "ps": 7.1366,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 62.4639,
+        "pcf": 54.466,
+        "ps": 24.2663,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-06-17",
         "price": 392.2487,
-        "pe": 55.3894,
-        "pcf": 16.8198,
-        "ps": 7.4433,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 65.1484,
+        "pcf": 56.8068,
+        "ps": 25.3092,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-06-18",
         "price": 410.6681,
-        "pe": 57.9904,
-        "pcf": 17.6096,
-        "ps": 7.7928,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 68.2077,
+        "pcf": 59.4743,
+        "ps": 26.4977,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-06-22",
         "price": 392.13,
-        "pe": 55.3726,
-        "pcf": 16.8147,
-        "ps": 7.441,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 65.1287,
+        "pcf": 56.7896,
+        "ps": 25.3015,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-06-23",
         "price": 380.15,
-        "pe": 53.6809,
-        "pcf": 16.301,
-        "ps": 7.2137,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 63.139,
+        "pcf": 55.0546,
+        "ps": 24.5285,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-06-24",
         "price": 382.07,
-        "pe": 53.9521,
-        "pcf": 16.3833,
-        "ps": 7.2501,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 63.4579,
+        "pcf": 55.3326,
+        "ps": 24.6524,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-06-25",
         "price": 378.91,
-        "pe": 53.5058,
-        "pcf": 16.2478,
-        "ps": 7.1902,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 62.933,
+        "pcf": 54.875,
+        "ps": 24.4485,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-06-26",
         "price": 365.02,
-        "pe": 51.5444,
-        "pcf": 15.6522,
-        "ps": 6.9266,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 60.626,
+        "pcf": 52.8634,
+        "ps": 23.5523,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-06-29",
         "price": 372.45,
-        "pe": 52.5936,
-        "pcf": 15.9708,
-        "ps": 7.0676,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 61.8601,
+        "pcf": 53.9394,
+        "ps": 24.0317,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-06-30",
         "price": 377.75,
-        "pe": 53.342,
-        "pcf": 16.198,
-        "ps": 7.1682,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 62.7404,
+        "pcf": 54.707,
+        "ps": 24.3737,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-01",
         "price": 369.34,
-        "pe": 52.1545,
-        "pcf": 15.8374,
-        "ps": 7.0086,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 61.3435,
+        "pcf": 53.489,
+        "ps": 23.831,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-02",
         "price": 360.45,
-        "pe": 50.8991,
-        "pcf": 15.4562,
-        "ps": 6.8399,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 59.867,
+        "pcf": 52.2016,
+        "ps": 23.2574,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-06",
         "price": 373.9,
-        "pe": 52.7984,
-        "pcf": 16.033,
-        "ps": 7.0951,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 62.1009,
+        "pcf": 54.1494,
+        "ps": 24.1253,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-07",
         "price": 370.78,
-        "pe": 52.3578,
-        "pcf": 15.8992,
-        "ps": 7.0359,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 61.5827,
+        "pcf": 53.6976,
+        "ps": 23.9239,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-08",
         "price": 388.69,
-        "pe": 54.8869,
-        "pcf": 16.6672,
-        "ps": 7.3758,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 64.5574,
+        "pcf": 56.2914,
+        "ps": 25.0796,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-09",
         "price": 401.11,
-        "pe": 56.6407,
-        "pcf": 17.1997,
-        "ps": 7.6115,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 66.6202,
+        "pcf": 58.0901,
+        "ps": 25.8809,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-10",
         "price": 399.97,
-        "pe": 56.4797,
-        "pcf": 17.1508,
-        "ps": 7.5898,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 66.4309,
+        "pcf": 57.925,
+        "ps": 25.8074,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-13",
         "price": 384.05,
-        "pe": 54.2317,
-        "pcf": 16.4682,
-        "ps": 7.2877,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 63.7867,
+        "pcf": 55.6194,
+        "ps": 24.7802,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-14",
         "price": 389.11,
-        "pe": 54.9462,
-        "pcf": 16.6852,
-        "ps": 7.3837,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 64.6271,
+        "pcf": 56.3522,
+        "ps": 25.1067,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-15",
         "price": 394.28,
-        "pe": 55.6762,
-        "pcf": 16.9069,
-        "ps": 7.4818,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 65.4858,
+        "pcf": 57.1009,
+        "ps": 25.4402,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-16",
         "price": 374.45,
-        "pe": 52.876,
-        "pcf": 16.0565,
-        "ps": 7.1056,
-        "ttmPeriodEnd": "2019-08-04",
-        "ttmAvailableFrom": "2019-12-20"
+        "pe": 62.1923,
+        "pcf": 54.2291,
+        "ps": 24.1607,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
+      },
+      {
+        "date": "2026-07-17",
+        "price": 370.83,
+        "pe": 61.591,
+        "pcf": 53.7048,
+        "ps": 23.9272,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-19",
@@ -100882,25 +100860,49 @@
         "ps": 23.4
       },
       {
+        "date": "2026-07-20",
+        "price": 378.16,
+        "pe": 62.8085,
+        "pcf": 54.7664,
+        "ps": 24.4001,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
+      },
+      {
         "date": "2026-07-21",
         "price": 386.5,
-        "pe": 62.9,
-        "pcf": 53.5,
-        "ps": 23.8
+        "pe": 64.1936,
+        "pcf": 55.9742,
+        "ps": 24.9383,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-22",
         "price": 396.81,
-        "pe": 64.3,
-        "pcf": 54.7,
-        "ps": 24.4
+        "pe": 65.906,
+        "pcf": 57.4673,
+        "ps": 25.6035,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-23",
         "price": 392.47,
-        "pe": 66.2,
-        "pcf": 56.1,
-        "ps": 25.0
+        "pe": 65.1852,
+        "pcf": 56.8388,
+        "ps": 25.3235,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
+      },
+      {
+        "date": "2026-07-24",
+        "price": 381.92,
+        "pe": 63.433,
+        "pcf": 55.3109,
+        "ps": 24.6427,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-26",
@@ -100912,43 +100914,53 @@
       {
         "date": "2026-07-27",
         "price": 383.22,
-        "pe": 63.6,
-        "pcf": 54.0,
-        "ps": 24.1
+        "pe": 63.6489,
+        "pcf": 55.4992,
+        "ps": 24.7266,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-28",
         "price": 380.91,
-        "pe": 63.9,
-        "pcf": 54.2,
-        "ps": 24.2
+        "pe": 63.2652,
+        "pcf": 55.1647,
+        "ps": 24.5776,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-29",
         "price": 370.32,
-        "pe": 63.3,
-        "pcf": 53.9,
-        "ps": 24.0
+        "pe": 61.5063,
+        "pcf": 53.631,
+        "ps": 23.8943,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-30",
         "price": 387.84,
-        "pe": 61.5,
-        "pcf": 52.4,
-        "ps": 23.4
+        "pe": 64.4162,
+        "pcf": 56.1683,
+        "ps": 25.0247,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-07-31",
         "price": 389.28,
-        "pe": 64.6,
-        "pcf": 54.9,
-        "ps": 24.4
+        "pe": 64.6554,
+        "pcf": 56.3768,
+        "ps": 25.1176,
+        "ttmPeriodEnd": "2026-05-03",
+        "ttmAvailableFrom": "2026-06-09"
       },
       {
         "date": "2026-08-02",
         "price": 389.28,
         "pe": 64.8,
-        "pcf": 94.4,
+        "pcf": 55.1,
         "ps": 24.5
       }
     ],
@@ -137203,31 +137215,19 @@
         "date": "2026-08-02",
         "price": 476.15,
         "pe": 156.3,
-        "pcf": 62.8,
+        "pcf": 79.8,
         "ps": 20.7
       }
     ]
   },
-  "updatedAt": "2026-08-02T04:11:40Z",
+  "updatedAt": "2026-08-02T04:46:11Z",
   "backfillUpdatedAt": "2026-08-02",
-  "backfillErrors": {
-    "TSM": "no comparable quarterly SEC financial facts",
-    "AVGO": "latest comparable TTM period is stale (2019-08-04); history was not overwritten",
-    "SKHY": "no SEC CIK configured for this US ticker"
-  },
+  "backfillErrors": {},
   "methodology": "For each trading date: EOD close divided by the latest already-filed rolling-four-quarter EPS, operating cash flow per share, and revenue per share. Per-share denominators use the average diluted weighted shares of the same four quarters.",
   "priceSources": {
-    "NVDA": "EODHD adjusted EOD",
-    "AAPL": "EODHD adjusted EOD",
-    "MSFT": "EODHD adjusted EOD",
-    "GOOGL": "EODHD adjusted EOD",
-    "AMZN": "EODHD adjusted EOD",
-    "META": "EODHD adjusted EOD",
-    "TSLA": "EODHD adjusted EOD",
-    "MU": "EODHD adjusted EOD",
-    "AMD": "EODHD adjusted EOD"
+    "AVGO": "EODHD adjusted EOD"
   },
-  "selectedHistoryUpdatedAt": "2026-07-26T18:34:03.679282Z",
+  "selectedHistoryUpdatedAt": "2026-08-02T04:47:32.456062Z",
   "selectedHistoryErrors": {},
   "selectedHistoryMethod": "AMD and TSM use five available years. SKHY uses only actual US ADR dates from 2026-07-10 onward; no synthetic pre-listing price or valuation is generated."
 }

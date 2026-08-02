@@ -40,8 +40,15 @@ COMPANIES = {
 }
 TARGET_TICKERS = {ticker.strip().upper() for ticker in os.environ.get("HISTORY_TICKERS", "").split(",") if ticker.strip()}
 
-REVENUE_TAGS = ("RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet", "Revenues")
-NET_INCOME_TAGS = ("NetIncomeLoss",)
+REVENUE_TAGS = (
+    "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "RevenueFromContractWithCustomerIncludingAssessedTax",
+    "SalesRevenueNet",
+    "Revenues",
+)
+# Broadcom changed its current filing tag from NetIncomeLoss to ProfitLoss.
+# Keep both because Company Facts can contain years of either taxonomy.
+NET_INCOME_TAGS = ("NetIncomeLoss", "ProfitLoss")
 CFO_TAGS = ("NetCashProvidedByUsedInOperatingActivities", "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations")
 SHARES_TAGS = ("WeightedAverageNumberOfDilutedSharesOutstanding", "WeightedAverageNumberOfSharesOutstandingDiluted")
 
@@ -234,7 +241,59 @@ def quarterly_shares(facts):
     entries = fact_entries(facts, SHARES_TAGS, "shares")
     values = select_by_end(entries, 60, 120)
     values.update({end: row for end, row in select_by_end(entries, 300, 400).items() if end not in values})
+    # Broadcom's more recent filings do not consistently expose the diluted
+    # weighted-average share tag in Company Facts.  The SEC DEI cover-page
+    # outstanding-share fact is still reported with every 10-Q/10-K.  Use it
+    # only as a fallback so a missing EPS-denominator tag cannot freeze the
+    # full P/E, P/CF and P/S history at an obsolete fiscal period.
+    dei_entries = (
+        facts.get("facts", {})
+        .get("dei", {})
+        .get("EntityCommonStockSharesOutstanding", {})
+        .get("units", {})
+        .get("shares", [])
+    )
+    for entry in dei_entries:
+        if entry.get("form") not in {"10-Q", "10-K", "20-F", "40-F"}:
+            continue
+        end, filed, value = parsed_date(entry.get("end")), parsed_date(entry.get("filed")), number(entry.get("val"))
+        if not end or not filed or not value or value <= 0:
+            continue
+        # Prefer an actual weighted-average share fact whenever available.
+        # Cover-page outstanding shares are a fallback only.
+        if end not in values:
+            values[end] = {"value": value, "filed": filed, "source": "dei-outstanding"}
     return values
+
+
+def shares_for_period(shares, period_end):
+    """Return the diluted-share fact reported for a fiscal quarter.
+
+    Some issuers (notably Broadcom after fiscal-calendar changes) tag the
+    weighted-average share fact one or a few calendar days away from the flow
+    statement's period end.  Exact-date intersection then freezes a complete
+    TTM series at the last pre-change quarter.  Prefer an exact match, then a
+    very close date, and only finally the latest prior quarter within 120 days.
+    """
+    exact = shares.get(period_end)
+    if exact:
+        return exact
+    nearby = [
+        (abs((end - period_end).days), end, row)
+        for end, row in shares.items()
+        if abs((end - period_end).days) <= 7
+    ]
+    if nearby:
+        return min(nearby, key=lambda item: item[0])[2]
+    cover_page = [
+        (abs((end - period_end).days), end, row)
+        for end, row in shares.items()
+        if row.get("source") == "dei-outstanding" and abs((end - period_end).days) <= 120
+    ]
+    if cover_page:
+        return min(cover_page, key=lambda item: item[0])[2]
+    prior = [(end, row) for end, row in shares.items() if 0 < (period_end - end).days <= 120]
+    return max(prior, key=lambda item: item[0])[1] if prior else None
 
 
 def quarterly_ttm_periods(company_facts):
@@ -253,7 +312,7 @@ def quarterly_ttm_periods(company_facts):
         # four corresponding quarterly weighted-average diluted share counts,
         # not just the latest quarter's share count.  The latter can materially
         # distort P/E after repurchases, issuances, or stock splits.
-        share_rows = [shares.get(d) for d in recent]
+        share_rows = [shares_for_period(shares, d) for d in recent]
         if any(row is None or row["value"] <= 0 for row in share_rows):
             continue
         average_shares = sum(row["value"] for row in share_rows) / 4
@@ -277,10 +336,25 @@ def quarterly_ttm_periods(company_facts):
     return periods
 
 
+def ttm_series_diagnostic(company_facts):
+    """Compact field-level dates for a safe, actionable skip message."""
+    series = {
+        "revenue": quarterly_flow(company_facts, REVENUE_TAGS),
+        "netIncome": quarterly_flow(company_facts, NET_INCOME_TAGS),
+        "operatingCashflow": quarterly_flow(company_facts, CFO_TAGS),
+        "shares": quarterly_shares(company_facts),
+    }
+    return ", ".join(
+        f"{name}={max(values).isoformat() if values else 'none'}"
+        for name, values in series.items()
+    )
+
+
 def history_for_ticker(ticker, config, start, end):
     if not config["cik"]:
         raise RuntimeError("no SEC CIK configured for this US ticker")
-    periods = quarterly_ttm_periods(fetch_sec(config["cik"]))
+    company_facts = fetch_sec(config["cik"])
+    periods = quarterly_ttm_periods(company_facts)
     if not periods:
         raise RuntimeError("no comparable quarterly SEC financial facts")
     periods.sort(key=lambda item: item["available"])
@@ -288,7 +362,7 @@ def history_for_ticker(ticker, config, start, end):
     if (end - newest_period["periodEnd"]).days > 550:
         raise RuntimeError(
             f"latest comparable TTM period is stale ({newest_period['periodEnd']}); "
-            "history was not overwritten"
+            f"history was not overwritten; field ends: {ttm_series_diagnostic(company_facts)}"
         )
     prices, price_source = fetch_prices(ticker, config["stooq"], start, end)
     active, rows = None, []

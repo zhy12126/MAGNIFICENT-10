@@ -392,7 +392,12 @@ renderMobileStocks();
 // Keep the MAG7 concentration badge synchronized whenever the daily snapshot
 // replaces the in-memory stock list.
 const baseRenderStocks=renderStocks;
-renderStocks=()=>{baseRenderStocks();renderMag7Share()};
+renderStocks=()=>{
+  // Old snapshots stored Finviz P/C (cash on balance sheet) under `pcf`.
+  // Hide those legacy values until a refresh writes a true P/CF TTM value.
+  stocks=stocks.map(stock=>stock.cashMultipleKind==='pcf-ttm'||!stock.dataSource?stock:{...stock,pcf:'—'});
+  baseRenderStocks();renderMag7Share();
+};
 renderMag7Share();
 
 const drawPriceChart=stock=>{
@@ -491,7 +496,34 @@ document.querySelector('#stats').addEventListener('click',event=>{
   if(chartMode==='valuation')drawChart(stocks[activeIndex]);
 });
 rankingDirection.pcf=1;
-metricHelp.pcf=['市现率（P/CF）','市现率 = 市值 ÷ 过去 12 个月经营现金流。它衡量市场为公司实际经营产生的现金支付了多少倍价格；经营现金流为负或缺失时显示“—”。'];
+metricHelp.price=['最新股价','来自 Finviz 的最近可用价格与日变动；日更脚本通常在收盘后保存快照。若 Finviz 暂不可用，页面保留最近一次有效快照；SKHY 可回退 Yahoo Finance。'];
+metricHelp.pcf=['市现率（P/CF，TTM）','市现率 = 当日市值 ÷ 最近已披露的过去 12 个月经营现金流。市值每天随价格变化，经营现金流在新财报披露后更新；若经营现金流为负或尚无可用财报，显示“—”。这不是 Finviz 的 P/C（股价 ÷ 每股现金余额）。'];
+
+// Restore the unambiguous P/CF TTM label in both desktop and mobile layouts.
+const relabelHomepagePcf=()=>{
+  const psHeader=document.querySelector('.table-head [data-sort="ps"]');
+  if(psHeader)psHeader.textContent='市销率（TTM）';
+  const psHeaderHelp=psHeader?.parentElement?.querySelector('.help[data-metric="ps"]');
+  if(psHeaderHelp)psHeaderHelp.setAttribute('aria-label','市销率（TTM）说明');
+  const header=document.querySelector('.table-head [data-sort="pcf"]');
+  if(header)header.textContent='市现率（TTM）';
+  const headerHelp=header?.parentElement?.querySelector('.help[data-metric="pcf"]');
+  if(headerHelp){headerHelp.setAttribute('aria-label','市现率（TTM）说明');headerHelp.dataset.metric='pcf'}
+  document.querySelectorAll('.mobile-more-grid small').forEach(label=>{
+    if(label.textContent.includes('市销率')){
+      const help=label.querySelector('.mobile-metric-help');
+      label.firstChild.textContent='市销率（TTM） ';
+      if(help)help.setAttribute('aria-label','市销率（TTM）说明');
+    }
+    if(label.textContent.includes('市现率')||label.textContent.includes('市自由现金流率')){
+      const help=label.querySelector('.mobile-metric-help');
+      label.firstChild.textContent='市现率（TTM） ';
+      if(help)help.setAttribute('aria-label','市现率（TTM）说明');
+    }
+  });
+};
+relabelHomepagePcf();
+new MutationObserver(relabelHomepagePcf).observe(document.querySelector('#mobile-stock-rows'),{childList:true});
 
 // Final mouse handler: makes the tooltip self-contained, consistently styled,
 // and independent of SVG/CSS inheritance quirks in local file previews.

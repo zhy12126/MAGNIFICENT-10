@@ -72,6 +72,10 @@ switch ($Mode) {
     Write-Host "开始本地财报刷新：更新公司级现金流模型输入。"
     Write-Host "预计使用 24 次 Alpha Vantage 请求；建议在不运行日更的周末执行。" -ForegroundColor Yellow
     & $runner @runnerArgs (Join-Path $PSScriptRoot 'fetch_fundamentals.py')
+    if ($LASTEXITCODE -eq 0) {
+      Write-Host "同步最新财报输入到网页快照..." -ForegroundColor Cyan
+      & $runner @runnerArgs (Join-Path $PSScriptRoot 'sync_fundamentals_to_stocks.py')
+    }
   }
   'spy' {
     Write-Host "开始仅刷新 SPY 权重与每份额篮子价值。" -ForegroundColor Cyan
