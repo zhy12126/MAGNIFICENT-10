@@ -169,15 +169,23 @@ Object.assign(metricHelp,{
 // SVG children (paths, grid lines and the invisible overlay) can differ between
 // browsers. Delegating from the document guarantees that any pointer movement
 // within the plot produces the same tooltip.
+const chartEventPoint=(svg,event)=>{
+  const matrix=svg.getScreenCTM();
+  if(matrix&&typeof DOMPoint==='function'){
+    try{const point=new DOMPoint(event.clientX,event.clientY).matrixTransform(matrix.inverse());if(Number.isFinite(point.x)&&Number.isFinite(point.y))return{x:point.x,y:point.y}}catch{}
+  }
+  const rect=svg.getBoundingClientRect();
+  return{x:(event.clientX-rect.left)*1040/rect.width,y:(event.clientY-rect.top)*400/rect.height};
+};
 document.addEventListener('pointermove',event=>{
   if(chartMode==='price')return;
   const svg=event.target instanceof Element?event.target.closest('#chart'):null;
   if(!svg||document.querySelector('#detail').classList.contains('hidden'))return;
   const points=filteredHistory(stocks[activeIndex].ticker);
   if(points.length<2)return;
-  const tooltip=document.querySelector('#chart-tooltip'),rect=svg.getBoundingClientRect();
-  const viewX=(event.clientX-rect.left)*1040/rect.width;
-  if(viewX<76||viewX>980||event.clientY<rect.top+62*rect.height/400||event.clientY>rect.top+314*rect.height/400)return;
+  const tooltip=document.querySelector('#chart-tooltip'),rect=svg.getBoundingClientRect(),position=chartEventPoint(svg,event);
+  const viewX=position.x;
+  if(viewX<76||viewX>980||position.y<62||position.y>314)return;
   const index=Math.max(0,Math.min(points.length-1,Math.round((viewX-76)/904*(points.length-1))));
   const point=points[index],x=76+904*index/Math.max(1,points.length-1);
   const guide=svg.querySelector('.hover-guide');
@@ -228,9 +236,9 @@ document.addEventListener('mousemove',event=>{
   const wrap=event.target instanceof Element?event.target.closest('.chart-wrap'):null;
   const detail=document.querySelector('#detail'),svg=wrap?.querySelector('#chart');
   if(!svg||detail.classList.contains('hidden'))return;
-  const points=filteredHistory(stocks[activeIndex].ticker),rect=svg.getBoundingClientRect();
-  const xInView=(event.clientX-rect.left)*1040/rect.width;
-  const yInView=(event.clientY-rect.top)*400/rect.height;
+  const points=filteredHistory(stocks[activeIndex].ticker),position=chartEventPoint(svg,event);
+  const xInView=position.x;
+  const yInView=position.y;
   if(points.length<2||xInView<76||xInView>980||yInView<62||yInView>314)return;
   const index=Math.max(0,Math.min(points.length-1,Math.round((xInView-76)/904*(points.length-1))));
   const point=points[index],guide=svg.querySelector('.hover-guide');
@@ -628,8 +636,8 @@ document.addEventListener('mousemove',event=>{
   const detail=document.querySelector('#detail'),svg=wrap?.querySelector('#chart');
   if(!svg||detail.classList.contains('hidden'))return;
   const isPrice=chartMode==='price';
-  const points=isPrice?filteredPriceHistory(stocks[activeIndex].ticker):filteredHistory(stocks[activeIndex].ticker),rect=svg.getBoundingClientRect();
-  const x=(event.clientX-rect.left)*1040/rect.width,y=(event.clientY-rect.top)*400/rect.height;
+  const points=isPrice?filteredPriceHistory(stocks[activeIndex].ticker):filteredHistory(stocks[activeIndex].ticker),position=chartEventPoint(svg,event);
+  const x=position.x,y=position.y;
   if(points.length<2||x<76||x>980||y<62||y>314)return;
   const index=Math.max(0,Math.min(points.length-1,Math.round((x-76)/904*(points.length-1))));
   const point=points[index],tooltip=document.querySelector('#chart-tooltip'),guide=svg.querySelector('.hover-guide-x');
