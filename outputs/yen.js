@@ -100,8 +100,16 @@ document.querySelectorAll('[data-chart-pair]').forEach(button=>button.addEventLi
 document.querySelectorAll('[data-chart-period]').forEach(button=>button.addEventListener('click',()=>{if(!dataReady)return;activeChartPeriod=button.dataset.chartPeriod;document.querySelectorAll('[data-chart-period]').forEach(item=>item.classList.toggle('active',item===button));drawFxChart(activePair);renderDrivers(activeChartPeriod);renderMarketContext(activeChartPeriod)}));
 let chartResizeTimer;window.addEventListener('resize',()=>{clearTimeout(chartResizeTimer);chartResizeTimer=setTimeout(()=>drawFxChart(activePair),100)});
 const trendCanvas=document.querySelector('#fx-trend-chart');
-trendCanvas.addEventListener('pointermove',event=>{if(!dataReady||event.pointerType==='touch')return;const rect=trendCanvas.getBoundingClientRect(),period=chartSeries[activePair].periods[activeChartPeriod],plotLeft=16,plotRight=62,plotWidth=Math.max(1,rect.width-plotLeft-plotRight),x=Math.min(plotWidth,Math.max(0,event.clientX-rect.left-plotLeft)),index=Math.round(x/plotWidth*(period.values.length-1));drawFxChart(activePair,index)});
-trendCanvas.addEventListener('pointerleave',()=>drawFxChart(activePair));trendCanvas.addEventListener('pointercancel',()=>drawFxChart(activePair));
+function updateChartPointer(event){
+  if(!dataReady)return;
+  const rect=trendCanvas.getBoundingClientRect(),period=chartSeries[activePair].periods[activeChartPeriod],plotLeft=16,plotRight=62,plotWidth=Math.max(1,rect.width-plotLeft-plotRight),x=Math.min(plotWidth,Math.max(0,event.clientX-rect.left-plotLeft)),index=Math.round(x/plotWidth*(period.values.length-1));
+  drawFxChart(activePair,index);
+}
+trendCanvas.addEventListener('pointerdown',event=>{if(event.pointerType==='touch')updateChartPointer(event)});
+trendCanvas.addEventListener('pointermove',updateChartPointer);
+trendCanvas.addEventListener('pointerleave',event=>{if(event.pointerType!=='touch')drawFxChart(activePair)});
+trendCanvas.addEventListener('pointercancel',()=>drawFxChart(activePair));
+document.addEventListener('pointerdown',event=>{if(event.pointerType==='touch'&&!trendCanvas.contains(event.target))drawFxChart(activePair)});
 
 function applyPayload(payload){
   if(!payload||payload.schemaVersion!==1||!payload.periods||!payload.attribution)throw new Error('invalid yen-rate payload');
@@ -116,7 +124,7 @@ function applyPayload(payload){
   while(cursor<today){cursor.setUTCDate(cursor.getUTCDate()+1);const day=cursor.getUTCDay();if(day!==0&&day!==6&&cursor<=today)businessLag++}
   const stale=businessLag>3,status=document.querySelector('[data-status-label]'),dot=document.querySelector('.demo-dot');
   status.textContent=stale?`${shortProvider} 数据延迟`:`${shortProvider} 日频数据`;dot?.classList.toggle('stale',stale);
-  const generatedAt=new Date(payload.generatedAt),japanUpdated=Number.isNaN(generatedAt.getTime())?'—':new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(generatedAt).replaceAll('/','-');
+  const japanUpdated=window.formatJapanHeaderTime?.(payload.generatedAt)||'—';
   const updatedElement=document.querySelector('[data-updated]');updatedElement.textContent=japanUpdated;updatedElement.title=`汇率数据截至最近共同交易日 ${payload.latestCommonDate}`;
   dataReady=true;document.querySelector('#chart-data-source').textContent=`${shortProvider} 日频参考汇率 · 同日对齐`;renderDrivers('180');renderMarketContext('180');drawFxChart('cnyjpy');
 }

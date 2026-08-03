@@ -15,7 +15,7 @@ const fallbackStocks=[
 let stocks=fallbackStocks,historyByTicker={},nasdaqData=null,activeIndex=0,activePeriod='3年',activeValuationPeriod='3年',activePricePeriod='1年',lastUpdated='等待日更数据',activeNasdaqMetrics=new Set(['pe','forwardPe','pb']),sortKey='cap',sortDirection=-1,chartMode='valuation',activeValuationMetric='pe',showPriceOverlay=true,marketDataReady=false;
 const syncTouchMobileClass=()=>{const mobileSignal=navigator.maxTouchPoints>0||window.matchMedia('(pointer: coarse)').matches||/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);document.documentElement.classList.toggle('touch-mobile',window.innerWidth<=680&&mobileSignal)};
 syncTouchMobileClass();window.addEventListener('resize',syncTouchMobileClass);
-const formatJapanTime=value=>{const date=new Date(value);if(Number.isNaN(date.getTime()))return value||'等待日更数据';return `${new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).format(date)} Asia/Japan`};
+const formatJapanTime=value=>window.formatJapanHeaderTime?.(value)||value||'等待日更数据';
 const rankingDirection={pe:1,peg:1,ps:1,pcf:1};
 const metricNumber=(stock,key)=>{if(key==='cap'){const text=String(stock.cap||'');const value=Number.parseFloat(text);return Number.isFinite(value)?value*(text.includes('T')?1e3:1):null}if(key==='name')return null;const value=Number.parseFloat(String(stock[key]??'').replace(/[$,%>]/g,''));return Number.isFinite(value)?value:null};
 const homepageValuationHistory=(stock,key)=>{const ordered=(historyByTicker[stock.ticker]||[]).filter(point=>!String(point.valuationMethod||'').includes('Alpha Vantage EARNINGS reported dates')&&Number.isFinite(Number(point[key]))&&Number(point[key])>0).sort((a,b)=>String(a.date).localeCompare(String(b.date)));const latest=ordered.at(-1);if(!latest)return[];const cutoff=new Date(`${latest.date}T00:00:00Z`);cutoff.setUTCFullYear(cutoff.getUTCFullYear()-3);return ordered.filter(point=>new Date(`${point.date}T00:00:00Z`)>=cutoff)};
@@ -246,18 +246,17 @@ document.addEventListener('mousemove',event=>{
   tooltip.classList.remove('hidden');
 });
 
-const resetTransientMobileLayers=()=>{
+const resetTransientMobileLayers=event=>{
   if(!window.matchMedia('(max-width:680px)').matches)return;
   const body=document.body;
   const landscapeCard=document.querySelector('.chart-card');
-  if(landscapeCard&&!document.fullscreenElement&&!document.webkitFullscreenElement){
+  const landscapeIsRequested=landscapeCard?.classList.contains('landscape-requested');
+  if(landscapeCard&&!document.fullscreenElement&&!document.webkitFullscreenElement&&!landscapeIsRequested){
     landscapeCard.classList.remove('landscape-fallback','force-landscape');
     body.classList.remove('chart-landscape-open');
   }
 };
 window.addEventListener('pageshow',resetTransientMobileLayers);
-window.addEventListener('orientationchange',resetTransientMobileLayers);
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')resetTransientMobileLayers()});
 if(new URL(location.href).searchParams.has('_resume')){
   const cleanUrl=new URL(location.href);cleanUrl.searchParams.delete('_resume');history.replaceState(history.state,'',cleanUrl);
 }
@@ -563,16 +562,18 @@ document.querySelector('#price-overlay-toggle').addEventListener('change',event=
 });
 const landscapeButton=document.querySelector('#chart-landscape-toggle'),landscapeCard=document.querySelector('.chart-card');
 const landscapeActive=()=>document.fullscreenElement===landscapeCard||document.webkitFullscreenElement===landscapeCard||landscapeCard.classList.contains('landscape-fallback');
-let landscapePortraitLocked=false;
-const syncForcedLandscape=()=>landscapeCard.classList.toggle('force-landscape',landscapeActive()&&landscapePortraitLocked);
-const syncLandscapeButton=()=>{const active=landscapeActive();landscapeButton.setAttribute('aria-pressed',String(active));landscapeButton.innerHTML=active?'<span aria-hidden="true">×</span> 退出横屏':'<span aria-hidden="true">↔</span> 横屏查看';if(!active){document.body.classList.remove('chart-landscape-open');landscapePortraitLocked=false}syncForcedLandscape()};
+const syncForcedLandscape=()=>landscapeCard.classList.toggle('force-landscape',landscapeActive()&&window.innerHeight>window.innerWidth);
+const syncLandscapeButton=()=>{const active=landscapeActive();landscapeButton.setAttribute('aria-pressed',String(active));landscapeButton.innerHTML=active?'<span aria-hidden="true">×</span> 退出横屏':'<span aria-hidden="true">↔</span> 横屏查看';if(!active){document.body.classList.remove('chart-landscape-open');landscapeCard.classList.remove('force-landscape','landscape-requested')}else syncForcedLandscape()};
 landscapeButton.addEventListener('click',async()=>{
   const active=document.fullscreenElement===landscapeCard||document.webkitFullscreenElement===landscapeCard||landscapeCard.classList.contains('landscape-fallback');
-  if(active){if(document.fullscreenElement&&document.exitFullscreen)await document.exitFullscreen();else if(document.webkitFullscreenElement&&document.webkitExitFullscreen)document.webkitExitFullscreen();landscapeCard.classList.remove('landscape-fallback');document.body.classList.remove('chart-landscape-open');if(screen.orientation?.unlock)screen.orientation.unlock();syncLandscapeButton();return}
-  try{const request=landscapeCard.requestFullscreen||landscapeCard.webkitRequestFullscreen;if(request)await request.call(landscapeCard);else throw new Error('fullscreen unsupported');try{if(screen.orientation?.lock){await screen.orientation.lock('portrait-primary');landscapePortraitLocked=true}}catch{landscapePortraitLocked=false}}catch{landscapePortraitLocked=false;landscapeCard.classList.add('landscape-fallback');document.body.classList.add('chart-landscape-open')}
+  if(active){if(document.fullscreenElement&&document.exitFullscreen)await document.exitFullscreen();else if(document.webkitFullscreenElement&&document.webkitExitFullscreen)document.webkitExitFullscreen();landscapeCard.classList.remove('landscape-fallback','landscape-requested');document.body.classList.remove('chart-landscape-open');if(screen.orientation?.unlock)screen.orientation.unlock();syncLandscapeButton();return}
+  landscapeCard.classList.add('landscape-requested');
+  try{const request=landscapeCard.requestFullscreen||landscapeCard.webkitRequestFullscreen;if(request)await request.call(landscapeCard);else throw new Error('fullscreen unsupported');try{if(screen.orientation?.lock)await screen.orientation.lock('landscape')}catch{}}
+  catch{landscapeCard.classList.add('landscape-fallback');document.body.classList.add('chart-landscape-open')}
   syncLandscapeButton();
 });
 document.addEventListener('fullscreenchange',syncLandscapeButton);document.addEventListener('webkitfullscreenchange',syncLandscapeButton);
+window.addEventListener('resize',syncForcedLandscape);window.addEventListener('orientationchange',syncForcedLandscape);
 document.querySelector('#mobile-chart-note-toggle').addEventListener('click',event=>{
   const wrap=event.currentTarget.closest('.chart-note-wrap'),expanded=wrap.classList.toggle('expanded');
   event.currentTarget.textContent=expanded?'收起说明':'展开说明';
