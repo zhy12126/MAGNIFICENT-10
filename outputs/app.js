@@ -137,8 +137,9 @@ document.querySelector('#model-inputs').addEventListener('click',event=>{
   document.querySelector('#modal-content').innerHTML=content.includes('<')?content:`<p>${content}</p>`;
   document.querySelector('#metric-modal').classList.remove('hidden');
 });
-function openDetail(ticker){const i=stocks.findIndex(stock=>stock.ticker===ticker);if(i<0)return;activeIndex=i;const s=stocks[i];document.querySelector('#overview').classList.add('hidden');document.querySelector('#detail').classList.remove('hidden');const detailLogo=document.querySelector('#detail-logo');if(detailLogo)detailLogo.outerHTML=logo(s,true).replace('<div class="','<div id="detail-logo" class="');document.querySelector('#detail-ticker').textContent=s.ticker+' · NASDAQ';document.querySelector('#detail-name').textContent=s.name;document.querySelector('#detail-price').textContent=`${s.price}  ·  ${s.change||'—'}  ·  市值 $${s.cap}`;document.querySelector('#chart-title').textContent=`${s.name} 估值历史（TTM 估算）`;document.querySelector('#insight-copy').textContent=s.note;document.querySelector('#model-inputs').innerHTML=modelInputs(s);drawChart(s);window.scrollTo({top:0,behavior:'smooth'})}
-document.querySelector('#back').addEventListener('click',()=>{document.querySelector('#detail').classList.add('hidden');document.querySelector('#overview').classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'})});document.querySelectorAll('.periods button').forEach(b=>b.addEventListener('click',()=>{document.querySelector('.periods .active').classList.remove('active');b.classList.add('active');activePeriod=b.textContent;if(chartMode==='price')activePricePeriod=activePeriod;else activeValuationPeriod=activePeriod;drawSelectedChart(stocks[activeIndex])}));document.querySelectorAll('nav button').forEach(button=>button.addEventListener('click',()=>{const view=button.dataset.view;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('nav-active',b===button));document.querySelector('#overview').classList.toggle('hidden',view!=='overview');document.querySelector('#nasdaq').classList.toggle('hidden',view!=='nasdaq');document.querySelector('#detail').classList.add('hidden');if(view==='nasdaq')renderNasdaq();window.scrollTo({top:0,behavior:'smooth'})}));
+const scrollPageToTop=()=>{const shell=document.querySelector('.shell');if(window.matchMedia('(max-width:680px)').matches&&shell)shell.scrollTo({top:0,behavior:'smooth'});else window.scrollTo({top:0,behavior:'smooth'})};
+function openDetail(ticker){const i=stocks.findIndex(stock=>stock.ticker===ticker);if(i<0)return;activeIndex=i;const s=stocks[i];document.querySelector('#overview').classList.add('hidden');document.querySelector('#detail').classList.remove('hidden');const detailLogo=document.querySelector('#detail-logo');if(detailLogo)detailLogo.outerHTML=logo(s,true).replace('<div class="','<div id="detail-logo" class="');document.querySelector('#detail-ticker').textContent=s.ticker+' · NASDAQ';document.querySelector('#detail-name').textContent=s.name;document.querySelector('#detail-price').textContent=`${s.price}  ·  ${s.change||'—'}  ·  市值 $${s.cap}`;document.querySelector('#chart-title').textContent=`${s.name} 估值历史（TTM 估算）`;document.querySelector('#insight-copy').textContent=s.note;document.querySelector('#model-inputs').innerHTML=modelInputs(s);drawChart(s);scrollPageToTop()}
+document.querySelector('#back').addEventListener('click',()=>{document.querySelector('#detail').classList.add('hidden');document.querySelector('#overview').classList.remove('hidden');scrollPageToTop()});document.querySelectorAll('.periods button').forEach(b=>b.addEventListener('click',()=>{document.querySelector('.periods .active').classList.remove('active');b.classList.add('active');activePeriod=b.textContent;if(chartMode==='price')activePricePeriod=activePeriod;else activeValuationPeriod=activePeriod;drawSelectedChart(stocks[activeIndex])}));document.querySelectorAll('nav button').forEach(button=>button.addEventListener('click',()=>{const view=button.dataset.view;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('nav-active',b===button));document.querySelector('#overview').classList.toggle('hidden',view!=='overview');document.querySelector('#nasdaq').classList.toggle('hidden',view!=='nasdaq');document.querySelector('#detail').classList.add('hidden');if(view==='nasdaq')renderNasdaq();scrollPageToTop()}));
 document.querySelectorAll('.sort-header').forEach(button=>button.addEventListener('click',()=>{const key=button.dataset.sort;if(sortKey===key)sortDirection*=-1;else{sortKey=key;sortDirection=key==='name'?1:-1}renderStocks()}));
 // The SPY snapshot must load independently: a missing optional data file must
 // never leave the two concentration cards blank.  The query parameter also
@@ -314,23 +315,6 @@ document.querySelectorAll('[data-ndx-period]').forEach(button=>button.addEventLi
 }));
 renderNasdaq();
 if(location.hash==='#nasdaq')document.querySelector('nav [data-view="nasdaq"]')?.click();
-
-// Browsers may restore an old scroll offset from their back/forward cache
-// after the routed view has become shorter.  Manage it ourselves so a hidden
-// detail chart can never leave a long blank area below the active view.
-if ('scrollRestoration' in window.history) window.history.scrollRestoration='manual';
-const resetRouteScroll=()=>{
-  const shell=document.querySelector('.shell');
-  if(shell)shell.scrollTo({top:0,left:0,behavior:'auto'});
-  window.scrollTo({top:0,left:0,behavior:'auto'});
-  requestAnimationFrame(()=>{if(shell)shell.scrollTo({top:0,left:0,behavior:'auto'});window.scrollTo({top:0,left:0,behavior:'auto'})});
-};
-const stabilizeRouteScroll=resetRouteScroll;
-const routeOpenDetail=openDetail;
-openDetail=ticker=>{routeOpenDetail(ticker);stabilizeRouteScroll()};
-window.addEventListener('popstate',stabilizeRouteScroll);
-window.addEventListener('pageshow',stabilizeRouteScroll);
-document.querySelectorAll('nav button').forEach(button=>button.addEventListener('click',stabilizeRouteScroll));
 
 // SPY weight cards open their own history view.  These histories are built
 // from daily State Street holdings snapshots, so a newly introduced basket may
@@ -535,8 +519,7 @@ const openDetailWithoutHistory=openDetail;
 const showOverviewFromHistory=()=>{
   document.querySelector('#detail').classList.add('hidden');
   document.querySelector('#overview').classList.remove('hidden');
-  document.querySelector('.shell')?.scrollTo({top:0,behavior:'smooth'});
-  window.scrollTo({top:0,behavior:'smooth'});
+  scrollPageToTop();
 };
 const syncDetailRoute=()=>{
   const ticker=new URL(window.location.href).searchParams.get('stock');
@@ -554,10 +537,8 @@ openDetail=ticker=>{
   syncDetailRoute();
 };
 window.addEventListener('popstate',syncDetailRoute);
-// Some mobile browsers restore a page from their back/forward cache without a
-// fresh click. Re-read the URL in that case so it can never disagree with the
-// company shown in the detail panel.
-window.addEventListener('pageshow',syncDetailRoute);
+// Perform the initial URL-to-view sync once; native history restoration owns
+// resume/pageshow so route rendering cannot fight the browser's scroll offset.
 queueMicrotask(syncDetailRoute);
 // Remove the earlier direct-close listener so the on-page button follows the
 // exact same history path as a phone back gesture.

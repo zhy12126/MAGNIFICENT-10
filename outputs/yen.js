@@ -26,8 +26,6 @@ let activePair='cnyjpy',activeChartPeriod='180',dataReady=false;
 const signed=value=>`${value>=0?'+':'−'}${Math.abs(value).toFixed(2)}%`;
 const setDirection=(element,value)=>{element.classList.toggle('positive',value>=0);element.classList.toggle('negative',value<0)};
 
-if('scrollRestoration'in window.history)window.history.scrollRestoration='manual';
-window.addEventListener('pageshow',event=>{if(event.persisted)window.scrollTo({top:0,left:0,behavior:'auto'})});
 const trendControlPanel=document.querySelector('.trend-controls');
 const trendCard=document.querySelector('.trend-card');
 if(trendControlPanel&&trendCard&&trendControlPanel.parentElement!==trendCard){trendCard.appendChild(trendControlPanel);trendControlPanel.classList.add('trend-controls-bottom')}
