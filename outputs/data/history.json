@@ -118800,6 +118800,19 @@
         "valuationMethod": "quarterly K-IFRS consolidated statements; rolling four quarters; latest quarter from official filing; 1 common share = 10 ADSs"
       },
       {
+        "date": "2026-07-17",
+        "price": 154.03,
+        "priceCurrency": "USD",
+        "priceSource": "Yahoo Finance SKHY close",
+        "priceKind": "actual-adr",
+        "pe": 21.5693,
+        "pcf": 22.9312,
+        "ps": 12.2708,
+        "ttmPeriodEnd": "2026-03-31",
+        "ttmAvailableFrom": "2026-05-15",
+        "valuationMethod": "quarterly K-IFRS consolidated statements; rolling four quarters; latest quarter from official filing; 1 common share = 10 ADSs"
+      },
+      {
         "date": "2026-07-20",
         "price": 151.16,
         "priceCurrency": "USD",
@@ -118932,22 +118945,12 @@
       {
         "date": "2026-08-03",
         "price": 142.72,
+        "priceCurrency": "USD",
+        "priceSource": "Yahoo Finance SKHY close",
+        "priceKind": "actual-adr",
         "pe": 9.0105,
         "pcf": 11.471,
         "ps": 7.7147,
-        "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-29",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
-      },
-      {
-        "date": "2026-08-04",
-        "price": 105.6993,
-        "priceCurrency": "USD",
-        "priceSource": "Yahoo Finance 000660.KS close converted to ADS-equivalent USD",
-        "priceKind": "underlying-ads-equivalent-proxy",
-        "pe": 6.6181,
-        "pcf": 8.4254,
-        "ps": 5.6664,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-29",
         "valuationMethod": "quarterly K-IFRS consolidated statements; rolling four quarters; latest quarter from official filing; 1 common share = 10 ADSs"
@@ -141590,6 +141593,6 @@
   "selectedHistoryUpdatedAt": "2026-08-04T01:34:51.709518Z",
   "selectedHistoryErrors": {},
   "selectedHistoryMethod": "AMD and TSM use dedicated verified rebuilds. SKHY uses its separate K-IFRS/ADS history path, including clearly labelled pre-listing underlying-share proxies.",
-  "skhyHistoryUpdatedAt": "2026-08-04T01:34:54.194865Z",
+  "skhyHistoryUpdatedAt": "2026-08-04T01:49:17.189456Z",
   "skhyHistoryMethod": "Dedicated SKHY series: actual Nasdaq closes from listing; earlier observations are labelled 000660.KS ADS-equivalent proxies. Financial denominators use SK hynix KRW consolidated statements."
 }
