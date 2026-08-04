@@ -12,7 +12,8 @@ const fallbackStocks = [
   { name: 'AMD', ticker: 'AMD', logo: 'A', color: '#fff2eb', ink: '#d34b28', cap: '—', pe: '—', fpe: '—', peg: '—', ps: '—', pcf: '—', implied: '—', growth: '—', price: '等待日终更新', note: '等待 Alpha Vantage 日更数据。' },
   { name: 'SK hynix', ticker: 'SKHY', logo: 'H', color: '#fff0ea', ink: '#d04d34', cap: '—', pe: '—', fpe: '—', peg: '—', ps: '—', pcf: '—', implied: '—', growth: '—', price: '等待日终更新', note: '等待 Alpha Vantage 日更数据。' }
 ];
-let stocks = fallbackStocks, historyByTicker = {}, nasdaqData = null, activeIndex = 0, activePeriod = '3年', activeValuationPeriod = '3年', activePricePeriod = '1年', lastUpdated = '等待日更数据', activeNasdaqMetrics = new Set(['pe', 'forwardPe', 'pb']), sortKey = 'cap', sortDirection = -1, chartMode = 'valuation', activeValuationMetric = 'pe', showPriceOverlay = true, marketDataReady = false;
+let stocks = fallbackStocks, historyByTicker = {}, nasdaqData = null, activeIndex = 0, activePeriod = '3年', activeValuationPeriod = '3年', activePricePeriod = '1年', lastUpdated = '等待日更数据', activeNasdaqMetrics = new Set(['pe', 'forwardPe', 'pb']), sortKey = 'cap', sortDirection = -1, chartMode = 'valuation', activeValuationMetric = 'pe', showPriceOverlay = true, marketDataReady = false, overviewScrollPosition = 0;
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 const syncTouchMobileClass = () => { const mobileSignal = navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent); document.documentElement.classList.toggle('touch-mobile', window.innerWidth <= 680 && mobileSignal) };
 syncTouchMobileClass(); window.addEventListener('resize', syncTouchMobileClass);
 const formatJapanTime = value => window.formatJapanHeaderTime?.(value) || value || '等待日更数据';
@@ -143,9 +144,21 @@ document.querySelector('#model-inputs').addEventListener('click', event => {
   document.querySelector('#modal-content').innerHTML = content.includes('<') ? content : `<p>${content}</p>`;
   document.querySelector('#metric-modal').classList.remove('hidden');
 });
-const scrollPageToTop = () => { const shell = document.querySelector('.shell'); if (window.matchMedia('(max-width:680px)').matches && shell) shell.scrollTo({ top: 0, behavior: 'smooth' }); else window.scrollTo({ top: 0, behavior: 'smooth' }) };
-function openDetail(ticker) { const i = stocks.findIndex(stock => stock.ticker === ticker); if (i < 0) return; activeIndex = i; const s = stocks[i]; document.querySelector('#overview').classList.add('hidden'); document.querySelector('#detail').classList.remove('hidden'); const detailLogo = document.querySelector('#detail-logo'); if (detailLogo) detailLogo.outerHTML = logo(s, true).replace('<div class="', '<div id="detail-logo" class="'); document.querySelector('#detail-ticker').textContent = s.ticker + ' · NASDAQ'; document.querySelector('#detail-name').textContent = s.name; document.querySelector('#detail-price').textContent = `${s.price}  ·  ${s.change || '—'}  ·  市值 $${s.cap}`; document.querySelector('#chart-title').textContent = `${s.name} 估值历史（TTM 估算）`; document.querySelector('#insight-copy').textContent = s.note; document.querySelector('#model-inputs').innerHTML = modelInputs(s); drawChart(s); scrollPageToTop() }
-document.querySelector('#back').addEventListener('click', () => { document.querySelector('#detail').classList.add('hidden'); document.querySelector('#overview').classList.remove('hidden'); scrollPageToTop() }); document.querySelectorAll('.periods button').forEach(b => b.addEventListener('click', () => { document.querySelector('.periods .active').classList.remove('active'); b.classList.add('active'); activePeriod = b.textContent; if (chartMode === 'price') activePricePeriod = activePeriod; else activeValuationPeriod = activePeriod; drawSelectedChart(stocks[activeIndex]) })); document.querySelectorAll('nav button').forEach(button => button.addEventListener('click', () => { const view = button.dataset.view; document.querySelectorAll('nav button').forEach(b => b.classList.toggle('nav-active', b === button)); document.querySelector('#overview').classList.toggle('hidden', view !== 'overview'); document.querySelector('#nasdaq').classList.toggle('hidden', view !== 'nasdaq'); document.querySelector('#detail').classList.add('hidden'); if (view === 'nasdaq') renderNasdaq(); scrollPageToTop() }));
+const getScrollContainer = () => { const shell = document.querySelector('.shell'); return window.matchMedia('(max-width:680px)').matches && shell ? shell : window };
+const scrollPageToTopImmediate = container => {
+  if (container === window) {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  } else {
+    container.scrollTop = 0;
+  }
+};
+const scrollPageToTop = () => { const container = getScrollContainer(); if (container === window) window.scrollTo({ top: 0, behavior: 'smooth' }); else container.scrollTo({ top: 0, behavior: 'smooth' }) };
+const saveScrollPosition = () => { const container = getScrollContainer(); overviewScrollPosition = container === window ? window.scrollY : container.scrollTop };
+const restoreScrollPosition = () => { const container = getScrollContainer(); if (container === window) window.scrollTo({ top: overviewScrollPosition, behavior: 'auto' }); else container.scrollTop = overviewScrollPosition };
+function openDetail(ticker) { const i = stocks.findIndex(stock => stock.ticker === ticker); if (i < 0) return; activeIndex = i; const s = stocks[i]; const container = getScrollContainer(); saveScrollPosition(); document.querySelector('#overview').classList.add('hidden'); document.querySelector('#detail').classList.remove('hidden'); const detailLogo = document.querySelector('#detail-logo'); if (detailLogo) detailLogo.outerHTML = logo(s, true).replace('<div class="', '<div id="detail-logo" class="'); document.querySelector('#detail-ticker').textContent = s.ticker + ' · NASDAQ'; document.querySelector('#detail-name').textContent = s.name; document.querySelector('#detail-price').textContent = `${s.price}  ·  ${s.change || '—'}  ·  市值 $${s.cap}`; document.querySelector('#chart-title').textContent = `${s.name} 估值历史（TTM 估算）`; document.querySelector('#insight-copy').textContent = s.note; document.querySelector('#model-inputs').innerHTML = modelInputs(s); drawChart(s); scrollPageToTopImmediate(container); requestAnimationFrame(() => scrollPageToTopImmediate(container)) }
+document.querySelector('#back').addEventListener('click', () => { document.querySelector('#detail').classList.add('hidden'); document.querySelector('#overview').classList.remove('hidden'); restoreScrollPosition() }); document.querySelectorAll('.periods button').forEach(b => b.addEventListener('click', () => { document.querySelector('.periods .active').classList.remove('active'); b.classList.add('active'); activePeriod = b.textContent; if (chartMode === 'price') activePricePeriod = activePeriod; else activeValuationPeriod = activePeriod; drawSelectedChart(stocks[activeIndex]) })); document.querySelectorAll('nav button').forEach(button => button.addEventListener('click', () => { const view = button.dataset.view; document.querySelectorAll('nav button').forEach(b => b.classList.toggle('nav-active', b === button)); document.querySelector('#overview').classList.toggle('hidden', view !== 'overview'); document.querySelector('#nasdaq').classList.toggle('hidden', view !== 'nasdaq'); document.querySelector('#detail').classList.add('hidden'); if (view === 'nasdaq') renderNasdaq(); scrollPageToTop() }));
 document.querySelectorAll('.sort-header').forEach(button => button.addEventListener('click', () => { const key = button.dataset.sort; if (sortKey === key) sortDirection *= -1; else { sortKey = key; sortDirection = key === 'name' ? 1 : -1 } renderStocks() }));
 // The SPY snapshot must load independently: a missing optional data file must
 // never leave the two concentration cards blank.  The query parameter also
@@ -532,7 +545,7 @@ const openDetailWithoutHistory = openDetail;
 const showOverviewFromHistory = () => {
   document.querySelector('#detail').classList.add('hidden');
   document.querySelector('#overview').classList.remove('hidden');
-  scrollPageToTop();
+  restoreScrollPosition();
 };
 const syncDetailRoute = () => {
   const ticker = new URL(window.location.href).searchParams.get('stock');
@@ -543,8 +556,7 @@ const syncDetailRoute = () => {
 // URL is the single source of truth for the detail view. Rendering never
 // reads a previously selected company after navigation has changed the URL.
 openDetail = ticker => {
-  if (!stocks.some(stock => stock.ticker === ticker)) return;
-  const url = new URL(window.location.href);
+  if (!stocks.some(stock => stock.ticker === ticker)) return; saveScrollPosition(); const url = new URL(window.location.href);
   url.searchParams.set('stock', ticker);
   window.history.pushState({ market10Detail: true, ticker }, '', url);
   syncDetailRoute();
