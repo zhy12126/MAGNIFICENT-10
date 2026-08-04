@@ -59,8 +59,8 @@ def main():
             if snapshot_value is None or history_value in (None, 0):
                 issues.append(f"{ticker}: {metric} missing on one side")
                 continue
-            difference = abs(snapshot_value / history_value - 1)
-            if difference > .006:  # one-decimal UI rounding tolerance
+            if round(snapshot_value, 1) != round(history_value, 1):
+                difference = abs(snapshot_value / history_value - 1)
                 issues.append(f"{ticker}: {metric} differs by {difference * 100:.2f}%")
         if len([row for row in rows if row.get("ttmPeriodEnd")]) < 1000 and ticker not in {"SKHY"}:
             issues.append(f"{ticker}: fewer than 1000 auditable five-year valuation rows")

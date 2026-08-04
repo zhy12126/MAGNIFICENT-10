@@ -20,10 +20,12 @@ $pythonCommand = Get-Command python -ErrorAction SilentlyContinue
 if ($pyLauncher) {
   $pythonRunner = $pyLauncher.Source
   $pythonArgs = @('-3')
-} elseif ($pythonCommand) {
+}
+elseif ($pythonCommand) {
   $pythonRunner = $pythonCommand.Source
   $pythonArgs = @()
-} else {
+}
+else {
   throw '未找到 Python 3。请安装 Python 3.11+，安装时勾选 Add Python to PATH，然后重试。'
 }
 
@@ -33,7 +35,7 @@ if (Test-Path -LiteralPath $outputPath) {
 }
 
 Write-Host '开始更新人民币兑日元分析数据……'
-Write-Host '数据源：优先使用ECB每日参考汇率；连接失败时回退FRED。' -ForegroundColor DarkGray
+Write-Host '数据源：仅使用ECB每日参考汇率；ECB不可用时更新失败并退出。' -ForegroundColor DarkGray
 Write-Host '数据口径：日频研究数据，不是实时成交报价。' -ForegroundColor Yellow
 
 Push-Location $projectRoot
@@ -47,7 +49,8 @@ try {
   if ($LASTEXITCODE -ne 0) {
     throw "事件日历更新程序退出，错误码：$LASTEXITCODE"
   }
-} finally {
+}
+finally {
   Pop-Location
 }
 
@@ -65,7 +68,8 @@ if ($previousWriteTime -and $outputFile.LastWriteTimeUtc -eq $previousWriteTime)
 
 try {
   $snapshot = Get-Content -LiteralPath $outputPath -Raw -Encoding UTF8 | ConvertFrom-Json
-} catch {
+}
+catch {
   throw 'yen-rates.json 已生成，但JSON格式校验失败。'
 }
 
@@ -83,7 +87,8 @@ Write-Host "CNY/JPY：$([math]::Round([double]$snapshot.latest.cnyjpy, 4))"
 Write-Host "输出文件：$outputPath" -ForegroundColor DarkGray
 try {
   $eventSnapshot = Get-Content -LiteralPath $eventOutputPath -Raw -Encoding UTF8 | ConvertFrom-Json
-} catch {
+}
+catch {
   throw 'yen-events.json 已生成，但JSON格式校验失败。'
 }
 if ($eventSnapshot.schemaVersion -ne 1 -or $null -eq $eventSnapshot.events) {

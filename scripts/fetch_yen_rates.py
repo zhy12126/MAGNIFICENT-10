@@ -1,99 +1,42 @@
 """Build auditable CNY/JPY history and USD-leg attribution.
 
-ECB daily reference rates are the primary source. They publish USD, JPY and
-CNY against EUR in one same-time table, from which the USD legs are derived.
-FRED DEXJPUS and DEXCHUS are retained as a fallback.
+ECB daily reference rates are the only approved source. They publish USD, JPY
+and CNY against EUR in one same-time table, from which the USD legs are derived.
 The output is replaced atomically, so a network or validation failure never
 overwrites the last successful snapshot.
 """
 from __future__ import annotations
 
-import csv
-import io
 import json
 import math
 import os
+import ssl
 import xml.etree.ElementTree as ET
 from bisect import bisect_left
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
-from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
+try:
+    import certifi
+except ImportError:  # pragma: no cover
+    certifi = None
+
 OUTPUT = Path("outputs/data/yen-rates.json")
-FRED_CSV = "https://fred.stlouisfed.org/graph/fredgraph.csv"
-ECB_CSV = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.csv"
 ECB_XML = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.xml"
 PERIODS = {"30": 30, "180": 180, "365": 365, "1095": 1095, "1825": 1825}
 MAX_CHART_POINTS = 240
 
 
-def fetch_csv(series_id: str, start: date) -> dict[str, float]:
-    query = urlencode({"id": series_id, "cosd": start.isoformat()})
-    request = Request(
-        f"{FRED_CSV}?{query}",
-        headers={"User-Agent": "HY-Tools/1.0 (daily public-data fetch)"},
-    )
-    with urlopen(request, timeout=45) as response:
-        text = response.read().decode("utf-8-sig")
-    rows: dict[str, float] = {}
-    for row in csv.DictReader(io.StringIO(text)):
-        raw_date = row.get("observation_date") or row.get("DATE")
-        raw_value = row.get(series_id)
-        if not raw_date or not raw_value or raw_value == ".":
-            continue
-        value = float(raw_value)
-        if math.isfinite(value) and value > 0:
-            rows[raw_date] = value
-    if len(rows) < 200:
-        raise ValueError(f"FRED {series_id} returned only {len(rows)} valid observations")
-    return rows
-
-
-def parse_ecb_csv(text: str, start: date) -> tuple[dict[str, float], dict[str, float]]:
-    usdjpy: dict[str, float] = {}
-    usdcny: dict[str, float] = {}
-    reader = csv.DictReader(io.StringIO(text))
-    normalized_fields = {field.strip().upper() for field in (reader.fieldnames or []) if field}
-    required_fields = {"DATE", "USD", "JPY", "CNY"}
-    if not required_fields.issubset(normalized_fields):
-        preview = text[:120].replace("\r", " ").replace("\n", " ")
-        raise ValueError(
-            f"ECB CSV columns are not recognized ({sorted(normalized_fields)[:8]}); "
-            f"response starts with {preview!r}"
-        )
-    for raw_row in reader:
-        # ECB's historical CSV currently includes spaces around currency column
-        # names. Normalize both keys and values so minor formatting changes do
-        # not silently turn a valid download into zero observations.
-        row = {
-            (key or "").strip().upper(): (value or "").strip()
-            for key, value in raw_row.items()
-        }
-        raw_date = row.get("DATE", "")
-        try:
-            observation_date = date.fromisoformat(raw_date)
-        except ValueError:
-            continue
-        if observation_date < start:
-            continue
-        try:
-            eurusd = float(row.get("USD", ""))
-            eurjpy = float(row.get("JPY", ""))
-            eurcny = float(row.get("CNY", ""))
-        except ValueError:
-            continue
-        if all(math.isfinite(value) and value > 0 for value in (eurusd, eurjpy, eurcny)):
-            usdjpy[raw_date] = eurjpy / eurusd
-            usdcny[raw_date] = eurcny / eurusd
-    if len(usdjpy) < 200 or len(usdcny) < 200:
-        raise ValueError(f"ECB returned only {min(len(usdjpy), len(usdcny))} valid shared observations")
-    return usdjpy, usdcny
+def ssl_context() -> ssl.SSLContext:
+    if certifi is not None:
+        return ssl.create_default_context(cafile=certifi.where())
+    return ssl.create_default_context()
 
 
 def fetch_ecb(start: date) -> tuple[dict[str, float], dict[str, float]]:
     request = Request(ECB_XML, headers={"User-Agent": "HY-Tools/1.0 (daily public-data fetch)"})
-    with urlopen(request, timeout=45) as response:
+    with urlopen(request, context=ssl_context(), timeout=45) as response:
         payload = response.read()
     return parse_ecb_xml(payload, start)
 
@@ -234,33 +177,17 @@ def write_atomic(payload: dict) -> None:
 
 def main() -> None:
     start = date.today() - timedelta(days=6 * 366)
-    try:
-        try:
-            usdjpy, usdcny = fetch_ecb(start)
-            source = {
-                "provider": "European Central Bank (ECB)",
-                "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/",
-                "series": {"base": "EUR", "currencies": ["USD", "JPY", "CNY"]},
-                "frequency": "daily working days",
-                "note": "Reference rates for information purposes; USD legs are derived from same-date EUR rates.",
-            }
-        except Exception as ecb_error:
-            print(f"ECB refresh failed, trying FRED fallback: {ecb_error}")
-            usdjpy, usdcny = fetch_csv("DEXJPUS", start), fetch_csv("DEXCHUS", start)
-            source = {
-                "provider": "Federal Reserve Bank of St. Louis (FRED) — fallback",
-                "url": "https://fred.stlouisfed.org/",
-                "series": {"usdjpy": "DEXJPUS", "usdcny": "DEXCHUS"},
-                "frequency": "daily business days",
-            }
-        payload = build_payload(usdjpy, usdcny, source)
-        write_atomic(payload)
-        print(f"Wrote {OUTPUT} through {payload['latestCommonDate']} from {payload['source']['provider']}")
-    except Exception as exc:
-        if OUTPUT.exists():
-            print(f"Yen-rate refresh failed; keeping previous snapshot: {exc}")
-            return
-        raise
+    usdjpy, usdcny = fetch_ecb(start)
+    source = {
+        "provider": "European Central Bank (ECB)",
+        "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/",
+        "series": {"base": "EUR", "currencies": ["USD", "JPY", "CNY"]},
+        "frequency": "daily working days",
+        "note": "Reference rates for information purposes; USD legs are derived from same-date EUR rates.",
+    }
+    payload = build_payload(usdjpy, usdcny, source)
+    write_atomic(payload)
+    print(f"Wrote {OUTPUT} through {payload['latestCommonDate']} from {payload['source']['provider']}")
 
 
 if __name__ == "__main__":

@@ -25,7 +25,7 @@
 - 哪些经济数据、政策和资金流线索与这段行情一致；
 - 未来30天有哪些值得留意的官方事件。
 
-`Update yen analysis data` 工作流优先从欧洲央行（ECB）取得同日 EUR/USD、EUR/JPY 与 EUR/CNY 参考汇率，由此推导 USD/JPY、USD/CNY 和 CNY/JPY；ECB 失败时回退到 FRED 的 DEXJPUS 与 DEXCHUS。结果写入 `outputs/data/yen-rates.json`。这些数据属于日频研究数据，不是实时成交报价。
+`Update yen analysis data` 工作流从欧洲央行（ECB）取得同日 EUR/USD、EUR/JPY 与 EUR/CNY 参考汇率，由此推导 USD/JPY、USD/CNY 和 CNY/JPY；如果 ECB 数据不可用，则更新失败并报错，不回退到 FRED。结果写入 `outputs/data/yen-rates.json`。这些数据属于日频研究数据，不是实时成交报价。
 
 未来事件日历由 `outputs/data/yen-events-source.json` 中经过人工核对的官方日程生成。`scripts/build_yen_events.py` 会校验官方域名、移除过期事件，并生成未来30天的 `outputs/data/yen-events.json`。新增或调整事件时，需要先依据发布机构官网修改 source 文件并更新 `reviewedThrough`，不从第三方财经日历自动推断。
 
