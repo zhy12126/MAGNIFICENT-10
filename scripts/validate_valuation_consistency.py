@@ -7,6 +7,7 @@ from pathlib import Path
 HISTORY = Path("outputs/data/history.json")
 STOCKS = Path("outputs/data/stocks.json")
 METRICS = ("pe", "pcf", "ps")
+MIN_AUDIT_ROWS = 1000
 
 
 def number(value):
@@ -24,6 +25,7 @@ def main():
     stocks_payload = json.loads(STOCKS.read_text(encoding="utf-8"))
     stocks = {row["ticker"]: row for row in stocks_payload.get("stocks", [])}
     issues = []
+    warnings = []
 
     if args.fix:
         history["stocks"] = {ticker: rows for ticker, rows in history.get("stocks", {}).items() if ticker in stocks}
@@ -62,8 +64,9 @@ def main():
             if round(snapshot_value, 1) != round(history_value, 1):
                 difference = abs(snapshot_value / history_value - 1)
                 issues.append(f"{ticker}: {metric} differs by {difference * 100:.2f}%")
-        if len([row for row in rows if row.get("ttmPeriodEnd")]) < 1000 and ticker not in {"SKHY"}:
-            issues.append(f"{ticker}: fewer than 1000 auditable five-year valuation rows")
+        auditable_rows = [row for row in rows if row.get("ttmPeriodEnd")]
+        if len(auditable_rows) < MIN_AUDIT_ROWS and ticker not in {"SKHY"}:
+            warnings.append(f"{ticker}: fewer than {MIN_AUDIT_ROWS} auditable five-year valuation rows")
 
     weekend_rows = [
         f"{ticker}:{row['date']}" for ticker, rows in history.get("stocks", {}).items() for row in rows
@@ -80,6 +83,8 @@ def main():
     if issues:
         print("\n".join(issues))
         raise SystemExit(1)
+    if warnings:
+        print("\n".join(warnings))
     print(f"Consistency check passed for {len(stocks)} stocks.")
 
 
