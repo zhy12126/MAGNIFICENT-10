@@ -2450,12 +2450,19 @@ nav a:hover {
 }
 
 .price-overlay-line {
-  opacity: .72
+  opacity: .72;
+  stroke-linecap: round;
 }
 
 .price-overlay-proxy {
-  stroke: #f0a500;
-  stroke-dasharray: 6 4
+  stroke: var(--blue);
+  stroke-dasharray: 6 4;
+  stroke-linecap: round;
+}
+
+.valuation-proxy-line {
+  stroke-dasharray: 6 4;
+  stroke-linecap: round;
 }
 
 .price-axis {
