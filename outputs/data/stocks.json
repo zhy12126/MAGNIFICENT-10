@@ -93,11 +93,11 @@
         "fiscalPeriodEnd": "2026-06-30",
         "revenueTTM": 466823000000.0,
         "operatingCashflowTTM": 146724000000.0,
-        "fcfTTM": 134794000000.0,
+        "fcfTTM": 136683000000.0,
         "netIncomeTTM": 128930000000.0,
-        "fcfMarginTTM": 0.28874755528326584,
+        "fcfMarginTTM": 0.2927940568480987,
         "fcfMargin3yMedian": 0.25981710737440805,
-        "normalizedFcfMargin": 0.27428233132883695,
+        "normalizedFcfMargin": 0.2763055821112534,
         "ttmWeight": 0.5,
         "terminalGrowth": 0.025,
         "riskFreeRate": 0.0425,
@@ -549,7 +549,7 @@
       "ps": "21.1",
       "pcf": "81.3",
       "evEbitda": "104.8",
-      "implied": "98%",
+      "implied": "97%",
       "growth": "38%",
       "revenueGrowthCurrent": "38%",
       "epsGrowthCurrent": "92%",
@@ -558,14 +558,14 @@
       "valuationModel": {
         "status": "ready",
         "company": "AMD",
-        "fiscalPeriodEnd": "2026-03-31",
-        "revenueTTM": 37454000000.0,
-        "operatingCashflowTTM": 9725000000.0,
-        "fcfTTM": 8574000000.0,
-        "netIncomeTTM": 5009000000.0,
-        "fcfMarginTTM": 0.22892080952635233,
+        "fiscalPeriodEnd": "2026-06-30",
+        "revenueTTM": 41305000000.0,
+        "operatingCashflowTTM": 10080000000.0,
+        "fcfTTM": 8403000000.0,
+        "netIncomeTTM": 6434000000.0,
+        "fcfMarginTTM": 0.2034378404551507,
         "fcfMargin3yMedian": 0.09327128175295715,
-        "normalizedFcfMargin": 0.154313569250985,
+        "normalizedFcfMargin": 0.14284623316894426,
         "ttmWeight": 0.45,
         "terminalGrowth": 0.025,
         "riskFreeRate": 0.0425,
@@ -642,5 +642,6 @@
       "dataSource": "Finviz supplemental + Yahoo Finance EOD",
       "note": "数据口径：收盘价和实际交易日来自 Yahoo Finance EOD；Trailing P/E、P/CF、P/S 与历史曲线共用已披露财报 TTM 分母；Finviz 仅提供前瞻及企业价值补充指标。"
     }
-  ]
+  ],
+  "fundamentalsUpdatedAt": "2026-08-06T15:55:32Z"
 }
