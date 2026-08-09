@@ -601,7 +601,7 @@
       "ps": "7.5",
       "pcf": "11.1",
       "evEbitda": "15.4",
-      "implied": "34%",
+      "implied": "35%",
       "growth": "233%",
       "revenueGrowthCurrent": "233%",
       "epsGrowthCurrent": "1182%",
@@ -611,10 +611,10 @@
         "status": "ready",
         "company": "SK hynix",
         "fiscalPeriodEnd": "2026-06-30",
-        "revenueTTM": 131679394552.99246,
-        "operatingCashflowTTM": 88558684506.52739,
-        "fcfTTM": 63471998155.094894,
-        "netIncomeTTM": 112742163965.2612,
+        "revenueTTM": 134406637225.35371,
+        "operatingCashflowTTM": 90392844089.46185,
+        "fcfTTM": 64786581522.1907,
+        "netIncomeTTM": 115077193235.28621,
         "fcfMarginTTM": 0.4820192131848807,
         "fcfMargin3yMedian": 0.19840848634054134,
         "normalizedFcfMargin": 0.29767224073606013,
@@ -624,9 +624,9 @@
         "equityRiskPremium": 0.05,
         "reportingCurrency": "KRW",
         "modelCurrency": "USD",
-        "fxRateToUsd": 0.000696087997350923,
-        "beta": 2.322,
-        "costOfEquity": 0.15860000000000002,
+        "fxRateToUsd": 0.0007105048383193854,
+        "beta": 2.413,
+        "costOfEquity": 0.16315,
         "rationale": "DRAM 与 NAND 周期显著，TTM 权重 35%，三年中位数权重 65%。",
         "source": "SK hynix 2Q26 official K-IFRS results (SEC 6-K + earnings presentation); KRW translated at latest KRW/USD",
         "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2120882/000119312526321989/d115239d6k.htm",
@@ -642,5 +642,6 @@
       "dataSource": "Finviz supplemental + Yahoo Finance EOD",
       "note": "数据口径：收盘价和实际交易日来自 Yahoo Finance EOD；Trailing P/E、P/CF、P/S 与历史曲线共用已披露财报 TTM 分母；Finviz 仅提供前瞻及企业价值补充指标。"
     }
-  ]
+  ],
+  "fundamentalsUpdatedAt": "2026-08-09T03:11:35Z"
 }
