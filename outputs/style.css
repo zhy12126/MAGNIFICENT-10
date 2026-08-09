@@ -1334,7 +1334,8 @@ svg {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px
+  gap: 18px;
+  container-type: inline-size
 }
 
 .model-head .eyebrow {
@@ -3008,6 +3009,43 @@ nav a:hover {
 }
 
 @media(max-width:390px) {
+  .growth-scenarios:not(.baseline-comparison) {
+    grid-template-columns: 1fr;
+  }
+
+  .growth-scenarios:not(.baseline-comparison)>div:last-child {
+    grid-column: auto;
+  }
+}
+
+/* Use the model card's real width as a fallback. Some mobile browsers keep a
+   desktop-sized layout viewport even when the visible content area is narrow. */
+@container (max-width:700px) {
+  .growth-scenarios:not(.baseline-comparison) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 8px;
+  }
+
+  .growth-scenarios:not(.baseline-comparison)>div {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 10px 11px;
+    border-radius: 10px;
+  }
+
+  .growth-scenarios:not(.baseline-comparison)>div:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .growth-scenarios:not(.baseline-comparison)>i {
+    display: none;
+  }
+}
+
+@container (max-width:380px) {
   .growth-scenarios:not(.baseline-comparison) {
     grid-template-columns: 1fr;
   }
