@@ -12,7 +12,7 @@ const fallbackStocks = [
   { name: 'AMD', ticker: 'AMD', logo: 'A', color: '#fff2eb', ink: '#d34b28', cap: '—', pe: '—', fpe: '—', peg: '—', ps: '—', pcf: '—', implied: '—', growth: '—', price: '等待日终更新', note: '等待 Alpha Vantage 日更数据。' },
   { name: 'SK hynix', ticker: 'SKHY', logo: 'H', color: '#fff0ea', ink: '#d04d34', cap: '—', pe: '—', fpe: '—', peg: '—', ps: '—', pcf: '—', implied: '—', growth: '—', price: '等待日终更新', note: '等待 Alpha Vantage 日更数据。' }
 ];
-let stocks = fallbackStocks, historyByTicker = {}, nasdaqData = null, activeIndex = 0, activePeriod = '3年', activeValuationPeriod = '3年', activePricePeriod = '1年', lastUpdated = '等待日更数据', activeNasdaqMetrics = new Set(['pe', 'forwardPe', 'pb']), sortKey = 'cap', sortDirection = -1, chartMode = 'valuation', activeValuationMetric = 'pe', showPriceOverlay = true, marketDataReady = false, overviewScrollPosition = 0;
+let stocks = fallbackStocks, historyByTicker = {}, nasdaqData = null, activeIndex = 0, activePeriod = '1年', activeValuationPeriod = '1年', activePricePeriod = '1年', lastUpdated = '等待日更数据', activeNasdaqMetrics = new Set(['pe', 'forwardPe', 'pb']), sortKey = 'cap', sortDirection = -1, chartMode = 'valuation', activeValuationMetric = 'pe', showPriceOverlay = false, marketDataReady = false, overviewScrollPosition = 0;
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 const syncTouchMobileClass = () => { const mobileSignal = navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent); document.documentElement.classList.toggle('touch-mobile', window.innerWidth <= 680 && mobileSignal) };
 syncTouchMobileClass(); window.addEventListener('resize', syncTouchMobileClass);

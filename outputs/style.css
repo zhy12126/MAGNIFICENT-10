@@ -3021,6 +3021,36 @@ nav a:hover {
 /* Use the model card's real width as a fallback. Some mobile browsers keep a
    desktop-sized layout viewport even when the visible content area is narrow. */
 @container (max-width:700px) {
+  .baseline-comparison {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 8px;
+  }
+
+  .baseline-comparison>div {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 10px 11px;
+    border-radius: 10px;
+  }
+
+  .baseline-comparison>.baseline-primary {
+    grid-column: 1 / -1;
+    padding: 13px 14px;
+    background: linear-gradient(135deg, #eefaf4, #f8fcfa);
+    border-color: #bfe3d1;
+  }
+
+  .baseline-comparison>.baseline-primary b {
+    font-size: 26px;
+  }
+
+  .baseline-comparison>i {
+    display: none;
+  }
+
   .growth-scenarios:not(.baseline-comparison) {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3046,6 +3076,14 @@ nav a:hover {
 }
 
 @container (max-width:380px) {
+  .baseline-comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .baseline-comparison>.baseline-primary {
+    grid-column: auto;
+  }
+
   .growth-scenarios:not(.baseline-comparison) {
     grid-template-columns: 1fr;
   }
