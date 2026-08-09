@@ -672,10 +672,10 @@
         "status": "ready",
         "company": "SK hynix",
         "fiscalPeriodEnd": "2026-06-30",
-        "revenueTTM": 134406637225.35371,
-        "operatingCashflowTTM": 90392844089.46185,
-        "fcfTTM": 64786581522.1907,
-        "netIncomeTTM": 115077193235.28621,
+        "revenueTTM": 133623381736.65266,
+        "operatingCashflowTTM": 89866079245.59734,
+        "fcfTTM": 64409037327.80428,
+        "netIncomeTTM": 114406580197.96483,
         "fcfMarginTTM": 0.4820192131848807,
         "fcfMargin3yMedian": 0.19840848634054134,
         "normalizedFcfMargin": 0.29767224073606013,
@@ -685,17 +685,19 @@
         "equityRiskPremium": 0.05,
         "reportingCurrency": "KRW",
         "modelCurrency": "USD",
-        "fxRateToUsd": 0.0007105048383193854,
+        "fxRateToUsd": 0.0007063643670908015,
         "beta": 2.413,
         "costOfEquity": 0.16315,
         "rationale": "DRAM 与 NAND 周期显著，TTM 权重 35%，三年中位数权重 65%。",
-        "source": "SK hynix 2Q26 official K-IFRS results (SEC 6-K + earnings presentation); KRW translated at latest KRW/USD",
+        "source": "SK hynix 2Q26 official K-IFRS results (SEC 6-K + earnings presentation); FY2021 cycle input from Korean DART annual report; KRW translated at latest KRW/USD",
         "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2120882/000119312526321989/d115239d6k.htm",
         "availableFrom": "2026-07-29",
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null,
         "providerFiscalPeriodEnd": "2026-06-30",
-        "fiscalPeriodEndActual": "2026-06-30"
+        "fiscalPeriodEndActual": "2026-06-30",
+        "fcfMarginCycleMedian": 0.1700322890998682,
+        "fcfMarginCycleYears": 5
       },
       "valuationAsOf": "2026-08-07",
       "ttmPeriodEnd": "2026-06-30",
@@ -706,5 +708,5 @@
       "note": "数据口径：收盘价和实际交易日来自 Yahoo Finance EOD；Trailing P/E、P/CF、P/S 与历史曲线共用已披露财报 TTM 分母；Finviz 仅提供前瞻及企业价值补充指标。"
     }
   ],
-  "fundamentalsUpdatedAt": "2026-08-09T03:11:35Z"
+  "fundamentalsUpdatedAt": "2026-08-09T07:00:26Z"
 }

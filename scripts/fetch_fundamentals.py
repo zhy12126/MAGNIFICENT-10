@@ -109,7 +109,7 @@ def annual_margins(income, cash):
             _, _, margin = fcf_margin(income_report, cash_report)
             if margin is not None:
                 results.append(margin)
-    return results[:3]
+    return results[:7]
 
 def main():
     companies = {}
@@ -126,7 +126,8 @@ def main():
                 companies[ticker] = {"status": "insufficient", "company": name, "reason": "公开财报不足四个季度或三年可比现金流，暂不计算隐含增长率。", "rationale": rationale}
                 continue
             revenue, operating_cashflow, fcf, net_income, ttm_margin, fiscal_end = ttm
-            median_margin = statistics.median(margins)
+            median_margin = statistics.median(margins[:3])
+            cycle_margin = statistics.median(margins[:7]) if len(margins) >= 5 else None
             normalized = ttm_weight * ttm_margin + (1 - ttm_weight) * median_margin
             reporting_currency = "USD"
             fx_rate_to_usd = 1.0
@@ -144,6 +145,7 @@ def main():
                 "revenueTTM": revenue, "operatingCashflowTTM": operating_cashflow,
                 "fcfTTM": fcf, "netIncomeTTM": net_income, "fcfMarginTTM": ttm_margin,
                 "fcfMargin3yMedian": median_margin, "normalizedFcfMargin": normalized,
+                "fcfMarginCycleMedian": cycle_margin, "fcfMarginCycleYears": min(len(margins), 7),
                 "ttmWeight": ttm_weight, "terminalGrowth": TERMINAL_GROWTH,
                 "riskFreeRate": RISK_FREE_RATE, "equityRiskPremium": EQUITY_RISK_PREMIUM,
                 "reportingCurrency": reporting_currency, "modelCurrency": "USD", "fxRateToUsd": fx_rate_to_usd,
