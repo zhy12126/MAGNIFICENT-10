@@ -10,6 +10,14 @@ METRICS = ("pe", "pcf", "ps")
 MIN_AUDIT_ROWS = 1000
 
 
+def fiscal_quarter(value):
+    try:
+        parsed = date.fromisoformat(str(value))
+    except (TypeError, ValueError):
+        return None
+    return parsed.year, (parsed.month - 1) // 3 + 1
+
+
 def number(value):
     try:
         return float(value)
@@ -54,6 +62,15 @@ def main():
             continue
         if matching.get("ttmPeriodEnd") != stock.get("ttmPeriodEnd"):
             issues.append(f"{ticker}: TTM period mismatch snapshot={stock.get('ttmPeriodEnd')} history={matching.get('ttmPeriodEnd')}")
+        model = stock.get("valuationModel") or {}
+        model_period = model.get("fiscalPeriodEndActual") or model.get("fiscalPeriodEnd")
+        model_quarter = fiscal_quarter(model_period)
+        valuation_quarter = fiscal_quarter(stock.get("ttmPeriodEnd"))
+        if model_quarter and valuation_quarter and valuation_quarter < model_quarter:
+            issues.append(
+                f"{ticker}: trailing multiples are stale; valuation TTM={stock.get('ttmPeriodEnd')} "
+                f"but company model filing={model_period}"
+            )
         for metric in METRICS:
             snapshot_value, history_value = number(stock.get(metric)), number(matching.get(metric))
             if snapshot_value is None and history_value is None:

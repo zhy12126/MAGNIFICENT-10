@@ -101,9 +101,20 @@ const marketCapNumber = value => { const text = String(value || '').trim(), numb
 function reverseImpliedGrowth(s, m) {
   const marketCap = marketCapNumber(s.cap), revenue = Number(m.revenueTTM), currentMargin = Number(m.fcfMarginTTM), targetMargin = Number(m.normalizedFcfMargin), cost = Number(m.costOfEquity), terminal = Number(m.terminalGrowth);
   if (![marketCap, revenue, currentMargin, targetMargin, cost, terminal].every(Number.isFinite) || marketCap <= 0 || revenue <= 0 || targetMargin < .03 || cost <= terminal) return null;
+  const adjustment = Number(m.equityValueAdjustmentUsd) || 0, operatingEquityValue = marketCap - adjustment;
+  if (operatingEquityValue <= 0) return null;
   const equityValue = growth => { let presentValue = 0; for (let year = 1; year <= 5; year++) { const margin = currentMargin + (targetMargin - currentMargin) * year / 5; const fcfe = revenue * (1 + growth) ** year * margin; presentValue += fcfe / (1 + cost) ** year } const terminalFcfe = revenue * (1 + growth) ** 5 * targetMargin * (1 + terminal); return presentValue + (terminalFcfe / (cost - terminal)) / (1 + cost) ** 5 };
-  let low = -.30, high = 1.50; for (let i = 0; i < 60; i++) { const middle = (low + high) / 2; if (equityValue(middle) < marketCap) low = middle; else high = middle }
-  return equityValue(high) < marketCap ? '>150%' : `${Math.max(-30, Math.min(150, high * 100)).toFixed(0)}%`;
+  let low = -.30, high = 1.50; for (let i = 0; i < 60; i++) { const middle = (low + high) / 2; if (equityValue(middle) < operatingEquityValue) low = middle; else high = middle }
+  return equityValue(high) < operatingEquityValue ? '>150%' : `${Math.max(-30, Math.min(150, high * 100)).toFixed(0)}%`;
+}
+function growthSensitivity(s, m) {
+  const beta = Number(m.beta), erp = Number(m.equityRiskPremium), rf = Number(m.riskFreeRate);
+  const values = [
+    { ...m, normalizedFcfMargin: Number(m.normalizedFcfMargin) * .8, terminalGrowth: .02, costOfEquity: rf + (beta + .2) * erp },
+    m,
+    { ...m, normalizedFcfMargin: Number(m.normalizedFcfMargin) * 1.2, terminalGrowth: .03, costOfEquity: rf + Math.max(0, beta - .2) * erp },
+  ].map(model => reverseImpliedGrowth(s, model)).filter(value => value && value !== '>150%').map(Number.parseFloat);
+  return values.length ? `${Math.min(...values).toFixed(0)}%–${Math.max(...values).toFixed(0)}%` : null;
 }
 const modelHelpButton = (key, label) => `<button type="button" class="model-metric-help" data-model-help="${key}" aria-label="${label}说明">?</button>`;
 const editableAssumption = (label, key, value, { percent = false, step = '0.1', min, max } = {}) => `<label class="model-assumption editable"><span class="assumption-label"><span>${label} ${modelHelpButton(key, label)}</span><em>可编辑</em></span><span class="assumption-input-row"><input type="number" inputmode="decimal" data-model-input="${key}" value="${percent ? (Number(value) * 100).toFixed(1) : Number(value).toFixed(2)}" step="${step}"${min !== undefined ? ` min="${min}"` : ''}${max !== undefined ? ` max="${max}"` : ''}/>${percent ? '<small>%</small>' : ''}</span></label>`;
@@ -112,7 +123,9 @@ function modelInputs(s) {
   if (!ready) return `<p class="eyebrow">IMPLIED-GROWTH INPUTS</p><h3>公司级模型输入</h3><p class="model-result-unavailable">未展示推算结果：当前没有足够的公司公开财报数据，无法建立可靠的公司级现金流模型，因此隐含增长率显示为“—”。</p>`;
   const pct = v => `${(Number(v) * 100).toFixed(1)}%`, requiredGrowth = reverseImpliedGrowth(s, m), reason = m.impliedGrowthNote || '归一化自由现金流率过低、折现率不高于永续增长率，或模型输入不完整。';
   const quarter = reportedQuarterLabel(s), comparison = requiredGrowth ? `<div class="growth-compare" aria-label="增长对比"><div><span>未来 5 年所需增长 ${modelHelpButton('required-growth', '未来 5 年所需增长')}</span><b id="model-required-growth">${requiredGrowth}</b><small>按当前假设反推的收入 CAGR</small></div><i aria-hidden="true">对比</i><div><span>${quarter}实际增长 ${modelHelpButton('actual-growth', '实际增长')}</span><b>${s.growth || '—'}</b><small>已披露收入同比</small></div></div>` : '';
-  const disclosure = requiredGrowth ? '' : `<p id="model-result-unavailable" class="model-result-unavailable">未展示推算结果：${reason}</p>`;
+  const sensitivity = requiredGrowth ? growthSensitivity(s, m) : null, disclosure = requiredGrowth
+    ? (sensitivity ? `<p class="model-result-unavailable">敏感度区间：<b>${sensitivity}</b>（先以市值减去净现金调整，再令 FCF 率 ±20%、Beta ±0.2、永续增长 2.0%–3.0%）</p>` : '')
+    : `<p id="model-result-unavailable" class="model-result-unavailable">未展示推算结果：${reason}</p>`;
   return `<div class="model-head"><div><p class="eyebrow">IMPLIED-GROWTH INPUTS</p><h3>公司级模型输入</h3></div>${comparison}</div><div class="model-grid"><span><span class="model-metric-name">TTM 自由现金流率 ${modelHelpButton('fcf-ttm', 'TTM 自由现金流率')}</span><b>${pct(m.fcfMarginTTM)}</b></span><span><span class="model-metric-name">三年中位数 ${modelHelpButton('fcf-median', '三年中位数')}</span><b>${pct(m.fcfMargin3yMedian)}</b></span><span><span class="model-metric-name">归一化 FCF 率 ${modelHelpButton('fcf-normalized', '归一化 FCF 率')}</span><b>${pct(m.normalizedFcfMargin)}</b></span>${editableAssumption('权益成本', 'costOfEquity', m.costOfEquity, { percent: true, min: 0.1, max: 50 })}${editableAssumption('Beta', 'beta', m.beta, { step: '0.01', min: 0, max: 5 })}${editableAssumption('永续增长', 'terminalGrowth', m.terminalGrowth, { percent: true, min: -5, max: 10 })}</div><p class="model-assumption-hint">这些数值是估值假设，并非公司财报数据。修改后会立即重算“未来 5 年所需增长”；调整 Beta 会同步更新权益成本，手动填写权益成本则优先采用手动值。输入仅保存在本设备。</p>${disclosure}<p class="model-formula-note">未来 5 年所需增长 g：求解 <b>当前市值 = Σ（第 t 年收入 × 自由现金流率 ÷ (1 + 权益成本)<sup>t</sup>）+ 终值折现</b>，其中第 t 年收入 = 当前收入 × (1 + g)<sup>t</sup>。</p><p class="model-note">截止财报期：${m.fiscalPeriodEnd}。${m.rationale} 数据来源：${m.source}。</p>`
 }
 function updateModelGrowthPreview() {

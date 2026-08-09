@@ -20,7 +20,12 @@
       "modelCurrency": "USD",
       "fxRateToUsd": 1.0,
       "rationale": "AI 数据中心利润率出现结构性抬升；保留 40% 三年中位数以避免只外推峰值。",
-      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）"
+      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
+      "cashAndShortTermInvestmentsUsd": 62359000000.0,
+      "totalDebtUsd": 8470000000.0,
+      "equityValueAdjustmentUsd": 53889000000.0,
+      "balanceSheetPeriodEnd": "2026-04-26",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "AAPL": {
       "status": "ready",
@@ -41,7 +46,12 @@
       "modelCurrency": "USD",
       "fxRateToUsd": 1.0,
       "rationale": "硬件与服务组合成熟，TTM 与三年现金转化各占一半。",
-      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）"
+      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
+      "cashAndShortTermInvestmentsUsd": 62399000000.0,
+      "totalDebtUsd": 82347000000.0,
+      "equityValueAdjustmentUsd": -19948000000.0,
+      "balanceSheetPeriodEnd": "2026-06-27",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "MSFT": {
       "status": "ready",
@@ -62,7 +72,12 @@
       "modelCurrency": "USD",
       "fxRateToUsd": 1.0,
       "rationale": "AI 基础设施资本开支已显著上升，较多采用当前现金流率。",
-      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）"
+      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
+      "cashAndShortTermInvestmentsUsd": 76843000000.0,
+      "totalDebtUsd": 40294000000.0,
+      "equityValueAdjustmentUsd": 36549000000.0,
+      "balanceSheetPeriodEnd": "2026-06-30",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "GOOGL": {
       "status": "ready",
@@ -83,7 +98,12 @@
       "modelCurrency": "USD",
       "fxRateToUsd": 1.0,
       "rationale": "数据中心投资快速增加，当前现金流率比过去轻资本年份更具代表性。",
-      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）"
+      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
+      "cashAndShortTermInvestmentsUsd": 242474000000.0,
+      "totalDebtUsd": 100164000000.0,
+      "equityValueAdjustmentUsd": 142310000000.0,
+      "balanceSheetPeriodEnd": "2026-06-30",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "AMZN": {
       "status": "ready",
@@ -104,7 +124,12 @@
       "modelCurrency": "USD",
       "fxRateToUsd": 1.0,
       "rationale": "AWS 与物流网络均在加大投入，当前现金转化优先。",
-      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）"
+      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
+      "cashAndShortTermInvestmentsUsd": 125702000000.0,
+      "totalDebtUsd": 132224000000.0,
+      "equityValueAdjustmentUsd": -6522000000.0,
+      "balanceSheetPeriodEnd": "2026-06-30",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "META": {
       "status": "ready",
@@ -125,7 +150,12 @@
       "modelCurrency": "USD",
       "fxRateToUsd": 1.0,
       "rationale": "AI 资本开支处于高投入阶段，避免用旧年高 FCF 率高估。",
-      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）"
+      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
+      "cashAndShortTermInvestmentsUsd": 88856000000.0,
+      "totalDebtUsd": 58748000000.0,
+      "equityValueAdjustmentUsd": 30108000000.0,
+      "balanceSheetPeriodEnd": "2026-03-31",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "TSLA": {
       "status": "ready",
@@ -146,16 +176,21 @@
       "modelCurrency": "USD",
       "fxRateToUsd": 1.0,
       "rationale": "交付、库存和营运资本波动较大，以三年中位数为主。",
-      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）"
+      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
+      "cashAndShortTermInvestmentsUsd": 43524000000.0,
+      "totalDebtUsd": 648441000.0,
+      "equityValueAdjustmentUsd": 42875559000.0,
+      "balanceSheetPeriodEnd": "2026-06-30",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "TSM": {
       "status": "ready",
       "company": "TSMC",
       "fiscalPeriodEnd": "2026-06-30",
-      "revenueTTM": 148345953033.33334,
-      "operatingCashflowTTM": 89447367533.33333,
-      "fcfTTM": 39734119633.333336,
-      "netIncomeTTM": 74728926133.33333,
+      "revenueTTM": 140834765537.97467,
+      "operatingCashflowTTM": 84918386898.73418,
+      "fcfTTM": 37722265474.68354,
+      "netIncomeTTM": 70945183037.97469,
       "fcfMarginTTM": 0.2678476818602869,
       "fcfMargin3yMedian": 0.2851970594718451,
       "normalizedFcfMargin": 0.2773898395466439,
@@ -165,9 +200,9 @@
       "equityRiskPremium": 0.05,
       "reportingCurrency": "TWD",
       "modelCurrency": "USD",
-      "fxRateToUsd": 0.03333333333333333,
+      "fxRateToUsd": 0.03164556962025317,
       "rationale": "晶圆厂资本开支与景气周期显著，三年中位数为主。",
-      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）；TSMC 金额按 1 USD = 30.0 TWD 换算"
+      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）；TSMC 金额按公司 2Q26 披露汇率 1 USD = 31.6 TWD 换算"
     },
     "MU": {
       "status": "ready",
@@ -188,7 +223,12 @@
       "modelCurrency": "USD",
       "fxRateToUsd": 1.0,
       "rationale": "存储价格周期显著，三年中位数为主以降低周期高低点影响。",
-      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）"
+      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
+      "cashAndShortTermInvestmentsUsd": 25022000000.0,
+      "totalDebtUsd": 3624000000.0,
+      "equityValueAdjustmentUsd": 21398000000.0,
+      "balanceSheetPeriodEnd": "2026-05-28",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "AVGO": {
       "status": "ready",
@@ -209,7 +249,12 @@
       "modelCurrency": "USD",
       "fxRateToUsd": 1.0,
       "rationale": "基础设施软件整合与半导体业务并行，当前现金转化权重略高。",
-      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）"
+      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
+      "cashAndShortTermInvestmentsUsd": 19628000000.0,
+      "totalDebtUsd": 64907000000.0,
+      "equityValueAdjustmentUsd": -45279000000.0,
+      "balanceSheetPeriodEnd": "2026-05-03",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "AMD": {
       "status": "ready",
@@ -230,7 +275,12 @@
       "modelCurrency": "USD",
       "fxRateToUsd": 1.0,
       "rationale": "数据中心与客户端业务均具周期性，采用三年中位数以避免只外推单一景气阶段。",
-      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）"
+      "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
+      "cashAndShortTermInvestmentsUsd": 13111000000.0,
+      "totalDebtUsd": 3226000000.0,
+      "equityValueAdjustmentUsd": 9885000000.0,
+      "balanceSheetPeriodEnd": "2026-06-27",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "SKHY": {
       "status": "ready",

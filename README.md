@@ -101,7 +101,7 @@ FCF 利润率用于周期归一化，之后按最新 KRW/USD 汇率换成模型�
 .\scripts\run_local_update.ps1 -Mode history
 ```
 
-GitHub 上的 `Refresh company fundamentals` 每周检查通用公司和 SKHY 的最新财报；发现财报期变化时，会自动回填美国公司、TSM 与 SKHY 各自的历史估值，再执行一致性验证。SKHY 始终使用独立 K-IFRS 路径，不进入美国公司的 SEC 通用逻辑。`Backfill free valuation history` 会在每月第一个周一进行一次全量历史审计，也可手动运行。
+GitHub 上的 `Refresh company fundamentals` 每周检查通用公司和 SKHY 的最新财报；发现财报期变化时，只回填发生变化的美国公司、TSM 或 SKHY 历史估值，再执行财报结构及估值一致性验证。SKHY 始终使用独立 K-IFRS 路径，不进入美国公司的 SEC 通用逻辑。不再运行每月全量历史审计；需要人工复核时可在本地按需执行 `history`。
 
 若要免费回填 Stooq 的五年日收盘价，即使 `.env` 中已配置 EODHD Key，也可明确指定：
 
@@ -109,7 +109,7 @@ GitHub 上的 `Refresh company fundamentals` 每周检查通用公司和 SKHY �
 .\scripts\run_local_update.ps1 -Mode history -PriceSource stooq
 ```
 
-这会覆盖同日期的历史估值点，不会伪造 Forward PE；历史 Forward PE 需要带时间戳的分析师一致预期数据。每一个交易日的分母均使用当日已经披露的最近四个季度 TTM，且以这四个季度的平均稀释加权股数换算为每股指标；因此不会在财报披露日前提前使用新数据。每条记录还会保存 `ttmPeriodEnd` 与 `ttmAvailableFrom`，可用于核查口径。若在 `.env` 配置 `EODHD_API_KEY`，价格优先使用 EODHD 的调整后 EOD 收盘价；否则使用 Stooq，Stooq 返回空数据时回退 Yahoo Finance。后两者是低频本地回填的兼容措施，不应视为有 SLA 的商业数据授权。GitHub 部署时，在 **Settings → Secrets and variables → Actions** 新建 `SEC_EDGAR_USER_AGENT`（以及可选的 `EODHD_API_KEY`）。该工作流每月第一个周一自动执行，也可在 Actions 页面手动运行。若 SEC 或价格源缺少某美股代码，页面会保留空值，不混用其他市场数据。
+这会覆盖同日期的历史估值点，不会伪造 Forward PE；历史 Forward PE 需要带时间戳的分析师一致预期数据。每一个交易日的分母均使用当日已经披露的最近四个季度 TTM，且以这四个季度的平均稀释加权股数换算为每股指标；因此不会在财报披露日前提前使用新数据。每条记录还会保存 `ttmPeriodEnd` 与 `ttmAvailableFrom`，可用于核查口径。若在 `.env` 配置 `EODHD_API_KEY`，价格优先使用 EODHD 的调整后 EOD 收盘价；否则使用 Stooq，Stooq 返回空数据时回退 Yahoo Finance。后两者是低频本地回填的兼容措施，不应视为有 SLA 的商业数据授权。GitHub 部署时，在 **Settings → Secrets and variables → Actions** 新建 `SEC_EDGAR_USER_AGENT`（以及可选的 `EODHD_API_KEY`）。GitHub 周度财报任务只在识别到新财报时回填对应公司；若 SEC 或价格源缺少某美股代码，页面会保留空值，不混用其他市场数据。
 
 Alpha Vantage 免费 Key 每天限额约 25 次请求。通用 `fundamentals` 使用 22 次请求；财报变化时 TSM 专项历史重建再使用 3 次，合计不超过 25 次。SKHY 专用更新和 `daily` 不使用该 Key。
 
@@ -119,6 +119,8 @@ Alpha Vantage 免费 Key 每天限额约 25 次请求。通用 `fundamentals` �
 - `收入同比（最近）` 是最新披露季度的收入同比，不是分析师预测。
 - `市现率` 在免费 25 次/日额度内无法可靠同时取得，暂显示 `—`；要补齐可使用付费数据源或降低其他调用。
 - `隐含增长率` 是公司级反向 FCFE：基于各公司最近四季收入、经营现金流、资本开支、三年现金流率中位数和该股 Beta，反向计算未来五年收入 CAGR；不会使用行业统一自由现金流率。
+- 美国公司的反向估值会用 SEC Company Facts 中最新一期现金、短期投资和债务调整经营资产对应的权益价值；缺少可审计资产负债表输入时不臆造调整值。详情页同时展示 FCF 率、Beta 和永续增长联合变化下的敏感度区间。
+- 52/53 周财年的公司同时保留数据商标准化日期和 SEC 历史回填识别的真实财报截止日期；一致性验证会阻止估值倍数仍停留在更早季度的快照通过。
 - 每周日，`Refresh company fundamentals` 会检查 11 家通用公司的 Alpha Vantage 财报，并通过独立 K-IFRS 路径检查 SKHY；只有财报期发生变化才回填相关历史估值。每日行情更新后会强制执行快照/历史一致性验证，验证失败不会提交数据。
 - 对公开财报不足四个季度或三年可比现金流的公司，隐含增长率显示 `—`，不会补造行业假设。
 - `outputs/data/history.json` 由日更任务累积真实 PE、Forward PE 与 P/S 快照；详情页的 1 年、3 年、5 年、10 年筛选均只展示这些真实快照。首次部署前的历史不会用模拟数据补齐。

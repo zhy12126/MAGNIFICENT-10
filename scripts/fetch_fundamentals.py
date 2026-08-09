@@ -41,9 +41,9 @@ TERMINAL_GROWTH = .025
 # Alpha Vantage returns TSMC's primary financial statements in TWD, while the
 # TSM ADR market capitalization is quoted in USD.  Amounts must therefore be
 # normalized before the reverse-FCFE model compares cash flow with equity value.
-# The model uses a transparent rounded spot proxy; margins are unaffected by
-# this conversion, and the rate can be refreshed during the methodology review.
-TSM_TWD_PER_USD = 30.0
+# The model uses TSMC's disclosed quarterly USD/NTD rate; margins are unaffected
+# by this conversion, and the rate is refreshed with each new filing.
+TSM_TWD_PER_USD = 31.6
 
 def call(function, symbol):
     query = urlencode({"function": function, "symbol": symbol, "apikey": API_KEY})

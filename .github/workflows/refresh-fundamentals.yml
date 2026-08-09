@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: valuation-data-writer
+  group: site-data-writer
   cancel-in-progress: false
 
 jobs:
@@ -35,6 +35,10 @@ jobs:
         run: python scripts/fetch_fundamentals.py
         env:
           ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
+      - name: Add SEC net-cash valuation adjustments
+        run: python scripts/enrich_balance_sheet_adjustments.py
+        env:
+          SEC_EDGAR_USER_AGENT: ${{ secrets.SEC_EDGAR_USER_AGENT }}
       - name: Sync refreshed inputs into the website snapshot
         run: python scripts/sync_fundamentals_to_stocks.py
       - name: Refresh SKHY from its separate K-IFRS path
@@ -52,20 +56,27 @@ jobs:
           changed=sorted(k for k,v in after.items() if v and before.get(k) != v)
           print('filings_changed=' + ('true' if changed else 'false'))
           print('tickers=' + ','.join(changed))
+          print('us_tickers=' + ','.join(k for k in changed if k not in {'TSM','SKHY'}))
+          print('us_changed=' + ('true' if any(k not in {'TSM','SKHY'} for k in changed) else 'false'))
+          print('tsm_changed=' + ('true' if 'TSM' in changed else 'false'))
+          print('skhy_changed=' + ('true' if 'SKHY' in changed else 'false'))
           PY
+      - name: Validate refreshed company models
+        run: python scripts/validate_fundamentals.py
       - name: Backfill US valuation history after a new filing
-        if: steps.changed.outputs.filings_changed == 'true'
+        if: steps.changed.outputs.us_changed == 'true'
         env:
           SEC_EDGAR_USER_AGENT: ${{ secrets.SEC_EDGAR_USER_AGENT }}
+          HISTORY_TICKERS: ${{ steps.changed.outputs.us_tickers }}
         run: python scripts/fetch_free_valuation_history.py
       - name: Rebuild TSM history after a new filing
-        if: steps.changed.outputs.filings_changed == 'true'
+        if: steps.changed.outputs.tsm_changed == 'true'
         env:
           ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
           REBUILD_TICKERS: TSM
         run: python scripts/rebuild_selected_history.py
       - name: Rebuild separate SKHY history after a new filing
-        if: steps.changed.outputs.filings_changed == 'true'
+        if: steps.changed.outputs.skhy_changed == 'true'
         run: python scripts/fetch_skhy_history.py
       - name: Align the latest market snapshot after history changes
         if: steps.changed.outputs.filings_changed == 'true'
@@ -78,4 +89,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add outputs/data/fundamentals.json outputs/data/stocks.json outputs/data/history.json
           git diff --cached --quiet || git commit -m "chore: refresh filings and valuation history"
+          git pull --rebase
           git push
