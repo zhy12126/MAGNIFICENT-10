@@ -1334,7 +1334,8 @@ svg {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px
+  gap: 18px;
+  container-type: inline-size
 }
 
 .model-head .eyebrow {
@@ -2925,4 +2926,169 @@ nav a:hover {
 
 .growth-scenarios>div:nth-child(2) b {
   color: #3568a8
+}
+
+@media(max-width:680px) {
+  .baseline-comparison {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .baseline-comparison>div {
+    min-width: 0;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .baseline-comparison>.baseline-primary {
+    grid-column: 1 / -1;
+    padding: 13px 14px;
+    background: linear-gradient(135deg, #eefaf4, #f8fcfa);
+    border-color: #bfe3d1;
+  }
+
+  .baseline-comparison>.baseline-primary b {
+    margin: 2px 0;
+    font-size: 26px;
+    line-height: 1.1;
+  }
+
+  .baseline-comparison>div:not(.baseline-primary) b {
+    margin: 2px 0;
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  .baseline-comparison span {
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .baseline-comparison small {
+    font-size: 9px;
+    line-height: 1.4;
+  }
+
+  .baseline-comparison>i {
+    display: none;
+  }
+}
+
+@media(max-width:780px) {
+  .growth-scenarios:not(.baseline-comparison) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .growth-scenarios:not(.baseline-comparison)>div {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 10px 11px;
+    border-radius: 10px;
+  }
+
+  .growth-scenarios:not(.baseline-comparison)>div:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .growth-scenarios:not(.baseline-comparison)>div:last-child b {
+    font-size: 20px;
+  }
+
+  .growth-scenarios:not(.baseline-comparison)>span,
+  .growth-scenarios:not(.baseline-comparison) small {
+    overflow-wrap: anywhere;
+  }
+
+  .growth-scenarios:not(.baseline-comparison)>i {
+    display: none;
+  }
+}
+
+@media(max-width:390px) {
+  .growth-scenarios:not(.baseline-comparison) {
+    grid-template-columns: 1fr;
+  }
+
+  .growth-scenarios:not(.baseline-comparison)>div:last-child {
+    grid-column: auto;
+  }
+}
+
+/* Use the model card's real width as a fallback. Some mobile browsers keep a
+   desktop-sized layout viewport even when the visible content area is narrow. */
+@container (max-width:700px) {
+  .baseline-comparison {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 8px;
+  }
+
+  .baseline-comparison>div {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 10px 11px;
+    border-radius: 10px;
+  }
+
+  .baseline-comparison>.baseline-primary {
+    grid-column: 1 / -1;
+    padding: 13px 14px;
+    background: linear-gradient(135deg, #eefaf4, #f8fcfa);
+    border-color: #bfe3d1;
+  }
+
+  .baseline-comparison>.baseline-primary b {
+    font-size: 26px;
+  }
+
+  .baseline-comparison>i {
+    display: none;
+  }
+
+  .growth-scenarios:not(.baseline-comparison) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 8px;
+  }
+
+  .growth-scenarios:not(.baseline-comparison)>div {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 10px 11px;
+    border-radius: 10px;
+  }
+
+  .growth-scenarios:not(.baseline-comparison)>div:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .growth-scenarios:not(.baseline-comparison)>i {
+    display: none;
+  }
+}
+
+@container (max-width:380px) {
+  .baseline-comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .baseline-comparison>.baseline-primary {
+    grid-column: auto;
+  }
+
+  .growth-scenarios:not(.baseline-comparison) {
+    grid-template-columns: 1fr;
+  }
+
+  .growth-scenarios:not(.baseline-comparison)>div:last-child {
+    grid-column: auto;
+  }
 }

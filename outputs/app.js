@@ -12,7 +12,7 @@ const fallbackStocks = [
   { name: 'AMD', ticker: 'AMD', logo: 'A', color: '#fff2eb', ink: '#d34b28', cap: '—', pe: '—', fpe: '—', peg: '—', ps: '—', pcf: '—', implied: '—', growth: '—', price: '等待日终更新', note: '等待 Alpha Vantage 日更数据。' },
   { name: 'SK hynix', ticker: 'SKHY', logo: 'H', color: '#fff0ea', ink: '#d04d34', cap: '—', pe: '—', fpe: '—', peg: '—', ps: '—', pcf: '—', implied: '—', growth: '—', price: '等待日终更新', note: '等待 Alpha Vantage 日更数据。' }
 ];
-let stocks = fallbackStocks, historyByTicker = {}, nasdaqData = null, activeIndex = 0, activePeriod = '3年', activeValuationPeriod = '3年', activePricePeriod = '1年', lastUpdated = '等待日更数据', activeNasdaqMetrics = new Set(['pe', 'forwardPe', 'pb']), sortKey = 'cap', sortDirection = -1, chartMode = 'valuation', activeValuationMetric = 'pe', showPriceOverlay = true, marketDataReady = false, overviewScrollPosition = 0;
+let stocks = fallbackStocks, historyByTicker = {}, nasdaqData = null, activeIndex = 0, activePeriod = '1年', activeValuationPeriod = '1年', activePricePeriod = '1年', lastUpdated = '等待日更数据', activeNasdaqMetrics = new Set(['pe', 'forwardPe', 'pb']), sortKey = 'cap', sortDirection = -1, chartMode = 'valuation', activeValuationMetric = 'pe', showPriceOverlay = false, marketDataReady = false, overviewScrollPosition = 0;
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 const syncTouchMobileClass = () => { const mobileSignal = navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent); document.documentElement.classList.toggle('touch-mobile', window.innerWidth <= 680 && mobileSignal) };
 syncTouchMobileClass(); window.addEventListener('resize', syncTouchMobileClass);
@@ -160,7 +160,7 @@ function modelInputs(s) {
   } else {
     const baseline = reverseImpliedGrowth(s, m) || '—', sensitivity = growthSensitivity(s, m) || '—';
     heading = '公司级基准估值';
-    comparison = `<div class="growth-compare growth-scenarios" aria-label="基准增长对比"><div><span>未来5年所需增长 ${modelHelpButton('required-growth', '未来5年所需增长')}</span><b id="model-required-growth">${baseline}</b><small>公司级基准模型</small></div><div><span>普通敏感度 ${modelHelpButton('growth-sensitivity', '普通敏感度')}</span><b id="model-growth-sensitivity">${sensitivity}</b><small>现金流率、折现率与终值</small></div><i aria-hidden="true">对比</i>${actual}</div>`;
+    comparison = `<div class="growth-compare growth-scenarios baseline-comparison" aria-label="基准增长对比"><div class="baseline-primary"><span>未来5年所需增长 ${modelHelpButton('required-growth', '未来5年所需增长')}</span><b id="model-required-growth">${baseline}</b><small>当前市值反推的收入 CAGR</small></div><div><span>普通敏感度 ${modelHelpButton('growth-sensitivity', '普通敏感度')}</span><b id="model-growth-sensitivity">${sensitivity}</b><small>关键假设变化范围</small></div><i aria-hidden="true">对比</i>${actual}</div>`;
     guidance = '轻资本或无足够资本开支均值回归依据的公司仅展示基准模型和普通敏感度，不强套资本开支正常化。';
   }
   const medianDisplay = medianValue !== null && medianValue !== undefined && Number.isFinite(Number(medianValue)) ? pct(medianValue) : '—';
