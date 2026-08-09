@@ -2913,3 +2913,16 @@ nav a:hover {
     min-height: 0 !important
   }
 }
+
+.growth-scenarios>div {
+  min-width: 142px
+}
+
+.growth-scenarios>div:nth-child(2) {
+  background: #f5f8ff;
+  border-color: #dce5f4
+}
+
+.growth-scenarios>div:nth-child(2) b {
+  color: #3568a8
+}

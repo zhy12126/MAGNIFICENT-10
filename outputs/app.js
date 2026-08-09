@@ -116,24 +116,43 @@ function growthSensitivity(s, m) {
   ].map(model => reverseImpliedGrowth(s, model)).filter(value => value && value !== '>150%').map(Number.parseFloat);
   return values.length ? `${Math.min(...values).toFixed(0)}%–${Math.max(...values).toFixed(0)}%` : null;
 }
+function reverseScenarioGrowth(s, m, normalizationYears = null) {
+  const marketCap = marketCapNumber(s.cap), revenue = Number(m.revenueTTM), currentMargin = Number(m.fcfMarginTTM), historicalMargin = Number(m.fcfMargin3yMedian), cost = Number(m.costOfEquity), terminal = Number(m.terminalGrowth), adjustment = Number(m.equityValueAdjustmentUsd) || 0;
+  const targetValue = marketCap - adjustment, terminalMargin = normalizationYears ? historicalMargin : currentMargin;
+  if (![targetValue, revenue, currentMargin, historicalMargin, cost, terminalMargin].every(Number.isFinite) || targetValue <= 0 || revenue <= 0 || terminalMargin < .03 || cost <= terminal) return null;
+  const marginForYear = year => normalizationYears ? currentMargin + (historicalMargin - currentMargin) * Math.min(year / normalizationYears, 1) : currentMargin;
+  const equityValue = growth => {
+    let value = 0;
+    for (let year = 1; year <= 5; year++) value += revenue * (1 + growth) ** year * marginForYear(year) / (1 + cost) ** year;
+    const terminalFcfe = revenue * (1 + growth) ** 5 * terminalMargin * (1 + terminal);
+    return value + terminalFcfe / (cost - terminal) / (1 + cost) ** 5;
+  };
+  let low = -.30, high = 1.50;
+  for (let index = 0; index < 60; index++) { const middle = (low + high) / 2; if (equityValue(middle) < targetValue) low = middle; else high = middle }
+  return equityValue(high) < targetValue ? 1.5 : high;
+}
+const scenarioLabel = values => {
+  const valid = values.filter(Number.isFinite).map(value => Math.max(-.3, Math.min(1.5, value)) * 100);
+  if (!valid.length) return '—';
+  const low = Math.min(...valid), high = Math.max(...valid);
+  return Math.round(low) === Math.round(high) ? `${Math.round(low)}%` : `${Math.round(low)}%–${Math.round(high)}%`;
+};
 const modelHelpButton = (key, label) => `<button type="button" class="model-metric-help" data-model-help="${key}" aria-label="${label}说明">?</button>`;
 const editableAssumption = (label, key, value, { percent = false, step = '0.1', min, max } = {}) => `<label class="model-assumption editable"><span class="assumption-label"><span>${label} ${modelHelpButton(key, label)}</span><em>可编辑</em></span><span class="assumption-input-row"><input type="number" inputmode="decimal" data-model-input="${key}" value="${percent ? (Number(value) * 100).toFixed(1) : Number(value).toFixed(2)}" step="${step}"${min !== undefined ? ` min="${min}"` : ''}${max !== undefined ? ` max="${max}"` : ''}/>${percent ? '<small>%</small>' : ''}</span></label>`;
 function modelInputs(s) {
   const m = modelForStock(s), ready = m?.status === 'ready';
-  if (!ready) return `<p class="eyebrow">IMPLIED-GROWTH INPUTS</p><h3>公司级模型输入</h3><p class="model-result-unavailable">未展示推算结果：当前没有足够的公司公开财报数据，无法建立可靠的公司级现金流模型，因此隐含增长率显示为“—”。</p>`;
-  const pct = v => `${(Number(v) * 100).toFixed(1)}%`, requiredGrowth = reverseImpliedGrowth(s, m), reason = m.impliedGrowthNote || '归一化自由现金流率过低、折现率不高于永续增长率，或模型输入不完整。';
-  const quarter = reportedQuarterLabel(s), comparison = requiredGrowth ? `<div class="growth-compare" aria-label="增长对比"><div><span>未来 5 年所需增长 ${modelHelpButton('required-growth', '未来 5 年所需增长')}</span><b id="model-required-growth">${requiredGrowth}</b><small>按当前假设反推的收入 CAGR</small></div><i aria-hidden="true">对比</i><div><span>${quarter}实际增长 ${modelHelpButton('actual-growth', '实际增长')}</span><b>${s.growth || '—'}</b><small>已披露收入同比</small></div></div>` : '';
-  const sensitivity = requiredGrowth ? growthSensitivity(s, m) : null, disclosure = requiredGrowth
-    ? (sensitivity ? `<p class="model-result-unavailable">敏感度区间：<b>${sensitivity}</b>（先以市值减去净现金调整，再令 FCF 率 ±20%、Beta ±0.2、永续增长 2.0%–3.0%）</p>` : '')
-    : `<p id="model-result-unavailable" class="model-result-unavailable">未展示推算结果：${reason}</p>`;
-  return `<div class="model-head"><div><p class="eyebrow">IMPLIED-GROWTH INPUTS</p><h3>公司级模型输入</h3></div>${comparison}</div><div class="model-grid"><span><span class="model-metric-name">TTM 自由现金流率 ${modelHelpButton('fcf-ttm', 'TTM 自由现金流率')}</span><b>${pct(m.fcfMarginTTM)}</b></span><span><span class="model-metric-name">三年中位数 ${modelHelpButton('fcf-median', '三年中位数')}</span><b>${pct(m.fcfMargin3yMedian)}</b></span><span><span class="model-metric-name">归一化 FCF 率 ${modelHelpButton('fcf-normalized', '归一化 FCF 率')}</span><b>${pct(m.normalizedFcfMargin)}</b></span>${editableAssumption('权益成本', 'costOfEquity', m.costOfEquity, { percent: true, min: 0.1, max: 50 })}${editableAssumption('Beta', 'beta', m.beta, { step: '0.01', min: 0, max: 5 })}${editableAssumption('永续增长', 'terminalGrowth', m.terminalGrowth, { percent: true, min: -5, max: 10 })}</div><p class="model-assumption-hint">这些数值是估值假设，并非公司财报数据。修改后会立即重算“未来 5 年所需增长”；调整 Beta 会同步更新权益成本，手动填写权益成本则优先采用手动值。输入仅保存在本设备。</p>${disclosure}<p class="model-formula-note">未来 5 年所需增长 g：求解 <b>当前市值 = Σ（第 t 年收入 × 自由现金流率 ÷ (1 + 权益成本)<sup>t</sup>）+ 终值折现</b>，其中第 t 年收入 = 当前收入 × (1 + g)<sup>t</sup>。</p><p class="model-note">截止财报期：${m.fiscalPeriodEnd}。${m.rationale} 数据来源：${m.source}。</p>`
+  if (!ready) return `<p class="eyebrow">IMPLIED-GROWTH INPUTS</p><h3>公司级模型输入</h3><p class="model-result-unavailable">当前没有足够的公司公开财报数据，暂不计算双情景隐含增长率。</p>`;
+  const pct = value => `${(Number(value) * 100).toFixed(1)}%`, currentScenario = scenarioLabel([reverseScenarioGrowth(s, m)]), normalizedScenario = scenarioLabel([reverseScenarioGrowth(s, m, 3), reverseScenarioGrowth(s, m, 5)]), quarter = reportedQuarterLabel(s);
+  const comparison = `<div class="growth-compare growth-scenarios" aria-label="双情景增长对比"><div><span>当前资本开支持续 ${modelHelpButton('capex-current', '当前资本开支持续')}</span><b id="scenario-current-growth">${currentScenario}</b><small>TTM FCF率维持不变</small></div><div><span>资本开支正常化 ${modelHelpButton('capex-normalized', '资本开支正常化')}</span><b id="scenario-normalized-growth">${normalizedScenario}</b><small>3–5年回归三年中位数</small></div><i aria-hidden="true">对比</i><div><span>${quarter}实际增长 ${modelHelpButton('actual-growth', '实际增长')}</span><b>${s.growth || '—'}</b><small>已披露收入同比</small></div></div>`;
+  return `<div class="model-head"><div><p class="eyebrow">IMPLIED-GROWTH SCENARIOS</p><h3>两种资本开支情景</h3></div>${comparison}</div><div class="model-grid"><span><span class="model-metric-name">TTM 自由现金流率 ${modelHelpButton('fcf-ttm', 'TTM 自由现金流率')}</span><b>${pct(m.fcfMarginTTM)}</b></span><span><span class="model-metric-name">三年中位数 ${modelHelpButton('fcf-median', '三年中位数')}</span><b>${pct(m.fcfMargin3yMedian)}</b></span><span><span class="model-metric-name">原基准 FCF 率 ${modelHelpButton('fcf-normalized', '原基准 FCF 率')}</span><b>${pct(m.normalizedFcfMargin)}</b></span>${editableAssumption('权益成本', 'costOfEquity', m.costOfEquity, { percent: true, min: 0.1, max: 50 })}${editableAssumption('Beta', 'beta', m.beta, { step: '0.01', min: 0, max: 5 })}${editableAssumption('永续增长', 'terminalGrowth', m.terminalGrowth, { percent: true, min: -5, max: 10 })}</div><p class="model-assumption-hint">情景一假设当前 TTM 资本开支强度长期延续；情景二假设 FCF 率在3–5年内逐步回归公司自身三年中位数。调整权益成本、Beta或永续增长后会立即重算。</p><p class="model-formula-note">两个情景都反推未来5年收入 CAGR，使折现现金流价值加净现金调整后等于当前市值。情景区间反映正常化用时3年或5年的差异，不是预测区间。</p><p class="model-note">截止财报期：${m.fiscalPeriodEnd}。${m.rationale} 数据来源：${m.source}。</p>`;
 }
 function updateModelGrowthPreview() {
   const s = stocks[activeIndex], container = document.querySelector('#model-inputs'); if (!s || !container) return;
   const m = modelForStock(s), values = {}; container.querySelectorAll('[data-model-input]').forEach(input => { const n = Number(input.value); if (Number.isFinite(n)) values[input.dataset.modelInput] = input.dataset.modelInput === 'beta' ? n : n / 100 });
-  Object.assign(m, values); const requiredGrowth = reverseImpliedGrowth(s, m), result = container.querySelector('#model-required-growth'), unavailable = container.querySelector('#model-result-unavailable');
-  if (result) result.textContent = requiredGrowth || '—';
-  if (unavailable) unavailable.textContent = requiredGrowth ? '' : `未展示推算结果：归一化自由现金流率过低、折现率不高于永续增长率，或模型输入不完整。`;
+  Object.assign(m, values);
+  const current = container.querySelector('#scenario-current-growth'), normalized = container.querySelector('#scenario-normalized-growth');
+  if (current) current.textContent = scenarioLabel([reverseScenarioGrowth(s, m)]);
+  if (normalized) normalized.textContent = scenarioLabel([reverseScenarioGrowth(s, m, 3), reverseScenarioGrowth(s, m, 5)]);
 }
 document.querySelector('#model-inputs').addEventListener('input', event => {
   const input = event.target; if (!(input instanceof HTMLInputElement) || !input.matches('[data-model-input]')) return;
@@ -301,6 +320,9 @@ if (new URL(location.href).searchParams.has('_resume')) {
   const cleanUrl = new URL(location.href); cleanUrl.searchParams.delete('_resume'); history.replaceState(history.state, '', cleanUrl);
 }
 Object.assign(metricHelp, {
+  'capex-current': ['当前资本开支持续情景', `<p class="plain-lead">假设最近十二个月的自由现金流率在明确预测期和终值阶段都保持不变。</p><p>它代表当前数据中心、设备或其他资本开支强度长期延续的压力情景。若当前资本开支处于高峰，这个情景通常会要求更高的收入增长。</p>`],
+  'capex-normalized': ['资本开支正常化情景', `<p class="plain-lead">假设自由现金流率从当前 TTM 水平逐步回归公司自身最近三年中位数。</p><p>页面分别按3年和5年完成正常化，并把两个结果显示为区间。它不是管理层指引，也不假设行业统一利润率。</p>`],
+  'implied-growth': ['隐含增长率', `<p class="plain-lead">详情页用两种资本开支情景反推未来五年收入 CAGR，并与最近季度实际收入增长对照。</p><h3>当前资本开支持续</h3><p>TTM 自由现金流率长期保持不变，适合作为当前投资强度持续的压力情景。</p><h3>资本开支正常化</h3><p>FCF率在3年或5年内回归公司自身三年中位数，两个结果显示为区间。</p><div class="beginner-tip">首页表格仍显示原公司级基准值；进入详情页查看双情景，不应把任何一个数字视为公司指引。</div>`],
   'required-growth': ['未来 5 年所需增长', `<p class="plain-lead">在当前市值、现金流率和风险假设下，公司未来五年收入平均每年需要增长多少，才能使模型价值接近当前市值。</p><h3>计算方式</h3><p>模型反向求解收入 CAGR，并逐年把自由现金流折现回今天。数值越高，代表当前价格对未来增长的要求越高。</p><div class="beginner-tip">这是估值模型反推的要求，不是公司指引或分析师预测。</div>`],
   'actual-growth': ['最近季度实际增长', `<p class="plain-lead">最近已披露季度的营业收入，相比上年同一季度的实际同比变化。</p><div class="modal-formula">收入同比 =（本季度收入 ÷ 去年同期收入 − 1）× 100%</div><p>标题中的年份和季度来自最近财报截止日期。它反映已经发生的增长，不代表未来仍会保持相同速度。</p>`],
   'fcf-ttm': ['TTM 自由现金流率', `<p class="plain-lead">过去连续 12 个月，公司每 1 元收入最终转化为多少自由现金流。</p><div class="modal-formula">TTM 自由现金流率 =（经营现金流 − 资本开支）÷ TTM 营业收入</div><p>它更接近公司当前经营状态，但可能受到短期营运资金或资本开支波动影响。</p>`],
