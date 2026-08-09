@@ -14,7 +14,7 @@ const fallbackStocks = [
 ];
 let stocks = fallbackStocks, historyByTicker = {}, nasdaqData = null, activeIndex = 0, activePeriod = '1年', activeValuationPeriod = '1年', activePricePeriod = '1年', lastUpdated = '等待日更数据', activeNasdaqMetrics = new Set(['pe', 'forwardPe', 'pb']), sortKey = 'cap', sortDirection = -1, chartMode = 'valuation', activeValuationMetric = 'pe', showPriceOverlay = false, marketDataReady = false, overviewScrollPosition = 0;
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-const syncTouchMobileClass = () => { const mobileSignal = navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent); document.documentElement.classList.toggle('touch-mobile', window.innerWidth <= 680 && mobileSignal) };
+const syncTouchMobileClass = () => { document.documentElement.classList.toggle('touch-mobile', window.innerWidth <= 680) };
 syncTouchMobileClass(); window.addEventListener('resize', syncTouchMobileClass);
 const formatJapanTime = value => window.formatJapanHeaderTime?.(value) || value || '等待日更数据';
 const rankingDirection = { pe: 1, peg: 1, ps: 1, pcf: 1 };
