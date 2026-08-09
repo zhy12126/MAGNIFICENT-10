@@ -10,6 +10,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: site-data-writer
+  cancel-in-progress: false
+
 jobs:
   update-spy:
     runs-on: ubuntu-latest
@@ -28,4 +32,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add outputs/data/concentration.json
           git diff --cached --quiet || git commit -m "chore: update SPY concentration"
+          git pull --rebase
           git push

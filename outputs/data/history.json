@@ -1,5 +1,5 @@
 {
-  "source": "Selected US EOD prices from Yahoo Finance + Alpha Vantage quarterly financial statements",
+  "source": "SEC EDGAR point-in-time quarterly TTM financial facts + daily EOD prices (auto selection; EODHD, Stooq, and Yahoo fallback where applicable)",
   "stocks": {
     "NVDA": [
       {
@@ -130705,33 +130705,6 @@
     ],
     "AMD": [
       {
-        "date": "2021-08-02",
-        "price": 108.63,
-        "pe": 38.7603,
-        "pcf": 48.5528,
-        "ps": 9.9835,
-        "ttmPeriodEnd": "2021-06-26",
-        "ttmAvailableFrom": "2021-07-28"
-      },
-      {
-        "date": "2021-08-03",
-        "price": 112.56,
-        "pe": 40.1626,
-        "pcf": 50.3094,
-        "ps": 10.3447,
-        "ttmPeriodEnd": "2021-06-26",
-        "ttmAvailableFrom": "2021-07-28"
-      },
-      {
-        "date": "2021-08-04",
-        "price": 118.77,
-        "pe": 42.3784,
-        "pcf": 53.0849,
-        "ps": 10.9154,
-        "ttmPeriodEnd": "2021-06-26",
-        "ttmAvailableFrom": "2021-07-28"
-      },
-      {
         "date": "2021-08-05",
         "price": 112.35,
         "pe": 40.0876,
@@ -142006,69 +141979,53 @@
         "pcf": 81.6911,
         "ps": 21.2112,
         "ttmPeriodEnd": "2026-03-28",
-        "ttmAvailableFrom": "2026-05-06",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-05-06"
       },
       {
         "date": "2026-08-04",
         "price": 518.58,
-        "pe": 169.7109,
-        "pcf": 87.412,
+        "pe": 169.711,
+        "pcf": 87.4121,
         "ps": 22.6967,
         "ttmPeriodEnd": "2026-03-28",
-        "ttmAvailableFrom": "2026-05-06",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-05-06"
       },
       {
         "date": "2026-08-05",
         "price": 482.05,
-        "pe": 157.7561,
-        "pcf": 81.2545,
-        "ps": 21.0979,
-        "ttmPeriodEnd": "2026-03-28",
-        "ttmAvailableFrom": "2026-05-06",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "pe": 123.3595,
+        "pcf": 78.7396,
+        "ps": 19.2155,
+        "ttmPeriodEnd": "2026-06-27",
+        "ttmAvailableFrom": "2026-08-05"
       },
       {
         "date": "2026-08-06",
         "price": 489.28,
-        "pe": 160.1222,
-        "pcf": 82.4732,
-        "ps": 21.4143,
-        "ttmPeriodEnd": "2026-03-28",
-        "ttmAvailableFrom": "2026-05-06",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "pe": 125.2097,
+        "pcf": 79.9206,
+        "ps": 19.5037,
+        "ttmPeriodEnd": "2026-06-27",
+        "ttmAvailableFrom": "2026-08-05"
       },
       {
         "date": "2026-08-07",
         "price": 483.36,
-        "pe": 158.1848,
-        "pcf": 81.4753,
-        "ps": 21.1552,
-        "ttmPeriodEnd": "2026-03-28",
-        "ttmAvailableFrom": "2026-05-06",
+        "pe": 123.6948,
+        "pcf": 78.9536,
+        "ps": 19.2677,
+        "ttmPeriodEnd": "2026-06-27",
+        "ttmAvailableFrom": "2026-08-05",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ]
   },
-  "updatedAt": "2026-08-07T23:01:37Z",
-  "backfillUpdatedAt": "2026-08-04",
-  "backfillErrors": {
-    "TSM": "no comparable quarterly SEC financial facts",
-    "SKHY": "no SEC CIK configured for this US ticker"
-  },
+  "updatedAt": "2026-08-09T05:53:34Z",
+  "backfillUpdatedAt": "2026-08-09",
+  "backfillErrors": {},
   "methodology": "For each trading date: EOD close divided by the latest already-filed rolling-four-quarter EPS, operating cash flow per share, and revenue per share. Per-share denominators use the average diluted weighted shares of the same four quarters.",
   "priceSources": {
-    "NVDA": "Yahoo Finance fallback (longer coverage than Stooq)",
-    "AAPL": "Yahoo Finance fallback (longer coverage than Stooq)",
-    "MSFT": "Yahoo Finance fallback (longer coverage than Stooq)",
-    "GOOGL": "Yahoo Finance fallback (longer coverage than Stooq)",
-    "AMZN": "Yahoo Finance fallback (longer coverage than Stooq)",
-    "META": "Yahoo Finance fallback (longer coverage than Stooq)",
-    "TSLA": "Yahoo Finance fallback (longer coverage than Stooq)",
-    "MU": "Yahoo Finance fallback (longer coverage than Stooq)",
-    "AVGO": "Yahoo Finance fallback (longer coverage than Stooq)",
-    "AMD": "Yahoo Finance fallback (longer coverage than Stooq)"
+    "AMD": "Yahoo Finance fallback (longer coverage than Stooq) (longer coverage than EODHD plan)"
   },
   "selectedHistoryUpdatedAt": "2026-08-04T01:34:51.709518Z",
   "selectedHistoryErrors": {},

@@ -448,6 +448,7 @@ def implied_growth(market_cap, model):
     target_margin = number(model.get("normalizedFcfMargin"))
     cost_of_equity = number(model.get("costOfEquity"))
     terminal = number(model.get("terminalGrowth"))
+    adjustment = number(model.get("equityValueAdjustmentUsd")) or 0
     if not all(x is not None for x in (revenue, current_margin, target_margin, cost_of_equity, terminal)):
         return "—", "unavailable", "模型输入不完整，暂不反推隐含增长率。"
     if revenue <= 0 or cost_of_equity <= terminal:
@@ -456,6 +457,10 @@ def implied_growth(market_cap, model):
         return "—", "unavailable", "归一化自由现金流率为负，终值模型没有经济上有效的解。"
     if target_margin < MIN_RELIABLE_NORMALIZED_FCF_MARGIN:
         return "—", "high_uncertainty", f"归一化自由现金流率仅为 {target_margin * 100:.1f}%，受大额资本开支影响，暂不将反推结果作为常规增长率展示。"
+
+    operating_equity_value = market_cap - adjustment
+    if operating_equity_value <= 0:
+        return "—", "unavailable", "净现金及非经营资产调整超过当前市值。"
 
     def equity_value(growth):
         pv = 0
@@ -469,11 +474,11 @@ def implied_growth(market_cap, model):
     low, high = -.30, 1.50
     for _ in range(60):
         mid = (low + high) / 2
-        if equity_value(mid) < market_cap:
+        if equity_value(mid) < operating_equity_value:
             low = mid
         else:
             high = mid
-    if equity_value(high) < market_cap:
+    if equity_value(high) < operating_equity_value:
         return ">150%", "ready", None
     return f"{max(-30, min(150, high * 100)):.0f}%", "ready", None
 
