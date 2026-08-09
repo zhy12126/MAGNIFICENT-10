@@ -54,7 +54,9 @@
         "balanceSheetPeriodEnd": "2026-04-26",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
         "providerFiscalPeriodEnd": "2026-04-30",
-        "fiscalPeriodEndActual": "2026-04-26"
+        "fiscalPeriodEndActual": "2026-04-26",
+        "fcfMarginCycleMedian": 0.39128045429565855,
+        "fcfMarginCycleYears": 7
       },
       "valuationAsOf": "2026-08-07",
       "ttmPeriodEnd": "2026-04-26",
@@ -113,7 +115,9 @@
         "balanceSheetPeriodEnd": "2026-06-27",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
         "providerFiscalPeriodEnd": "2026-06-30",
-        "fiscalPeriodEndActual": "2026-06-27"
+        "fiscalPeriodEndActual": "2026-06-27",
+        "fcfMarginCycleMedian": 0.25981710737440805,
+        "fcfMarginCycleYears": 7
       },
       "valuationAsOf": "2026-08-07",
       "ttmPeriodEnd": "2026-06-27",
@@ -172,7 +176,9 @@
         "balanceSheetPeriodEnd": "2026-06-30",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
         "providerFiscalPeriodEnd": "2026-06-30",
-        "fiscalPeriodEndActual": "2026-06-30"
+        "fiscalPeriodEndActual": "2026-06-30",
+        "fcfMarginCycleMedian": 0.3021801388696241,
+        "fcfMarginCycleYears": 7
       },
       "valuationAsOf": "2026-08-07",
       "ttmPeriodEnd": "2026-06-30",
@@ -231,7 +237,9 @@
         "balanceSheetPeriodEnd": "2026-06-30",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
         "providerFiscalPeriodEnd": "2026-06-30",
-        "fiscalPeriodEndActual": "2026-06-30"
+        "fiscalPeriodEndActual": "2026-06-30",
+        "fcfMarginCycleMedian": 0.21217242500954617,
+        "fcfMarginCycleYears": 7
       },
       "valuationAsOf": "2026-08-07",
       "ttmPeriodEnd": "2026-06-30",
@@ -290,7 +298,9 @@
         "balanceSheetPeriodEnd": "2026-06-30",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
         "providerFiscalPeriodEnd": "2026-06-30",
-        "fiscalPeriodEndActual": "2026-06-30"
+        "fiscalPeriodEndActual": "2026-06-30",
+        "fcfMarginCycleMedian": 0.05153622724971354,
+        "fcfMarginCycleYears": 7
       },
       "valuationAsOf": "2026-08-07",
       "ttmPeriodEnd": "2026-06-30",
@@ -349,7 +359,9 @@
         "balanceSheetPeriodEnd": "2026-03-31",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
         "providerFiscalPeriodEnd": "2026-06-30",
-        "fiscalPeriodEndActual": "2026-06-30"
+        "fiscalPeriodEndActual": "2026-06-30",
+        "fcfMarginCycleMedian": 0.30004102012815254,
+        "fcfMarginCycleYears": 7
       },
       "valuationAsOf": "2026-08-07",
       "ttmPeriodEnd": "2026-06-30",
@@ -408,7 +420,9 @@
         "balanceSheetPeriodEnd": "2026-06-30",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
         "providerFiscalPeriodEnd": "2026-06-30",
-        "fiscalPeriodEndActual": "2026-06-30"
+        "fiscalPeriodEndActual": "2026-06-30",
+        "fcfMarginCycleMedian": 0.06471211192241236,
+        "fcfMarginCycleYears": 7
       },
       "valuationAsOf": "2026-08-07",
       "ttmPeriodEnd": "2026-06-30",
@@ -454,15 +468,17 @@
         "equityRiskPremium": 0.05,
         "reportingCurrency": "TWD",
         "modelCurrency": "USD",
-        "fxRateToUsd": 0.03164556962025317,
+        "fxRateToUsd": 0.03164556962025316,
         "rationale": "晶圆厂资本开支与景气周期显著，三年中位数为主。",
-        "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）；TSMC 金额按公司 2Q26 披露汇率 1 USD = 31.6 TWD 换算",
+        "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）；TSMC 金额按 1 USD = 31.6 TWD 换算",
         "beta": 1.39,
         "costOfEquity": 0.11199999999999999,
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null,
         "providerFiscalPeriodEnd": "2026-06-30",
-        "fiscalPeriodEndActual": "2026-06-30"
+        "fiscalPeriodEndActual": "2026-06-30",
+        "fcfMarginCycleMedian": 0.22489498413595382,
+        "fcfMarginCycleYears": 7
       },
       "valuationAsOf": "2026-08-07",
       "ttmPeriodEnd": "2026-06-30",
@@ -521,7 +537,9 @@
         "balanceSheetPeriodEnd": "2026-05-28",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
         "providerFiscalPeriodEnd": "2026-05-31",
-        "fiscalPeriodEndActual": "2026-05-28"
+        "fiscalPeriodEndActual": "2026-05-28",
+        "fcfMarginCycleMedian": 0.04462518058751137,
+        "fcfMarginCycleYears": 7
       },
       "valuationAsOf": "2026-08-07",
       "ttmPeriodEnd": "2026-05-28",
@@ -580,7 +598,9 @@
         "balanceSheetPeriodEnd": "2026-05-03",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
         "providerFiscalPeriodEnd": "2026-04-30",
-        "fiscalPeriodEndActual": "2026-05-03"
+        "fiscalPeriodEndActual": "2026-05-03",
+        "fcfMarginCycleMedian": 0.4852823315118397,
+        "fcfMarginCycleYears": 7
       },
       "valuationAsOf": "2026-08-07",
       "ttmPeriodEnd": "2026-05-03",
@@ -639,7 +659,9 @@
         "balanceSheetPeriodEnd": "2026-06-27",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
         "providerFiscalPeriodEnd": "2026-06-30",
-        "fiscalPeriodEndActual": "2026-06-27"
+        "fiscalPeriodEndActual": "2026-06-27",
+        "fcfMarginCycleMedian": 0.09327128175295715,
+        "fcfMarginCycleYears": 7
       },
       "valuationAsOf": "2026-08-07",
       "ttmPeriodEnd": "2026-06-27",
@@ -708,5 +730,5 @@
       "note": "数据口径：收盘价和实际交易日来自 Yahoo Finance EOD；Trailing P/E、P/CF、P/S 与历史曲线共用已披露财报 TTM 分母；Finviz 仅提供前瞻及企业价值补充指标。"
     }
   ],
-  "fundamentalsUpdatedAt": "2026-08-09T07:00:26Z"
+  "fundamentalsUpdatedAt": "2026-08-09T07:05:47Z"
 }
