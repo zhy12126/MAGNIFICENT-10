@@ -407,31 +407,40 @@ if (location.hash === '#nasdaq') document.querySelector('nav [data-view="nasdaq"
 // from daily State Street holdings snapshots, so a newly introduced basket may
 // initially have only one observation.
 const concentrationConfigs = {
-  mag7: { title: 'MAG7 占标普 500 权重历史', subtitle: '以 SPY 每日持仓作为标普 500 代理；数值为 MAG7 在 SPY 中的合计权重。', color: '#1aa774' },
-  aiHardware: { title: 'AI 算力硬件指数占标普 500 权重历史', subtitle: '以 SPY 每日持仓作为标普 500 代理；覆盖芯片、设备、EDA、服务器、网络与基础设施。', color: '#5579d8' }
+  mag7: { name: 'MAG7', weightTitle: 'MAG7 占标普 500 权重历史', weightSubtitle: '以 SPY 每日持仓作为标普 500 代理；数值为 MAG7 在 SPY 中的合计权重。', color: '#1aa774' },
+  aiHardware: { name: 'AI 算力硬件指数', weightTitle: 'AI 算力硬件指数占标普 500 权重历史', weightSubtitle: '以 SPY 每日持仓作为标普 500 代理；覆盖芯片、设备、EDA、服务器、网络与基础设施。', color: '#5579d8' }
 };
 const concentrationModal = document.querySelector('#concentration-modal');
+let activeConcentrationKey = 'mag7';
+let activeConcentrationView = 'weight';
 const closeConcentrationModal = () => concentrationModal.classList.add('hidden');
-const drawConcentrationHistory = key => {
+const drawConcentrationHistory = (key = activeConcentrationKey, view = activeConcentrationView) => {
   const config = concentrationConfigs[key], wrap = document.querySelector('#concentration-chart-wrap');
   if (!config || !wrap) return;
-  document.querySelector('#concentration-title').textContent = config.title;
-  document.querySelector('#concentration-subtitle').textContent = config.subtitle;
-  const points = (concentrationData?.history || []).filter(item => numericValue(item?.[key])).map(item => ({ date: String(item.date), value: Number(item[key]) })).sort((a, b) => a.date.localeCompare(b.date));
+  activeConcentrationKey = key;
+  activeConcentrationView = view;
+  const isValue = view === 'basketValue', field = isValue ? `${key}SpyBasketUnitValue` : key, decimals = isValue ? 2 : 1, formatValue = value => isValue ? `$${value.toFixed(decimals)}` : `${value.toFixed(decimals)}%`;
+  const title = isValue ? `${config.name} 篮子价值变化` : config.weightTitle;
+  const subtitle = isValue ? `按交易日记录每份 SPY 对应的 ${config.name} 持仓价值；同时反映成分股价格与篮子权重变化。` : config.weightSubtitle;
+  document.querySelector('#concentration-title').textContent = title;
+  document.querySelector('#concentration-subtitle').textContent = subtitle;
+  document.querySelectorAll('[data-concentration-view]').forEach(button => { const selected = button.dataset.concentrationView === view; button.classList.toggle('active', selected); button.setAttribute('aria-selected', String(selected)) });
+  const points = (concentrationData?.history || []).filter(item => numericValue(item?.[field])).map(item => ({ date: String(item.date), value: Number(item[field]) })).sort((a, b) => a.date.localeCompare(b.date));
   if (points.length < 2) {
     const current = points[0]?.value;
-    wrap.innerHTML = `<div class="concentration-empty">${current === undefined ? '暂无可用历史快照。' : '当前快照为 ' + current.toFixed(1) + '%。'}<br>需要至少两个交易日的 SPY 日持仓快照后才能绘制趋势线。</div>`;
+    wrap.innerHTML = `<div class="concentration-empty">${current === undefined ? '暂无可用历史快照。' : '当前快照为 ' + formatValue(current) + '。'}<br>需要至少两个交易日的 SPY 日持仓快照后才能绘制趋势线。</div>`;
     return;
   }
-  const width = 760, left = 56, right = 730, top = 22, bottom = 270, values = points.map(point => point.value), rawMin = Math.min(...values), rawMax = Math.max(...values), padding = Math.max((rawMax - rawMin) * .18, .25), min = Math.max(0, rawMin - padding), max = rawMax + padding, range = max - min || 1;
+  const width = 760, left = 56, right = 730, top = 22, bottom = 270, values = points.map(point => point.value), rawMin = Math.min(...values), rawMax = Math.max(...values), padding = Math.max((rawMax - rawMin) * .18, isValue ? 1 : .25), min = Math.max(0, rawMin - padding), max = rawMax + padding, range = max - min || 1;
   const x = index => left + (right - left) * index / (points.length - 1), y = value => bottom - (value - min) / range * (bottom - top);
   let grid = '';
-  for (let index = 0; index < 5; index++) { const yy = top + (bottom - top) * index / 4, value = max - (max - min) * index / 4; grid += `<line class="grid" x1="${left}" y1="${yy}" x2="${right}" y2="${yy}"/><text class="axis" x="4" y="${yy + 4}">${value.toFixed(1)}%</text>` }
+  for (let index = 0; index < 5; index++) { const yy = top + (bottom - top) * index / 4, value = max - (max - min) * index / 4; grid += `<line class="grid" x1="${left}" y1="${yy}" x2="${right}" y2="${yy}"/><text class="axis" x="4" y="${yy + 4}">${formatValue(value)}</text>` }
   const path = points.map((point, index) => `${index ? 'L' : 'M'}${x(index).toFixed(1)},${y(point.value).toFixed(1)}`).join(' ');
   const last = points.at(-1), lastX = x(points.length - 1), lastY = y(last.value);
-  wrap.innerHTML = `<svg class="concentration-chart" viewBox="0 0 ${width} 312" role="img" aria-label="${config.title}">${grid}<path class="line" stroke="${config.color}" d="${path}"/><circle class="dot" cx="${lastX}" cy="${lastY}" r="5" fill="${config.color}"/><text class="axis" x="${left}" y="298">${points[0].date}</text><text class="axis" x="${right}" y="298" text-anchor="end">${last.date}</text><text class="axis" x="${Math.max(left, lastX - 6)}" y="${Math.max(16, lastY - 10)}" text-anchor="end">${last.value.toFixed(1)}%</text></svg>`;
+  wrap.innerHTML = `<svg class="concentration-chart" viewBox="0 0 ${width} 312" role="img" aria-label="${title}">${grid}<path class="line" stroke="${config.color}" d="${path}"/><circle class="dot" cx="${lastX}" cy="${lastY}" r="5" fill="${config.color}"/><text class="axis" x="${left}" y="298">${points[0].date}</text><text class="axis" x="${right}" y="298" text-anchor="end">${last.date}</text><text class="axis" x="${Math.max(left, lastX - 6)}" y="${Math.max(16, lastY - 10)}" text-anchor="end">${formatValue(last.value)}</text></svg>`;
 };
-document.querySelectorAll('[data-concentration-metric]').forEach(button => button.addEventListener('click', () => { drawConcentrationHistory(button.dataset.concentrationMetric); concentrationModal.classList.remove('hidden') }));
+document.querySelectorAll('[data-concentration-metric]').forEach(button => button.addEventListener('click', () => { drawConcentrationHistory(button.dataset.concentrationMetric, 'weight'); concentrationModal.classList.remove('hidden') }));
+document.querySelectorAll('[data-concentration-view]').forEach(button => button.addEventListener('click', () => drawConcentrationHistory(activeConcentrationKey, button.dataset.concentrationView)));
 document.querySelector('#concentration-close').addEventListener('click', closeConcentrationModal);
 concentrationModal.addEventListener('click', event => { if (event.target === concentrationModal) closeConcentrationModal() });
 document.addEventListener('keydown', event => { if (event.key === 'Escape') closeConcentrationModal() });
