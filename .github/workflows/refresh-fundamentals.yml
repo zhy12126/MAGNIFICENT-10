@@ -5,6 +5,8 @@ on:
   schedule:
     # Weekly filing check: Sunday 01:15 UTC = Sunday 10:15 Asia/Japan.
     - cron: '15 01 * * 0'
+    # Expanded-company group runs Monday to stay within Alpha Vantage's daily quota.
+    - cron: '15 01 * * 1'
 
 permissions:
   contents: write
@@ -35,6 +37,7 @@ jobs:
         run: python scripts/fetch_fundamentals.py
         env:
           ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
+          FUNDAMENTAL_TICKERS: ${{ github.event.schedule == '15 01 * * 1' && 'NFLX,MCD,PLTR,LLY,ORCL,AXP' || 'NVDA,AAPL,MSFT,GOOGL,AMZN,META,TSLA,TSM,MU,AVGO,AMD' }}
       - name: Add SEC net-cash valuation adjustments
         run: python scripts/enrich_balance_sheet_adjustments.py
         env:

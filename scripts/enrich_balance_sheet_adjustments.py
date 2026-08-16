@@ -12,14 +12,16 @@ CIKS = {
     "GOOGL": "0001652044", "AMZN": "0001018724", "META": "0001326801",
     "TSLA": "0001318605", "MU": "0000723125", "AVGO": "0001730168",
     "AMD": "0000002488",
+    "NFLX": "0001065280", "MCD": "0000063908", "PLTR": "0001321655",
+    "LLY": "0000059478", "ORCL": "0001341439", "AXP": "0000004962",
 }
 CASH_TAGS = (
     "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
     "CashAndCashEquivalentsAtCarryingValue",
 )
 INVESTMENT_TAGS = ("ShortTermInvestments", "MarketableSecuritiesCurrent")
-TOTAL_DEBT_TAGS = ("LongTermDebtAndFinanceLeaseObligationsCurrent", "LongTermDebtCurrent")
-LONG_DEBT_TAGS = ("LongTermDebtAndFinanceLeaseObligationsNoncurrent", "LongTermDebtNoncurrent")
+TOTAL_DEBT_TAGS = ("LongTermDebtAndFinanceLeaseObligationsCurrent", "LongTermDebtCurrent", "ShortTermBorrowings", "CommercialPaper")
+LONG_DEBT_TAGS = ("LongTermDebtAndFinanceLeaseObligationsNoncurrent", "LongTermDebtNoncurrent", "LongTermDebtAndFinanceLeaseObligations", "LongTermDebt")
 
 
 def facts(cik):

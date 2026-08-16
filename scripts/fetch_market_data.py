@@ -37,6 +37,12 @@ COMPANIES = [
     ("Broadcom", "AVGO", "B", "#fff0ea", "#d34b28"),
     ("AMD", "AMD", "A", "#fff2eb", "#d34b28"),
     ("SK hynix", "SKHY", "H", "#fff0ea", "#d04d34"),
+    ("Netflix", "NFLX", "N", "#fff0f0", "#e50914"),
+    ("McDonald's", "MCD", "M", "#fff6d8", "#da291c"),
+    ("Palantir", "PLTR", "P", "#eef0f2", "#101113"),
+    ("Eli Lilly", "LLY", "L", "#fff0f1", "#d52b1e"),
+    ("Oracle", "ORCL", "O", "#fff0f0", "#c74634"),
+    ("American Express", "AXP", "A", "#e9f5ff", "#006fcf"),
 ]
 MIN_RELIABLE_NORMALIZED_FCF_MARGIN = .03
 
@@ -440,12 +446,16 @@ def money(value):
     return f"{value / 1e12:.2f}T" if value >= 1e12 else f"{value / 1e9:.0f}B"
 
 def implied_growth(market_cap, model):
+    if model.get("modelApplicability") == "not-applicable-financial":
+        return "—", "not_applicable", model.get("modelApplicabilityNote")
     """Company-specific reverse FCFE model, using cached reported fundamentals."""
     if market_cap is None or market_cap <= 0 or not model:
         return "—", "unavailable", "缺少市值或公司级财报模型输入。"
     revenue = number(model.get("revenueTTM"))
     current_margin = number(model.get("fcfMarginTTM"))
     target_margin = number(model.get("normalizedFcfMargin"))
+    target_margin = number(model.get("displayScenarioTargetMargin")) or target_margin
+    current_margin = number(model.get("displayScenarioCurrentMargin")) if model.get("displayScenarioCurrentMargin") is not None else current_margin
     cost_of_equity = number(model.get("costOfEquity"))
     terminal = number(model.get("terminalGrowth"))
     adjustment = number(model.get("equityValueAdjustmentUsd")) or 0

@@ -37,11 +37,15 @@ def number(value: object) -> float | None:
 
 def implied_growth(market_capitalization: float | None, model: dict) -> tuple[str, str, str | None]:
     """Same reverse-FCFE calculation as the daily job, without its API setup."""
+    if model.get("modelApplicability") == "not-applicable-financial":
+        return "—", "not_applicable", model.get("modelApplicabilityNote")
     if not market_capitalization or market_capitalization <= 0 or not model:
         return "—", "unavailable", "缺少市值或公司级财报模型输入。"
     revenue = number(model.get("revenueTTM"))
     current_margin = number(model.get("fcfMarginTTM"))
     target_margin = number(model.get("normalizedFcfMargin"))
+    target_margin = number(model.get("displayScenarioTargetMargin")) or target_margin
+    current_margin = number(model.get("displayScenarioCurrentMargin")) if model.get("displayScenarioCurrentMargin") is not None else current_margin
     cost_of_equity = number(model.get("costOfEquity"))
     terminal_growth = number(model.get("terminalGrowth"))
     adjustment = number(model.get("equityValueAdjustmentUsd")) or 0

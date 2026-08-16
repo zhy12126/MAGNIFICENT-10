@@ -4,7 +4,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 
 TARGET = Path("outputs/data/fundamentals.json")
-EXPECTED = {"NVDA", "AAPL", "MSFT", "GOOGL", "AMZN", "META", "TSLA", "TSM", "MU", "AVGO", "AMD", "SKHY"}
+EXPECTED = {"NVDA", "AAPL", "MSFT", "GOOGL", "AMZN", "META", "TSLA", "TSM", "MU", "AVGO", "AMD", "SKHY", "NFLX", "MCD", "PLTR", "LLY", "ORCL", "AXP"}
 US_WITH_SEC_BALANCE = EXPECTED - {"TSM", "SKHY"}
 MODEL_FIELDS = (
     "fiscalPeriodEnd", "revenueTTM", "operatingCashflowTTM", "fcfTTM",
@@ -62,6 +62,14 @@ def main():
                 )
         if ticker == "TSM" and not (0 < float(model.get("fxRateToUsd") or 0) < 0.1):
             issues.append("TSM: invalid TWD/USD conversion")
+        if ticker == "AXP":
+            financial = model.get("financialValuationModel") or {}
+            required = ("commonEquityUsd", "commonSharesOutstanding", "sustainableRoe", "bookValueGrowth", "periodEnd", "source")
+            missing_financial = [field for field in required if financial.get(field) is None]
+            if missing_financial:
+                issues.append(f"AXP: missing residual-income fields {', '.join(missing_financial)}")
+            elif float(financial["commonEquityUsd"]) <= 0 or float(financial["commonSharesOutstanding"]) <= 0:
+                issues.append("AXP: invalid residual-income equity or share count")
 
     if issues:
         raise SystemExit("\n".join(issues))

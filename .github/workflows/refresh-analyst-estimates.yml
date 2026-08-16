@@ -1,0 +1,62 @@
+name: Refresh analyst revenue consensus
+
+on:
+  workflow_dispatch:
+    inputs:
+      tickers:
+        description: Optional comma-separated ticker group
+        required: false
+  schedule:
+    - cron: '35 02 * * 2'
+    - cron: '35 02 * * 3'
+    - cron: '35 02 * * 4'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-data-writer
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Select six-company request group
+        id: group
+        env:
+          MANUAL_TICKERS: ${{ inputs.tickers }}
+          EVENT_SCHEDULE: ${{ github.event.schedule }}
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import os
+          manual=os.environ.get('MANUAL_TICKERS','').strip()
+          schedule=os.environ.get('EVENT_SCHEDULE','')
+          groups={
+            '35 02 * * 2':'NVDA,AAPL,MSFT,GOOGL,AMZN,META',
+            '35 02 * * 3':'TSLA,TSM,MU,AVGO,AMD,SKHY',
+            '35 02 * * 4':'NFLX,MCD,PLTR,LLY,ORCL,AXP',
+          }
+          print('tickers=' + (manual or groups.get(schedule,'NVDA,AAPL,MSFT,GOOGL,AMZN,META')))
+          PY
+      - name: Refresh annual revenue consensus
+        run: python scripts/fetch_analyst_estimates.py
+        env:
+          ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
+          ESTIMATE_TICKERS: ${{ steps.group.outputs.tickers }}
+      - name: Validate company data
+        run: |
+          python scripts/validate_fundamentals.py
+          python scripts/validate_valuation_consistency.py
+      - name: Commit refreshed consensus
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add outputs/data/fundamentals.json outputs/data/stocks.json
+          git diff --cached --quiet || git commit -m "chore: refresh analyst revenue consensus"
+          git pull --rebase
+          git push

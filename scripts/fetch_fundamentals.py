@@ -1,8 +1,9 @@
 """Refresh company-specific reverse-DCF inputs from Alpha Vantage financial statements.
 
-This job is intentionally separate from the daily snapshot.  It makes 22 calls
-(income statement + cash flow for each of the 11 generic companies).  SKHY is
-refreshed by its own K-IFRS workflow and must be preserved here.
+This job is intentionally separate from the daily snapshot. Each company uses
+two calls (income statement + cash flow). FUNDAMENTAL_TICKERS allows the weekly
+workflow to stay within the free daily quota by refreshing companies in groups.
+SKHY is refreshed by its own K-IFRS workflow and must be preserved here.
 """
 import json
 import os
@@ -33,10 +34,21 @@ COMPANIES = {
     "MU": ("Micron", .35, "存储价格周期显著，三年中位数为主以降低周期高低点影响。"),
     "AVGO": ("Broadcom", .60, "基础设施软件整合与半导体业务并行，当前现金转化权重略高。"),
     "AMD": ("AMD", .45, "数据中心与客户端业务均具周期性，采用三年中位数以避免只外推单一景气阶段。"),
+    "NFLX": ("Netflix", .60, "订阅业务现金转化较稳定，当前经营结构权重略高，同时保留历史内容投入周期。"),
+    "MCD": ("McDonald's", .50, "成熟特许经营体系现金流稳定，TTM 与三年中位数各占一半。"),
+    "PLTR": ("Palantir", .65, "高增长软件业务利润率仍在扩张，偏重当前现金转化并保留历史基准。"),
+    "LLY": ("Eli Lilly", .55, "创新药放量与研发投入并存，当前现金流略高权重但不过度外推单一产品周期。"),
+    "ORCL": ("Oracle", .75, "AI 云基础设施资本开支快速上升，当前现金流率比过去成熟软件时期更具代表性。"),
+    "AXP": ("American Express", .50, "金融公司的经营现金流受客户贷款与融资活动影响，普通 FCFE 反推不适用。"),
 }
+REQUESTED_TICKERS = {ticker.strip().upper() for ticker in os.environ.get("FUNDAMENTAL_TICKERS", "").split(",") if ticker.strip()}
 RISK_FREE_RATE = .0425       # US 10Y reference, refreshed with each methodology review
 EQUITY_RISK_PREMIUM = .0500  # long-run mature-market ERP assumption
 TERMINAL_GROWTH = .025
+DISPLAY_SCENARIO_MARGINS = {
+    "ORCL": (0.17, -0.352), "PLTR": (0.35, 0.35), "LLY": (0.16, None),
+    "TSLA": (0.065, None), "AMZN": (0.08, None), "NVDA": (0.46, None), "AMD": (0.10, None),
+}
 
 # Alpha Vantage returns TSMC's primary financial statements in TWD, while the
 # TSM ADR market capitalization is quoted in USD.  Amounts must therefore be
@@ -112,18 +124,25 @@ def annual_margins(income, cash):
     return results[:7]
 
 def main():
-    companies = {}
-    for index, (ticker, (name, ttm_weight, rationale)) in enumerate(COMPANIES.items()):
+    target = Path("outputs/data/fundamentals.json")
+    previous = json.loads(target.read_text(encoding="utf-8")) if target.exists() else {"companies": {}}
+    companies = dict(previous.get("companies", {}))
+    selected = [(ticker, config) for ticker, config in COMPANIES.items() if not REQUESTED_TICKERS or ticker in REQUESTED_TICKERS]
+    unknown = REQUESTED_TICKERS - set(COMPANIES)
+    if unknown:
+        raise SystemExit(f"Unknown FUNDAMENTAL_TICKERS: {', '.join(sorted(unknown))}")
+    refreshed = {}
+    for index, (ticker, (name, ttm_weight, rationale)) in enumerate(selected):
         try:
             income = call("INCOME_STATEMENT", ticker)
             time.sleep(13)
             cash = call("CASH_FLOW", ticker)
-            if index < len(COMPANIES) - 1:
+            if index < len(selected) - 1:
                 time.sleep(13)
             ttm = latest_ttm(income, cash)
             margins = annual_margins(income, cash)
             if not ttm or len(margins) < 3 or ttm_weight == 0:
-                companies[ticker] = {"status": "insufficient", "company": name, "reason": "公开财报不足四个季度或三年可比现金流，暂不计算隐含增长率。", "rationale": rationale}
+                refreshed[ticker] = {"status": "insufficient", "company": name, "reason": "公开财报不足四个季度或三年可比现金流，暂不计算隐含增长率。", "rationale": rationale}
                 continue
             revenue, operating_cashflow, fcf, net_income, ttm_margin, fiscal_end = ttm
             median_margin = statistics.median(margins[:3])
@@ -140,7 +159,7 @@ def main():
                 fx_rate_to_usd = 1 / TSM_TWD_PER_USD
             # Alpha OVERVIEW beta is refreshed by the daily job.  Use a neutral
             # temporary beta here; fetch_market_data replaces it when available.
-            companies[ticker] = {
+            refreshed[ticker] = {
                 "status": "ready", "company": name, "fiscalPeriodEnd": fiscal_end,
                 "revenueTTM": revenue, "operatingCashflowTTM": operating_cashflow,
                 "fcfTTM": fcf, "netIncomeTTM": net_income, "fcfMarginTTM": ttm_margin,
@@ -151,26 +170,40 @@ def main():
                 "reportingCurrency": reporting_currency, "modelCurrency": "USD", "fxRateToUsd": fx_rate_to_usd,
                 "rationale": rationale, "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）" + (f"；TSMC 金额按 1 USD = {TSM_TWD_PER_USD:.1f} TWD 换算" if ticker == "TSM" else ""),
             }
+            if ticker in DISPLAY_SCENARIO_MARGINS:
+                target_margin, current_override = DISPLAY_SCENARIO_MARGINS[ticker]
+                refreshed[ticker]["displayScenarioTargetMargin"] = target_margin
+                if current_override is not None:
+                    refreshed[ticker]["displayScenarioCurrentMargin"] = current_override
+            if companies.get(ticker, {}).get("analystConsensus"):
+                refreshed[ticker]["analystConsensus"] = companies[ticker]["analystConsensus"]
+            if ticker == "AXP":
+                refreshed[ticker]["modelApplicability"] = "not-applicable-financial"
+                refreshed[ticker]["modelApplicabilityNote"] = "金融公司的经营现金流包含客户贷款和融资变动，不使用普通工业公司的反向 FCFE 模型。"
+                refreshed[ticker]["financialValuationModel"] = {
+                    "method": "residual-income",
+                    "commonEquityUsd": 32_395_000_000.0,
+                    "commonSharesOutstanding": 682_000_000.0,
+                    "sustainableRoe": 0.34,
+                    "bookValueGrowth": 0.07,
+                    "periodEnd": "2026-03-31",
+                    "source": "American Express 2026 Q1 Form 10-Q：总股东权益扣除 16 亿美元优先股",
+                }
         except Exception as exc:
-            companies[ticker] = {"status": "unavailable", "company": name, "reason": str(exc), "rationale": rationale}
+            refreshed[ticker] = {"status": "unavailable", "company": name, "reason": str(exc), "rationale": rationale}
     # A rate-limit response for every symbol is not a successful refresh. In
     # that situation keep the last known file intact and return a non-zero
     # exit code so the PowerShell wrapper and GitHub Action cannot report a
     # misleading success.
-    ready_count = sum(company.get("status") == "ready" for company in companies.values())
+    ready_count = sum(company.get("status") == "ready" for company in refreshed.values())
     if ready_count == 0:
         raise SystemExit(
             "No usable fundamentals were returned. Alpha Vantage likely hit its "
             "daily limit; fundamentals.json was left unchanged."
         )
 
-    target = Path("outputs/data/fundamentals.json")
     target.parent.mkdir(parents=True, exist_ok=True)
-    if target.exists():
-        previous = json.loads(target.read_text(encoding="utf-8"))
-        skhy = previous.get("companies", {}).get("SKHY")
-        if skhy:
-            companies["SKHY"] = skhy
+    companies.update(refreshed)
     target.write_text(json.dumps({"updatedAt": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "companies": companies}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 if __name__ == "__main__":

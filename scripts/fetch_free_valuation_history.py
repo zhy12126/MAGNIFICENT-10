@@ -39,6 +39,12 @@ COMPANIES = {
     "AMD": {"cik": "0000002488", "stooq": "amd.us"},
     # SK hynix is a foreign issuer; do not fabricate a SEC-derived valuation line.
     "SKHY": {"cik": None, "stooq": "skhy.us"},
+    "NFLX": {"cik": "0001065280", "stooq": "nflx.us"},
+    "MCD": {"cik": "0000063908", "stooq": "mcd.us"},
+    "PLTR": {"cik": "0001321655", "stooq": "pltr.us"},
+    "LLY": {"cik": "0000059478", "stooq": "lly.us"},
+    "ORCL": {"cik": "0001341439", "stooq": "orcl.us"},
+    "AXP": {"cik": "0000004962", "stooq": "axp.us"},
 }
 TARGET_TICKERS = {ticker.strip().upper() for ticker in os.environ.get("HISTORY_TICKERS", "").split(",") if ticker.strip()}
 
@@ -353,6 +359,18 @@ def quarterly_shares(facts):
         # Cover-page outstanding shares are a fallback only.
         if end not in values:
             values[end] = {"value": value, "filed": filed, "source": "dei-outstanding"}
+    # A few issuers (notably McDonald's) publish weighted-average shares in
+    # millions even though Company Facts labels the unit simply as "shares".
+    # Detect that scale from a nearby audited DEI outstanding-share fact.
+    outstanding = [(end, row["value"]) for end, row in values.items() if row.get("source") == "dei-outstanding" and row["value"] > 1_000_000]
+    for end, row in values.items():
+        if row.get("source") == "dei-outstanding" or row["value"] >= 1_000_000 or not outstanding:
+            continue
+        _, reference = min(outstanding, key=lambda item: abs((item[0] - end).days))
+        scaled = row["value"] * 1_000_000
+        if .25 <= scaled / reference <= 4:
+            row["value"] = scaled
+            row["source"] = "weighted-average-shares; scaled-from-millions"
     return values
 
 
