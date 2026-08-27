@@ -31,13 +31,16 @@ def main():
         issues.append(f"missing companies: {', '.join(sorted(missing))}")
     if extra:
         issues.append(f"unexpected companies: {', '.join(sorted(extra))}")
+    
+    # Check either updatedAt (from fetch_fundamentals) or analystEstimatesUpdatedAt (from fetch_analyst_estimates)
+    timestamp_to_check = payload.get("updatedAt") or payload.get("analystEstimatesUpdatedAt")
     try:
-        updated = datetime.fromisoformat(payload["updatedAt"].replace("Z", "+00:00"))
+        updated = datetime.fromisoformat(timestamp_to_check.replace("Z", "+00:00"))
         age_hours = (datetime.now(timezone.utc) - updated).total_seconds() / 3600
         if age_hours < -1 or age_hours > 48:
-            issues.append(f"updatedAt is not from this refresh: {payload['updatedAt']}")
-    except (KeyError, TypeError, ValueError):
-        issues.append("updatedAt is missing or invalid")
+            issues.append(f"updatedAt is not from this refresh: {timestamp_to_check}")
+    except (KeyError, TypeError, ValueError, AttributeError):
+        issues.append("updatedAt or analystEstimatesUpdatedAt is missing or invalid")
 
     for ticker in sorted(EXPECTED & set(companies)):
         model = companies[ticker]
