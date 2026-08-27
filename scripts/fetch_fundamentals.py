@@ -63,8 +63,15 @@ def call(function, symbol):
         data = json.load(response)
     if "Note" in data or "Information" in data or "Error Message" in data:
         message = data.get("Note") or data.get("Information") or data.get("Error Message") or "request rejected"
+        message_lower = message.lower()
+        # Detect rate limit vs other errors
+        is_rate_limit = any(x in message_lower for x in ["call", "limit", "quota", "per", "request", "busy"])
         message = re.sub(r"API key as\s+[A-Za-z0-9_-]+", "API key", message, flags=re.I)
-        raise RuntimeError(f"Alpha Vantage {symbol}/{function} rejected the request: {message}")
+        error_msg = f"Alpha Vantage {symbol}/{function}: {message}"
+        if is_rate_limit:
+            raise RuntimeError(f"🔴 Rate limit detected: {error_msg}")
+        else:
+            raise RuntimeError(error_msg)
     return data
 
 def num(value):
@@ -191,20 +198,28 @@ def main():
                 }
         except Exception as exc:
             refreshed[ticker] = {"status": "unavailable", "company": name, "reason": str(exc), "rationale": rationale}
-    # A rate-limit response for every symbol is not a successful refresh. In
-    # that situation keep the last known file intact and return a non-zero
-    # exit code so the PowerShell wrapper and GitHub Action cannot report a
-    # misleading success.
+    # Alpha Vantage has a rate limit (30 calls/day on free tier). When the limit
+    # is hit mid-run, subsequent companies will fail. A partial success is better
+    # than no updates at all. If we refreshed at least one company, save the
+    # partial updates; otherwise exit non-zero to signal an API issue.
     ready_count = sum(company.get("status") == "ready" for company in refreshed.values())
-    if ready_count == 0:
+    unavailable_count = sum(company.get("status") == "unavailable" for company in refreshed.values())
+    
+    refreshed_tickers = [t for t, c in refreshed.items() if c.get("status") == "ready"]
+    if refreshed_tickers:
+        # Partial success: save what we got
+        print(f"Refreshed {len(refreshed_tickers)}/{len(REQUESTED_TICKERS)} companies: {', '.join(refreshed_tickers)}")
+        if unavailable_count > 0:
+            unavailable_tickers = [t for t, c in refreshed.items() if c.get("status") == "unavailable"]
+            print(f"⚠️  {len(unavailable_tickers)} company/companies unavailable (likely API rate limit): {', '.join(unavailable_tickers)}")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        companies.update(refreshed)
+        target.write_text(json.dumps({"updatedAt": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "companies": companies}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    else:
         raise SystemExit(
             "No usable fundamentals were returned. Alpha Vantage likely hit its "
-            "daily limit; fundamentals.json was left unchanged."
+            "daily limit before any companies could be refreshed; fundamentals.json was left unchanged."
         )
-
-    target.parent.mkdir(parents=True, exist_ok=True)
-    companies.update(refreshed)
-    target.write_text(json.dumps({"updatedAt": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "companies": companies}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 if __name__ == "__main__":
     main()
