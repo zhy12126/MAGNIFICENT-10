@@ -3,10 +3,10 @@
   "description": "Manually verified filing guidance and business segments. fiscalPeriodEnd must match automated fundamentals before display.",
   "guidance": {
     "NVDA": {
-      "value": "91%–99%",
-      "period": "FY2027 Q2收入 $89.2B–$92.8B，对比 FY2026 Q2实际收入",
-      "issued": "2026-05-20",
-      "fiscalPeriodEnd": "2026-04-30"
+      "value": "约 90%",
+      "period": "FY2027 Q3收入 $108.0B（±2%），对比 FY2026 Q3实际收入 $57.0B；指引未计入中国数据中心计算收入",
+      "issued": "2026-08-26",
+      "fiscalPeriodEnd": "2026-07-26"
     },
     "AAPL": {
       "value": "9%–11%",
@@ -91,46 +91,28 @@
   },
   "business": {
     "NVDA": {
-      "period": "FY2027 Q1 vs FY2026 Q1",
-      "issued": "2026-05-20",
-      "source": "NVIDIA FY2027 Q1财报及FY2026市场平台收入表",
+      "period": "FY2027 Q2 vs FY2026 Q2",
+      "issued": "2026-08-26",
+      "source": "NVIDIA FY2027 Q2财报",
       "segments": [
         [
           "AI数据中心",
-          75.246,
-          "+92%",
-          "AI训练、推理、加速计算及数据中心网络；本季收入占比92.2%"
+          89.0,
+          "+117%",
+          "AI训练、推理、加速计算及数据中心网络；本季收入占比92.5%"
         ],
         [
-          "玩家、终端与边缘计算",
-          6.369,
-          "+29%",
-          "GeForce游戏、PC与游戏主机、工作站、汽车及机器人；公司本季未再单列纯Gaming"
+          "边缘计算",
+          7.2,
+          "+27%",
+          "PC、游戏主机、工作站、汽车及机器人等用于代理式与物理AI的终端/边缘设备；本季收入占比7.5%"
         ]
       ],
-      "submetrics": [
-        [
-          "Hyperscale AI客户",
-          "+115%",
-          "AI数据中心子业务",
-          50.4
-        ],
-        [
-          "AI云、工业与企业",
-          "+74%",
-          "AI数据中心子业务",
-          49.7
-        ],
-        [
-          "Gaming（最近单列完整财年）",
-          "+41%",
-          "FY2026收入$16.042B，占FY2026公司总收入7.4%；对比FY2025"
-        ]
-      ],
-      "fiscalPeriodEnd": "2026-04-30",
-      "comparisonPeriod": "FY2027 Q1 vs FY2026 Q1",
-      "manualUpdatedAt": "2026-05-20",
-      "reportedRevenue": 81.615
+      "submetrics": [],
+      "fiscalPeriodEnd": "2026-07-26",
+      "comparisonPeriod": "FY2027 Q2 vs FY2026 Q2",
+      "manualUpdatedAt": "2026-08-28",
+      "reportedRevenue": 96.221
     },
     "AAPL": {
       "period": "FY2026 Q3 vs FY2025 Q3",

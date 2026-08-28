@@ -1,25 +1,8 @@
 {
   "source": "Yahoo Finance EOD + point-in-time filing TTM; Finviz supplemental metrics",
-  "updatedAt": "2026-08-27T03:24:29Z",
+  "updatedAt": "2026-08-28T00:08:18Z",
   "sourceByTicker": {
-    "NVDA": "Finviz",
-    "AAPL": "Finviz",
-    "MSFT": "Finviz",
-    "GOOGL": "Finviz",
-    "AMZN": "Finviz",
-    "META": "Finviz",
-    "TSLA": "Finviz",
-    "TSM": "Finviz",
-    "MU": "Finviz",
-    "AVGO": "Finviz",
-    "AMD": "Finviz",
-    "SKHY": "Finviz",
-    "NFLX": "Finviz",
-    "MCD": "Finviz",
-    "PLTR": "Finviz",
-    "LLY": "Finviz",
-    "ORCL": "Finviz",
-    "AXP": "Finviz"
+    "NVDA": "Finviz"
   },
   "stocks": [
     {
@@ -28,30 +11,30 @@
       "logo": "N",
       "color": "#d5f4b4",
       "ink": "#55a62f",
-      "cap": "5.07T",
-      "pe": "32.2",
-      "fpe": "16.3",
-      "peg": "0.3",
-      "ps": "20.2",
-      "pcf": "40.8",
-      "evEbitda": "30.2",
-      "implied": "51%",
-      "growth": "85%",
-      "revenueGrowthCurrent": "85%",
-      "epsGrowthCurrent": "213%",
-      "price": "$209.66",
-      "change": "-1.5912%",
+      "cap": "5.52T",
+      "pe": "28.9",
+      "fpe": "15.3",
+      "peg": "0.2",
+      "ps": "18.4",
+      "pcf": "41.4",
+      "evEbitda": "27.1",
+      "implied": "48%",
+      "growth": "106%",
+      "revenueGrowthCurrent": "106%",
+      "epsGrowthCurrent": "128%",
+      "price": "$227.98",
+      "change": "8.7380%",
       "valuationModel": {
         "status": "ready",
         "company": "NVIDIA",
-        "fiscalPeriodEnd": "2026-04-30",
-        "revenueTTM": 253491000000.0,
-        "operatingCashflowTTM": 125648000000.0,
-        "fcfTTM": 119076000000.0,
-        "netIncomeTTM": 159613000000.0,
-        "fcfMarginTTM": 0.4697444879699871,
+        "fiscalPeriodEnd": "2026-07-26",
+        "revenueTTM": 302969000000.0,
+        "operatingCashflowTTM": 134360000000.0,
+        "fcfTTM": 127006000000.0,
+        "netIncomeTTM": 192879000000.0,
+        "fcfMarginTTM": 0.41920460509161,
         "fcfMargin3yMedian": 0.44770258129648327,
-        "normalizedFcfMargin": 0.46092772530058557,
+        "normalizedFcfMargin": 0.4306037955735593,
         "fcfMarginCycleMedian": 0.39128045429565855,
         "fcfMarginCycleYears": 7,
         "ttmWeight": 0.6,
@@ -63,19 +46,22 @@
         "fxRateToUsd": 1.0,
         "rationale": "AI 数据中心利润率出现结构性抬升；保留 40% 三年中位数以避免只外推峰值。",
         "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
-        "cashAndShortTermInvestmentsUsd": 62359000000.0,
-        "totalDebtUsd": 8470000000.0,
-        "equityValueAdjustmentUsd": 53889000000.0,
-        "balanceSheetPeriodEnd": "2026-04-26",
-        "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
+        "displayScenarioTargetMargin": 0.46,
         "beta": 2.21,
         "costOfEquity": 0.153,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "cashAndShortTermInvestmentsUsd": 71565000000.0,
+        "totalDebtUsd": 34366000000.0,
+        "equityValueAdjustmentUsd": 37199000000.0,
+        "balanceSheetPeriodEnd": "2026-07-26",
+        "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
+        "providerFiscalPeriodEnd": "2026-07-31",
+        "fiscalPeriodEndActual": "2026-07-26"
       },
-      "valuationAsOf": "2026-08-26",
-      "ttmPeriodEnd": "2026-04-26",
-      "ttmAvailableFrom": "2026-05-20",
+      "valuationAsOf": "2026-08-27",
+      "ttmPeriodEnd": "2026-07-26",
+      "ttmAvailableFrom": "2026-08-26",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
       "cashMultipleKind": "pcf-ttm",
       "dataSource": "Finviz supplemental + Yahoo Finance EOD",
@@ -103,7 +89,7 @@
       "valuationModel": {
         "status": "ready",
         "company": "Apple",
-        "fiscalPeriodEnd": "2026-06-30",
+        "fiscalPeriodEnd": "2026-06-27",
         "revenueTTM": 466823000000.0,
         "operatingCashflowTTM": 146724000000.0,
         "fcfTTM": 136683000000.0,
@@ -130,7 +116,9 @@
         "beta": 1.08,
         "costOfEquity": 0.0965,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "providerFiscalPeriodEnd": "2026-06-30",
+        "fiscalPeriodEndActual": "2026-06-27"
       },
       "valuationAsOf": "2026-08-26",
       "ttmPeriodEnd": "2026-06-27",
@@ -189,7 +177,9 @@
         "beta": 1.1,
         "costOfEquity": 0.0975,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "providerFiscalPeriodEnd": "2026-06-30",
+        "fiscalPeriodEndActual": "2026-06-30"
       },
       "valuationAsOf": "2026-08-26",
       "ttmPeriodEnd": "2026-06-30",
@@ -248,7 +238,9 @@
         "beta": 1.23,
         "costOfEquity": 0.10400000000000001,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "providerFiscalPeriodEnd": "2026-06-30",
+        "fiscalPeriodEndActual": "2026-06-30"
       },
       "valuationAsOf": "2026-08-26",
       "ttmPeriodEnd": "2026-06-30",
@@ -307,7 +299,9 @@
         "beta": 1.44,
         "costOfEquity": 0.11449999999999999,
         "impliedGrowthStatus": "high_uncertainty",
-        "impliedGrowthNote": "归一化自由现金流率仅为 0.2%，受大额资本开支影响，暂不将反推结果作为常规增长率展示。"
+        "impliedGrowthNote": "归一化自由现金流率仅为 0.2%，受大额资本开支影响，暂不将反推结果作为常规增长率展示。",
+        "providerFiscalPeriodEnd": "2026-06-30",
+        "fiscalPeriodEndActual": "2026-06-30"
       },
       "valuationAsOf": "2026-08-26",
       "ttmPeriodEnd": "2026-06-30",
@@ -366,7 +360,9 @@
         "beta": 1.24,
         "costOfEquity": 0.10450000000000001,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "providerFiscalPeriodEnd": "2026-06-30",
+        "fiscalPeriodEndActual": "2026-06-30"
       },
       "valuationAsOf": "2026-08-26",
       "ttmPeriodEnd": "2026-06-30",
@@ -425,7 +421,9 @@
         "beta": 1.84,
         "costOfEquity": 0.1345,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "providerFiscalPeriodEnd": "2026-06-30",
+        "fiscalPeriodEndActual": "2026-06-30"
       },
       "valuationAsOf": "2026-08-26",
       "ttmPeriodEnd": "2026-06-30",
@@ -479,7 +477,9 @@
         "beta": 1.4,
         "costOfEquity": 0.11249999999999999,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "providerFiscalPeriodEnd": "2026-06-30",
+        "fiscalPeriodEndActual": "2026-06-30"
       },
       "valuationAsOf": "2026-08-26",
       "ttmPeriodEnd": "2026-06-30",
@@ -511,7 +511,7 @@
       "valuationModel": {
         "status": "ready",
         "company": "Micron",
-        "fiscalPeriodEnd": "2026-05-31",
+        "fiscalPeriodEnd": "2026-05-28",
         "revenueTTM": 90274000000.0,
         "operatingCashflowTTM": 51432000000.0,
         "fcfTTM": 27170000000.0,
@@ -538,7 +538,9 @@
         "beta": 2.22,
         "costOfEquity": 0.15350000000000003,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "providerFiscalPeriodEnd": "2026-05-31",
+        "fiscalPeriodEndActual": "2026-05-28"
       },
       "valuationAsOf": "2026-08-26",
       "ttmPeriodEnd": "2026-05-28",
@@ -570,7 +572,7 @@
       "valuationModel": {
         "status": "ready",
         "company": "Broadcom",
-        "fiscalPeriodEnd": "2026-04-30",
+        "fiscalPeriodEnd": "2026-05-03",
         "revenueTTM": 75465000000.0,
         "operatingCashflowTTM": 33622000000.0,
         "fcfTTM": 32762000000.0,
@@ -597,7 +599,9 @@
         "beta": 1.45,
         "costOfEquity": 0.11499999999999999,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "providerFiscalPeriodEnd": "2026-04-30",
+        "fiscalPeriodEndActual": "2026-05-03"
       },
       "valuationAsOf": "2026-08-26",
       "ttmPeriodEnd": "2026-05-03",
@@ -629,7 +633,7 @@
       "valuationModel": {
         "status": "ready",
         "company": "AMD",
-        "fiscalPeriodEnd": "2026-06-30",
+        "fiscalPeriodEnd": "2026-06-27",
         "revenueTTM": 41305000000.0,
         "operatingCashflowTTM": 10080000000.0,
         "fcfTTM": 8403000000.0,
@@ -656,7 +660,9 @@
         "beta": 2.48,
         "costOfEquity": 0.1665,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "providerFiscalPeriodEnd": "2026-06-30",
+        "fiscalPeriodEndActual": "2026-06-27"
       },
       "valuationAsOf": "2026-08-26",
       "ttmPeriodEnd": "2026-06-27",
@@ -712,7 +718,9 @@
         "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2120882/000119312526321989/d115239d6k.htm",
         "availableFrom": "2026-07-29",
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "providerFiscalPeriodEnd": "2026-06-30",
+        "fiscalPeriodEndActual": "2026-06-30"
       },
       "valuationAsOf": "2026-08-26",
       "ttmPeriodEnd": "2026-06-30",
@@ -771,7 +779,9 @@
         "beta": 1.53,
         "costOfEquity": 0.11900000000000002,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "providerFiscalPeriodEnd": "2026-06-30",
+        "fiscalPeriodEndActual": "2026-06-30"
       },
       "valuationAsOf": "2026-08-26",
       "ttmPeriodEnd": "2026-06-30",
@@ -830,7 +840,9 @@
         "beta": 0.42,
         "costOfEquity": 0.0635,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "providerFiscalPeriodEnd": "2026-06-30",
+        "fiscalPeriodEndActual": "2026-06-30"
       },
       "valuationAsOf": "2026-08-26",
       "ttmPeriodEnd": "2026-06-30",
@@ -889,7 +901,9 @@
         "beta": 1.6,
         "costOfEquity": 0.12250000000000003,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "providerFiscalPeriodEnd": "2026-06-30",
+        "fiscalPeriodEndActual": "2026-06-30"
       },
       "valuationAsOf": "2026-08-26",
       "ttmPeriodEnd": "2026-06-30",
@@ -948,7 +962,9 @@
         "beta": 0.51,
         "costOfEquity": 0.068,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "providerFiscalPeriodEnd": "2026-06-30",
+        "fiscalPeriodEndActual": "2026-06-30"
       },
       "valuationAsOf": "2026-08-26",
       "ttmPeriodEnd": "2026-06-30",
@@ -1007,7 +1023,9 @@
         "beta": 1.73,
         "costOfEquity": 0.129,
         "impliedGrowthStatus": "unavailable",
-        "impliedGrowthNote": "归一化自由现金流率为负，终值模型没有经济上有效的解。"
+        "impliedGrowthNote": "归一化自由现金流率为负，终值模型没有经济上有效的解。",
+        "providerFiscalPeriodEnd": "2026-05-31",
+        "fiscalPeriodEndActual": "2026-05-31"
       },
       "valuationAsOf": "2026-08-26",
       "ttmPeriodEnd": "2026-05-31",
@@ -1077,7 +1095,9 @@
         "beta": 1.05,
         "costOfEquity": 0.095,
         "impliedGrowthStatus": "not_applicable",
-        "impliedGrowthNote": "金融公司的经营现金流包含客户贷款和融资变动，不使用普通工业公司的反向 FCFE 模型。"
+        "impliedGrowthNote": "金融公司的经营现金流包含客户贷款和融资变动，不使用普通工业公司的反向 FCFE 模型。",
+        "providerFiscalPeriodEnd": "2026-06-30",
+        "fiscalPeriodEndActual": "2026-06-30"
       },
       "valuationAsOf": "2026-08-26",
       "ttmPeriodEnd": "2026-06-30",
@@ -1087,5 +1107,6 @@
       "dataSource": "Finviz supplemental + Yahoo Finance EOD",
       "note": "数据口径：收盘价和实际交易日来自 Yahoo Finance EOD；Trailing P/E、P/CF、P/S 与历史曲线共用已披露财报 TTM 分母；Finviz 仅提供前瞻及企业价值补充指标。"
     }
-  ]
+  ],
+  "fundamentalsUpdatedAt": "2026-08-28T00:07:55Z"
 }

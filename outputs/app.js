@@ -645,7 +645,7 @@ new MutationObserver(refreshInsightDisclosure).observe(document.querySelector('#
 // Detail-page growth metrics use the most recently reported quarter from the
 // Alpha Vantage company overview, not a forward-estimate proxy.
 const REPORTED_FISCAL_QUARTERS={
-  NVDA:{'2026-04-26':'FY2027 Q1','2026-04-30':'FY2027 Q1'},
+  NVDA:{'2026-04-26':'FY2027 Q1','2026-04-30':'FY2027 Q1','2026-07-26':'FY2027 Q2','2026-07-31':'FY2027 Q2'},
   AAPL:{'2026-06-27':'FY2026 Q3'},
   MSFT:{'2026-06-30':'FY2026 Q4'},
   MU:{'2026-05-28':'FY2026 Q3'},

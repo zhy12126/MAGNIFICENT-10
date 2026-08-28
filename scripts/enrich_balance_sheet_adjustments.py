@@ -15,6 +15,7 @@ CIKS = {
     "NFLX": "0001065280", "MCD": "0000063908", "PLTR": "0001321655",
     "LLY": "0000059478", "ORCL": "0001341439", "AXP": "0000004962",
 }
+TARGET_TICKERS = {ticker.strip().upper() for ticker in os.environ.get("BALANCE_SHEET_TICKERS", "").split(",") if ticker.strip()}
 CASH_TAGS = (
     "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
     "CashAndCashEquivalentsAtCarryingValue",
@@ -52,7 +53,12 @@ def main():
     if not USER_AGENT or "@" not in USER_AGENT:
         raise SystemExit("Missing SEC_EDGAR_USER_AGENT with contact email.")
     data = json.loads(TARGET.read_text(encoding="utf-8"))
+    unknown = TARGET_TICKERS - set(CIKS)
+    if unknown:
+        raise SystemExit(f"Unknown BALANCE_SHEET_TICKERS: {', '.join(sorted(unknown))}")
     for ticker, cik in CIKS.items():
+        if TARGET_TICKERS and ticker not in TARGET_TICKERS:
+            continue
         model = data.get("companies", {}).get(ticker)
         if not model or model.get("status") != "ready":
             continue
