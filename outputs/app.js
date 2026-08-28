@@ -137,11 +137,16 @@ let ANALYST_REVENUE_EXPECTATIONS = {};
 let BUSINESS_GROWTH = {};
 let BUSINESS_GROWTH_AUDITED = {};
 let SUBMETRIC_PARENT = {};
+const sameFiscalQuarter = (left, right) => {
+  const a = String(left || '').match(/^(\d{4})-(\d{2})-/);
+  const b = String(right || '').match(/^(\d{4})-(\d{2})-/);
+  return Boolean(a && b && a[1] === b[1] && Math.floor((Number(a[2]) - 1) / 3) === Math.floor((Number(b[2]) - 1) / 3));
+};
 function businessGrowthSection(s) {
   const data=BUSINESS_GROWTH_AUDITED[s.ticker]||BUSINESS_GROWTH[s.ticker];
   if(!data) return `<section class="business-growth-card"><div class="business-growth-head"><div><p class="eyebrow">BUSINESS GROWTH</p><h3>各业务增长情况</h3></div></div><p class="business-growth-empty">最新财报未提供可直接核验的分部收入同比数据，暂不使用估算值。</p></section>`;
   const automatedPeriod=s.valuationModel?.fiscalPeriodEnd;
-  if(automatedPeriod&&data.fiscalPeriodEnd&&data.fiscalPeriodEnd!==automatedPeriod) return `<section class="business-growth-card"><div class="business-growth-head"><div><p class="eyebrow">BUSINESS GROWTH</p><h3>业务数据待更新</h3></div></div><p class="business-growth-empty">最新财报截至 ${automatedPeriod}，当前业务拆分截至 ${data.fiscalPeriodEnd}。</p></section>`;
+  if(automatedPeriod&&data.fiscalPeriodEnd&&!sameFiscalQuarter(data.fiscalPeriodEnd,automatedPeriod)) return `<section class="business-growth-card"><div class="business-growth-head"><div><p class="eyebrow">BUSINESS GROWTH</p><h3>业务数据待更新</h3></div></div><p class="business-growth-empty">最新财报截至 ${automatedPeriod}，当前业务拆分截至 ${data.fiscalPeriodEnd}。</p></section>`;
   if(data.segments){
     const colors=['#2563eb','#f59e0b','#10b981','#8b5cf6','#ef4444','#06b6d4','#84cc16'],numeric=data.segments.filter(item=>Number.isFinite(Number(item[1]))),total=numeric.reduce((sum,item)=>sum+Number(item[1]),0);let cursor=0;
     const slices=numeric.map((item,index)=>{const start=cursor,end=cursor+Number(item[1])/total*100;cursor=end;return `${colors[index%colors.length]} ${start.toFixed(2)}% ${end.toFixed(2)}%`}).join(',');
