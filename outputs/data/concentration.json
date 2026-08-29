@@ -2,7 +2,7 @@
   "source": "State Street SPY daily fund holdings; price revaluation via Yahoo Finance when needed",
   "sourceUrl": "https://www.ssga.com/us/en/individual/etfs/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
   "methodology": "SPY daily fund-holdings weights, used as an S&P 500 proxy. When State Street has not yet published the latest session, basket weights are estimated from each holding's split-adjusted return relative to SPY, using Yahoo Finance daily closes. Official and estimated dates are exposed separately. AI compute-hardware basket: chips, semiconductor equipment, EDA, servers, networking and physical infrastructure.",
-  "updatedAt": "2026-08-28T21:11:00Z",
+  "updatedAt": "2026-08-29T15:03:39Z",
   "asOf": "2026-08-28",
   "holdingsAsOf": "2026-08-27",
   "isEstimated": true,
