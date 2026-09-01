@@ -72,7 +72,43 @@
         "beta": 2.22,
         "costOfEquity": 0.15350000000000003,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "analystConsensus": {
+          "source": "Alpha Vantage EARNINGS_ESTIMATES",
+          "updatedAt": "2026-09-01T07:56:21.530688Z",
+          "revenueCagr": -0.8438099444779938,
+          "growthPath": [
+            -0.3,
+            1.0,
+            -0.3,
+            0.18,
+            0.14
+          ],
+          "consensusYears": 3,
+          "farGrowth": {
+            "year4": 0.18,
+            "year5": 0.14,
+            "basis": "company-specific"
+          },
+          "analystCount": 26,
+          "estimates": [
+            {
+              "periodEnd": "2026-10-31",
+              "revenue": 104434313520.0,
+              "analystCount": 27
+            },
+            {
+              "periodEnd": "2027-01-31",
+              "revenue": 397012036470.0,
+              "analystCount": 27
+            },
+            {
+              "periodEnd": "2027-01-31",
+              "revenue": 118902053480.0,
+              "analystCount": 26
+            }
+          ]
+        }
       },
       "valuationAsOf": "2026-08-31",
       "ttmPeriodEnd": "2026-07-26",
@@ -131,7 +167,43 @@
         "beta": 1.09,
         "costOfEquity": 0.097,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "analystConsensus": {
+          "source": "Alpha Vantage EARNINGS_ESTIMATES",
+          "updatedAt": "2026-09-01T07:56:34.723646Z",
+          "revenueCagr": -0.8887364257989661,
+          "growthPath": [
+            0.04707161859125253,
+            -0.3,
+            0.8496797701928334,
+            0.06,
+            0.05
+          ],
+          "consensusYears": 3,
+          "farGrowth": {
+            "year4": 0.06,
+            "year5": 0.05,
+            "basis": "company-specific"
+          },
+          "analystCount": 20,
+          "estimates": [
+            {
+              "periodEnd": "2026-09-30",
+              "revenue": 477683718840.0,
+              "analystCount": 36
+            },
+            {
+              "periodEnd": "2026-09-30",
+              "revenue": 113550860190.0,
+              "analystCount": 28
+            },
+            {
+              "periodEnd": "2026-12-31",
+              "revenue": 154432499960.0,
+              "analystCount": 20
+            }
+          ]
+        }
       },
       "valuationAsOf": "2026-08-31",
       "ttmPeriodEnd": "2026-06-27",
@@ -190,7 +262,43 @@
         "beta": 1.11,
         "costOfEquity": 0.098,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "analystConsensus": {
+          "source": "Alpha Vantage EARNINGS_ESTIMATES",
+          "updatedAt": "2026-09-01T07:56:47.910234Z",
+          "revenueCagr": 0.17866380976183027,
+          "growthPath": [
+            -0.3,
+            0.11020560808875213,
+            1.0,
+            0.14,
+            0.12
+          ],
+          "consensusYears": 3,
+          "farGrowth": {
+            "year4": 0.14,
+            "year5": 0.12,
+            "basis": "company-specific"
+          },
+          "analystCount": 37,
+          "estimates": [
+            {
+              "periodEnd": "2026-09-30",
+              "revenue": 90668190940.0,
+              "analystCount": 38
+            },
+            {
+              "periodEnd": "2026-12-31",
+              "revenue": 95533713360.0,
+              "analystCount": 37
+            },
+            {
+              "periodEnd": "2027-06-30",
+              "revenue": 391082615630.0,
+              "analystCount": 49
+            }
+          ]
+        }
       },
       "valuationAsOf": "2026-08-31",
       "ttmPeriodEnd": "2026-06-30",
@@ -249,7 +357,43 @@
         "beta": 1.22,
         "costOfEquity": 0.10350000000000001,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "analystConsensus": {
+          "source": "Alpha Vantage EARNINGS_ESTIMATES",
+          "updatedAt": "2026-09-01T07:57:01.111200Z",
+          "revenueCagr": -0.8981352057749703,
+          "growthPath": [
+            -0.3,
+            1.0,
+            -0.3,
+            0.12,
+            0.1
+          ],
+          "consensusYears": 3,
+          "farGrowth": {
+            "year4": 0.12,
+            "year5": 0.1,
+            "basis": "company-specific"
+          },
+          "analystCount": 36,
+          "estimates": [
+            {
+              "periodEnd": "2026-09-30",
+              "revenue": 127081092080.0,
+              "analystCount": 40
+            },
+            {
+              "periodEnd": "2026-12-31",
+              "revenue": 497864285580.0,
+              "analystCount": 51
+            },
+            {
+              "periodEnd": "2026-12-31",
+              "revenue": 141085716630.0,
+              "analystCount": 36
+            }
+          ]
+        }
       },
       "valuationAsOf": "2026-08-31",
       "ttmPeriodEnd": "2026-06-30",
@@ -309,7 +453,43 @@
         "beta": 1.44,
         "costOfEquity": 0.11449999999999999,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "analystConsensus": {
+          "source": "Alpha Vantage EARNINGS_ESTIMATES",
+          "updatedAt": "2026-09-01T07:57:14.303179Z",
+          "revenueCagr": -0.899370293793033,
+          "growthPath": [
+            -0.3,
+            1.0,
+            -0.3,
+            0.12,
+            0.1
+          ],
+          "consensusYears": 3,
+          "farGrowth": {
+            "year4": 0.12,
+            "year5": 0.1,
+            "basis": "company-specific"
+          },
+          "analystCount": 45,
+          "estimates": [
+            {
+              "periodEnd": "2026-09-30",
+              "revenue": 202153635130.0,
+              "analystCount": 48
+            },
+            {
+              "periodEnd": "2026-12-31",
+              "revenue": 828185897360.0,
+              "analystCount": 56
+            },
+            {
+              "periodEnd": "2026-12-31",
+              "revenue": 243944715340.0,
+              "analystCount": 45
+            }
+          ]
+        }
       },
       "valuationAsOf": "2026-08-31",
       "ttmPeriodEnd": "2026-06-30",
@@ -368,7 +548,43 @@
         "beta": 1.24,
         "costOfEquity": 0.10450000000000001,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "analystConsensus": {
+          "source": "Alpha Vantage EARNINGS_ESTIMATES",
+          "updatedAt": "2026-09-01T07:57:27.562091Z",
+          "revenueCagr": -0.8940566213711029,
+          "growthPath": [
+            -0.3,
+            1.0,
+            -0.3,
+            0.12,
+            0.1
+          ],
+          "consensusYears": 3,
+          "farGrowth": {
+            "year4": 0.12,
+            "year5": 0.1,
+            "basis": "company-specific"
+          },
+          "analystCount": 45,
+          "estimates": [
+            {
+              "periodEnd": "2026-09-30",
+              "revenue": 63314922190.0,
+              "analystCount": 47
+            },
+            {
+              "periodEnd": "2026-12-31",
+              "revenue": 254185499680.0,
+              "analystCount": 55
+            },
+            {
+              "periodEnd": "2026-12-31",
+              "revenue": 73667127690.0,
+              "analystCount": 45
+            }
+          ]
+        }
       },
       "valuationAsOf": "2026-08-31",
       "ttmPeriodEnd": "2026-06-30",
@@ -1096,5 +1312,6 @@
       "dataSource": "Finviz supplemental + Yahoo Finance EOD",
       "note": "数据口径：收盘价和实际交易日来自 Yahoo Finance EOD；Trailing P/E、P/CF、P/S 与历史曲线共用已披露财报 TTM 分母；Finviz 仅提供前瞻及企业价值补充指标。"
     }
-  ]
+  ],
+  "analystEstimatesUpdatedAt": "2026-09-01T07:57:27.562133Z"
 }
