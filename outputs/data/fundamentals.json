@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-31T07:03:20Z",
+  "updatedAt": "2026-09-04T02:49:29Z",
   "companies": {
     "NVDA": {
       "status": "ready",
@@ -24,11 +24,6 @@
       "rationale": "AI 数据中心利润率出现结构性抬升；保留 40% 三年中位数以避免只外推峰值。",
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
       "displayScenarioTargetMargin": 0.46,
-      "cashAndShortTermInvestmentsUsd": 71565000000.0,
-      "totalDebtUsd": 34366000000.0,
-      "equityValueAdjustmentUsd": 37199000000.0,
-      "balanceSheetPeriodEnd": "2026-07-26",
-      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
         "updatedAt": "2026-09-01T07:56:21.530688Z",
@@ -64,7 +59,12 @@
             "analystCount": 26
           }
         ]
-      }
+      },
+      "cashAndShortTermInvestmentsUsd": 71565000000.0,
+      "totalDebtUsd": 34366000000.0,
+      "equityValueAdjustmentUsd": 37199000000.0,
+      "balanceSheetPeriodEnd": "2026-07-26",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "AAPL": {
       "status": "ready",
@@ -577,7 +577,43 @@
       "totalDebtUsd": 14309306000.0,
       "equityValueAdjustmentUsd": -5177842000.0,
       "balanceSheetPeriodEnd": "2026-06-30",
-      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
+      "analystConsensus": {
+        "source": "Alpha Vantage EARNINGS_ESTIMATES",
+        "updatedAt": "2026-09-04T02:47:28.258107Z",
+        "revenueCagr": -0.9202056142851703,
+        "growthPath": [
+          -0.3,
+          1.0,
+          -0.3,
+          0.1,
+          0.08
+        ],
+        "consensusYears": 3,
+        "farGrowth": {
+          "year4": 0.1,
+          "year5": 0.08,
+          "basis": "company-specific"
+        },
+        "analystCount": 36,
+        "estimates": [
+          {
+            "periodEnd": "2026-09-30",
+            "revenue": 12879983470.0,
+            "analystCount": 37
+          },
+          {
+            "periodEnd": "2026-12-31",
+            "revenue": 51220497810.0,
+            "analystCount": 46
+          },
+          {
+            "periodEnd": "2026-12-31",
+            "revenue": 13534291950.0,
+            "analystCount": 36
+          }
+        ]
+      }
     },
     "MCD": {
       "status": "ready",
@@ -605,7 +641,43 @@
       "totalDebtUsd": 40661000000.0,
       "equityValueAdjustmentUsd": -39431500000.0,
       "balanceSheetPeriodEnd": "2026-06-30",
-      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
+      "analystConsensus": {
+        "source": "Alpha Vantage EARNINGS_ESTIMATES",
+        "updatedAt": "2026-09-04T02:47:41.787320Z",
+        "revenueCagr": -0.929387256875342,
+        "growthPath": [
+          -0.3,
+          1.0,
+          -0.3,
+          0.05,
+          0.04
+        ],
+        "consensusYears": 3,
+        "farGrowth": {
+          "year4": 0.05,
+          "year5": 0.04,
+          "basis": "company-specific"
+        },
+        "analystCount": 25,
+        "estimates": [
+          {
+            "periodEnd": "2026-09-30",
+            "revenue": 7324227230.0,
+            "analystCount": 25
+          },
+          {
+            "periodEnd": "2026-12-31",
+            "revenue": 28205789920.0,
+            "analystCount": 30
+          },
+          {
+            "periodEnd": "2026-12-31",
+            "revenue": 7288708620.0,
+            "analystCount": 25
+          }
+        ]
+      }
     },
     "PLTR": {
       "status": "ready",
@@ -635,7 +707,43 @@
       "totalDebtUsd": 0,
       "equityValueAdjustmentUsd": 9442410000.0,
       "balanceSheetPeriodEnd": "2026-06-30",
-      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
+      "analystConsensus": {
+        "source": "Alpha Vantage EARNINGS_ESTIMATES",
+        "updatedAt": "2026-09-04T02:47:55.160801Z",
+        "revenueCagr": -0.8382421123809519,
+        "growthPath": [
+          -0.3,
+          1.0,
+          -0.3,
+          0.23,
+          0.19
+        ],
+        "consensusYears": 3,
+        "farGrowth": {
+          "year4": 0.23,
+          "year5": 0.19,
+          "basis": "company-specific"
+        },
+        "analystCount": 23,
+        "estimates": [
+          {
+            "periodEnd": "2026-09-30",
+            "revenue": 2176723630.0,
+            "analystCount": 23
+          },
+          {
+            "periodEnd": "2026-12-31",
+            "revenue": 8188880520.0,
+            "analystCount": 28
+          },
+          {
+            "periodEnd": "2026-12-31",
+            "revenue": 2458945600.0,
+            "analystCount": 23
+          }
+        ]
+      }
     },
     "LLY": {
       "status": "ready",
@@ -664,7 +772,43 @@
       "totalDebtUsd": 47858000000.0,
       "equityValueAdjustmentUsd": -38786400000.0,
       "balanceSheetPeriodEnd": "2026-06-30",
-      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
+      "analystConsensus": {
+        "source": "Alpha Vantage EARNINGS_ESTIMATES",
+        "updatedAt": "2026-09-04T02:48:08.671013Z",
+        "revenueCagr": -0.9135399080554885,
+        "growthPath": [
+          -0.3,
+          1.0,
+          -0.3,
+          0.18,
+          0.14
+        ],
+        "consensusYears": 3,
+        "farGrowth": {
+          "year4": 0.18,
+          "year5": 0.14,
+          "basis": "company-specific"
+        },
+        "analystCount": 14,
+        "estimates": [
+          {
+            "periodEnd": "2026-09-30",
+            "revenue": 22234610010.0,
+            "analystCount": 14
+          },
+          {
+            "periodEnd": "2026-12-31",
+            "revenue": 88179230800.0,
+            "analystCount": 28
+          },
+          {
+            "periodEnd": "2026-12-31",
+            "revenue": 23210118790.0,
+            "analystCount": 14
+          }
+        ]
+      }
     },
     "ORCL": {
       "status": "ready",
@@ -694,7 +838,43 @@
       "totalDebtUsd": 0,
       "equityValueAdjustmentUsd": 31289000000.0,
       "balanceSheetPeriodEnd": "2026-05-31",
-      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
+      "analystConsensus": {
+        "source": "Alpha Vantage EARNINGS_ESTIMATES",
+        "updatedAt": "2026-09-04T02:48:22.187726Z",
+        "revenueCagr": 0.32659591524165443,
+        "growthPath": [
+          -0.3,
+          0.22447745143685793,
+          1.0,
+          0.17,
+          0.13
+        ],
+        "consensusYears": 3,
+        "farGrowth": {
+          "year4": 0.17,
+          "year5": 0.13,
+          "basis": "company-specific"
+        },
+        "analystCount": 30,
+        "estimates": [
+          {
+            "periodEnd": "2026-08-31",
+            "revenue": 19129328840.0,
+            "analystCount": 31
+          },
+          {
+            "periodEnd": "2026-11-30",
+            "revenue": 21167771020.0,
+            "analystCount": 30
+          },
+          {
+            "periodEnd": "2027-05-31",
+            "revenue": 89339564120.0,
+            "analystCount": 42
+          }
+        ]
+      }
     },
     "AXP": {
       "status": "ready",
@@ -735,6 +915,5 @@
       "balanceSheetPeriodEnd": "2026-06-30",
       "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     }
-  },
-  "analystEstimatesUpdatedAt": "2026-09-01T07:57:27.562133Z"
+  }
 }
