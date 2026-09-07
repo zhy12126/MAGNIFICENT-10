@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-04T02:49:29Z",
+  "updatedAt": "2026-09-07T06:05:54Z",
   "companies": {
     "NVDA": {
       "status": "ready",
@@ -528,10 +528,10 @@
       "status": "ready",
       "company": "SK hynix",
       "fiscalPeriodEnd": "2026-06-30",
-      "revenueTTM": 138092836106.60684,
-      "operatingCashflowTTM": 92871932976.99344,
-      "fcfTTM": 66563400206.57532,
-      "netIncomeTTM": 118233268186.03755,
+      "revenueTTM": 140754042284.18756,
+      "operatingCashflowTTM": 94661680864.93918,
+      "fcfTTM": 67846152714.41552,
+      "netIncomeTTM": 120511757878.64795,
       "fcfMarginTTM": 0.4820192131848807,
       "fcfMargin3yMedian": 0.19840848634054134,
       "fcfMarginCycleMedian": 0.1700322890998682,
@@ -543,9 +543,9 @@
       "equityRiskPremium": 0.05,
       "reportingCurrency": "KRW",
       "modelCurrency": "USD",
-      "fxRateToUsd": 0.0007299909455102571,
-      "beta": 2.395,
-      "costOfEquity": 0.16225,
+      "fxRateToUsd": 0.0007440587021625296,
+      "beta": 2.389,
+      "costOfEquity": 0.16195,
       "rationale": "DRAM 与 NAND 周期显著，TTM 权重 35%，三年中位数权重 65%。",
       "source": "SK hynix 2Q26 official K-IFRS results (SEC 6-K + earnings presentation); FY2021 cycle input from Korean DART annual report; KRW translated at latest KRW/USD",
       "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2120882/000119312526321989/d115239d6k.htm",
@@ -573,11 +573,6 @@
       "fxRateToUsd": 1.0,
       "rationale": "订阅业务现金转化较稳定，当前经营结构权重略高，同时保留历史内容投入周期。",
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
-      "cashAndShortTermInvestmentsUsd": 9131464000.0,
-      "totalDebtUsd": 14309306000.0,
-      "equityValueAdjustmentUsd": -5177842000.0,
-      "balanceSheetPeriodEnd": "2026-06-30",
-      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
         "updatedAt": "2026-09-04T02:47:28.258107Z",
@@ -613,7 +608,12 @@
             "analystCount": 36
           }
         ]
-      }
+      },
+      "cashAndShortTermInvestmentsUsd": 9131464000.0,
+      "totalDebtUsd": 14309306000.0,
+      "equityValueAdjustmentUsd": -5177842000.0,
+      "balanceSheetPeriodEnd": "2026-06-30",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "MCD": {
       "status": "ready",
@@ -637,11 +637,6 @@
       "fxRateToUsd": 1.0,
       "rationale": "成熟特许经营体系现金流稳定，TTM 与三年中位数各占一半。",
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
-      "cashAndShortTermInvestmentsUsd": 1229500000.0,
-      "totalDebtUsd": 40661000000.0,
-      "equityValueAdjustmentUsd": -39431500000.0,
-      "balanceSheetPeriodEnd": "2026-06-30",
-      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
         "updatedAt": "2026-09-04T02:47:41.787320Z",
@@ -677,7 +672,12 @@
             "analystCount": 25
           }
         ]
-      }
+      },
+      "cashAndShortTermInvestmentsUsd": 1229500000.0,
+      "totalDebtUsd": 40661000000.0,
+      "equityValueAdjustmentUsd": -39431500000.0,
+      "balanceSheetPeriodEnd": "2026-06-30",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "PLTR": {
       "status": "ready",
@@ -703,11 +703,6 @@
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
       "displayScenarioTargetMargin": 0.35,
       "displayScenarioCurrentMargin": 0.35,
-      "cashAndShortTermInvestmentsUsd": 9442410000.0,
-      "totalDebtUsd": 0,
-      "equityValueAdjustmentUsd": 9442410000.0,
-      "balanceSheetPeriodEnd": "2026-06-30",
-      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
         "updatedAt": "2026-09-04T02:47:55.160801Z",
@@ -743,7 +738,12 @@
             "analystCount": 23
           }
         ]
-      }
+      },
+      "cashAndShortTermInvestmentsUsd": 9442410000.0,
+      "totalDebtUsd": 0,
+      "equityValueAdjustmentUsd": 9442410000.0,
+      "balanceSheetPeriodEnd": "2026-06-30",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "LLY": {
       "status": "ready",
@@ -768,11 +768,6 @@
       "rationale": "创新药放量与研发投入并存，当前现金流略高权重但不过度外推单一产品周期。",
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
       "displayScenarioTargetMargin": 0.16,
-      "cashAndShortTermInvestmentsUsd": 9071600000.0,
-      "totalDebtUsd": 47858000000.0,
-      "equityValueAdjustmentUsd": -38786400000.0,
-      "balanceSheetPeriodEnd": "2026-06-30",
-      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
         "updatedAt": "2026-09-04T02:48:08.671013Z",
@@ -808,7 +803,12 @@
             "analystCount": 14
           }
         ]
-      }
+      },
+      "cashAndShortTermInvestmentsUsd": 9071600000.0,
+      "totalDebtUsd": 47858000000.0,
+      "equityValueAdjustmentUsd": -38786400000.0,
+      "balanceSheetPeriodEnd": "2026-06-30",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "ORCL": {
       "status": "ready",
@@ -834,11 +834,6 @@
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
       "displayScenarioTargetMargin": 0.17,
       "displayScenarioCurrentMargin": -0.352,
-      "cashAndShortTermInvestmentsUsd": 31289000000.0,
-      "totalDebtUsd": 0,
-      "equityValueAdjustmentUsd": 31289000000.0,
-      "balanceSheetPeriodEnd": "2026-05-31",
-      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
         "updatedAt": "2026-09-04T02:48:22.187726Z",
@@ -874,7 +869,12 @@
             "analystCount": 42
           }
         ]
-      }
+      },
+      "cashAndShortTermInvestmentsUsd": 31289000000.0,
+      "totalDebtUsd": 0,
+      "equityValueAdjustmentUsd": 31289000000.0,
+      "balanceSheetPeriodEnd": "2026-05-31",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "AXP": {
       "status": "ready",
