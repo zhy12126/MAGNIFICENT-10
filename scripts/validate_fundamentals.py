@@ -1,4 +1,5 @@
 """Fail CI when refreshed company-model inputs are incomplete or inconsistent."""
+import argparse
 import json
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -22,6 +23,14 @@ def parsed_date(value):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--timestamp-field",
+        choices=("updatedAt", "analystEstimatesUpdatedAt"),
+        default="updatedAt",
+        help="Timestamp written by the refresh being validated (default: updatedAt).",
+    )
+    args = parser.parse_args()
     payload = json.loads(TARGET.read_text(encoding="utf-8"))
     companies = payload.get("companies", {})
     issues = []
@@ -32,15 +41,15 @@ def main():
     if extra:
         issues.append(f"unexpected companies: {', '.join(sorted(extra))}")
     
-    # Check either updatedAt (from fetch_fundamentals) or analystEstimatesUpdatedAt (from fetch_analyst_estimates)
-    timestamp_to_check = payload.get("updatedAt") or payload.get("analystEstimatesUpdatedAt")
+    # Validate only the timestamp owned by this refresh; never fall back to another job's.
+    timestamp_to_check = payload.get(args.timestamp_field)
     try:
         updated = datetime.fromisoformat(timestamp_to_check.replace("Z", "+00:00"))
         age_hours = (datetime.now(timezone.utc) - updated).total_seconds() / 3600
         if age_hours < -1 or age_hours > 48:
-            issues.append(f"updatedAt is not from this refresh: {timestamp_to_check}")
+            issues.append(f"{args.timestamp_field} is not from this refresh: {timestamp_to_check}")
     except (KeyError, TypeError, ValueError, AttributeError):
-        issues.append("updatedAt or analystEstimatesUpdatedAt is missing or invalid")
+        issues.append(f"{args.timestamp_field} is missing or invalid")
 
     for ticker in sorted(EXPECTED & set(companies)):
         model = companies[ticker]

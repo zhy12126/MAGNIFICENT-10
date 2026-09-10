@@ -50,7 +50,7 @@ jobs:
           ESTIMATE_TICKERS: ${{ steps.group.outputs.tickers }}
       - name: Validate company data
         run: |
-          python scripts/validate_fundamentals.py
+          python scripts/validate_fundamentals.py --timestamp-field analystEstimatesUpdatedAt
           python scripts/validate_valuation_consistency.py
       - name: Commit refreshed consensus
         run: |
