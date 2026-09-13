@@ -337,13 +337,13 @@
         "status": "ready",
         "company": "Alphabet",
         "fiscalPeriodEnd": "2026-06-30",
-        "revenueTTM": 445867000000.0,
+        "revenueTTM": 445866000000.0,
         "operatingCashflowTTM": 185675000000.0,
         "fcfTTM": 53273000000.0,
         "netIncomeTTM": 244205000000.0,
-        "fcfMarginTTM": 0.11948181856921458,
+        "fcfMarginTTM": 0.11948208654618203,
         "fcfMargin3yMedian": 0.20788645155392008,
-        "normalizedFcfMargin": 0.14158297681539095,
+        "normalizedFcfMargin": 0.14158317779811655,
         "fcfMarginCycleMedian": 0.21217242500954617,
         "fcfMarginCycleYears": 7,
         "ttmWeight": 0.75,
@@ -807,7 +807,7 @@
       "valuationModel": {
         "status": "ready",
         "company": "Broadcom",
-        "fiscalPeriodEnd": "2026-07-31",
+        "fiscalPeriodEnd": "2026-08-02",
         "revenueTTM": 89104000000.0,
         "operatingCashflowTTM": 40653000000.0,
         "fcfTTM": 39403000000.0,
@@ -834,7 +834,9 @@
         "beta": 1.47,
         "costOfEquity": 0.11599999999999999,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "providerFiscalPeriodEnd": "2026-07-31",
+        "fiscalPeriodEndActual": "2026-08-02"
       },
       "valuationAsOf": "2026-09-11",
       "ttmPeriodEnd": "2026-08-02",
@@ -929,10 +931,10 @@
         "status": "ready",
         "company": "SK hynix",
         "fiscalPeriodEnd": "2026-06-30",
-        "revenueTTM": 140754042284.18756,
-        "operatingCashflowTTM": 94661680864.93918,
-        "fcfTTM": 67846152714.41552,
-        "netIncomeTTM": 120511757878.64795,
+        "revenueTTM": 140919704677.8736,
+        "operatingCashflowTTM": 94773094223.93008,
+        "fcfTTM": 67926005171.074394,
+        "netIncomeTTM": 120653595839.06107,
         "fcfMarginTTM": 0.4820192131848807,
         "fcfMargin3yMedian": 0.19840848634054134,
         "fcfMarginCycleMedian": 0.1700322890998682,
@@ -944,7 +946,7 @@
         "equityRiskPremium": 0.05,
         "reportingCurrency": "KRW",
         "modelCurrency": "USD",
-        "fxRateToUsd": 0.0007440587021625296,
+        "fxRateToUsd": 0.0007449344322207421,
         "beta": 2.389,
         "costOfEquity": 0.16195,
         "rationale": "DRAM 与 NAND 周期显著，TTM 权重 35%，三年中位数权重 65%。",
@@ -1442,7 +1444,9 @@
         "beta": 1.75,
         "costOfEquity": 0.13,
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "providerFiscalPeriodEnd": "2026-08-31",
+        "fiscalPeriodEndActual": "2026-08-31"
       },
       "valuationAsOf": "2026-09-11",
       "ttmPeriodEnd": "2026-08-31",
@@ -1524,5 +1528,6 @@
       "dataSource": "Finviz supplemental + Yahoo Finance EOD",
       "note": "数据口径：收盘价和实际交易日来自 Yahoo Finance EOD；Trailing P/E、P/CF、P/S 与历史曲线共用已披露财报 TTM 分母；Finviz 仅提供前瞻及企业价值补充指标。"
     }
-  ]
+  ],
+  "fundamentalsUpdatedAt": "2026-09-13T06:10:28Z"
 }

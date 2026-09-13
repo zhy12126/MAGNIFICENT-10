@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-13T04:42:44Z",
+  "updatedAt": "2026-09-13T06:10:28Z",
   "companies": {
     "NVDA": {
       "status": "ready",
@@ -88,11 +88,6 @@
       "fxRateToUsd": 1.0,
       "rationale": "硬件与服务组合成熟，TTM 与三年现金转化各占一半。",
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
-      "cashAndShortTermInvestmentsUsd": 62399000000.0,
-      "totalDebtUsd": 93307000000.0,
-      "equityValueAdjustmentUsd": -30908000000.0,
-      "balanceSheetPeriodEnd": "2026-06-27",
-      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
         "updatedAt": "2026-09-08T07:22:30.108677Z",
@@ -128,7 +123,12 @@
             "analystCount": 19
           }
         ]
-      }
+      },
+      "cashAndShortTermInvestmentsUsd": 62399000000.0,
+      "totalDebtUsd": 93307000000.0,
+      "equityValueAdjustmentUsd": -30908000000.0,
+      "balanceSheetPeriodEnd": "2026-06-27",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "MSFT": {
       "status": "ready",
@@ -152,11 +152,6 @@
       "fxRateToUsd": 1.0,
       "rationale": "AI 基础设施资本开支已显著上升，较多采用当前现金流率。",
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
-      "cashAndShortTermInvestmentsUsd": 76843000000.0,
-      "totalDebtUsd": 49521000000.0,
-      "equityValueAdjustmentUsd": 27322000000.0,
-      "balanceSheetPeriodEnd": "2026-06-30",
-      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
         "updatedAt": "2026-09-08T07:22:43.228613Z",
@@ -192,19 +187,24 @@
             "analystCount": 49
           }
         ]
-      }
+      },
+      "cashAndShortTermInvestmentsUsd": 76843000000.0,
+      "totalDebtUsd": 49521000000.0,
+      "equityValueAdjustmentUsd": 27322000000.0,
+      "balanceSheetPeriodEnd": "2026-06-30",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "GOOGL": {
       "status": "ready",
       "company": "Alphabet",
       "fiscalPeriodEnd": "2026-06-30",
-      "revenueTTM": 445867000000.0,
+      "revenueTTM": 445866000000.0,
       "operatingCashflowTTM": 185675000000.0,
       "fcfTTM": 53273000000.0,
       "netIncomeTTM": 244205000000.0,
-      "fcfMarginTTM": 0.11948181856921458,
+      "fcfMarginTTM": 0.11948208654618203,
       "fcfMargin3yMedian": 0.20788645155392008,
-      "normalizedFcfMargin": 0.14158297681539095,
+      "normalizedFcfMargin": 0.14158317779811655,
       "fcfMarginCycleMedian": 0.21217242500954617,
       "fcfMarginCycleYears": 7,
       "ttmWeight": 0.75,
@@ -216,11 +216,6 @@
       "fxRateToUsd": 1.0,
       "rationale": "数据中心投资快速增加，当前现金流率比过去轻资本年份更具代表性。",
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
-      "cashAndShortTermInvestmentsUsd": 242474000000.0,
-      "totalDebtUsd": 100164000000.0,
-      "equityValueAdjustmentUsd": 142310000000.0,
-      "balanceSheetPeriodEnd": "2026-06-30",
-      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
         "updatedAt": "2026-09-08T07:22:56.407172Z",
@@ -256,7 +251,12 @@
             "analystCount": 35
           }
         ]
-      }
+      },
+      "cashAndShortTermInvestmentsUsd": 242474000000.0,
+      "totalDebtUsd": 100164000000.0,
+      "equityValueAdjustmentUsd": 142310000000.0,
+      "balanceSheetPeriodEnd": "2026-06-30",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "AMZN": {
       "status": "ready",
@@ -281,11 +281,6 @@
       "rationale": "AWS 与物流网络均在加大投入，当前现金转化优先。",
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
       "displayScenarioTargetMargin": 0.08,
-      "cashAndShortTermInvestmentsUsd": 125702000000.0,
-      "totalDebtUsd": 136325000000.0,
-      "equityValueAdjustmentUsd": -10623000000.0,
-      "balanceSheetPeriodEnd": "2026-06-30",
-      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
         "updatedAt": "2026-09-08T07:23:09.583899Z",
@@ -321,7 +316,12 @@
             "analystCount": 45
           }
         ]
-      }
+      },
+      "cashAndShortTermInvestmentsUsd": 125702000000.0,
+      "totalDebtUsd": 136325000000.0,
+      "equityValueAdjustmentUsd": -10623000000.0,
+      "balanceSheetPeriodEnd": "2026-06-30",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "META": {
       "status": "ready",
@@ -345,11 +345,6 @@
       "fxRateToUsd": 1.0,
       "rationale": "AI 资本开支处于高投入阶段，避免用旧年高 FCF 率高估。",
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
-      "cashAndShortTermInvestmentsUsd": 104069000000.0,
-      "totalDebtUsd": 83664000000.0,
-      "equityValueAdjustmentUsd": 20405000000.0,
-      "balanceSheetPeriodEnd": "2026-06-30",
-      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
         "updatedAt": "2026-09-08T07:23:22.729806Z",
@@ -385,7 +380,12 @@
             "analystCount": 45
           }
         ]
-      }
+      },
+      "cashAndShortTermInvestmentsUsd": 104069000000.0,
+      "totalDebtUsd": 83664000000.0,
+      "equityValueAdjustmentUsd": 20405000000.0,
+      "balanceSheetPeriodEnd": "2026-06-30",
+      "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "TSLA": {
       "status": "ready",
@@ -528,10 +528,10 @@
       "status": "ready",
       "company": "SK hynix",
       "fiscalPeriodEnd": "2026-06-30",
-      "revenueTTM": 140754042284.18756,
-      "operatingCashflowTTM": 94661680864.93918,
-      "fcfTTM": 67846152714.41552,
-      "netIncomeTTM": 120511757878.64795,
+      "revenueTTM": 140919704677.8736,
+      "operatingCashflowTTM": 94773094223.93008,
+      "fcfTTM": 67926005171.074394,
+      "netIncomeTTM": 120653595839.06107,
       "fcfMarginTTM": 0.4820192131848807,
       "fcfMargin3yMedian": 0.19840848634054134,
       "fcfMarginCycleMedian": 0.1700322890998682,
@@ -543,7 +543,7 @@
       "equityRiskPremium": 0.05,
       "reportingCurrency": "KRW",
       "modelCurrency": "USD",
-      "fxRateToUsd": 0.0007440587021625296,
+      "fxRateToUsd": 0.0007449344322207421,
       "beta": 2.389,
       "costOfEquity": 0.16195,
       "rationale": "DRAM 与 NAND 周期显著，TTM 权重 35%，三年中位数权重 65%。",
