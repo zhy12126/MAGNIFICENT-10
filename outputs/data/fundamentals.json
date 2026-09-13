@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-07T06:05:54Z",
+  "updatedAt": "2026-09-13T04:42:44Z",
   "companies": {
     "NVDA": {
       "status": "ready",
@@ -470,14 +470,14 @@
     "AVGO": {
       "status": "ready",
       "company": "Broadcom",
-      "fiscalPeriodEnd": "2026-04-30",
-      "revenueTTM": 75465000000.0,
-      "operatingCashflowTTM": 33622000000.0,
-      "fcfTTM": 32762000000.0,
-      "netIncomeTTM": 29317000000.0,
-      "fcfMarginTTM": 0.4341350294838667,
+      "fiscalPeriodEnd": "2026-07-31",
+      "revenueTTM": 89104000000.0,
+      "operatingCashflowTTM": 40653000000.0,
+      "fcfTTM": 39403000000.0,
+      "netIncomeTTM": 38265000000.0,
+      "fcfMarginTTM": 0.44221359310468666,
       "fcfMargin3yMedian": 0.4212750637844945,
-      "normalizedFcfMargin": 0.4289910432041178,
+      "normalizedFcfMargin": 0.4338381813766098,
       "fcfMarginCycleMedian": 0.4852823315118397,
       "fcfMarginCycleYears": 7,
       "ttmWeight": 0.6,
@@ -489,10 +489,10 @@
       "fxRateToUsd": 1.0,
       "rationale": "基础设施软件整合与半导体业务并行，当前现金转化权重略高。",
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
-      "cashAndShortTermInvestmentsUsd": 19628000000.0,
-      "totalDebtUsd": 67159000000.0,
-      "equityValueAdjustmentUsd": -47531000000.0,
-      "balanceSheetPeriodEnd": "2026-05-03",
+      "cashAndShortTermInvestmentsUsd": 23975000000.0,
+      "totalDebtUsd": 61671000000.0,
+      "equityValueAdjustmentUsd": -37696000000.0,
+      "balanceSheetPeriodEnd": "2026-08-02",
       "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "AMD": {
@@ -813,14 +813,14 @@
     "ORCL": {
       "status": "ready",
       "company": "Oracle",
-      "fiscalPeriodEnd": "2026-05-31",
-      "revenueTTM": 67358000000.0,
-      "operatingCashflowTTM": 31977000000.0,
-      "fcfTTM": -23686000000.0,
-      "netIncomeTTM": 17087000000.0,
-      "fcfMarginTTM": -0.3516434573473084,
+      "fiscalPeriodEnd": "2026-08-31",
+      "revenueTTM": 71777000000.0,
+      "operatingCashflowTTM": 46940000000.0,
+      "fcfTTM": -28720000000.0,
+      "netIncomeTTM": 18920000000.0,
+      "fcfMarginTTM": -0.40012817476350365,
       "fcfMargin3yMedian": -0.00686423108416523,
-      "normalizedFcfMargin": -0.26544865078152263,
+      "normalizedFcfMargin": -0.30181218884366906,
       "fcfMarginCycleMedian": 0.16955599151219122,
       "fcfMarginCycleYears": 7,
       "ttmWeight": 0.75,
@@ -870,10 +870,10 @@
           }
         ]
       },
-      "cashAndShortTermInvestmentsUsd": 31289000000.0,
+      "cashAndShortTermInvestmentsUsd": 36369000000.0,
       "totalDebtUsd": 0,
-      "equityValueAdjustmentUsd": 31289000000.0,
-      "balanceSheetPeriodEnd": "2026-05-31",
+      "equityValueAdjustmentUsd": 36369000000.0,
+      "balanceSheetPeriodEnd": "2026-08-31",
       "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     },
     "AXP": {

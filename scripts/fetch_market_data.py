@@ -505,19 +505,22 @@ def main():
     # snapshot.  Keeping the prior row is safer than publishing empty metrics.
     target = Path("outputs/data/stocks.json")
     previous_stocks = {}
+    previous_source_by_ticker = {}
     if target.exists():
+        previous_payload = json.loads(target.read_text(encoding="utf-8"))
         previous_stocks = {
             stock.get("ticker"): stock
-            for stock in json.loads(target.read_text(encoding="utf-8")).get("stocks", [])
+            for stock in previous_payload.get("stocks", [])
             if stock.get("ticker")
         }
+        previous_source_by_ticker = dict(previous_payload.get("sourceByTicker", {}))
     known_tickers = {ticker for _, ticker, *_ in COMPANIES}
     unknown_tickers = REQUESTED_TICKERS - known_tickers
     if unknown_tickers:
         raise SystemExit(f"Unknown MARKET_TICKERS: {', '.join(sorted(unknown_tickers))}")
     stocks = []
     updated_tickers = set()
-    source_by_ticker = {}
+    source_by_ticker = previous_source_by_ticker
     calculated_by_ticker = {}
     for i, (name, ticker, logo, color, ink) in enumerate(COMPANIES):
         prior = previous_stocks.get(ticker, {})

@@ -45,10 +45,10 @@
       "fiscalPeriodEnd": "2026-05-31"
     },
     "AVGO": {
-      "value": "约 84%",
-      "period": "FY2026 Q3收入约 $29.4B，对比 FY2025 Q3实际收入",
-      "issued": "2026-06-03",
-      "fiscalPeriodEnd": "2026-04-30"
+      "value": "约 93%",
+      "period": "FY2026 Q4收入约 $34.8B，对比 FY2025 Q4实际收入",
+      "issued": "2026-09-02",
+      "fiscalPeriodEnd": "2026-07-31"
     },
     "AMD": {
       "value": "约 41%",
@@ -69,10 +69,10 @@
       "fiscalPeriodEnd": "2026-06-30"
     },
     "ORCL": {
-      "value": "约 34%",
-      "period": "FY2027全年收入约 $90B，对比 FY2026全年实际收入",
-      "issued": "2026-06-10",
-      "fiscalPeriodEnd": "2026-05-31"
+      "value": "30%–34%",
+      "period": "FY2027 Q2收入同比增速指引（美元及固定汇率口径）",
+      "issued": "2026-09-10",
+      "fiscalPeriodEnd": "2026-08-31"
     }
   },
   "analystDisplayOverrides": {
@@ -446,35 +446,35 @@
       "reportedRevenue": 41.46
     },
     "AVGO": {
-      "period": "FY2026 Q2 vs FY2025 Q2",
-      "issued": "2026-06-03",
+      "period": "FY2026 Q3 vs FY2025 Q3",
+      "issued": "2026-09-02",
       "source": "Broadcom 财报",
       "segments": [
         [
           "半导体解决方案",
-          15.01,
-          "+79%",
+          20.839,
+          "+127%",
           "AI加速器、网络、无线及存储芯片"
         ],
         [
           "基础设施软件",
-          7.18,
-          "+9%",
+          8.752,
+          "+29%",
           "VMware Cloud Foundation及企业软件"
         ]
       ],
       "submetrics": [
         [
           "AI半导体",
-          "+143%",
+          "+221%",
           "半导体解决方案子业务",
-          72.0
+          80.0
         ]
       ],
-      "fiscalPeriodEnd": "2026-04-30",
-      "comparisonPeriod": "FY2026 Q2 vs FY2025 Q2",
-      "manualUpdatedAt": "2026-06-03",
-      "reportedRevenue": 22.189999999999998
+      "fiscalPeriodEnd": "2026-07-31",
+      "comparisonPeriod": "FY2026 Q3 vs FY2025 Q3",
+      "manualUpdatedAt": "2026-09-02",
+      "reportedRevenue": 29.591
     },
     "AMD": {
       "period": "2026 Q2 vs 2025 Q2",
@@ -702,45 +702,45 @@
       "reportedRevenue": 22.97
     },
     "ORCL": {
-      "period": "FY2026 Q4 vs FY2025 Q4",
-      "issued": "2026-06-10",
+      "period": "FY2027 Q1 vs FY2026 Q1",
+      "issued": "2026-09-10",
       "source": "Oracle 财报",
       "segments": [
         [
           "云基础设施 IaaS",
-          5.8,
-          "+93%",
+          7.4,
+          "+121%",
           "OCI计算、存储、数据库及AI基础设施"
         ],
         [
           "云应用 SaaS",
-          4.1,
+          4.2,
           "+10%",
           "Fusion、NetSuite及行业云应用"
         ],
         [
           "软件",
-          6.8,
-          "−2%",
+          5.5,
+          "−3%",
           "本地软件许可与支持"
         ],
         [
           "服务",
-          1.5,
-          "+13%",
+          1.4,
+          "+5%",
           "咨询与实施服务"
         ],
         [
           "硬件",
-          0.9,
-          "+9%",
+          0.8,
+          "+15%",
           "Exadata及服务器硬件"
         ]
       ],
-      "fiscalPeriodEnd": "2026-05-31",
-      "comparisonPeriod": "FY2026 Q4 vs FY2025 Q4",
-      "manualUpdatedAt": "2026-06-10",
-      "reportedRevenue": 19.099999999999998
+      "fiscalPeriodEnd": "2026-08-31",
+      "comparisonPeriod": "FY2027 Q1 vs FY2026 Q1",
+      "manualUpdatedAt": "2026-09-10",
+      "reportedRevenue": 19.3
     },
     "AXP": {
       "period": "2026 Q2 vs 2025 Q2",

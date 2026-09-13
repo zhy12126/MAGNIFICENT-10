@@ -214,7 +214,12 @@ def main():
             print(f"⚠️  {len(unavailable_tickers)} company/companies unavailable (likely API rate limit): {', '.join(unavailable_tickers)}")
         target.parent.mkdir(parents=True, exist_ok=True)
         companies.update(refreshed)
-        target.write_text(json.dumps({"updatedAt": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "companies": companies}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        output = {
+            **previous,
+            "updatedAt": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "companies": companies,
+        }
+        target.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     else:
         raise SystemExit(
             "No usable fundamentals were returned. Alpha Vantage likely hit its "
