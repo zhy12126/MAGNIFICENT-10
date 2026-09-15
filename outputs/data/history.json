@@ -1,43 +1,7 @@
 {
-  "source": "SEC EDGAR point-in-time quarterly TTM financial facts + daily EOD prices (auto selection; EODHD, Stooq, and Yahoo fallback where applicable)",
+  "source": "Selected US EOD prices from Yahoo Finance + Alpha Vantage quarterly financial statements",
   "stocks": {
     "NVDA": [
-      {
-        "date": "2021-09-07",
-        "price": 22.662,
-        "pe": 3.539,
-        "pcf": 3.1704,
-        "ps": 1.1441,
-        "ttmPeriodEnd": "2021-08-01",
-        "ttmAvailableFrom": "2021-08-20"
-      },
-      {
-        "date": "2021-09-08",
-        "price": 22.339,
-        "pe": 3.4886,
-        "pcf": 3.1253,
-        "ps": 1.1278,
-        "ttmPeriodEnd": "2021-08-01",
-        "ttmAvailableFrom": "2021-08-20"
-      },
-      {
-        "date": "2021-09-09",
-        "price": 22.177,
-        "pe": 3.4633,
-        "pcf": 3.1026,
-        "ps": 1.1196,
-        "ttmPeriodEnd": "2021-08-01",
-        "ttmAvailableFrom": "2021-08-20"
-      },
-      {
-        "date": "2021-09-10",
-        "price": 22.478,
-        "pe": 3.5103,
-        "pcf": 3.1447,
-        "ps": 1.1348,
-        "ttmPeriodEnd": "2021-08-01",
-        "ttmAvailableFrom": "2021-08-20"
-      },
       {
         "date": "2021-09-13",
         "price": 22.152,
@@ -11295,87 +11259,56 @@
         "pcf": 41.865,
         "ps": 18.5662,
         "ttmPeriodEnd": "2026-07-26",
-        "ttmAvailableFrom": "2026-08-26",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-26"
       },
       {
         "date": "2026-09-08",
         "price": 225.73,
         "pe": 28.5771,
         "pcf": 41.0236,
-        "ps": 18.193,
+        "ps": 18.1931,
         "ttmPeriodEnd": "2026-07-26",
-        "ttmAvailableFrom": "2026-08-26",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-26"
       },
       {
         "date": "2026-09-09",
         "price": 223.67,
-        "pe": 28.3163,
+        "pe": 28.3164,
         "pcf": 40.6492,
         "ps": 18.027,
         "ttmPeriodEnd": "2026-07-26",
-        "ttmAvailableFrom": "2026-08-26",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-26"
       },
       {
         "date": "2026-09-10",
         "price": 218.36,
         "pe": 27.6441,
         "pcf": 39.6842,
-        "ps": 17.599,
+        "ps": 17.5991,
         "ttmPeriodEnd": "2026-07-26",
-        "ttmAvailableFrom": "2026-08-26",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-26"
       },
       {
         "date": "2026-09-11",
         "price": 218.29,
-        "pe": 27.6352,
+        "pe": 27.6353,
         "pcf": 39.6715,
         "ps": 17.5934,
+        "ttmPeriodEnd": "2026-07-26",
+        "ttmAvailableFrom": "2026-08-26"
+      },
+      {
+        "date": "2026-09-14",
+        "price": 210.96,
+        "pe": 26.7073,
+        "pcf": 38.3393,
+        "ps": 17.0026,
         "ttmPeriodEnd": "2026-07-26",
         "ttmAvailableFrom": "2026-08-26",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "AAPL": [
-      {
-        "date": "2021-09-07",
-        "price": 156.69,
-        "pe": 30.8466,
-        "pcf": 25.6436,
-        "ps": 7.7128,
-        "ttmPeriodEnd": "2021-06-26",
-        "ttmAvailableFrom": "2021-07-28"
-      },
-      {
-        "date": "2021-09-08",
-        "price": 155.11,
-        "pe": 30.5356,
-        "pcf": 25.385,
-        "ps": 7.6351,
-        "ttmPeriodEnd": "2021-06-26",
-        "ttmAvailableFrom": "2021-07-28"
-      },
-      {
-        "date": "2021-09-09",
-        "price": 154.07,
-        "pe": 30.3309,
-        "pcf": 25.2148,
-        "ps": 7.5839,
-        "ttmPeriodEnd": "2021-06-26",
-        "ttmAvailableFrom": "2021-07-28"
-      },
-      {
-        "date": "2021-09-10",
-        "price": 148.97,
-        "pe": 29.3268,
-        "pcf": 24.3801,
-        "ps": 7.3328,
-        "ttmPeriodEnd": "2021-06-26",
-        "ttmAvailableFrom": "2021-07-28"
-      },
       {
         "date": "2021-09-13",
         "price": 149.55,
@@ -22633,8 +22566,7 @@
         "pcf": 32.3056,
         "ps": 10.1537,
         "ttmPeriodEnd": "2026-06-27",
-        "ttmAvailableFrom": "2026-07-31",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-31"
       },
       {
         "date": "2026-09-08",
@@ -22643,77 +22575,47 @@
         "pcf": 31.927,
         "ps": 10.0347,
         "ttmPeriodEnd": "2026-06-27",
-        "ttmAvailableFrom": "2026-07-31",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-31"
       },
       {
         "date": "2026-09-09",
         "price": 315.34,
         "pe": 36.2322,
-        "pcf": 31.8382,
+        "pcf": 31.8381,
         "ps": 10.0068,
         "ttmPeriodEnd": "2026-06-27",
-        "ttmAvailableFrom": "2026-07-31",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-31"
       },
       {
         "date": "2026-09-10",
         "price": 326.57,
         "pe": 37.5225,
-        "pcf": 32.972,
+        "pcf": 32.9719,
         "ps": 10.3632,
         "ttmPeriodEnd": "2026-06-27",
-        "ttmAvailableFrom": "2026-07-31",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-31"
       },
       {
         "date": "2026-09-11",
         "price": 332.27,
         "pe": 38.1774,
-        "pcf": 33.5475,
+        "pcf": 33.5474,
         "ps": 10.5441,
+        "ttmPeriodEnd": "2026-06-27",
+        "ttmAvailableFrom": "2026-07-31"
+      },
+      {
+        "date": "2026-09-14",
+        "price": 333.08,
+        "pe": 38.2705,
+        "pcf": 33.6292,
+        "ps": 10.5698,
         "ttmPeriodEnd": "2026-06-27",
         "ttmAvailableFrom": "2026-07-31",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "MSFT": [
-      {
-        "date": "2021-09-07",
-        "price": 300.18,
-        "pe": 37.3051,
-        "pcf": 29.7853,
-        "ps": 13.5984,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-29"
-      },
-      {
-        "date": "2021-09-08",
-        "price": 300.21,
-        "pe": 37.3088,
-        "pcf": 29.7882,
-        "ps": 13.5997,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-29"
-      },
-      {
-        "date": "2021-09-09",
-        "price": 297.25,
-        "pe": 36.941,
-        "pcf": 29.4945,
-        "ps": 13.4656,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-29"
-      },
-      {
-        "date": "2021-09-10",
-        "price": 295.71,
-        "pe": 36.7496,
-        "pcf": 29.3417,
-        "ps": 13.3959,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-29"
-      },
       {
         "date": "2021-09-13",
         "price": 296.99,
@@ -33971,28 +33873,25 @@
         "pcf": 20.3666,
         "ps": 11.2276,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-29",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-29"
       },
       {
         "date": "2026-09-08",
         "price": 493.95,
-        "pe": 27.5359,
+        "pe": 27.5358,
         "pcf": 20.1322,
         "ps": 11.0984,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-29",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-29"
       },
       {
         "date": "2026-09-09",
         "price": 491.65,
-        "pe": 27.4077,
+        "pe": 27.4076,
         "pcf": 20.0385,
         "ps": 11.0467,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-29",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-29"
       },
       {
         "date": "2026-09-10",
@@ -34001,8 +33900,7 @@
         "pcf": 20.0707,
         "ps": 11.0645,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-29",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-29"
       },
       {
         "date": "2026-09-11",
@@ -34011,47 +33909,20 @@
         "pcf": 20.2007,
         "ps": 11.1362,
         "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-07-29"
+      },
+      {
+        "date": "2026-09-14",
+        "price": 505.41,
+        "pe": 28.1747,
+        "pcf": 20.5993,
+        "ps": 11.3559,
+        "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-29",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "GOOGL": [
-      {
-        "date": "2021-09-07",
-        "price": 144.2805,
-        "pe": 31.3495,
-        "pcf": 24.3979,
-        "ps": 8.9564,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-28"
-      },
-      {
-        "date": "2021-09-08",
-        "price": 143.691,
-        "pe": 31.2214,
-        "pcf": 24.2982,
-        "ps": 8.9198,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-28"
-      },
-      {
-        "date": "2021-09-09",
-        "price": 143.541,
-        "pe": 31.1888,
-        "pcf": 24.2729,
-        "ps": 8.9105,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-28"
-      },
-      {
-        "date": "2021-09-10",
-        "price": 140.876,
-        "pe": 30.6097,
-        "pcf": 23.8222,
-        "ps": 8.7451,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-28"
-      },
       {
         "date": "2021-09-13",
         "price": 142.3325,
@@ -45309,87 +45180,56 @@
         "pcf": 22.321,
         "ps": 9.2953,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-23",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-23"
       },
       {
         "date": "2026-09-08",
         "price": 338.36,
-        "pe": 16.9662,
+        "pe": 16.9661,
         "pcf": 22.3144,
-        "ps": 9.2926,
+        "ps": 9.2925,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-23",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-23"
       },
       {
         "date": "2026-09-09",
         "price": 330.65,
         "pe": 16.5796,
         "pcf": 21.8059,
-        "ps": 9.0809,
+        "ps": 9.0808,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-23",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-23"
       },
       {
         "date": "2026-09-10",
         "price": 332.6,
-        "pe": 16.6774,
+        "pe": 16.6773,
         "pcf": 21.9345,
-        "ps": 9.1345,
+        "ps": 9.1343,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-23",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-23"
       },
       {
         "date": "2026-09-11",
         "price": 338.5,
         "pe": 16.9732,
         "pcf": 22.3236,
-        "ps": 9.2965,
+        "ps": 9.2964,
+        "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-07-23"
+      },
+      {
+        "date": "2026-09-14",
+        "price": 349.39,
+        "pe": 17.5192,
+        "pcf": 23.0418,
+        "ps": 9.5954,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-23",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "AMZN": [
-      {
-        "date": "2021-09-07",
-        "price": 175.4645,
-        "pe": 3.0577,
-        "pcf": 1.5174,
-        "ps": 0.2031,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-30"
-      },
-      {
-        "date": "2021-09-08",
-        "price": 176.275,
-        "pe": 3.0718,
-        "pcf": 1.5244,
-        "ps": 0.204,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-30"
-      },
-      {
-        "date": "2021-09-09",
-        "price": 174.208,
-        "pe": 3.0358,
-        "pcf": 1.5065,
-        "ps": 0.2016,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-30"
-      },
-      {
-        "date": "2021-09-10",
-        "price": 173.4575,
-        "pe": 3.0227,
-        "pcf": 1.5,
-        "ps": 0.2007,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-30"
-      },
       {
         "date": "2021-09-13",
         "price": 172.8585,
@@ -56647,28 +56487,25 @@
         "pcf": 17.3974,
         "ps": 3.62,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-31",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-31"
       },
       {
         "date": "2026-09-08",
         "price": 256.97,
         "pe": 20.6331,
         "pcf": 17.2938,
-        "ps": 3.5984,
+        "ps": 3.5985,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-31",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-31"
       },
       {
         "date": "2026-09-09",
         "price": 252.4,
         "pe": 20.2662,
-        "pcf": 16.9862,
-        "ps": 3.5344,
+        "pcf": 16.9863,
+        "ps": 3.5345,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-31",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-31"
       },
       {
         "date": "2026-09-10",
@@ -56677,8 +56514,7 @@
         "pcf": 16.9519,
         "ps": 3.5273,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-31",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-31"
       },
       {
         "date": "2026-09-11",
@@ -56687,47 +56523,20 @@
         "pcf": 17.281,
         "ps": 3.5958,
         "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-07-31"
+      },
+      {
+        "date": "2026-09-14",
+        "price": 253.54,
+        "pe": 20.3577,
+        "pcf": 17.063,
+        "ps": 3.5505,
+        "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-31",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "META": [
-      {
-        "date": "2021-09-07",
-        "price": 382.18,
-        "pe": 28.2978,
-        "pcf": 22.3347,
-        "ps": 10.5202,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-29"
-      },
-      {
-        "date": "2021-09-08",
-        "price": 377.57,
-        "pe": 27.9565,
-        "pcf": 22.0653,
-        "ps": 10.3933,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-29"
-      },
-      {
-        "date": "2021-09-09",
-        "price": 378.0,
-        "pe": 27.9883,
-        "pcf": 22.0905,
-        "ps": 10.4051,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-29"
-      },
-      {
-        "date": "2021-09-10",
-        "price": 378.69,
-        "pe": 28.0394,
-        "pcf": 22.1308,
-        "ps": 10.4241,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-29"
-      },
       {
         "date": "2021-09-13",
         "price": 376.51,
@@ -67985,8 +67794,7 @@
         "pcf": 12.1602,
         "ps": 6.9419,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-30",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-30"
       },
       {
         "date": "2026-09-08",
@@ -67995,8 +67803,7 @@
         "pcf": 12.0953,
         "ps": 6.9049,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-30",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-30"
       },
       {
         "date": "2026-09-09",
@@ -68005,8 +67812,7 @@
         "pcf": 12.8881,
         "ps": 7.3575,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-30",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-30"
       },
       {
         "date": "2026-09-10",
@@ -68015,8 +67821,7 @@
         "pcf": 12.7045,
         "ps": 7.2527,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-30",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-30"
       },
       {
         "date": "2026-09-11",
@@ -68025,47 +67830,20 @@
         "pcf": 12.7765,
         "ps": 7.2938,
         "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-07-30"
+      },
+      {
+        "date": "2026-09-14",
+        "price": 665.6,
+        "pe": 25.1098,
+        "pcf": 13.1229,
+        "ps": 7.4915,
+        "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-30",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "TSLA": [
-      {
-        "date": "2021-09-07",
-        "price": 250.9733,
-        "pe": 127.7306,
-        "pcf": 30.3332,
-        "ps": 6.6547,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-27"
-      },
-      {
-        "date": "2021-09-08",
-        "price": 251.29,
-        "pe": 127.8917,
-        "pcf": 30.3715,
-        "ps": 6.6631,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-27"
-      },
-      {
-        "date": "2021-09-09",
-        "price": 251.62,
-        "pe": 128.0597,
-        "pcf": 30.4114,
-        "ps": 6.6719,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-27"
-      },
-      {
-        "date": "2021-09-10",
-        "price": 245.4233,
-        "pe": 124.906,
-        "pcf": 29.6624,
-        "ps": 6.5076,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-27"
-      },
       {
         "date": "2021-09-13",
         "price": 247.6667,
@@ -79323,99 +79101,56 @@
         "pcf": 66.9502,
         "ps": 12.0727,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-23",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-23"
       },
       {
         "date": "2026-09-08",
         "price": 368.16,
-        "pe": 341.9319,
+        "pe": 341.932,
         "pcf": 69.6125,
         "ps": 12.5528,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-23",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-23"
       },
       {
         "date": "2026-09-09",
         "price": 367.81,
-        "pe": 341.6068,
+        "pe": 341.6069,
         "pcf": 69.5463,
         "ps": 12.5409,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-23",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-23"
       },
       {
         "date": "2026-09-10",
         "price": 363.56,
-        "pe": 337.6596,
+        "pe": 337.6597,
         "pcf": 68.7427,
         "ps": 12.396,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-23",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-23"
       },
       {
         "date": "2026-09-11",
         "price": 365.44,
-        "pe": 339.4057,
+        "pe": 339.4058,
         "pcf": 69.0982,
         "ps": 12.4601,
+        "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-07-23"
+      },
+      {
+        "date": "2026-09-14",
+        "price": 358.97,
+        "pe": 333.3967,
+        "pcf": 67.8748,
+        "ps": 12.2395,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-23",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "TSM": [
-      {
-        "date": "2021-09-07",
-        "price": 124.7,
-        "priceCurrency": "USD",
-        "priceSource": "Yahoo Finance",
-        "pe": 33.1649,
-        "pcf": 20.6384,
-        "ps": 12.2832,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-15",
-        "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
-      },
-      {
-        "date": "2021-09-08",
-        "price": 121.89,
-        "priceCurrency": "USD",
-        "priceSource": "Yahoo Finance",
-        "pe": 32.4176,
-        "pcf": 20.2315,
-        "ps": 12.041,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-15",
-        "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
-      },
-      {
-        "date": "2021-09-09",
-        "price": 122.68,
-        "priceCurrency": "USD",
-        "priceSource": "Yahoo Finance",
-        "pe": 32.6277,
-        "pcf": 20.3323,
-        "ps": 12.1011,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-15",
-        "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
-      },
-      {
-        "date": "2021-09-10",
-        "price": 122.97,
-        "priceCurrency": "USD",
-        "priceSource": "Yahoo Finance",
-        "pe": 32.7048,
-        "pcf": 20.3804,
-        "ps": 12.1297,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-15",
-        "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
-      },
       {
         "date": "2021-09-13",
         "price": 123.62,
@@ -94419,91 +94154,75 @@
       {
         "date": "2026-09-04",
         "price": 428.91,
+        "priceCurrency": "USD",
+        "priceSource": "Yahoo Finance",
         "pe": 30.9459,
         "pcf": 26.2728,
         "ps": 15.8416,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-16",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
       },
       {
         "date": "2026-09-08",
         "price": 439.0,
+        "priceCurrency": "USD",
+        "priceSource": "Yahoo Finance",
         "pe": 31.6739,
-        "pcf": 26.8909,
-        "ps": 16.2143,
+        "pcf": 26.7244,
+        "ps": 16.1139,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-16",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
       },
       {
         "date": "2026-09-09",
         "price": 435.36,
+        "priceCurrency": "USD",
+        "priceSource": "Yahoo Finance",
         "pe": 31.4113,
-        "pcf": 26.6679,
-        "ps": 16.0799,
+        "pcf": 26.4732,
+        "ps": 15.9624,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-16",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
       },
       {
         "date": "2026-09-10",
         "price": 428.03,
+        "priceCurrency": "USD",
+        "priceSource": "Yahoo Finance",
         "pe": 30.8824,
-        "pcf": 26.2189,
-        "ps": 15.8092,
+        "pcf": 26.1689,
+        "ps": 15.7789,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-16",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
       },
       {
         "date": "2026-09-11",
         "price": 433.24,
+        "priceCurrency": "USD",
+        "priceSource": "Yahoo Finance",
         "pe": 31.2583,
-        "pcf": 26.538,
-        "ps": 16.0016,
+        "pcf": 26.4874,
+        "ps": 15.971,
+        "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-07-16",
+        "valuationMethod": "TSMC ADS EPS + TWD financials converted with disclosed ADS ratio"
+      },
+      {
+        "date": "2026-09-14",
+        "price": 418.01,
+        "pe": 30.1595,
+        "pcf": 25.5896,
+        "ps": 15.4296,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-16",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "MU": [
-      {
-        "date": "2021-09-07",
-        "price": 73.64,
-        "pe": 20.3094,
-        "pcf": 7.7252,
-        "ps": 3.2902,
-        "ttmPeriodEnd": "2021-06-03",
-        "ttmAvailableFrom": "2021-07-01"
-      },
-      {
-        "date": "2021-09-08",
-        "price": 72.27,
-        "pe": 19.9316,
-        "pcf": 7.5815,
-        "ps": 3.229,
-        "ttmPeriodEnd": "2021-06-03",
-        "ttmAvailableFrom": "2021-07-01"
-      },
-      {
-        "date": "2021-09-09",
-        "price": 72.87,
-        "pe": 20.097,
-        "pcf": 7.6445,
-        "ps": 3.2558,
-        "ttmPeriodEnd": "2021-06-03",
-        "ttmAvailableFrom": "2021-07-01"
-      },
-      {
-        "date": "2021-09-10",
-        "price": 73.5,
-        "pe": 20.2708,
-        "pcf": 7.7106,
-        "ps": 3.284,
-        "ttmPeriodEnd": "2021-06-03",
-        "ttmAvailableFrom": "2021-07-01"
-      },
       {
         "date": "2021-09-13",
         "price": 74.35,
@@ -105761,8 +105480,7 @@
         "pcf": 22.4835,
         "ps": 12.8096,
         "ttmPeriodEnd": "2026-05-28",
-        "ttmAvailableFrom": "2026-06-25",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-06-25"
       },
       {
         "date": "2026-09-08",
@@ -105771,76 +105489,47 @@
         "pcf": 22.1223,
         "ps": 12.6038,
         "ttmPeriodEnd": "2026-05-28",
-        "ttmAvailableFrom": "2026-06-25",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-06-25"
       },
       {
         "date": "2026-09-09",
         "price": 1027.77,
-        "pe": 23.1644,
-        "pcf": 22.7307,
+        "pe": 23.1645,
+        "pcf": 22.7308,
         "ps": 12.9504,
         "ttmPeriodEnd": "2026-05-28",
-        "ttmAvailableFrom": "2026-06-25",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-06-25"
       },
       {
         "date": "2026-09-10",
         "price": 977.41,
         "pe": 22.0294,
-        "pcf": 21.6169,
-        "ps": 12.3158,
+        "pcf": 21.617,
+        "ps": 12.3159,
         "ttmPeriodEnd": "2026-05-28",
-        "ttmAvailableFrom": "2026-06-25",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-06-25"
       },
       {
         "date": "2026-09-11",
         "price": 975.26,
-        "pe": 21.9809,
-        "pcf": 21.5693,
-        "ps": 12.2887,
+        "pe": 21.981,
+        "pcf": 21.5694,
+        "ps": 12.2888,
+        "ttmPeriodEnd": "2026-05-28",
+        "ttmAvailableFrom": "2026-06-25"
+      },
+      {
+        "date": "2026-09-14",
+        "price": 924.03,
+        "pe": 20.8263,
+        "pcf": 20.4364,
+        "ps": 11.6433,
         "ttmPeriodEnd": "2026-05-28",
         "ttmAvailableFrom": "2026-06-25",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "SKHY": [
-      {
-        "date": "2021-09-06",
-        "price": 9.1795,
-        "priceCurrency": "USD",
-        "priceSource": "Yahoo Finance 000660.KS close converted to ADS-equivalent USD",
-        "priceKind": "underlying-ads-equivalent-proxy"
-      },
-      {
-        "date": "2021-09-07",
-        "price": 9.0434,
-        "priceCurrency": "USD",
-        "priceSource": "Yahoo Finance 000660.KS close converted to ADS-equivalent USD",
-        "priceKind": "underlying-ads-equivalent-proxy"
-      },
-      {
-        "date": "2021-09-08",
-        "price": 9.1301,
-        "priceCurrency": "USD",
-        "priceSource": "Yahoo Finance 000660.KS close converted to ADS-equivalent USD",
-        "priceKind": "underlying-ads-equivalent-proxy"
-      },
-      {
-        "date": "2021-09-09",
-        "price": 8.8299,
-        "priceCurrency": "USD",
-        "priceSource": "Yahoo Finance 000660.KS close converted to ADS-equivalent USD",
-        "priceKind": "underlying-ads-equivalent-proxy"
-      },
-      {
-        "date": "2021-09-10",
-        "price": 8.981,
-        "priceCurrency": "USD",
-        "priceSource": "Yahoo Finance 000660.KS close converted to ADS-equivalent USD",
-        "priceKind": "underlying-ads-equivalent-proxy"
-      },
       {
         "date": "2021-09-13",
         "price": 9.1074,
@@ -119365,73 +119054,80 @@
       {
         "date": "2026-09-04",
         "price": 177.0,
+        "priceCurrency": "USD",
+        "priceSource": "Yahoo Finance SKHY close",
+        "priceKind": "actual-adr",
         "pe": 10.5498,
         "pcf": 13.4307,
         "ps": 9.0326,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-29",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "valuationMethod": "quarterly K-IFRS consolidated statements; rolling four quarters; latest quarter from official filing; 1 common share = 10 ADSs"
       },
       {
         "date": "2026-09-08",
         "price": 185.55,
-        "pe": 11.0594,
-        "pcf": 14.0795,
-        "ps": 9.4689,
+        "priceCurrency": "USD",
+        "priceSource": "Yahoo Finance SKHY close",
+        "priceKind": "actual-adr",
+        "pe": 10.9628,
+        "pcf": 13.9565,
+        "ps": 9.3862,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-29",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "valuationMethod": "quarterly K-IFRS consolidated statements; rolling four quarters; latest quarter from official filing; 1 common share = 10 ADSs"
       },
       {
         "date": "2026-09-09",
         "price": 198.63,
-        "pe": 11.839,
-        "pcf": 15.072,
-        "ps": 10.1364,
+        "priceCurrency": "USD",
+        "priceSource": "Yahoo Finance SKHY close",
+        "priceKind": "actual-adr",
+        "pe": 11.6975,
+        "pcf": 14.8918,
+        "ps": 10.0152,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-29",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "valuationMethod": "quarterly K-IFRS consolidated statements; rolling four quarters; latest quarter from official filing; 1 common share = 10 ADSs"
       },
       {
         "date": "2026-09-10",
         "price": 188.3,
-        "pe": 11.2233,
-        "pcf": 14.2882,
-        "ps": 9.6092,
+        "priceCurrency": "USD",
+        "priceSource": "Yahoo Finance SKHY close",
+        "priceKind": "actual-adr",
+        "pe": 11.0888,
+        "pcf": 14.1169,
+        "ps": 9.4941,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-29",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "valuationMethod": "quarterly K-IFRS consolidated statements; rolling four quarters; latest quarter from official filing; 1 common share = 10 ADSs"
       },
       {
         "date": "2026-09-11",
         "price": 190.07,
-        "pe": 11.3288,
-        "pcf": 14.4225,
-        "ps": 9.6995,
+        "priceCurrency": "USD",
+        "priceSource": "Yahoo Finance SKHY close",
+        "priceKind": "actual-adr",
+        "pe": 11.2683,
+        "pcf": 14.3454,
+        "ps": 9.6478,
+        "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-07-29",
+        "valuationMethod": "quarterly K-IFRS consolidated statements; rolling four quarters; latest quarter from official filing; 1 common share = 10 ADSs"
+      },
+      {
+        "date": "2026-09-14",
+        "price": 175.63,
+        "pe": 10.3849,
+        "pcf": 13.2208,
+        "ps": 8.8915,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-29",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "AVGO": [
-      {
-        "date": "2021-09-09",
-        "price": 49.349,
-        "pe": 3.4689,
-        "pcf": 1.5518,
-        "ps": 0.7944,
-        "ttmPeriodEnd": "2021-08-01",
-        "ttmAvailableFrom": "2021-09-09"
-      },
-      {
-        "date": "2021-09-10",
-        "price": 49.815,
-        "pe": 3.5017,
-        "pcf": 1.5665,
-        "ps": 0.8019,
-        "ttmPeriodEnd": "2021-08-01",
-        "ttmAvailableFrom": "2021-09-09"
-      },
       {
         "date": "2021-09-13",
         "price": 49.896,
@@ -130725,47 +130421,20 @@
         "pcf": 43.4178,
         "ps": 19.809,
         "ttmPeriodEnd": "2026-08-02",
+        "ttmAvailableFrom": "2026-09-10"
+      },
+      {
+        "date": "2026-09-14",
+        "price": 344.72,
+        "pe": 43.9267,
+        "pcf": 41.3464,
+        "ps": 18.864,
+        "ttmPeriodEnd": "2026-08-02",
         "ttmAvailableFrom": "2026-09-10",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "AMD": [
-      {
-        "date": "2021-09-07",
-        "price": 109.15,
-        "pe": 38.9458,
-        "pcf": 48.7852,
-        "ps": 10.0313,
-        "ttmPeriodEnd": "2021-06-26",
-        "ttmAvailableFrom": "2021-07-28"
-      },
-      {
-        "date": "2021-09-08",
-        "price": 106.17,
-        "pe": 37.8825,
-        "pcf": 47.4533,
-        "ps": 9.7575,
-        "ttmPeriodEnd": "2021-06-26",
-        "ttmAvailableFrom": "2021-07-28"
-      },
-      {
-        "date": "2021-09-09",
-        "price": 106.15,
-        "pe": 37.8754,
-        "pcf": 47.4444,
-        "ps": 9.7556,
-        "ttmPeriodEnd": "2021-06-26",
-        "ttmAvailableFrom": "2021-07-28"
-      },
-      {
-        "date": "2021-09-10",
-        "price": 105.2,
-        "pe": 37.5364,
-        "pcf": 47.0198,
-        "ps": 9.6683,
-        "ttmPeriodEnd": "2021-06-26",
-        "ttmAvailableFrom": "2021-07-28"
-      },
       {
         "date": "2021-09-13",
         "price": 104.8,
@@ -142023,8 +141692,7 @@
         "pcf": 78.0078,
         "ps": 19.0369,
         "ttmPeriodEnd": "2026-06-27",
-        "ttmAvailableFrom": "2026-08-05",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-05"
       },
       {
         "date": "2026-09-08",
@@ -142033,77 +141701,47 @@
         "pcf": 82.6092,
         "ps": 20.1598,
         "ttmPeriodEnd": "2026-06-27",
-        "ttmAvailableFrom": "2026-08-05",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-05"
       },
       {
         "date": "2026-09-09",
         "price": 521.1,
         "pe": 133.3527,
-        "pcf": 85.1181,
+        "pcf": 85.1182,
         "ps": 20.7721,
         "ttmPeriodEnd": "2026-06-27",
-        "ttmAvailableFrom": "2026-08-05",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-05"
       },
       {
         "date": "2026-09-10",
         "price": 503.6,
         "pe": 128.8743,
-        "pcf": 82.2596,
+        "pcf": 82.2597,
         "ps": 20.0745,
         "ttmPeriodEnd": "2026-06-27",
-        "ttmAvailableFrom": "2026-08-05",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-05"
       },
       {
         "date": "2026-09-11",
         "price": 516.13,
         "pe": 132.0808,
-        "pcf": 84.3063,
+        "pcf": 84.3064,
         "ps": 20.574,
+        "ttmPeriodEnd": "2026-06-27",
+        "ttmAvailableFrom": "2026-08-05"
+      },
+      {
+        "date": "2026-09-14",
+        "price": 493.41,
+        "pe": 126.2666,
+        "pcf": 80.5952,
+        "ps": 19.6683,
         "ttmPeriodEnd": "2026-06-27",
         "ttmAvailableFrom": "2026-08-05",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "NFLX": [
-      {
-        "date": "2021-09-07",
-        "price": 60.671,
-        "pe": 6.2858,
-        "pcf": 15.0067,
-        "ps": 1.0008,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-22"
-      },
-      {
-        "date": "2021-09-08",
-        "price": 60.605,
-        "pe": 6.279,
-        "pcf": 14.9904,
-        "ps": 0.9997,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-22"
-      },
-      {
-        "date": "2021-09-09",
-        "price": 59.754,
-        "pe": 6.1908,
-        "pcf": 14.7799,
-        "ps": 0.9856,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-22"
-      },
-      {
-        "date": "2021-09-10",
-        "price": 59.872,
-        "pe": 6.203,
-        "pcf": 14.8091,
-        "ps": 0.9876,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-22"
-      },
       {
         "date": "2021-09-13",
         "price": 58.929,
@@ -153361,8 +152999,7 @@
         "pcf": 21.7961,
         "ps": 5.3941,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-17",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-17"
       },
       {
         "date": "2026-09-08",
@@ -153371,18 +153008,16 @@
         "pcf": 21.3839,
         "ps": 5.2921,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-17",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-17"
       },
       {
         "date": "2026-09-09",
         "price": 76.03,
         "pe": 18.573,
-        "pcf": 21.1778,
+        "pcf": 21.1777,
         "ps": 5.2411,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-17",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-17"
       },
       {
         "date": "2026-09-10",
@@ -153391,57 +153026,29 @@
         "pcf": 21.1722,
         "ps": 5.2397,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-17",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-17"
       },
       {
         "date": "2026-09-11",
         "price": 77.4,
         "pe": 18.9077,
-        "pcf": 21.5594,
+        "pcf": 21.5593,
         "ps": 5.3355,
+        "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-07-17"
+      },
+      {
+        "date": "2026-09-14",
+        "price": 80.32,
+        "pe": 19.621,
+        "pcf": 22.3727,
+        "ps": 5.5368,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-17",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "MCD": [
-      {
-        "date": "2021-09-07",
-        "price": 236.19,
-        "pe": 25.714,
-        "pcf": 20.1754,
-        "ps": 8.1553,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-08-04"
-      },
-      {
-        "date": "2021-09-08",
-        "price": 238.62,
-        "pe": 25.9786,
-        "pcf": 20.3829,
-        "ps": 8.2392,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-08-04"
-      },
-      {
-        "date": "2021-09-09",
-        "price": 238.61,
-        "pe": 25.9775,
-        "pcf": 20.3821,
-        "ps": 8.2388,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-08-04"
-      },
-      {
-        "date": "2021-09-10",
-        "price": 239.18,
-        "pe": 26.0395,
-        "pcf": 20.4308,
-        "ps": 8.2585,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-08-04"
-      },
       {
         "date": "2021-09-13",
         "price": 241.21,
@@ -164699,18 +164306,16 @@
         "pcf": 16.0984,
         "ps": 6.5923,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-08-07",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-07"
       },
       {
         "date": "2026-09-08",
         "price": 255.81,
         "pe": 20.7928,
-        "pcf": 16.106,
+        "pcf": 16.1059,
         "ps": 6.5954,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-08-07",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-07"
       },
       {
         "date": "2026-09-09",
@@ -164719,8 +164324,7 @@
         "pcf": 15.9593,
         "ps": 6.5353,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-08-07",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-07"
       },
       {
         "date": "2026-09-10",
@@ -164729,57 +164333,29 @@
         "pcf": 15.9322,
         "ps": 6.5242,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-08-07",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-07"
       },
       {
         "date": "2026-09-11",
         "price": 252.53,
         "pe": 20.5261,
-        "pcf": 15.8995,
+        "pcf": 15.8994,
         "ps": 6.5108,
+        "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-08-07"
+      },
+      {
+        "date": "2026-09-14",
+        "price": 257.49,
+        "pe": 20.9293,
+        "pcf": 16.2117,
+        "ps": 6.6387,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-08-07",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "PLTR": [
-      {
-        "date": "2021-09-07",
-        "price": 26.7,
-        "pe": null,
-        "pcf": 539.0353,
-        "ps": 28.1433,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-08-12"
-      },
-      {
-        "date": "2021-09-08",
-        "price": 25.58,
-        "pe": null,
-        "pcf": 516.424,
-        "ps": 26.9628,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-08-12"
-      },
-      {
-        "date": "2021-09-09",
-        "price": 26.13,
-        "pe": null,
-        "pcf": 527.5277,
-        "ps": 27.5425,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-08-12"
-      },
-      {
-        "date": "2021-09-10",
-        "price": 26.28,
-        "pe": null,
-        "pcf": 530.5561,
-        "ps": 27.7006,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-08-12"
-      },
       {
         "date": "2021-09-13",
         "price": 25.83,
@@ -176037,8 +175613,7 @@
         "pcf": 131.7088,
         "ps": 72.7506,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-08-04",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-04"
       },
       {
         "date": "2026-09-08",
@@ -176047,77 +175622,47 @@
         "pcf": 128.6641,
         "ps": 71.0688,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-08-04",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-04"
       },
       {
         "date": "2026-09-09",
         "price": 169.53,
         "pe": 144.3691,
-        "pcf": 128.0824,
+        "pcf": 128.0823,
         "ps": 70.7475,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-08-04",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-04"
       },
       {
         "date": "2026-09-10",
         "price": 165.86,
         "pe": 141.2438,
-        "pcf": 125.3097,
-        "ps": 69.216,
+        "pcf": 125.3096,
+        "ps": 69.2159,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-08-04",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-04"
       },
       {
         "date": "2026-09-11",
         "price": 167.23,
         "pe": 142.4105,
-        "pcf": 126.3448,
-        "ps": 69.7877,
+        "pcf": 126.3446,
+        "ps": 69.7876,
+        "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-08-04"
+      },
+      {
+        "date": "2026-09-14",
+        "price": 173.31,
+        "pe": 147.5881,
+        "pcf": 130.9382,
+        "ps": 72.3249,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-08-04",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "LLY": [
-      {
-        "date": "2021-09-07",
-        "price": 254.8,
-        "pe": 38.265,
-        "pcf": 32.7421,
-        "ps": 8.6916,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-08-03"
-      },
-      {
-        "date": "2021-09-08",
-        "price": 254.84,
-        "pe": 38.271,
-        "pcf": 32.7472,
-        "ps": 8.693,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-08-03"
-      },
-      {
-        "date": "2021-09-09",
-        "price": 240.0,
-        "pe": 36.0424,
-        "pcf": 30.8402,
-        "ps": 8.1868,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-08-03"
-      },
-      {
-        "date": "2021-09-10",
-        "price": 239.5,
-        "pe": 35.9673,
-        "pcf": 30.776,
-        "ps": 8.1697,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-08-03"
-      },
       {
         "date": "2021-09-13",
         "price": 237.96,
@@ -187375,69 +186920,56 @@
         "pcf": 36.708,
         "ps": 12.9402,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-08-05",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-05"
       },
       {
         "date": "2026-09-08",
         "price": 1123.91,
         "pe": 37.7393,
         "pcf": 35.8952,
-        "ps": 12.6537,
+        "ps": 12.6536,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-08-05",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-05"
       },
       {
         "date": "2026-09-09",
         "price": 1124.21,
         "pe": 37.7494,
         "pcf": 35.9048,
-        "ps": 12.6571,
+        "ps": 12.657,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-08-05",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-05"
       },
       {
         "date": "2026-09-10",
         "price": 1123.0,
         "pe": 37.7088,
-        "pcf": 35.8662,
-        "ps": 12.6435,
+        "pcf": 35.8661,
+        "ps": 12.6434,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-08-05",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-08-05"
       },
       {
         "date": "2026-09-11",
         "price": 1115.7,
         "pe": 37.4637,
-        "pcf": 35.6331,
-        "ps": 12.5613,
+        "pcf": 35.633,
+        "ps": 12.5612,
+        "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-08-05"
+      },
+      {
+        "date": "2026-09-14",
+        "price": 1138.28,
+        "pe": 38.2219,
+        "pcf": 36.3542,
+        "ps": 12.8154,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-08-05",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "ORCL": [
-      {
-        "date": "2021-09-09",
-        "price": 89.54,
-        "pe": 19.8169,
-        "pcf": 17.1463,
-        "ps": 3.9065,
-        "ttmPeriodEnd": "2021-05-31",
-        "ttmAvailableFrom": "2021-06-21"
-      },
-      {
-        "date": "2021-09-10",
-        "price": 89.68,
-        "pe": 19.8479,
-        "pcf": 17.1731,
-        "ps": 3.9126,
-        "ttmPeriodEnd": "2021-05-31",
-        "ttmAvailableFrom": "2021-06-21"
-      },
       {
         "date": "2021-09-13",
         "price": 88.89,
@@ -198731,47 +198263,20 @@
         "pcf": 9.4029,
         "ps": 6.1493,
         "ttmPeriodEnd": "2026-08-31",
+        "ttmAvailableFrom": "2026-09-11"
+      },
+      {
+        "date": "2026-09-14",
+        "price": 144.79,
+        "pe": 22.4761,
+        "pcf": 9.0594,
+        "ps": 5.9247,
+        "ttmPeriodEnd": "2026-08-31",
         "ttmAvailableFrom": "2026-09-11",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "AXP": [
-      {
-        "date": "2021-09-07",
-        "price": 159.72,
-        "pe": 18.2885,
-        "pcf": 11.5294,
-        "ps": 5.4133,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-23"
-      },
-      {
-        "date": "2021-09-08",
-        "price": 158.93,
-        "pe": 18.198,
-        "pcf": 11.4723,
-        "ps": 5.3865,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-23"
-      },
-      {
-        "date": "2021-09-09",
-        "price": 159.39,
-        "pe": 18.2507,
-        "pcf": 11.5055,
-        "ps": 5.4021,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-23"
-      },
-      {
-        "date": "2021-09-10",
-        "price": 158.72,
-        "pe": 18.174,
-        "pcf": 11.4572,
-        "ps": 5.3794,
-        "ttmPeriodEnd": "2021-06-30",
-        "ttmAvailableFrom": "2021-07-23"
-      },
       {
         "date": "2021-09-13",
         "price": 161.45,
@@ -210029,62 +209534,81 @@
         "pcf": 12.1549,
         "ps": 5.2119,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-24",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-24"
       },
       {
         "date": "2026-09-08",
         "price": 326.1,
         "pe": 19.6173,
-        "pcf": 12.1527,
-        "ps": 5.2109,
+        "pcf": 12.1526,
+        "ps": 5.211,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-24",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-24"
       },
       {
         "date": "2026-09-09",
         "price": 321.8,
         "pe": 19.3586,
-        "pcf": 11.9925,
-        "ps": 5.1422,
+        "pcf": 11.9924,
+        "ps": 5.1423,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-24",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-24"
       },
       {
         "date": "2026-09-10",
         "price": 320.71,
         "pe": 19.293,
-        "pcf": 11.9519,
+        "pcf": 11.9518,
         "ps": 5.1248,
         "ttmPeriodEnd": "2026-06-30",
-        "ttmAvailableFrom": "2026-07-24",
-        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+        "ttmAvailableFrom": "2026-07-24"
       },
       {
         "date": "2026-09-11",
         "price": 324.69,
-        "pe": 19.5324,
-        "pcf": 12.1002,
+        "pe": 19.5325,
+        "pcf": 12.1001,
         "ps": 5.1884,
+        "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-07-24"
+      },
+      {
+        "date": "2026-09-14",
+        "price": 327.78,
+        "pe": 19.7184,
+        "pcf": 12.2152,
+        "ps": 5.2378,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-24",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ]
   },
-  "updatedAt": "2026-09-15T00:44:05Z",
-  "backfillUpdatedAt": "2026-09-13",
+  "updatedAt": "2026-09-15T07:46:43Z",
+  "backfillUpdatedAt": "2026-09-15",
   "backfillErrors": {},
   "methodology": "For each trading date: EOD close divided by the latest already-filed rolling-four-quarter EPS, operating cash flow per share, and revenue per share. Per-share denominators use the average diluted weighted shares of the same four quarters.",
   "priceSources": {
-    "AVGO": "Yahoo Finance fallback (longer coverage than Stooq) (longer coverage than EODHD plan)",
-    "ORCL": "Yahoo Finance fallback (longer coverage than Stooq) (longer coverage than EODHD plan)"
+    "NVDA": "Yahoo Finance fallback (longer coverage than Stooq)",
+    "AAPL": "Yahoo Finance fallback (longer coverage than Stooq)",
+    "MSFT": "Yahoo Finance fallback (longer coverage than Stooq)",
+    "GOOGL": "Yahoo Finance fallback (longer coverage than Stooq)",
+    "AMZN": "Yahoo Finance fallback (longer coverage than Stooq)",
+    "META": "Yahoo Finance fallback (longer coverage than Stooq)",
+    "TSLA": "Yahoo Finance fallback (longer coverage than Stooq)",
+    "MU": "Yahoo Finance fallback (longer coverage than Stooq)",
+    "AVGO": "Yahoo Finance fallback (longer coverage than Stooq)",
+    "AMD": "Yahoo Finance fallback (longer coverage than Stooq)",
+    "NFLX": "Yahoo Finance fallback (longer coverage than Stooq)",
+    "MCD": "Yahoo Finance fallback (longer coverage than Stooq)",
+    "PLTR": "Yahoo Finance fallback (longer coverage than Stooq)",
+    "LLY": "Yahoo Finance fallback (longer coverage than Stooq)",
+    "ORCL": "Yahoo Finance fallback (longer coverage than Stooq)",
+    "AXP": "Yahoo Finance fallback (longer coverage than Stooq)"
   },
-  "selectedHistoryUpdatedAt": "2026-09-08T07:16:08.705417Z",
+  "selectedHistoryUpdatedAt": "2026-09-15T07:46:13.042496Z",
   "selectedHistoryErrors": {},
   "selectedHistoryMethod": "AMD and TSM use dedicated verified rebuilds. SKHY uses its separate K-IFRS/ADS history path, including clearly labelled pre-listing underlying-share proxies.",
-  "skhyHistoryUpdatedAt": "2026-09-08T07:16:10.784482Z",
+  "skhyHistoryUpdatedAt": "2026-09-15T07:46:15.754952Z",
   "skhyHistoryMethod": "Dedicated SKHY series: actual Nasdaq closes from listing; earlier observations are labelled 000660.KS ADS-equivalent proxies. Financial denominators use SK hynix KRW consolidated statements."
 }
