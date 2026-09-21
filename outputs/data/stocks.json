@@ -1111,10 +1111,10 @@
         "status": "ready",
         "company": "SK hynix",
         "fiscalPeriodEnd": "2026-06-30",
-        "revenueTTM": 136585281588.44765,
-        "operatingCashflowTTM": 91858053429.60289,
-        "fcfTTM": 65836729963.89892,
-        "netIncomeTTM": 116942519855.59567,
+        "revenueTTM": 136913473196.5788,
+        "operatingCashflowTTM": 92078772982.4292,
+        "fcfTTM": 65994924624.624176,
+        "netIncomeTTM": 117223513189.60628,
         "fcfMarginTTM": 0.4820192131848807,
         "fcfMargin3yMedian": 0.19840848634054134,
         "fcfMarginCycleMedian": 0.1700322890998682,
@@ -1126,7 +1126,7 @@
         "equityRiskPremium": 0.05,
         "reportingCurrency": "KRW",
         "modelCurrency": "USD",
-        "fxRateToUsd": 0.0007220216606498195,
+        "fxRateToUsd": 0.000723756558049879,
         "beta": 2.389,
         "costOfEquity": 0.16195,
         "rationale": "DRAM 与 NAND 周期显著，TTM 权重 35%，三年中位数权重 65%。",
@@ -1501,10 +1501,10 @@
         "revenueTTM": 79665800000.0,
         "operatingCashflowTTM": 28083500000.0,
         "fcfTTM": 20053900000.0,
-        "netIncomeTTM": 26709500000.0,
+        "netIncomeTTM": 26711200000.0,
         "fcfMarginTTM": 0.25172533257683977,
-        "fcfMargin3yMedian": 0.009197938844696255,
-        "normalizedFcfMargin": 0.14258800539737518,
+        "fcfMargin3yMedian": 0.009197877583642298,
+        "normalizedFcfMargin": 0.1425879778299009,
         "fcfMarginCycleMedian": 0.1560563632697865,
         "fcfMarginCycleYears": 7,
         "ttmWeight": 0.55,
@@ -1745,5 +1745,5 @@
       "note": "数据口径：收盘价和实际交易日来自 Yahoo Finance EOD；Trailing P/E、P/CF、P/S 与历史曲线共用已披露财报 TTM 分母；Finviz 仅提供前瞻及企业价值补充指标。"
     }
   ],
-  "fundamentalsUpdatedAt": "2026-09-20T06:16:23Z"
+  "fundamentalsUpdatedAt": "2026-09-21T06:19:42Z"
 }
