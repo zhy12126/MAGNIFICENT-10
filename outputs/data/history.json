@@ -209614,7 +209614,7 @@
       }
     ]
   },
-  "updatedAt": "2026-09-22T07:45:18Z",
+  "updatedAt": "2026-09-23T00:46:18Z",
   "backfillUpdatedAt": "2026-09-22",
   "backfillErrors": {},
   "methodology": "For each trading date: EOD close divided by the latest already-filed rolling-four-quarter EPS, operating cash flow per share, and revenue per share. Per-share denominators use the average diluted weighted shares of the same four quarters.",
