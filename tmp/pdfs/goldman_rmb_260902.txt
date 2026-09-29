@@ -1,0 +1,679 @@
+=== PAGE 1 ===
+China’s goods trade surplus continues to grow on the back of strong n
+manufacturing competitiveness and technological progress, raising concerns 
+about de-industrialization in other economies. Foreign policymakers are 
+exploring a range of potential responses, including trade barriers and pressure 
+for appreciation of the Chinese renminbi. 
+Beijing’s stated economic policy objectives include further growth in high-tech n
+sectors to “build a manufacturing superpower”, “self-reliance” in key inputs and 
+technologies, and increased internationalization of the renminbi. We anticipate 
+that China’s policymakers will continue to favor gradual CNY appreciation against 
+the US dollar (3-5%/year) as the option that best balances these objectives. 
+We expect both incremental broad USD depreciation in coming years and lower n
+inflation in China than most other countries. Under these conditions, the 
+renminbi could appreciate gradually against the dollar on a sustained basis 
+without major impact on Chinese manufacturers’ relative competitiveness (as 
+measured by the real trade-weighted exchange rate) or loss of global 
+manufacturing share. 
+Andrew Tilton 
++852-2978-1802 | 
+andrew.tilton@gs.com 
+Goldman Sachs (Asia) L.L.C. 
+Hui Shan 
++852-2978-6634 | hui.shan@gs.com 
+Goldman Sachs (Asia) L.L.C.
+2 September 2026 | 3:55PM HKT
+ 
+Investors should consider this report as only a single factor in making their investment decision. For Reg AC 
+certification and other important disclosures, see the Disclosure Appendix, or go to 
+www.gs.com/research/hedge.html. 
+Economics Research
+ASIA IN FOCUS 
+Why Beijing may favor gradual RMB appreciation
+For the exclusive use of Goldman Sachs Clients
+991f56e45f7048fa97d3280f89dd91e4
+
+
+=== PAGE 2 ===
+Why Beijing may favor gradual RMB appreciation 
+ 
+ 
+As China’s trade surplus grows steadily larger – with the goods surplus now 6% of GDP 
+and more than 1% of global GDP – anxiety among foreign policymakers about the 
+impact on their manufacturing sectors is growing. The United States responded with 
+broad tariffs, while other countries and regions (e.g. the EU) have been more selective 
+and restrained. Analysts have also publicly debated a range of proposals for alleviating 
+global imbalances. US Treasury Secretary Bessent has described China’s trade surplus as 
+“unsustainable” and recently called for other countries to “examine their terms of trade 
+with China”. 
+As we have noted repeatedly in the past, China’s currency is substantially undervalued, 
+contributing to its export success. This has been one argument given to justify tariff 
+protection against Chinese goods. It also underpins proposals that other economies 
+pressure China to allow the renminbi to appreciate more quickly as a way of reducing 
+current account imbalances. By contrast, senior IMF officials recently downplayed the 
+role of FX, arguing that structural adjustment and US fiscal consolidation is a preferable 
+adjustment route. Our own view is that currency adjustment is necessary but not 
+sufficient – it would need to be combined with fiscal expansion aimed at boosting 
+China’s demand in order to bring China’s own economy back to balance, and with fiscal 
+restraint in large deficit economies. 
+However, experienced forecasters know that it is important to distinguish the question 
+of what policymakers should do from what they are likely to do. China’s stated 
+macroeconomic goals and its policy outcomes suggest that rebalancing – either global or 
+domestic – does not appear to be high on Beijing’s agenda. In what follows, we attempt 
+to take a look at the situation from Beijing’s perspective. 
+In our view, China’s policymakers effectively seek to further increase China’s share of 
+global manufacturing and move up the technology ladder while becoming less 
+dependent on foreign supply. (Aware of foreign concerns about rising surpluses, China’s 
+policymakers have claimed they “never deliberately pursued a trade surplus”1, but with 
+goals of further strengthening across many manufacturing industries and “self-reliance” 
+across a range of critical inputs, it is difficult to see how the math could work out 
+otherwise.) Strength in foreign demand is generally accompanied by restraint in 
+domestic China macro policy, as has been the case recently (Exhibit 1). Put differently, 
+the revealed preference of policymakers appears to be to leverage foreign demand to 
+the extent possible to drive China’s growth.  
+1 Then-Premier Li Keqiang made similar comments in 2018 , though at that time the current account surplus 
+was near its local low as a share of GDP.
+2 September 2026   2
+Goldman Sachs Asia in Focus
+For the exclusive use of Goldman Sachs Clients
+991f56e45f7048fa97d3280f89dd91e4
+
+
+=== PAGE 3 ===
+ 
+Another policy goal in Beijing – less critical than technology leadership, but nonetheless 
+important and related to the “self-reliance” drive – is internationalization of the RMB. 
+Success in this endeavor would reduce vulnerability to American sanctions in a world 
+where the US dollar remains dominant. Policymakers appear to see a window of 
+opportunity to “gain share” in an international currency sense, and have stepped up 
+efforts in this regard over the past year in several respects, including bond market 
+internationalization. Still another target, unimportant economically but of symbolic 
+value to Beijing, would be for China’s economy to exceed the US in size on a market value 
+basis.2 
+A policy which Beijing might assess could achieve all these goals simultaneously is 
+gradual RMB appreciation against the USD. 
+From the perspective of continued global manufacturing market share gains, 1.
+nominal appreciation against the USD might be seen by trading partners as a token 
+of accommodation to foreign concerns, and reduce the likelihood of tariff pushback. 
+From the perspective of RMB internationalization, appreciation – if market 2.
+participants expect it to continue – helps offset the negative rate differential vs the 
+US and would make RMB-denominated fixed income assets more attractive to hold. 
+Chinese government bond yields have slid lower for almost a decade, with the 5-year 
+CGB yield now about 1.4% and the 10-year 1.7%. Meanwhile, global yields have 
+risen sharply from Covid-era lows, with the US 10-year Treasury yield more than 
+300bp higher than China’s (Exhibit 2). 
+From the perspective of GDP at current prices and market exchange rates, RMB 3.
+appreciation could help China gain on the US in relative terms, even as its nominal 
+GDP growth slows.3 Exhibit 3 shows that after a period of strong outperformance 
+from 2005 to 2020, China’s “catch-up” to US market-value GDP reversed from 2021 
+to 2025 as its nominal growth slowed and the renminbi weakened against the dollar. 
+2 On a purchasing power parity basis, China’s economy is already significantly larger than the United States 
+($44.3tn vs $32.4tn based on IMF WEO data).
+3 While many observers believe China’s GDP growth is over-estimated, nominal growth is generally thought to 
+be somewhat more reliable, and FX appreciation could provide an offset.
+ 
+Exhibit 1: China macro policy has tightened in 2026 
+despite weak growth 
+ 
+Exhibit 2: Chinese bond yields have fallen far below US 
+yields 
+-2.5
+-2.0
+-1.5
+-1.0
+-0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+-2.5
+-2.0
+-1.5
+-1.0
+-0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26
+Z-score Z-score
+More policy
+stimulus
+China domestic macro policy proxy
+Note: Shaded areas refer to periods when China CAI 3mma growth was below 5%. 0
+1
+2
+3
+4
+5
+0
+1
+2
+3
+4
+5
+2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026
+U.S. 10-year treasury yield
+China 10-year government bond yield
+Percent Percent
+ 
+ 
+Source: Wind, Haver Analytics, CEIC, Goldman Sachs Global Investment 
+Research
+ 
+ 
+Source: Haver Analytics, Goldman Sachs Global Investment Research
+2 September 2026   3
+Goldman Sachs Asia in Focus
+For the exclusive use of Goldman Sachs Clients
+991f56e45f7048fa97d3280f89dd91e4
+
+
+=== PAGE 4 ===
+Exhibit 4 shows when China’s GDP would catch up to US nominal GDP (if ever) based 
+on a simple extrapolation of a China nominal growth assumption (horizontal axis; we 
+assume US nominal growth of 4.5% per year) and a CNY appreciation rate versus the 
+dollar (vertical axis). 
+ 
+A challenge for Beijing is that rapid RMB appreciation helps the second and third goals, 
+but potentially undermines the first, as it would eventually cut into China’s international 
+competitiveness, slowing exports and real GDP growth. But a moderate pace of 
+appreciation – perhaps 3-5% a year against the dollar – would not impede ongoing 
+market share gains, in our view. 
+Economists typically think about the real trade-weighted exchange rate (TWI) as the 
+most relevant in terms of international competitiveness, as it encompasses the range of 
+trading partners as well as differences in inflation across countries. If gradual enough, 
+RMB appreciation against the USD (i.e. declining USDCNY) need not erode 
+competitiveness as measured by the real TWI, for two reasons. 
+The USD is modestly overvalued by our assessment (with most of this overvaluation 1.
+against the RMB and other Asian currencies, particularly north Asia). Our global FX 
+forecasts imply roughly a 1% annual depreciation in the broad USD TWI over the 
+next several years. If the USD is on a broad depreciation trend, the RMB can 
+appreciate at the same pace against the USD without appreciating against other 
+currencies (on average). 
+Inflation in China has been lower than in most other countries in recent years. Put 2.
+differently, China runs a negative “inflation differential” with the rest of the world. 
+This gap has been particularly stark during the housing bust, with much of the world 
+experiencing an inflationary surge but China in lowflation (CPI) or deflation (PPI) 
+during most of this period. This resulted in a sharp real depreciation of the RMB 
+against its trading partners from 2022-25 (Exhibit 5) – particularly on a PPI basis, 
+which is arguably more relevant from a trade perspective. While this degree of 
+inflation divergence is unlikely to be repeated, we project China’s inflation to run at 
+ 
+Exhibit 3: China’s economic “catch-up” to the US has 
+stalled since the housing downturn began 
+ 
+Exhibit 4: For China to “catch up” to US market-value GDP 
+in the coming few decades, CNY appreciation will likely be 
+required 
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1970 1975 1980 1985 1990 1995 2000 2005 2010 2015 2020 2025
+China GDP as share of US (current prices, market exchange rates)
+Ratio Ratio
+234567
+0 never never never 2120 2057 2045
+1 never never 2120 2057 2045 2039
+2 never 2120 2057 2045 2039 2036
+3 2120 2057 2045 2039 2036 2034
+4 2057 2045 2039 2036 2034 2033
+5 2045 2039 2036 2034 2033 2032
+6 2039 2036 2034 2033 2032 2031
+China annual nominal growth rate (percent)
+Ann. CNY appreciation vs 
+USD (percent)
+  Sensitivity Analysis of China-US GDP "catch-up" 
+ 
+ 
+Source: Haver Analytics, Goldman Sachs Global Investment Research
+ 
+Uses official GDP data for both countries; US nominal growth is assumed to be 
+4.5%/year. 
+ 
+Source: Goldman Sachs Global Investment Research
+2 September 2026   4
+Goldman Sachs Asia in Focus
+For the exclusive use of Goldman Sachs Clients
+991f56e45f7048fa97d3280f89dd91e4
+
+
+=== PAGE 5 ===
+least 1pp below that of trading partners over the next few years. 
+ 
+The above points suggest that the RMB could appreciate 2-3% a year against the USD 
+without any appreciation in the real CNY TWI for several years into the future. And of 
+course, it could appreciate modestly faster than that – even say 5% a year – and still 
+remain meaningfully ‘cheap’ to fair value five years from now. Roughly, if a 5% annual 
+appreciation against the USD means a 2.5% annual appreciation in the real RMB TWI, 
+and the RMB is 20% undervalued today, then China would have only halved its 
+undervaluation after four years. A strong case can be made that the undervaluation is 
+larger than 20%, and it’s also possible that the inflation differentials and broad USD 
+moves could be bigger than we assume here. In other words, policymakers may be able 
+to have their cake and eat it too: 
+Appreciation of 3-5% per year against the USD would have only marginal impacts on n
+the competitiveness of Chinese firms in the next few years. 
+If markets came to expect such appreciation, this would offset China’s lower rates on n
+government bonds and related fixed income securities, probably contributing to 
+increased international holdings of RMB assets. 
+Given sluggish nominal GDP growth in China, currency appreciation could help close n
+the gap with US GDP on a market value (dollar) basis. 
+This pace of appreciation is broadly in line with forward pricing over the coming year, n
+making speculative positions less attractive in either direction and simplifying the 
+problem of currency management from the authorities’ (PBOC/SAFE) perspective. 
+An implicit assumption in the discussion so far is that Beijing has a significant degree of 
+control over the exchange rate. We strongly believe this to be the case – that in broad 
+terms the CNY is at least as much a policy variable as a market outcome. While 
+movement within the trading band is largely market-determined, the broader path is 
+policy-determined. This reflects a combination of both explicit signaling (daily CNY fix), 
+other central bank communication, large-scale resources to intervene and willingness to 
+do so, and a longstanding capital control regime that attempts to route flows through 
+authorized channels (e.g. the Stock/Bond Connect schemes). 
+ 
+Exhibit 5: The real trade-weighted RMB is substantially 
+cheaper than it was five or ten years ago 
+ 
+Exhibit 6: RMB appreciation has occurred alongside 
+export market share gains when initial competitiveness 
+was strong 
+75
+80
+85
+90
+95
+100
+105
+110
+115
+120
+75
+80
+85
+90
+95
+100
+105
+110
+115
+120
+Jan-16 Jan-18 Jan-20 Jan-22 Jan-24 Jan-26
+China trade-weighted exchange rate
+Nominal
+Real (PPI based)
+Real (CPI based)
+Index, 2019=100 Index, 2019=100
+6
+8
+10
+12
+14
+16
+18
+60
+70
+80
+90
+100
+110
+120
+05 06 07 08 09 10 11 12 13 14 15 16
+China's real broad effective exchange rate
+China's share of world exports (sa, rhs)
+Index (2020=100) Percent
+ 
+ 
+Source: Haver Analytics, Goldman Sachs Global Investment Research
+ 
+ 
+Source: Haver Analytics, Goldman Sachs Global Investment Research
+2 September 2026   5
+Goldman Sachs Asia in Focus
+For the exclusive use of Goldman Sachs Clients
+991f56e45f7048fa97d3280f89dd91e4
+
+
+=== PAGE 6 ===
+From the perspective of China’s household welfare and global imbalances, a better 
+policy option would be more rapid appreciation coupled with greater support to 
+domestic consumption. To the extent that currency appreciation slows headline GDP 
+growth and introduces more deflationary pressures, it would incentivize Chinese 
+policymakers to implement demand-boosting reflationary policies, which is another 
+necessary condition for restoring economic balances for China. China might hold or gain 
+global manufacturing share even in this scenario – for example, in the 2005-15 period, 
+China’s share of global manufacturing grew rapidly even as its trade-weighted exchange 
+rate appreciated, reflecting its strong competitiveness and the tailwind from WTO 
+admission (Exhibit 6). Collectively, these actions would increase households’ purchasing 
+power, and reduce global imbalances and trade tensions. Despite some calls by Chinese 
+academics and former policymakers to support households, and the rollout of a 
+five-year plan to improve consumption, Beijing appears to be moving very cautiously in 
+terms of implementation. While the RMB appreciated fairly quickly in late 2025 and 
+early this year (Exhibit 7), some of this may have reflected efforts to manage the 
+relationship with the US, and recent signals from the daily fixing suggest Beijing would 
+prefer to slow the pace going forward (Exhibit 8). 
+ 
+Therefore, we continue to expect modest, low-to-mid-single-digit appreciation of the 
+RMB in the coming years. Shocks that could change the path include a re-ignition of 
+large-scale tariff war, or a major global economic downturn, either of which would take 
+away the export impulse to China. Absent those, we expect USDCNY to reach about 6 at 
+end-2028 and 5.50 at end-2031. Strength in the renminbi should also be supportive of 
+other Asian currencies; correlations between CNY and other Asian currencies have risen 
+in recent years. 
+Key near-term events for the bilateral exchange rate are likely to include the US 
+employment report and September Fed meeting, but most importantly the scheduled 
+visit of President Xi to Washington to meet with President Trump on September 24. 
+ 
+ 
+Exhibit 7: The RMB appreciated quickly from late 2025 
+through midyear 2026…  
+ 
+Exhibit 8: …but recent CNY fixings imply Beijing prefers a 
+more gradual pace of appreciation 
+6.76
+6.80
+6.84
+6.88
+6.92
+6.96
+7.00
+7.04
+7.08
+7.12
+7.16
+7.20
+7.24
+6.76
+6.80
+6.84
+6.88
+6.92
+6.96
+7.00
+7.04
+7.08
+7.12
+7.16
+7.20
+7.24
+May-25 Jul-25 Sep-25 Nov-25 Jan-26 Mar-26 May-26 Jul-26 Sep-26
+USD/CNY fixing USD/CNY fixing
+Trump-Xi Meeting 
+in South Korea
+(Oct 30)
+PBOC signaled more 
+tolerance for CNY strength
+(Jan 15)
+Trump-Xi meeting in 
+Beijing
+(May 14-15)
+6.9% annualized 
+appreciation
+3.2% annualized 
+appreciation -1800
+-1500
+-1200
+-900
+-600
+-300
+0
+300
+600
+900
+-1800
+-1500
+-1200
+-900
+-600
+-300
+0
+300
+600
+900
+Jan-18 Jan-19 Jan-20 Jan-21 Jan- 22 Jan-23 Jan-24 Jan-25 Jan-26
+Single day
+10-day moving avg
+Countercyclical factor in USD/CNY fixing
+Strengthening
+bias
+Pips Pips
+Liberation Day
+ 
+ 
+Source: Bloomberg, Goldman Sachs Global Investment Research
+ 
+ 
+Source: Bloomberg, Goldman Sachs Global Investment Research
+The China Economics Team 
+2 September 2026   6
+Goldman Sachs Asia in Focus
+For the exclusive use of Goldman Sachs Clients
+991f56e45f7048fa97d3280f89dd91e4
+
+
+=== PAGE 7 ===
+Andrew Tilton 
++852-2978-1802 
+andrew.tilton@gs.com 
+Goldman Sachs (Asia) L.L.C.
+Hui Shan 
++852-2978-6634 
+hui.shan@gs.com 
+Goldman Sachs (Asia) L.L.C.
+Lisheng Wang 
++852-3966-4004 
+lisheng.wang@gs.com 
+Goldman Sachs (Asia) L.L.C.
+Xinquan Chen 
++852-2978-2418 
+xinquan.chen@gs.com 
+Goldman Sachs (Asia) L.L.C.
+Yuting Yang 
++852-2978-7283 
+yuting.y.yang@gs.com 
+Goldman Sachs (Asia) L.L.C.
+Chelsea Song 
++852-2978-0106 
+chelsea.song@gs.com 
+Goldman Sachs (Asia) L.L.C.
+2 September 2026   7
+Goldman Sachs Asia in Focus
+For the exclusive use of Goldman Sachs Clients
+991f56e45f7048fa97d3280f89dd91e4
+
+
+=== PAGE 8 ===
+Disclosure Appendix 
+ 
+ 
+Reg AC 
+I, Andrew Tilton, hereby certify that all of the views expressed in this report accurately reflect my personal views, which have not been influenced by 
+considerations of the firm’s business or client relationships. 
+Unless otherwise stated, the individuals listed on the cover page of this report are analysts in Goldman Sachs’ Global Investment Research division. 
+Contributing Authors: Andrew Tilton Goldman Sachs (Asia) L.L.C., Hui Shan Goldman Sachs (Asia) L.L.C.. 
+Unless otherwise stated, the individuals listed in the Contributing Authors disclosure of this report are analysts in Goldman Sachs’ Global Investment 
+Research division. 
+Disclosures 
+Regulatory disclosures 
+Disclosures required by United States laws and regulations 
+See company-specific regulatory disclosures above for any of the following disclosures required as to companies referred to in this report: manager or 
+co-manager in a pending transaction; 1% or other ownership; compensation for certain services; types of client relationships; managed/co-managed 
+public offerings in prior periods; directorships; registered market maker. Goldman Sachs trades or may trade as a principal in debt securities (or in 
+related derivatives) of issuers discussed in this report.  
+The following are additional required disclosures: Ownership and material conflicts of interest: Goldman Sachs policy prohibits its analysts, 
+professionals reporting to analysts and members of their households from owning securities of any company in the analyst’s area of coverage.  Analyst 
+compensation:  Analysts are paid in part based on the profitability of Goldman Sachs, which includes investment banking revenues.  Analyst as officer 
+or director: Goldman Sachs policy generally prohibits its analysts, persons reporting to analysts or members of their households from serving as an 
+officer, director or advisor of any company in the analyst’s area of coverage.  Non-U.S. Analysts:  Non-U.S. analysts may not be associated persons of 
+Goldman Sachs & Co. LLC and therefore may not be subject to FINRA Rule 2241 or FINRA Rule 2242 restrictions on communications with a subject 
+company, public appearances and trading in securities covered by the analysts.  
+Additional disclosures required under the laws and regulations of jurisdictions other than the United States 
+The following disclosures are those required by the jurisdiction indicated, except to the extent already made above pursuant to United States laws and 
+regulations. Australia: Goldman Sachs Australia Pty Ltd and its affiliates are not authorised deposit-taking institutions (as that term is defined in the 
+Banking Act 1959 (Cth)) in Australia and do not provide banking services, nor carry on a banking business, in Australia. This research, and any access to 
+it, is intended only for “wholesale clients” within the meaning of the Australian Corporations Act, unless otherwise agreed by Goldman Sachs. In 
+producing research reports, members of Global Investment Research of Goldman Sachs Australia may attend site visits and other meetings hosted by 
+the companies and other entities which are the subject of its research reports. In some instances the costs of such site visits or meetings may be met in 
+part or in whole by the issuers concerned if Goldman Sachs Australia considers it is appropriate and reasonable in the specific circumstances relating to 
+the site visit or meeting. To the extent that the contents of this document contains any financial product advice, it is general advice only and has been 
+prepared by Goldman Sachs without taking into account a client’s objectives, financial situation or needs. A client should, before acting on any such 
+advice, consider the appropriateness of the advice having regard to the client’s own objectives, financial situation and needs. A copy of certain 
+Goldman Sachs Australia and New Zealand disclosure of interests and a copy of Goldman Sachs’ Australian Sell-Side Research Independence Policy 
+Statement are available at: https://www.goldmansachs.com/disclosures/australia-new-zealand/index.html.  Brazil: Disclosure information in relation 
+to CVM Resolution n. 20 is available at https://www.gs.com/worldwide/brazil/area/gir/index.html. Where applicable, the Brazil-registered analyst 
+primarily responsible for the content of this research report, as defined in Article 20 of CVM Resolution n. 20, is the first author named at the beginning 
+of this report, unless indicated otherwise at the end of the text.  Canada: This information is being provided to you for information purposes only and is 
+not, and under no circumstances should be construed as, an advertisement, offering or solicitation by Goldman Sachs & Co. LLC for purchasers of 
+securities in Canada to trade in any Canadian security. Goldman Sachs & Co. LLC is not registered as a dealer in any jurisdiction in Canada under 
+applicable Canadian securities laws and generally is not permitted to trade in Canadian securities and may be prohibited from selling certain securities 
+and products in certain jurisdictions in Canada. If you wish to trade in any Canadian securities or other products in Canada please contact Goldman 
+Sachs Canada Inc., an affiliate of The Goldman Sachs Group Inc., or another registered Canadian dealer.  Hong Kong: Further information on the 
+securities of covered companies referred to in this research may be obtained on request from Goldman Sachs (Asia) L.L.C.  India: Further information 
+on the subject company or companies referred to in this research may be obtained from Goldman Sachs (India) Securities Private Limited, Research 
+Analyst - SEBI Registration Number INH000001493, 10th Floor, Ascent-Worli, Sudam Kalu Ahire Marg, Worli, Mumbai-400 025, India, Corporate 
+Identity Number U74140MH2006FTC160634, Phone +91 22 6616 9000, Fax +91 22 6616 9001. Goldman Sachs may beneficially own 1% or more of 
+the securities (as such term is defined in clause 2 (h) the Indian Securities Contracts (Regulation) Act, 1956) of the subject company or companies 
+referred to in this research report. Registration granted by SEBI and certification from NISM in no way guarantee performance of the intermediary or 
+provide any assurance of returns to investors. Goldman Sachs (India) Securities Private Limited compliance officer and investor grievance contact 
+details, a copy of the annual compliance audit report and other relevant information and disclosures can be found at this link: 
+https://www.goldmansachs.com/worldwide/india/research-analyst.  Japan: See below.  Korea: This research, and any access to it, is intended only for 
+“professional investors” within the meaning of the Financial Services and Capital Markets Act, unless otherwise agreed by Goldman Sachs. Further 
+information on the subject company or companies referred to in this research may be obtained from Goldman Sachs (Asia) L.L.C., Seoul Branch.  New 
+Zealand: Goldman Sachs New Zealand Limited and its affiliates are neither “registered banks” nor “deposit takers” (as defined in the Reserve Bank of 
+New Zealand Act 1989) in New Zealand. This research, and any access to it, is intended for “wholesale clients” (as defined in the Financial Advisers Act 
+2008) unless otherwise agreed by Goldman Sachs. A copy of certain Goldman Sachs Australia and New Zealand disclosure of interests is available at: 
+https://www.goldmansachs.com/disclosures/australia-new-zealand/index.html.  Russia: Research reports distributed in the Russian Federation are not 
+advertising as defined in the Russian legislation, but are information and analysis not having product promotion as their main purpose and do not 
+provide appraisal within the meaning of the Russian legislation on appraisal activity. Research reports do not constitute a personalized investment 
+recommendation as defined in Russian laws and regulations, are not addressed to a specific client, and are prepared without analyzing the financial 
+circumstances, investment profiles or risk profiles of clients. Goldman Sachs assumes no responsibility for any investment decisions that may be taken 
+by a client or any other person based on this research report.  Singapore: Goldman Sachs (Singapore) Pte. (Company Number: 198602165W), which is 
+regulated by the Monetary Authority of Singapore, accepts legal responsibility for this research, and should be contacted with respect to any matters 
+arising from, or in connection with, this research.  Taiwan: This material is for reference only and must not be reprinted without permission. Investors 
+should carefully consider their own investment risk. Investment results are the responsibility of the individual investor.  United Kingdom: Persons who 
+would be categorized as retail clients in the United Kingdom, as such term is defined in the rules of the Financial Conduct Authority, should read this 
+research in conjunction with prior Goldman Sachs research on the covered companies referred to herein and should refer to the risk warnings that have 
+been sent to them by Goldman Sachs International. A copy of these risks warnings, and a glossary of certain financial terms used in this report, are 
+2 September 2026   8
+Goldman Sachs Asia in Focus
+For the exclusive use of Goldman Sachs Clients
+991f56e45f7048fa97d3280f89dd91e4
+
+
+=== PAGE 9 ===
+available from Goldman Sachs International on request.   
+European Union and United Kingdom: Disclosure information in relation to Article 6 (2) of the European Commission Delegated Regulation (EU) 
+(2016/958) supplementing Regulation (EU) No 596/2014 of the European Parliament and of the Council (including as that Delegated Regulation is 
+implemented into United Kingdom domestic law and regulation following the United Kingdom’s departure from the European Union and the European 
+Economic Area) with regard to regulatory technical standards for the technical arrangements for objective presentation of investment 
+recommendations or other information recommending or suggesting an investment strategy and for disclosure of particular interests or indications of 
+conflicts of interest is available at https://www.gs.com/disclosures/europeanpolicy.html which states the European Policy for Managing Conflicts of 
+Interest in Connection with Investment Research.   
+Japan: Goldman Sachs Japan Co., Ltd. is a Financial Instrument Dealer registered with the Kanto Financial Bureau under registration number Kinsho 69, 
+and a member of Japan Securities Dealers Association, Financial Futures Association of Japan Type II Financial Instruments Firms Association, and 
+Investment Management Association of Japan. Sales and purchase of equities are subject to commission pre-determined with clients plus consumption 
+tax. See company-specific disclosures as to any applicable disclosures required by Japanese stock exchanges, the Japanese Securities Dealers 
+Association or the Japanese Securities Finance Company.   
+Global product; distributing entities 
+Goldman Sachs Global Investment Research produces and distributes research products for clients of Goldman Sachs on a global basis. Analysts based 
+in Goldman Sachs offices around the world produce research on industries and companies, and research on macroeconomics, currencies, commodities 
+and portfolio strategy. This research is disseminated in Australia by Goldman Sachs Australia Pty Ltd (ABN 21 006 797 897); in Brazil by Goldman Sachs 
+do Brasil Corretora de Títulos e Valores Mobiliários S.A.; Public Communication Channel Goldman Sachs Brazil: 0800 727 5764 and / or 
+contatogoldmanbrasil@gs.com. Available Weekdays (except holidays), from 9am to 6pm. Canal de Comunicação com o Público Goldman Sachs Brasil: 
+0800 727 5764 e/ou contatogoldmanbrasil@gs.com. Horário de funcionamento: segunda-feira à sexta-feira (exceto feriados), das 9h às 18h; in Canada 
+by Goldman Sachs & Co. LLC; in Hong Kong by Goldman Sachs (Asia) L.L.C.; in India by Goldman Sachs (India) Securities Private Ltd.; in Japan by 
+Goldman Sachs Japan Co., Ltd.; in the Republic of Korea by Goldman Sachs (Asia) L.L.C., Seoul Branch; in New Zealand by Goldman Sachs New Zealand 
+Limited; in Russia by OOO Goldman Sachs; in Singapore by Goldman Sachs (Singapore) Pte. (Company Number: 198602165W); and in the United States 
+of America by Goldman Sachs & Co. LLC. Goldman Sachs International has approved this research in connection with its distribution in the United 
+Kingdom.  
+Goldman Sachs International (“GSI”), authorised by the Prudential Regulation Authority (“PRA ”) and regulated by the Financial Conduct Authority 
+(“FCA ”) and the PRA, has approved this research in connection with its distribution in the United Kingdom. 
+European Economic Area: Goldman Sachs Bank Europe SE (“GSBE”) is a credit institution incorporated in Germany and, within the Single Supervisory 
+Mechanism, subject to direct prudential supervision by the European Central Bank and in other respects supervised by German Federal Financial 
+Supervisory Authority (Bundesanstalt für Finanzdienstleistungsaufsicht, BaFin) and Deutsche Bundesbank and disseminates research within the 
+European Economic Area.  
+General disclosures 
+This research is for our clients only. Other than disclosures relating to Goldman Sachs, this research is based on current public information that we 
+consider reliable, but we do not represent it is accurate or complete, and it should not be relied on as such. The information, opinions, estimates and 
+forecasts contained herein are as of the date hereof and are subject to change without prior notification. We seek to update our research as 
+appropriate, but various regulations may prevent us from doing so. Other than certain industry reports published on a periodic basis, the large majority 
+of reports are published at irregular intervals as appropriate in the analyst’s judgment. 
+Goldman Sachs conducts a global full-service, integrated investment banking, investment management, and brokerage business. We have investment 
+banking and other business relationships with a substantial percentage of the companies covered by Global Investment Research. Goldman Sachs & Co. 
+LLC, the United States broker dealer, is a member of SIPC (https://www.sipc.org).  
+Our salespeople, traders, and other professionals may provide oral or written market commentary or trading strategies to our clients and principal 
+trading desks that reflect opinions that are contrary to the opinions expressed in this research. Our asset management area, principal trading desks and 
+investing businesses may make investment decisions that are inconsistent with the recommendations or views expressed in this research. 
+We and our affiliates, officers, directors, and employees will from time to time have long or short positions in, act as principal in, make a market or act as 
+liquidity provider in, and buy or sell, any securities, derivatives, or other financial instruments referred to in this research (including any financial 
+instruments issued by the companies referred to herein), unless otherwise prohibited by regulation or Goldman Sachs policy.  
+The views attributed to third party presenters at Goldman Sachs arranged conferences, including individuals from other parts of Goldman Sachs, do not 
+necessarily reflect those of Global Investment Research and are not an official view of Goldman Sachs. 
+Any third party referenced herein, including any salespeople, traders and other professionals or members of their household, may have positions in the 
+products mentioned that are inconsistent with the views expressed by analysts named in this report. 
+This research is focused on investment themes across markets, industries and sectors. It does not attempt to distinguish between the prospects or 
+performance of, or provide analysis of, individual companies within any industry or sector we describe. 
+Any trading recommendation in this research relating to an equity or credit security or securities within an industry or sector is reflective of the 
+investment theme being discussed and is not a recommendation of any such security in isolation. 
+This research is not an offer to sell or the solicitation of an offer to buy any security in any jurisdiction where such an offer or solicitation would be illegal. 
+It does not constitute a personal recommendation or take into account the particular investment objectives, financial situations, or needs of individual 
+clients. Clients should consider whether any advice or recommendation in this research is suitable for their particular circumstances and, if appropriate, 
+seek professional advice, including tax advice. The price and value of investments referred to in this research and the income from them may fluctuate. 
+Past performance is not a guide to future performance, future returns are not guaranteed, and a loss of original capital may occur. Fluctuations in 
+exchange rates could have adverse effects on the value or price of, or income derived from, certain investments.  
+Certain transactions, including those involving futures, options, and other derivatives, give rise to substantial risk and are not suitable for all investors. 
+Investors should review current options and futures disclosure documents which are available from Goldman Sachs sales representatives or at 
+https://www.theocc.com/about/publications/character-risks.jsp and https://www.goldmansachs.com/disclosures/cftc_fcm_disclosures. Transaction 
+costs may be significant in option strategies calling for multiple purchase and sales of options such as spreads. Supporting documentation will be 
+supplied upon request.  
+Differing Levels of Service provided by Global Investment Research: The level and types of services provided to you by Goldman Sachs Global 
+Investment Research may vary as compared to that provided to internal and other external clients of GS, depending on various factors including your 
+individual preferences as to the frequency and manner of receiving communication, your risk profile and investment focus and perspective (e.g., 
+2 September 2026   9
+Goldman Sachs Asia in Focus
+For the exclusive use of Goldman Sachs Clients
+991f56e45f7048fa97d3280f89dd91e4
+
+
+=== PAGE 10 ===
+marketwide, sector specific, long term, short term), the size and scope of your overall client relationship with GS, and legal and regulatory constraints.  
+As an example, certain clients may request to receive notifications when research on specific securities is published, and certain clients may request 
+that specific data underlying analysts’ fundamental analysis available on our internal client websites be delivered to them electronically through data 
+feeds or otherwise. No change to an analyst’s fundamental research views (e.g., ratings, price targets, or material changes to earnings estimates for 
+equity securities), will be communicated to any client prior to inclusion of such information in a research report broadly disseminated through 
+electronic publication to our internal client websites or through other means, as necessary, to all clients who are entitled to receive such reports. 
+All research reports are disseminated and available to all clients simultaneously through electronic publication to our internal client websites. Not all 
+research content is redistributed to our clients or available to third-party aggregators, nor is Goldman Sachs responsible for the redistribution of our 
+research by third party aggregators. For research, models or other data related to one or more securities, markets or asset classes (including related 
+services) that may be available to you, please contact your GS representative or go to https://research.gs.com. 
+Disclosure information is also available at https://www.gs.com/research/hedge.html or from Research Compliance, 200 West Street, New York, NY 
+10282. 
+© 2026 Goldman Sachs.  
+You are permitted to store, display, analyze, modify, reformat, and print the information made available to you via this service only for your own use.  
+You may not resell or reverse engineer this information to calculate or develop any index for disclosure and/or marketing or create any other derivative 
+works or commercial product(s), data or offering(s) without the express written consent of Goldman Sachs. You are not permitted to publish, transmit, 
+or otherwise reproduce this information, in whole or in part, in any format to any third party without the express written consent of Goldman Sachs. 
+This foregoing restriction includes, without limitation, using, extracting, downloading or retrieving this information, in whole or in part, to train or 
+finetune a machine learning or artificial intelligence system, or to provide or reproduce this information, in whole or in part, as a prompt or input to any 
+such system. 
+2 September 2026   10
+Goldman Sachs Asia in Focus
+For the exclusive use of Goldman Sachs Clients
+991f56e45f7048fa97d3280f89dd91e4

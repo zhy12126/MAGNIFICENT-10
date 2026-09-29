@@ -1,0 +1,83 @@
+Exhibit 4 shows when China’s GDP would catch up to US nominal GDP (if ever) based 
+on a simple extrapolation of a China nominal growth assumption (horizontal axis; we 
+assume US nominal growth of 4.5% per year) and a CNY appreciation rate versus the 
+dollar (vertical axis). 
+ 
+A challenge for Beijing is that rapid RMB appreciation helps the second and third goals, 
+but potentially undermines the first, as it would eventually cut into China’s international 
+competitiveness, slowing exports and real GDP growth. But a moderate pace of 
+appreciation – perhaps 3-5% a year against the dollar – would not impede ongoing 
+market share gains, in our view. 
+Economists typically think about the real trade-weighted exchange rate (TWI) as the 
+most relevant in terms of international competitiveness, as it encompasses the range of 
+trading partners as well as differences in inflation across countries. If gradual enough, 
+RMB appreciation against the USD (i.e. declining USDCNY) need not erode 
+competitiveness as measured by the real TWI, for two reasons. 
+The USD is modestly overvalued by our assessment (with most of this overvaluation 1.
+against the RMB and other Asian currencies, particularly north Asia). Our global FX 
+forecasts imply roughly a 1% annual depreciation in the broad USD TWI over the 
+next several years. If the USD is on a broad depreciation trend, the RMB can 
+appreciate at the same pace against the USD without appreciating against other 
+currencies (on average). 
+Inflation in China has been lower than in most other countries in recent years. Put 2.
+differently, China runs a negative “inflation differential” with the rest of the world. 
+This gap has been particularly stark during the housing bust, with much of the world 
+experiencing an inflationary surge but China in lowflation (CPI) or deflation (PPI) 
+during most of this period. This resulted in a sharp real depreciation of the RMB 
+against its trading partners from 2022-25 (Exhibit 5) – particularly on a PPI basis, 
+which is arguably more relevant from a trade perspective. While this degree of 
+inflation divergence is unlikely to be repeated, we project China’s inflation to run at 
+ 
+Exhibit 3: China’s economic “catch-up” to the US has 
+stalled since the housing downturn began 
+ 
+Exhibit 4: For China to “catch up” to US market-value GDP 
+in the coming few decades, CNY appreciation will likely be 
+required 
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1970 1975 1980 1985 1990 1995 2000 2005 2010 2015 2020 2025
+China GDP as share of US (current prices, market exchange rates)
+Ratio Ratio
+234567
+0 never never never 2120 2057 2045
+1 never never 2120 2057 2045 2039
+2 never 2120 2057 2045 2039 2036
+3 2120 2057 2045 2039 2036 2034
+4 2057 2045 2039 2036 2034 2033
+5 2045 2039 2036 2034 2033 2032
+6 2039 2036 2034 2033 2032 2031
+China annual nominal growth rate (percent)
+Ann. CNY appreciation vs 
+USD (percent)
+  Sensitivity Analysis of China-US GDP "catch-up" 
+ 
+ 
+Source: Haver Analytics, Goldman Sachs Global Investment Research
+ 
+Uses official GDP data for both countries; US nominal growth is assumed to be 
+4.5%/year. 
+ 
+Source: Goldman Sachs Global Investment Research
+2 September 2026   4
+Goldman Sachs Asia in Focus
+For the exclusive use of Goldman Sachs Clients
+991f56e45f7048fa97d3280f89dd91e4

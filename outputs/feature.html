@@ -21,7 +21,7 @@
         <div><p class="eyebrow">EXCHANGE RATE TREND</p><h1 id="trend-title">过去6个月汇率走势</h1><p id="trend-description" class="chart-description">1人民币可以兑换多少日元；数值上升表示人民币换日元更划算。</p></div>
       </div>
       <div class="global-period-selector">
-        <div class="global-period-copy"><b>统一分析周期</b><span>同时更新汇率走势与“谁在主导”</span></div>
+        <div class="global-period-copy"><b>统一分析周期</b><span>同时更新汇率走势与驱动拆解</span></div>
         <div class="period-switch global-periods" role="group" aria-label="选择页面分析周期"><button type="button" data-chart-period="30">1个月</button><button type="button" class="active" data-chart-period="180">6个月</button><button type="button" data-chart-period="365">1年</button><button type="button" data-chart-period="1095">3年</button><button type="button" data-chart-period="1825">5年</button></div>
       </div>
       <div class="trend-card">
@@ -43,71 +43,40 @@
       <div class="driver-explainer driver-explainer-compact"><div class="explainer-intro"><span class="explainer-mark">?</span><div><b>为什么人民币兑日元要看美元汇率？</b><p>人民币兑日元可以直接报价，但市场价格通常会与两条更活跃的美元汇率保持一致。因此，把它拆成“日元相对美元”和“人民币相对美元”，更容易看清究竟是哪一侧变化更大。</p></div></div></div>
     </section>
 
-    <section class="yen-section" aria-labelledby="events-title">
-      <div class="section-head"><div><p class="eyebrow">MARKET CONTEXT</p><h2 id="events-title">近6个月，两侧发生了什么？</h2></div><div class="analysis-date-group"><span id="context-updated-date" class="analysis-maintained analysis-updated">内容更新：2026.09.10</span></div></div>
-      <div class="side-analysis-grid">
-        <article class="side-analysis-card jpy-analysis">
-          <header><div><span class="side-symbol">¥</span><span><small>日元侧</small><b id="jpy-context-title">为什么日元兑美元走强？</b></span></div><em>USD / JPY</em></header>
-          <p id="jpy-context-conclusion" class="side-conclusion">核心结论：近6个月日元兑美元总体走强，可以从日本政策正常化和干预风险对弱日元交易的约束来理解。仍然存在的日美利差与能源成本压力构成反向力量，因此半年走势呈现多种力量拉扯，而非单一因素主导。</p>
-          <ol id="jpy-context-reasons" class="reason-list">
-            <li><span>01</span><div><b>日本加息逐步改善持有日元的收益</b><p>日本央行6月将政策利率提高至约1%，7月维持。加息提高日元融资成本，也减少日元资产相对美元资产的收益劣势；市场若进一步预期后续加息，会提前降低对弱日元交易的依赖。</p></div></li>
-            <li><span>02</span><div><b>干预改变单边押注的风险回报</b><p>大规模干预的意义不仅是当期交易，还在于提高继续追空日元可能遭遇突然反弹的风险。它可以促使投资者降低杠杆、收缩仓位，为日元修复创造条件；持续升值仍需要利率和资金供求配合。</p></div></li>
-            <li><span>03</span><div><b>剩余利差解释了为何升值并不顺畅</b><p>以7月底政策利率看，美国仍比日本高2.50—2.75个百分点。持有美元依然有利息优势，只要日元预期升幅不足以抵消这一优势，套息需求就可能恢复，压制日元进一步走强。</p></div></li>
-            <li><span>04</span><div><b>能源冲击同时影响贸易条件和政策预期</b><p>油价上涨会提高日本进口账单，对日元形成压力；但输入型通胀也可能增加加息必要性。日本央行6月已指出原油涨价压低经济活动，这种增长与通胀之间的权衡，是政策路径和汇率反复的重要背景。</p></div></li>
-            <li><span>05</span><div><b>近期修复不能平均分摊到整个半年</b><p>半年窗口包含多轮行情，最近一个月的日元升值贡献尤其明显。高田讲话和近期干预有助于理解后段变化，但不能用9月的消息倒推解释3月以来所有波动。</p></div></li>
-          </ol>
-        </article>
-        <article class="side-analysis-card cny-analysis">
-          <header><div><span class="side-symbol">¥</span><span><small>人民币侧</small><b id="cny-context-title">为什么人民币兑美元走强？</b></span></div><em>USD / CNY</em></header>
-          <p id="cny-context-conclusion" class="side-conclusion">核心结论：近6个月人民币兑美元走强，外部收支与实际结汇需求是较有依据的支撑线索；预期变化可以进一步放大这种支持。国内需求修复不均衡和美元利率仍高，则解释了人民币升值为何较为温和。</p>
-          <ol id="cny-context-reasons" class="reason-list">
-            <li><span>01</span><div><b>经常账户顺差提供持续的外汇收入基础</b><p>二季度经常账户顺差13,337亿元，货物贸易顺差抵消了服务贸易等项目的逆差。这意味着对外交易整体有收入支撑人民币，但外汇收入是否兑换、何时兑换，决定它对即期汇率的实际作用。</p></div></li>
-            <li><span>02</span><div><b>结汇把贸易收入转化为人民币需求</b><p>7月银行结汇超过售汇183亿美元，比单看出口规模更接近外汇市场的兑换供求。当外汇持有人卖出外汇、买入人民币时，会对人民币形成支持；这项统计也包含银行自身业务，不能全部归于出口企业。</p></div></li>
-            <li><span>03</span><div><b>汇率预期能放大已有的供求变化</b><p>人民币逐步升值时，持有美元的企业可能加快结汇，进口商可能暂缓购汇，从而增加即期人民币需求。这有助于理解汇率为什么可能在经济数据仅温和改善时继续走强，但尚不能量化其实际贡献。</p></div></li>
-            <li><span>04</span><div><b>国内需求改善不均衡，约束升值幅度</b><p>制造业PMI在3—6月维持50及以上，7月回落、8月修复至49.8%。景气反复意味着增长和政策支持需求仍需权衡，尚不足以形成持续提高人民币资产收益预期的强劲动力。</p></div></li>
-            <li><span>05</span><div><b>不能把人民币走强全部解释为美元走弱</b><p>美国7月仍维持较高利率，并存在加息分歧；人民币还受到自身收支和结汇节奏影响。半年里人民币与日元均对美元升值，而日元幅度更大，最终使人民币兑日元小幅回落。</p></div></li>
-          </ol>
-        </article>
-      </div>
-      <p id="context-period-note" class="context-note"><b>阅读口径：</b>事实核查截至2026年9月10日；涨跌幅与两侧贡献以图表加载的所选周期数据为准。以下从政策、资金供求和预期变化分析原因，不代表已量化各因素的实际贡献。</p>
-    </section>
-
-    <section class="yen-section hidden" aria-labelledby="research-title">
-      <div class="section-head research-section-head"><div><p class="eyebrow">INSTITUTIONAL RESEARCH</p><h2 id="research-title">投行研报</h2><p class="chart-description">由站长个人筛选、阅读与维护，只保留和人民币/日元汇率分析相关的观点。</p></div><span class="research-maintained">个人维护</span></div>
+    <section class="yen-section" aria-labelledby="research-title">
+      <div class="section-head research-section-head"><div><p class="eyebrow">INSTITUTIONAL RESEARCH</p><h2 id="research-title">人民币 / 日元：机构研报</h2><p class="chart-description">保留一篇人民币侧和一篇日元侧的机构观点，按发布日期展示。</p></div><span class="research-maintained">核查至 2026.09.29</span></div>
       <article class="research-card">
-        <div class="research-topline"><div class="research-target"><small>高盛12个月目标</small><strong>USD/CNY&nbsp; 6.50</strong><em>人民币继续走强</em></div><div class="research-meta"><span class="research-bank">Goldman Sachs</span><time datetime="2026-06-07">2026.06.07</time><span>中国外汇与利率</span></div></div>
-        <div class="research-heading"><div><p>China FX/Rates Monitor</p><h3>政策锚如何支持人民币走强与低利率</h3></div><span class="research-focus">人民币侧</span></div>
-        <p class="research-lead">高盛认为，人民币即使在美元重新走强期间仍表现出较强韧性，关键并非单纯的美元方向，而是人民银行释放的政策信号，以及升值预期推动出口企业增加结汇。</p>
+        <div class="research-topline"><div class="research-target"><small>高盛中长期情景</small><strong>USD/CNY&nbsp; 6.0 / 5.50</strong><em>人民币渐进升值</em></div><div class="research-meta"><span class="research-bank">Goldman Sachs Global Investment Research</span><time datetime="2026-09-02">2026.09.02</time><span>2028E / 2031E</span></div></div>
+        <div class="research-heading"><div><p>Why Beijing may favor gradual RMB appreciation</p><h3>北京或偏好人民币渐进升值</h3></div><span class="research-focus">人民币侧</span></div>
+        <p class="research-lead">高盛预计，北京未来几年可能推动人民币兑美元每年升值约3%-5%。这一节奏既能回应外部对贸易顺差的关切，也能兼顾制造业升级、人民币国际化和美元计价GDP追赶。</p>
         <div class="research-points">
-          <section><span>01</span><div><b>美元走强没有扭转人民币趋势</b><p>3月中东能源冲击推动美元走强时，USD/CNY 仅由约6.82回升至6.90附近便企稳；5月中旬美元再次转强后，人民币仍恢复升值，月底 USD/CNY 跌破6.80。</p></div></section>
-          <section><span>02</span><div><b>央行政策信号是主要解释</b><p>高盛判断，人民银行已经能够接受人民币兑美元有序、渐进升值。约4%的年化升值速度，可能足以抵消境外投资者的部分利差成本，同时尽量限制对出口竞争力和通胀的影响。</p></div></section>
-          <section><span>03</span><div><b>一致升值预期推动企业结汇</b><p>随着升值预期趋于一致，出口企业加快把美元收入兑换成人民币。高盛估算，自上一年12月以来，企业比常态多结汇约1,500亿美元。</p></div></section>
-          <section><span>04</span><div><b>美元存量仍可能形成结汇供给</b><p>高盛此前估算，截至2025年中，企业额外囤积美元约5,000亿美元，处于本轮囤汇周期高点。若预期延续，其中一部分可能继续转化为人民币需求。</p></div></section>
-          <section><span>05</span><div><b>未来走势可能更波动、更事件驱动</b><p>当市场预期过于一致，中间价的细微变化也容易被视为政策信号。高盛因此认为升值趋势可能延续，但过程会更曲折，并受到美元反弹和事件冲击影响。</p></div></section>
-          <section><span>06</span><div><b>6.50是机构情景判断</b><p>高盛维持未来12个月 USD/CNY 到6.50的预测。该目标基于报告发布时的政策与市场假设，可能随美元、政策态度和企业结汇行为变化，并非确定结果。</p></div></section>
+          <section><span>01</span><div><b>3%-5%年升值是多目标平衡方案</b><p>渐进升值可以回应外部对贸易失衡的担忧，同时尽量避免快速升值削弱中国制造业和高科技产业的全球竞争力。</p></div></section>
+          <section><span>02</span><div><b>美元走弱与中国低通胀提供空间</b><p>高盛预计未来几年美元广义走弱，中国通胀低于贸易伙伴，使人民币名义升值未必会同步推高实际贸易加权汇率。</p></div></section>
+          <section><span>03</span><div><b>人民币实际汇率仍然偏低</b><p>报告认为人民币相对合理价值仍有折价，即使每年升值约5%，未来数年仍可能保持对出口竞争力较小的影响。</p></div></section>
+          <section><span>04</span><div><b>升值预期可提高人民币资产吸引力</b><p>人民币债券收益率低于美国，若市场形成持续升值预期，汇率收益可以部分抵消利差劣势，支持人民币资产国际化。</p></div></section>
+          <section><span>05</span><div><b>汇率路径较大程度由政策决定</b><p>高盛认为北京可以通过中间价信号、政策沟通、干预资源和资本管理影响人民币中长期路径，但近期信号显示升值节奏可能放缓。</p></div></section>
+          <section><span>06</span><div><b>中长期目标与主要风险</b><p>报告预计 USD/CNY 约在2028年底达到6.0、2031年底达到5.50；大规模关税战重启或全球经济严重下行，可能打断升值路径。</p></div></section>
         </div>
-        <div class="research-bottom research-source"><span>来源：Goldman Sachs Global Investment Research · 2026年6月7日<br>仅为转述式个人摘要，不提供原文下载，不构成投资或换汇建议。</span></div>
+        <div class="research-bottom research-source"><span>来源：Goldman Sachs Global Investment Research · Asia in Focus · 2026年9月2日<br>报告面向高盛客户；本页根据用户提供的研报整理，仅作观点转述，不构成投资或换汇建议。</span></div>
       </article>
       <article class="research-card research-card-jpy">
-        <div class="research-topline"><div class="research-target"><small>汇丰核心判断</small><strong>USD/JPY&nbsp; 新的更高区间</strong><em>日元继续偏弱</em></div><div class="research-meta"><span class="research-bank">HSBC</span><time datetime="2026-07">2026.07</time><span>美元兑日元</span></div></div>
-        <div class="research-heading"><div><p>USD-JPY: A New and Higher Range</p><h3>美元兑日元或已进入新的、更高的运行区间</h3></div><span class="research-focus">日元侧</span></div>
-        <p class="research-lead">汇丰认为，USD/JPY 已接近过去40年的高位。日本财务省仍可能通过干预抑制无序贬值，但更强的美元环境、持续的日美利差和日本国内资本外流，可能共同把汇率中枢推向更高区间。</p>
+        <div class="research-topline"><div class="research-target"><small>UBS CIO 核心判断</small><strong>日元&nbsp; 涨势或放缓</strong><em>不要外推为单边上涨</em></div><div class="research-meta"><span class="research-bank">UBS Chief Investment Office</span><time datetime="2026-09-18">2026.09.18</time><span>Japanese yen</span></div></div>
+        <div class="research-heading"><div><p>Strategic: Optimize your leverage</p><h3>市场已计入近两次加息，日元强势可能阶段性放缓</h3></div><span class="research-focus">日元侧</span></div>
+        <p class="research-lead">UBS认为，日元反弹主要来自市场提前押注日本央行收紧政策，年内几乎已计入两次额外加息；但植田和男行长的政策取向仍偏谨慎，当前预期可能过高，因此更可能出现日元强势放缓，而非不间断上涨。</p>
         <div class="research-points">
-          <section><span>01</span><div><b>干预措辞仍能影响短期行情</b><p>日本政府继续表示会对汇率变化采取适当措施，但汇丰认为近期措辞比4月底有所缓和。市场仍高度关注措辞强弱，因为它会改变对干预时点的判断。</p></div></section>
-          <section><span>02</span><div><b>更强的美元抬高 USD/JPY 中枢</b><p>在6月17日 FOMC 会议后，汇丰上调了对美元整体运行区间的判断，并据此认为 USD/JPY 可能在2027年年中之前保持强势。</p></div></section>
-          <section><span>03</span><div><b>日本央行预计不会快速连续加息</b><p>如果日本央行继续采取缓慢、谨慎的加息路径，美国与日本之间的名义和实际利差仍会维持较高水平，套息交易对日元的压力也难以迅速消失。</p></div></section>
-          <section><span>04</span><div><b>财政压力与居民海外投资形成资本流出</b><p>生活成本补贴、投资和国防支出可能使财政赤字压力延续；与此同时，日本居民继续购买海外股票，也意味着日元资金持续流向海外资产。</p></div></section>
-          <section><span>05</span><div><b>政府可能提高了对弱日元的容忍度</b><p>美元整体走强使 USD/JPY 的模型合理价值上升，而油价较3月至5月回落，缓解了输入型通胀压力。这可能降低政府立即干预的紧迫性。</p></div></section>
-          <section><span>06</span><div><b>干预门槛可能高于此前的160附近</b><p>汇丰认为，日本财务省不会容忍无限制、无序贬值，但通常倾向在市场意外时出手，且历次干预位置逐步提高。因此，下次触发点可能高于此前普遍关注的160，但报告没有给出确定水平。</p></div></section>
+          <section><span>01</span><div><b>加息预期是本轮反弹的主驱动</b><p>市场把更紧的日本央行路径提前反映到汇率，日元因此获得阶段性支持。</p></div></section>
+          <section><span>02</span><div><b>政策表态可能跟不上市场定价</b><p>UBS强调植田的谨慎风格，认为接近两次加息的定价存在过度风险，日元上涨节奏可能放慢。</p></div></section>
+          <section><span>03</span><div><b>市场定价不等于政策承诺</b><p>利率差和远期价格只能说明市场押注，不能替代日本央行对未来行动的正式承诺。</p></div></section>
+          <section><span>04</span><div><b>低融资成本仍伴随汇率风险</b><p>即使日元融资成本相对较低，日元突然升值也会提高外币借款的本币偿还金额，不能把低利率直接等同于低风险。</p></div></section>
         </div>
-        <div class="research-bottom research-source"><span>来源：HSBC Global Research · 2026年7月<br>根据用户提供的研报摘要整理，仅作机构观点转述，不构成投资或换汇建议。</span></div>
+        <div class="research-bottom research-source"><span>来源：<a href="https://www.ubs.com/us/en/wealth-management/insights/market-news/article.3769779.html" target="_blank" rel="noopener">UBS · Strategic: Optimize your leverage</a> · 2026年9月18日<br>这是UBS财富管理/CIO市场观点；本页仅作机构观点转述，不构成投资或换汇建议。</span></div>
       </article>
     </section>
 
     <section class="yen-section" aria-labelledby="calendar-title">
       <div class="section-head"><div><p class="eyebrow">UPCOMING CALENDAR</p><h2 id="calendar-title">未来事件日历</h2><p class="chart-description">以下时间统一换算为北京时间；日程可能由发布机构调整。</p></div><span class="calendar-window">未来30天</span></div>
       <div class="future-calendar" id="future-calendar" aria-live="polite"><p class="calendar-loading">正在加载已审核的官方日程…</p></div>
-      <p class="calendar-note">日程核查：2026.09.19，覆盖至2026.10.19。事件日历只提示潜在波动节点，不提供结果预测。点击事件名称可查看发布机构的官方日程。</p>
+      <p class="calendar-note" id="calendar-note">事件日历只提示潜在波动节点，不提供结果预测。点击事件名称可查看发布机构的官方日程。</p>
     </section>
 
     <footer class="yen-footer"><p><b>重要说明：</b>汇率走势使用ECB工作日参考汇率；人民币兑日元由同日USD/JPY与USD/CNY计算，不属于实时成交报价。事件与经济数据仅作为市场背景，不代表已经证明其与汇率变化之间存在确定因果关系。</p><a href="index.html">返回巨头估值 →</a></footer>
@@ -127,6 +96,6 @@
       <div class="log-example"><span>当前所选周期</span><b id="log-example-values">等待汇率数据</b><small id="log-example-formula">普通涨幅 = e<sup>对数变化</sup> − 1</small></div>
     </div>
   </div>
-  <script src="yen.js?v=20260919-1"></script>
+  <script src="yen.js?v=20260929-2"></script>
 </body>
 </html>

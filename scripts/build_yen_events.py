@@ -69,6 +69,7 @@ def main() -> None:
         "generatedAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "timezone": "Asia/Shanghai",
         "windowDays": WINDOW_DAYS,
+        "reviewedAt": raw.get("reviewedAt"),
         "reviewedThrough": raw.get("reviewedThrough"),
         "events": selected,
     }
