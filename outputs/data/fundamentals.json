@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-28T06:50:53Z",
+  "updatedAt": "2026-10-05T07:01:10Z",
   "companies": {
     "NVDA": {
       "status": "ready",
@@ -708,10 +708,10 @@
       "status": "ready",
       "company": "SK hynix",
       "fiscalPeriodEnd": "2026-06-30",
-      "revenueTTM": 138833691081.47668,
-      "operatingCashflowTTM": 93370182093.39705,
-      "fcfTTM": 66920506538.646194,
-      "netIncomeTTM": 118867578461.649,
+      "revenueTTM": 140701697123.1108,
+      "operatingCashflowTTM": 94626477038.09158,
+      "fcfTTM": 67820921341.05927,
+      "netIncomeTTM": 120466940640.89458,
       "fcfMarginTTM": 0.4820192131848807,
       "fcfMargin3yMedian": 0.19840848634054134,
       "fcfMarginCycleMedian": 0.1700322890998682,
@@ -723,49 +723,13 @@
       "equityRiskPremium": 0.05,
       "reportingCurrency": "KRW",
       "modelCurrency": "USD",
-      "fxRateToUsd": 0.0007339072777316747,
+      "fxRateToUsd": 0.0007437819934301679,
       "beta": 2.389,
       "costOfEquity": 0.16195,
       "rationale": "DRAM 与 NAND 周期显著，TTM 权重 35%，三年中位数权重 65%。",
       "source": "SK hynix 2Q26 official K-IFRS results (SEC 6-K + earnings presentation); FY2021 cycle input from Korean DART annual report; KRW translated at latest KRW/USD",
       "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2120882/000119312526321989/d115239d6k.htm",
-      "availableFrom": "2026-07-29",
-      "analystConsensus": {
-        "source": "Alpha Vantage EARNINGS_ESTIMATES",
-        "updatedAt": "2026-09-30T08:54:37.634276Z",
-        "revenueCagr": 608909.8746953922,
-        "growthPath": [
-          1.0,
-          1.0,
-          -0.3,
-          0.08,
-          0.06
-        ],
-        "consensusYears": 3,
-        "farGrowth": {
-          "year4": 0.08,
-          "year5": 0.06,
-          "basis": "company-specific"
-        },
-        "analystCount": 37,
-        "estimates": [
-          {
-            "periodEnd": "2026-09-30",
-            "revenue": 100287043740000.0,
-            "analystCount": 37
-          },
-          {
-            "periodEnd": "2026-12-31",
-            "revenue": 346529775650000.0,
-            "analystCount": 44
-          },
-          {
-            "periodEnd": "2026-12-31",
-            "revenue": 113906353020000.0,
-            "analystCount": 37
-          }
-        ]
-      }
+      "availableFrom": "2026-07-29"
     },
     "NFLX": {
       "status": "ready",
