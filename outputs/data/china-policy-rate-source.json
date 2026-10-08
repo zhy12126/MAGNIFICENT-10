@@ -5,10 +5,45 @@
   "latestSourceUrl": "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026092408454713496/index.html",
   "points": [
     {
-      "date": "2021-01-01",
+      "date": "2016-01-01",
+      "value": 2.25,
+      "sourceUrl": "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/3307990/f0b7f194d7a64548be1fa3aafbd5afd2/2017051310260490469.pdf",
+      "note": "期初水平，不是调息日；2017年第一季度执行报告核对2017年2月3日、3月16日各上调10个基点至2.45%。"
+    },
+    {
+      "date": "2017-02-03",
+      "value": 2.35,
+      "sourceUrl": "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/3307990/f0b7f194d7a64548be1fa3aafbd5afd2/2017051310260490469.pdf"
+    },
+    {
+      "date": "2017-03-16",
+      "value": 2.45,
+      "sourceUrl": "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/3307990/f0b7f194d7a64548be1fa3aafbd5afd2/2017051310260490469.pdf"
+    },
+    {
+      "date": "2017-12-14",
+      "value": 2.5,
+      "sourceUrl": "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/3307990/4fb4583e076a4347bea80eee7da3dc92/2018021417311593282.pdf"
+    },
+    {
+      "date": "2018-03-22",
+      "value": 2.55,
+      "sourceUrl": "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/3537682/53003f83ca094cbbab9a5c6440dd148e/2018051717143540409.pdf"
+    },
+    {
+      "date": "2019-11-18",
+      "value": 2.5,
+      "sourceUrl": "https://ftz.shenyang.gov.cn/zwgk/xwzx/xwdt/202206/t20220608_3096259.html"
+    },
+    {
+      "date": "2020-02-03",
+      "value": 2.4,
+      "sourceUrl": "https://ftz.shenyang.gov.cn/zwgk/xwzx/xwdt/202206/t20220608_3096259.html"
+    },
+    {
+      "date": "2020-03-30",
       "value": 2.2,
-      "sourceUrl": "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/4246985/75d90372c9174bde9287c2c30935b477/2022021119311841777.pdf",
-      "note": "期初水平；2021年全年为2.20%，不是调息日。"
+      "sourceUrl": "https://ftz.shenyang.gov.cn/zwgk/xwzx/xwdt/202206/t20220608_3096259.html"
     },
     {
       "date": "2022-01-17",
@@ -53,6 +88,10 @@
     "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/5347949/ad0bc3efe0234fed8cc6260a134a6e95/2025022618190099812.pdf",
     "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/4883187/cd2196ad2fdf454a9207100c4acff45e/2024030610591528512.pdf",
     "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/4584071/d7e45aa7d98c4664a9a6c2393d16787d/2023022418125754970.pdf",
-    "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/4246985/75d90372c9174bde9287c2c30935b477/2022021119311841777.pdf"
+    "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/4246985/75d90372c9174bde9287c2c30935b477/2022021119311841777.pdf",
+    "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/3307990/f0b7f194d7a64548be1fa3aafbd5afd2/2017051310260490469.pdf",
+    "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/3307990/4fb4583e076a4347bea80eee7da3dc92/2018021417311593282.pdf",
+    "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/3537682/53003f83ca094cbbab9a5c6440dd148e/2018051717143540409.pdf",
+    "https://ftz.shenyang.gov.cn/zwgk/xwzx/xwdt/202206/t20220608_3096259.html"
   ]
 }

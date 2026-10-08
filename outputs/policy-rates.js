@@ -7,7 +7,7 @@
   const readout = document.querySelector('#policy-date-values');
   const ns = 'http://www.w3.org/2000/svg', dayMs = 86400000;
   const styles = { cn: { color: '#ce892d', name: '中国' }, us: { color: '#4d79bc', name: '美国' }, jp: { color: '#c66868', name: '日本' } };
-  let payload, years = 5, selectedDate, bounds;
+  let payload, years = 10, selectedDate, bounds;
   const visible = new Set(['cn', 'us', 'jp']);
   const timestamp = day => Date.parse(`${day}T00:00:00Z`);
   const isoDay = value => new Date(value).toISOString().slice(0, 10);

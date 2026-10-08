@@ -9,7 +9,7 @@ import fetch_bond_yields as bonds
 
 
 def fixture():
-    return {key: {'2021-01-04': [1.] * 8, '2026-09-29': [2.] * 8,
+    return {key: {'2016-01-04': [1.] * 8, '2026-09-29': [2.] * 8,
                   '2026-09-30': [3.] * 8} for key in ('cn', 'us', 'jp')}
 
 

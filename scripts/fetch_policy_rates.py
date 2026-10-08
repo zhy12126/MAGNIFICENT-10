@@ -22,8 +22,8 @@ from urllib.request import Request, urlopen
 
 OUTPUT = Path('outputs/data/policy-rates.json')
 CHINA_SOURCE = Path('outputs/data/china-policy-rate-source.json')
-HISTORY_START = '2021-01-01'
-BIS_URL = 'https://stats.bis.org/api/v1/data/WS_CBPOL/D.US+JP?startPeriod=2021-01-01&format=csv'
+HISTORY_START = '2016-01-01'
+BIS_URL = 'https://stats.bis.org/api/v1/data/WS_CBPOL/D.US+JP?startPeriod=2016-01-01&format=csv'
 PBOC_INDEX = 'https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/index.html'
 
 
@@ -72,9 +72,9 @@ class OfficialHTML(HTMLParser):
             self.rows.append(self.row_stack.pop())
 
 
-def validate_points(points: list[dict], as_of: str) -> None:
+def validate_points(points: list[dict], as_of: str, history_start: str = HISTORY_START) -> None:
     date.fromisoformat(as_of)
-    if not points or points[0]['date'] > HISTORY_START:
+    if not points or points[0]['date'] > history_start:
         raise ValueError('Policy-rate history has no opening observation')
     previous = ''
     for point in points:
@@ -111,7 +111,11 @@ def parse_bis(raw: str) -> list[dict]:
     }
     result = []
     for area, observations in groups.items():
-        if len(observations) < 1000 or min(observations) != HISTORY_START:
+        # BIS's current Japan short-term policy series starts with the
+        # September 2016 framework; its recent observations use business days.
+        opening = '2016-09-21' if area == 'JP' else HISTORY_START
+        minimum = 2500 if area == 'JP' else 3000
+        if len(observations) < minimum or min(observations) > opening:
             raise ValueError(f'Incomplete BIS {area} policy-rate history')
         if area == 'US' and 'mid-point' not in metadata[area]:
             raise ValueError('BIS US policy-rate definition changed')
@@ -123,7 +127,7 @@ def parse_bis(raw: str) -> list[dict]:
                 points.append({'date': day, 'value': value})
         identifier, label, measure = definitions[area]
         as_of = max(observations)
-        validate_points(points, as_of)
+        validate_points(points, as_of, opening)
         result.append({'id': identifier, 'shortMeasure': label, 'measure': measure,
                        'provider': 'BIS（央行原始数据）',
                        'sourceUrl': f'https://data.bis.org/topics/CBPOL/BIS,WS_CBPOL,1.0/D.{area}',
@@ -166,10 +170,24 @@ def build_china(index: str, get=fetch) -> dict:
         previous = json.loads(OUTPUT.read_text(encoding='utf-8'))
         cached = next((item for item in previous.get('series', []) if item.get('id') == 'cn'), None)
         if cached and cached['asOf'] > series['asOf']:
-            validate_points(cached['points'], cached['asOf'])
-            if cached['points'][:len(source['points'])] != source['points']:
+            # Older snapshots can start later than the expanded reviewed history.
+            # Compare rates throughout their overlap, preserving later cached changes.
+            validate_points(cached['points'], cached['asOf'], cached['points'][0]['date'])
+            opening = cached['points'][0]['date']
+            overlap = sorted({opening, *[point['date'] for point in source['points']],
+                              *[point['date'] for point in cached['points']]})
+            def value_at(points, day):
+                return next(point['value'] for point in reversed(points) if point['date'] <= day)
+            if opening > series['asOf'] or any(
+                value_at(source['points'], day) != value_at(cached['points'], day)
+                for day in overlap if opening <= day <= series['asOf']
+            ):
                 raise ValueError('Cached China history conflicts with reviewed source')
-            series.update(points=cached['points'], asOf=cached['asOf'], sourceUrl=cached['sourceUrl'])
+            merged = list(source['points'])
+            for point in cached['points']:
+                if point['date'] > series['asOf'] and point['value'] != merged[-1]['value']:
+                    merged.append(point)
+            series.update(points=merged, asOf=cached['asOf'], sourceUrl=cached['sourceUrl'])
     links = list(dict.fromkeys(OfficialHTML(index).links))
     if not links or any(urlparse(url).hostname != 'www.pbc.gov.cn' or '/125475/' not in url for url in links):
         raise ValueError('Invalid PBOC operation index')
@@ -197,7 +215,7 @@ def main():
         china = build_china(index_future.result())
     series = [china, *us_jp]
     payload = {'schemaVersion': 1, 'generatedAt': datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
-               'unit': 'percentPerAnnum', 'historyStart': HISTORY_START,
+               'unit': 'percentPerAnnum', 'historyStart': max(item['points'][0]['date'] for item in series),
                'latestCommonDate': min(item['asOf'] for item in series), 'series': series}
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     temporary = OUTPUT.with_suffix('.json.tmp')

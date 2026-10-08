@@ -14,7 +14,7 @@
     if (text !== undefined) el.textContent = text;
     return el;
   };
-  let payload, years = 5, historyDay, historyBounds, unionDates;
+  let payload, years = 10, historyDay, historyBounds, unionDates;
   const tenYearIndex = 5;
   function status(id, message) {
     const el = section.querySelector(id); el.textContent = message; el.classList.toggle('hidden', !message);
@@ -80,11 +80,11 @@
     }
     for (const series of selected) {
       let path = '', previous;
-      // Break at missing observations on another market's quoted day, or long closures.
+      // Connect adjacent actual quotes linearly across holidays and missing dates.
       for (const day of dates) {
         const value = series.byDate.get(day)?.[tenYearIndex], time = timestamp(day);
-        if (value === undefined || value === null) { previous = undefined; continue }
-        path += `${previous !== undefined && time - previous <= 4 * dayMs ? 'L' : 'M'} ${x(time).toFixed(2)} ${y(value).toFixed(2)} `;
+        if (value === undefined || value === null) continue;
+        path += `${previous !== undefined ? 'L' : 'M'} ${x(time).toFixed(2)} ${y(value).toFixed(2)} `;
         previous = time;
       }
       historySvg.append(node('path', { d: path, fill: 'none', stroke: styles[series.id].color, 'stroke-width': 1.8, 'stroke-linejoin': 'round', 'data-series': series.id }));

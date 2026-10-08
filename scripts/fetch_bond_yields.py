@@ -20,7 +20,7 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 OUTPUT = Path('outputs/data/bond-yields.json')
-START = '2021-01-01'
+START = '2016-01-01'
 MATURITIES = [1, 2, 3, 5, 7, 10, 20, 30]
 CN_ID = '2c9081e50a2f9606010a3068cae70001'
 CN_BASE = 'https://yield.chinabond.com.cn/cbweb-mn/yc/'
@@ -135,7 +135,7 @@ def load_sources(today):
         raise ValueError('ChinaBond Treasury curve definition changed')
     jobs = [('jp', 'all', JP_BASE + 'historical/jgbcme_all.csv', parse_jp, False),
             ('jp', 'current', JP_BASE + 'jgbcme.csv', parse_jp, False)]
-    for year in range(2021, today.year + 1):
+    for year in range(int(START[:4]), today.year + 1):
         jobs.extend([('cn', year, cn_url(year, today), parse_cn, True),
                      ('us', year, us_url(year), parse_us, False)])
 
@@ -143,7 +143,7 @@ def load_sources(today):
         country, period, url, parser, post = job
         rows = parser(fetch(url, post))
         if country == 'jp' and period == 'all' and any(
-                sum(day.startswith(str(year)) for day in rows) < 150 for year in range(2021, today.year)):
+                sum(day.startswith(str(year)) for day in rows) < 150 for year in range(int(START[:4]), today.year)):
             raise ValueError('Incomplete MOF historical archive')
         if isinstance(period, int):
             minimum = 150 if period < today.year else max(1, ((today - date(today.year, 1, 1)).days - 21) // 3)
@@ -162,7 +162,7 @@ def build_payload(sources, today):
     filtered = {}
     for country in ('cn', 'us', 'jp'):
         rows = {day: values for day, values in sorted(sources[country].items()) if START <= day <= today.isoformat()}
-        if not rows or next(iter(rows)) > '2021-01-15':
+        if not rows or next(iter(rows)) > '2016-01-15':
             raise ValueError(f'Missing opening history for {country}')
         for day, values in rows.items():
             date.fromisoformat(day)
