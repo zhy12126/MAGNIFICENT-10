@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-08",
+  "asOf": "2026-09-24",
+  "latestSourceUrl": "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026092408454713496/index.html",
+  "points": [
+    {
+      "date": "2021-01-01",
+      "value": 2.2,
+      "sourceUrl": "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/4246985/75d90372c9174bde9287c2c30935b477/2022021119311841777.pdf",
+      "note": "期初水平；2021年全年为2.20%，不是调息日。"
+    },
+    {
+      "date": "2022-01-17",
+      "value": 2.1,
+      "sourceUrl": "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/4448049/index.html"
+    },
+    {
+      "date": "2022-08-15",
+      "value": 2.0,
+      "sourceUrl": "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/4630885/index.html"
+    },
+    {
+      "date": "2023-06-13",
+      "value": 1.9,
+      "sourceUrl": "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/4953019/index.html"
+    },
+    {
+      "date": "2023-08-15",
+      "value": 1.8,
+      "sourceUrl": "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/5023979/index.html"
+    },
+    {
+      "date": "2024-07-22",
+      "value": 1.7,
+      "sourceUrl": "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/5410037/index.html"
+    },
+    {
+      "date": "2024-09-27",
+      "value": 1.5,
+      "sourceUrl": "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/5347949/ad0bc3efe0234fed8cc6260a134a6e95/2025022618190099812.pdf",
+      "note": "2024年第四季度执行报告核对9月下调20个基点至1.50%。"
+    },
+    {
+      "date": "2025-05-08",
+      "value": 1.4,
+      "sourceUrl": "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/5701904/index.html"
+    }
+  ],
+  "historyChecks": [
+    "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/2026nhbzczxbg/2026081218435062865/2026081218435024793.pdf",
+    "https://www.pbc.gov.cn/goutongjiaoliu/attachDir/2026/02/2026021019001885059.pdf",
+    "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/5347949/ad0bc3efe0234fed8cc6260a134a6e95/2025022618190099812.pdf",
+    "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/4883187/cd2196ad2fdf454a9207100c4acff45e/2024030610591528512.pdf",
+    "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/4584071/d7e45aa7d98c4664a9a6c2393d16787d/2023022418125754970.pdf",
+    "https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/4246985/75d90372c9174bde9287c2c30935b477/2022021119311841777.pdf"
+  ]
+}

@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20260803-19" />
-  <link rel="stylesheet" href="yen.css?v=20260809-09" />
+  <link rel="stylesheet" href="yen.css?v=20261008-3" />
 </head>
 <body>
   <main class="shell yen-shell">
@@ -41,6 +41,29 @@
         <div class="method-box hidden" id="method-box"><b>这是数学拆解，不是新闻归因</b><p>人民币兑日元 = 美元兑日元 ÷ 美元兑人民币。贡献采用对数变化计算，因此日元侧与人民币侧可以相加；四舍五入后可能有极小误差。</p><code>CNY/JPY 变化 ≈ USD/JPY 变化 − USD/CNY 变化</code></div>
       </div>
       <div class="driver-explainer driver-explainer-compact"><div class="explainer-intro"><span class="explainer-mark">?</span><div><b>为什么人民币兑日元要看美元汇率？</b><p>人民币兑日元可以直接报价，但市场价格通常会与两条更活跃的美元汇率保持一致。因此，把它拆成“日元相对美元”和“人民币相对美元”，更容易看清究竟是哪一侧变化更大。</p></div></div></div>
+    </section>
+
+    <section class="yen-section policy-section" aria-labelledby="policy-title">
+      <div class="section-head policy-heading"><div><p class="eyebrow">CENTRAL BANK POLICY RATES</p><h2 id="policy-title">中美日央行基准利率走势</h2><p class="chart-description">默认展示近5年的政策利率路径；阶梯变化对应调息生效日，单位为年利率 %。</p></div><div class="period-switch policy-periods" role="group" aria-label="选择政策利率时间范围"><button type="button" data-policy-years="1" aria-pressed="false">1年</button><button type="button" data-policy-years="3" aria-pressed="false">3年</button><button type="button" class="active" data-policy-years="5" aria-pressed="true">5年</button></div></div>
+      <div class="policy-card">
+        <div class="policy-series-controls" id="policy-series-controls" role="group" aria-label="选择显示的国家"></div>
+        <div class="policy-chart-wrap"><svg id="policy-rate-chart" role="img" aria-label="中美日央行政策利率历史阶梯图" tabindex="0"></svg><p id="policy-chart-status" class="policy-chart-status" role="status">正在加载央行政策利率…</p></div>
+        <div class="policy-inspector"><label for="policy-inspect-date">查看日期 <input type="date" id="policy-inspect-date" disabled /></label><div id="policy-date-values" class="policy-date-values"></div></div>
+        <p class="policy-interaction-hint">移动指针或选择日期查看当日利率；点击国家卡片可显示或隐藏曲线。</p>
+        <details class="policy-method"><summary>指标口径与数据来源 <span id="policy-data-date"></span></summary><div id="policy-source-details"></div><p>各国政策工具不同，曲线用于比较政策方向。中国自2024年7月明确7天逆回购利率为主要政策利率，此前展示同一工具的操作利率。美国用目标区间中点；日本2024年3月至7月的0—0.1%区间用中点0.05%表示。水平线表示利率维持不变。</p></details>
+      </div>
+    </section>
+
+    <section class="yen-section bond-section" aria-labelledby="bond-title">
+      <div class="section-head"><div><p class="eyebrow">GOVERNMENT BOND YIELDS</p><h2 id="bond-title">中美日国债收益率</h2><p class="chart-description">对照三国10年期国债收益率的历史走势。收益率单位：年率 %。</p></div></div>
+      <div class="policy-card bond-card">
+        <div class="policy-series-controls" id="bond-series-controls" role="group" aria-label="选择显示的国债市场"></div>
+        <div class="bond-chart-heading bond-history-heading"><div><h3>10年期国债收益率历史</h3><p>日频观察 · 比较长期融资利率的变化</p></div><div class="period-switch policy-periods" role="group" aria-label="选择国债历史时间范围"><button type="button" data-bond-years="1" aria-pressed="false" disabled>1年</button><button type="button" data-bond-years="3" aria-pressed="false" disabled>3年</button><button type="button" class="active" data-bond-years="5" aria-pressed="true" disabled>5年</button></div></div>
+        <div class="policy-chart-wrap"><svg id="bond-history-chart" role="img" aria-label="中美日10年期国债收益率历史" tabindex="0"></svg><p id="bond-history-status" class="policy-chart-status" role="status">正在加载10年期历史收益率…</p></div>
+        <div class="policy-inspector"><label for="bond-history-date">查看日期 <input type="date" id="bond-history-date" disabled /></label><div id="bond-history-values" class="policy-date-values"></div></div>
+        <p class="policy-interaction-hint">移动指针、选择日期或用左右方向键查看；休市与缺失日期显示「无报价」，不沿用前值。</p>
+        <details class="policy-method"><summary>指标口径与数据来源 <span id="bond-data-date"></span></summary><div id="bond-source-details"></div><p>三国均为本币名义国债收益率，但曲线估算方法不同，不代表完全相同的债券组合。历史图显示各源真实日期的10年期观察值，截止于最近共同交易日，缺失处断线。数据自2021年起，随每日数据任务更新。</p></details>
+      </div>
     </section>
 
     <section class="yen-section" aria-labelledby="research-title">
@@ -97,5 +120,7 @@
     </div>
   </div>
   <script src="yen.js?v=20260929-2"></script>
+  <script src="policy-rates.js?v=20261008-1"></script>
+  <script src="bond-yields.js?v=20261008-2"></script>
 </body>
 </html>

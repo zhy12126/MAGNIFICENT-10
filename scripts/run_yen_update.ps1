@@ -7,6 +7,8 @@ $outputPath = Join-Path $projectRoot 'outputs\data\yen-rates.json'
 $fetchScript = Join-Path $PSScriptRoot 'fetch_yen_rates.py'
 $eventScript = Join-Path $PSScriptRoot 'build_yen_events.py'
 $eventOutputPath = Join-Path $projectRoot 'outputs\data\yen-events.json'
+$policyScript = Join-Path $PSScriptRoot 'fetch_policy_rates.py'
+$bondScript = Join-Path $PSScriptRoot 'fetch_bond_yields.py'
 
 if (-not (Test-Path -LiteralPath $fetchScript)) {
   throw "找不到汇率更新程序：$fetchScript"
@@ -48,6 +50,16 @@ try {
   & $pythonRunner @pythonArgs $eventScript
   if ($LASTEXITCODE -ne 0) {
     throw "事件日历更新程序退出，错误码：$LASTEXITCODE"
+  }
+  Write-Host '开始更新中美日央行政策利率……'
+  & $pythonRunner @pythonArgs $policyScript
+  if ($LASTEXITCODE -ne 0) {
+    throw "政策利率更新程序退出，错误码：$LASTEXITCODE"
+  }
+  Write-Host '开始更新中美日国债收益率曲线……'
+  & $pythonRunner @pythonArgs $bondScript
+  if ($LASTEXITCODE -ne 0) {
+    throw "国债收益率更新程序退出，错误码：$LASTEXITCODE"
   }
 }
 finally {

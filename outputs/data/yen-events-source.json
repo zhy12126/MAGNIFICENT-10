@@ -1,84 +1,7 @@
 {
   "schemaVersion": 1,
-  "reviewedThrough": "2026-10-29",
+  "reviewedThrough": "2026-11-07",
   "events": [
-    {
-      "id": "jp-rate-effective-2026-09-24",
-      "datetime": "2026-09-24",
-      "timeLabel": "当日生效",
-      "country": "jp",
-      "title": "日本央行1.25%政策利率生效",
-      "summary": "9月18日已公布的加息正式生效；这是执行日，不是新的利率决议。",
-      "impact": "jpy",
-      "major": false,
-      "sourceUrl": "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/k260918a.pdf"
-    },
-    {
-      "id": "jp-minutes-2026-09-28",
-      "datetime": "2026-09-28T07:50:00+08:00",
-      "timeLabel": "07:50",
-      "country": "jp",
-      "title": "日本央行7月会议纪要",
-      "summary": "回看7月维持1%利率时的讨论；这不是9月会议纪要。",
-      "impact": "jpy",
-      "major": false,
-      "sourceUrl": "https://www.boj.or.jp/en/mopo/mpmsche_minu/"
-    },
-    {
-      "id": "cn-pmi-2026-09-30",
-      "datetime": "2026-09-30T09:30:00+08:00",
-      "timeLabel": "09:30",
-      "country": "cn",
-      "title": "中国9月采购经理指数（PMI）",
-      "summary": "观察制造业能否重返50以上，以及新订单修复能否延续。",
-      "impact": "cny",
-      "major": true,
-      "sourceUrl": "https://www.stats.gov.cn/xw/tjxw/tzgg/202512/t20251224_1962137.html"
-    },
-    {
-      "id": "us-pce-gdp-2026-09-30",
-      "datetime": "2026-09-30T20:30:00+08:00",
-      "timeLabel": "20:30",
-      "country": "us",
-      "title": "美国8月PCE物价与二季度GDP第三次估值",
-      "summary": "关注核心PCE、消费及GDP修订对美元与利率预期的影响。",
-      "impact": "both",
-      "major": true,
-      "sourceUrl": "https://www.bea.gov/news/schedule"
-    },
-    {
-      "id": "jp-opinions-2026-10-01",
-      "datetime": "2026-10-01T07:50:00+08:00",
-      "timeLabel": "07:50",
-      "country": "jp",
-      "title": "日本央行9月会议意见摘要",
-      "summary": "查看9月加息至1.25%的讨论，关注委员对通胀、经济及后续加息节奏的分歧。",
-      "impact": "jpy",
-      "major": true,
-      "sourceUrl": "https://www.boj.or.jp/en/mopo/mpmsche_minu/"
-    },
-    {
-      "id": "jp-tokyo-cpi-2026-10-02",
-      "datetime": "2026-10-02",
-      "timeLabel": "发布时间待定",
-      "country": "jp",
-      "title": "东京9月消费者物价指数（初值）",
-      "summary": "官方日程为10月2日发布，观察日本通胀的最新先行线索。",
-      "impact": "jpy",
-      "major": false,
-      "sourceUrl": "https://www.stat.go.jp/english/data/cpi/1582.htm"
-    },
-    {
-      "id": "us-jobs-2026-10-02",
-      "datetime": "2026-10-02T20:30:00+08:00",
-      "timeLabel": "20:30",
-      "country": "us",
-      "title": "美国9月非农就业报告",
-      "summary": "关注新增就业、失业率和工资，评估美国利率路径。",
-      "impact": "both",
-      "major": true,
-      "sourceUrl": "https://www.bls.gov/schedule/2026/10_sched_list.htm"
-    },
     {
       "id": "cn-cpi-ppi-2026-10-14",
       "datetime": "2026-10-14T09:30:00+08:00",
@@ -88,7 +11,7 @@
       "summary": "观察消费价格、核心通胀和工业品价格，判断内需及成本压力。",
       "impact": "cny",
       "major": true,
-      "sourceUrl": "https://www.stats.gov.cn/xw/tjxw/tzgg/202512/t20251224_1962137.html"
+      "sourceUrl": "https://www.stats.gov.cn/english/PressRelease/ReleaseCalendar/202512/t20251226_1962154.html"
     },
     {
       "id": "us-cpi-2026-10-14",
@@ -96,7 +19,7 @@
       "timeLabel": "20:30",
       "country": "us",
       "title": "美国9月消费者物价指数（CPI）",
-      "summary": "9月加息后的重要通胀观察点，关注后续收紧预期及美元反应。",
+      "summary": "关注整体与核心通胀、住房和服务价格，评估美国利率预期及美元反应。",
       "impact": "both",
       "major": true,
       "sourceUrl": "https://www.bls.gov/schedule/2026/10_sched_list.htm"
@@ -121,18 +44,29 @@
       "summary": "关注三季度GDP、9月工业和消费，检验生产改善能否扩展至内需。",
       "impact": "cny",
       "major": true,
-      "sourceUrl": "https://www.stats.gov.cn/xw/tjxw/tzgg/202512/t20251224_1962137.html"
+      "sourceUrl": "https://www.stats.gov.cn/english/PressRelease/ReleaseCalendar/202512/t20251226_1962154.html"
     },
     {
-      "id": "us-trade-2026-10-06",
-      "datetime": "2026-10-06T20:30:00+08:00",
-      "timeLabel": "20:30",
-      "country": "us",
-      "title": "美国8月国际贸易收支",
-      "summary": "关注货物与服务贸易差额对美元供求和增长预期的影响。",
-      "impact": "both",
+      "id": "jp-cpi-2026-10-23",
+      "datetime": "2026-10-23",
+      "timeLabel": "发布时间待定",
+      "country": "jp",
+      "title": "日本9月全国消费者物价指数（CPI）",
+      "summary": "关注核心通胀与服务价格，为10月日本央行会议提供通胀线索。",
+      "impact": "jpy",
+      "major": true,
+      "sourceUrl": "https://www.stat.go.jp/english/data/cpi/1582.htm"
+    },
+    {
+      "id": "cn-profits-2026-10-27",
+      "datetime": "2026-10-27T09:30:00+08:00",
+      "timeLabel": "09:30",
+      "country": "cn",
+      "title": "中国1—9月规模以上工业企业利润",
+      "summary": "观察工业企业盈利修复与成本变化，评估中国经济动能及人民币资产预期。",
+      "impact": "cny",
       "major": false,
-      "sourceUrl": "https://www.bea.gov/news/schedule"
+      "sourceUrl": "https://www.stats.gov.cn/english/PressRelease/ReleaseCalendar/202512/t20251226_1962154.html"
     },
     {
       "id": "us-fomc-2026-10-29",
@@ -146,27 +80,104 @@
       "sourceUrl": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
     },
     {
-      "id": "jp-mpm-2026-10-29",
-      "datetime": "2026-10-29",
-      "timeLabel": "会议首日",
+      "id": "us-gdp-pce-2026-10-29",
+      "datetime": "2026-10-29T20:30:00+08:00",
+      "timeLabel": "20:30",
+      "country": "us",
+      "title": "美国三季度GDP初值与9月PCE物价",
+      "summary": "同日公布三季度GDP初值及9月个人收入和支出；关注核心PCE、消费和增长对美元利率预期的影响。",
+      "impact": "both",
+      "major": true,
+      "sourceUrl": "https://www.bea.gov/news/schedule"
+    },
+    {
+      "id": "jp-mpm-2026-10-30",
+      "datetime": "2026-10-30",
+      "timeLabel": "决议时间待定",
       "country": "jp",
-      "title": "日本央行10月金融政策会议（10/29—10/30）",
-      "summary": "关注政策利率与展望报告，市场将重新评估日本后续加息节奏。",
+      "title": "日本央行10月利率决议与展望报告",
+      "summary": "10月29—30日会议结束后公布政策决定与展望报告基本观点；关注利率路径及增长、通胀预测。",
       "impact": "jpy",
       "major": true,
       "sourceUrl": "https://www.boj.or.jp/en/mopo/mpmsche_minu/"
     },
     {
-      "id": "us-gdp-pce-2026-10-29",
-      "datetime": "2026-10-29T20:30:00+08:00",
+      "id": "jp-tokyo-cpi-2026-10-30",
+      "datetime": "2026-10-30",
+      "timeLabel": "发布时间待定",
+      "country": "jp",
+      "title": "东京10月消费者物价指数（初值）",
+      "summary": "全国CPI的先行观察点；与日本央行决议同日，关注通胀是否持续。",
+      "impact": "jpy",
+      "major": true,
+      "sourceUrl": "https://www.stat.go.jp/english/data/cpi/1582.htm"
+    },
+    {
+      "id": "us-eci-2026-10-30",
+      "datetime": "2026-10-30T20:30:00+08:00",
       "timeLabel": "20:30",
       "country": "us",
-      "title": "美国三季度GDP初值与9月个人收入和支出",
-      "summary": "同日公布的增长与消费数据将检验美国经济韧性及后续利率路径。",
+      "title": "美国三季度就业成本指数（ECI）",
+      "summary": "观察工资与福利成本的变化，评估服务通胀及后续美国利率路径。",
+      "impact": "both",
+      "major": false,
+      "sourceUrl": "https://www.bls.gov/schedule/2026/10_sched_list.htm"
+    },
+    {
+      "id": "cn-pmi-2026-10-31",
+      "datetime": "2026-10-31T09:30:00+08:00",
+      "timeLabel": "09:30",
+      "country": "cn",
+      "title": "中国10月采购经理指数（PMI）",
+      "summary": "关注制造业与非制造业景气、新订单和就业，判断内需及生产动能。",
+      "impact": "cny",
+      "major": true,
+      "sourceUrl": "https://www.stats.gov.cn/english/PressRelease/ReleaseCalendar/202512/t20251226_1962154.html"
+    },
+    {
+      "id": "us-jolts-2026-11-03",
+      "datetime": "2026-11-03T23:00:00+08:00",
+      "timeLabel": "23:00",
+      "country": "us",
+      "title": "美国9月职位空缺与劳动力流动调查（JOLTS）",
+      "summary": "观察职位空缺、招聘和离职情况，评估劳动力市场紧张程度及美元利率预期。",
+      "impact": "both",
+      "major": false,
+      "sourceUrl": "https://www.bls.gov/schedule/2026/11_sched_list.htm"
+    },
+    {
+      "id": "us-trade-2026-11-04",
+      "datetime": "2026-11-04T21:30:00+08:00",
+      "timeLabel": "21:30",
+      "country": "us",
+      "title": "美国9月国际贸易收支",
+      "summary": "关注货物与服务贸易差额对增长及美元供求的影响。",
+      "impact": "both",
+      "major": false,
+      "sourceUrl": "https://www.bea.gov/news/schedule"
+    },
+    {
+      "id": "jp-minutes-2026-11-05",
+      "datetime": "2026-11-05T07:50:00+08:00",
+      "timeLabel": "07:50",
+      "country": "jp",
+      "title": "日本央行9月会议纪要",
+      "summary": "回看9月17—18日会议的政策讨论与委员分歧；这不是10月会议纪要。",
+      "impact": "jpy",
+      "major": false,
+      "sourceUrl": "https://www.boj.or.jp/en/mopo/mpmsche_minu/"
+    },
+    {
+      "id": "us-jobs-2026-11-06",
+      "datetime": "2026-11-06T21:30:00+08:00",
+      "timeLabel": "21:30",
+      "country": "us",
+      "title": "美国10月非农就业报告",
+      "summary": "关注新增就业、失业率与工资增速，评估美国经济及利率预期。",
       "impact": "both",
       "major": true,
-      "sourceUrl": "https://www.bea.gov/news/schedule"
+      "sourceUrl": "https://www.bls.gov/schedule/2026/11_sched_list.htm"
     }
   ],
-  "reviewedAt": "2026-09-29"
+  "reviewedAt": "2026-10-08"
 }
