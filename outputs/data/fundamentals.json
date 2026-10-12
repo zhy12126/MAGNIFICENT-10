@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-05T07:01:10Z",
+  "updatedAt": "2026-10-12T07:21:14Z",
   "companies": {
     "NVDA": {
       "status": "ready",
@@ -708,10 +708,10 @@
       "status": "ready",
       "company": "SK hynix",
       "fiscalPeriodEnd": "2026-06-30",
-      "revenueTTM": 140701697123.1108,
-      "operatingCashflowTTM": 94626477038.09158,
-      "fcfTTM": 67820921341.05927,
-      "netIncomeTTM": 120466940640.89458,
+      "revenueTTM": 141990130333.0628,
+      "operatingCashflowTTM": 95492990364.15303,
+      "fcfTTM": 68441970903.1616,
+      "netIncomeTTM": 121570080192.1342,
       "fcfMarginTTM": 0.4820192131848807,
       "fcfMargin3yMedian": 0.19840848634054134,
       "fcfMarginCycleMedian": 0.1700322890998682,
@@ -723,49 +723,13 @@
       "equityRiskPremium": 0.05,
       "reportingCurrency": "KRW",
       "modelCurrency": "USD",
-      "fxRateToUsd": 0.0007437819934301679,
-      "beta": 2.389,
-      "costOfEquity": 0.16195,
+      "fxRateToUsd": 0.0007505929519395113,
+      "beta": 2.391,
+      "costOfEquity": 0.16205,
       "rationale": "DRAM 与 NAND 周期显著，TTM 权重 35%，三年中位数权重 65%。",
       "source": "SK hynix 2Q26 official K-IFRS results (SEC 6-K + earnings presentation); FY2021 cycle input from Korean DART annual report; KRW translated at latest KRW/USD",
       "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2120882/000119312526321989/d115239d6k.htm",
-      "availableFrom": "2026-07-29",
-      "analystConsensus": {
-        "source": "Alpha Vantage EARNINGS_ESTIMATES",
-        "updatedAt": "2026-10-07T09:06:21.041266Z",
-        "revenueCagr": 586214.3849902697,
-        "growthPath": [
-          1.0,
-          1.0,
-          -0.3,
-          0.08,
-          0.06
-        ],
-        "consensusYears": 3,
-        "farGrowth": {
-          "year4": 0.08,
-          "year5": 0.06,
-          "basis": "company-specific"
-        },
-        "analystCount": 37,
-        "estimates": [
-          {
-            "periodEnd": "2026-09-30",
-            "revenue": 99618665360000.0,
-            "analystCount": 37
-          },
-          {
-            "periodEnd": "2026-12-31",
-            "revenue": 345173637590000.0,
-            "analystCount": 45
-          },
-          {
-            "periodEnd": "2026-12-31",
-            "revenue": 113251001670000.0,
-            "analystCount": 37
-          }
-        ]
-      }
+      "availableFrom": "2026-07-29"
     },
     "NFLX": {
       "status": "ready",
@@ -970,8 +934,8 @@
       "fcfTTM": 20053900000.0,
       "netIncomeTTM": 26711200000.0,
       "fcfMarginTTM": 0.25172533257683977,
-      "fcfMargin3yMedian": 0.009197877583642298,
-      "normalizedFcfMargin": 0.1425879778299009,
+      "fcfMargin3yMedian": 0.08347356970006438,
+      "normalizedFcfMargin": 0.17601203928229084,
       "fcfMarginCycleMedian": 0.1560563632697865,
       "fcfMarginCycleYears": 7,
       "ttmWeight": 0.55,
