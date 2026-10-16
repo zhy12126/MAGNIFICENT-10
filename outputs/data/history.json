@@ -67901,6 +67901,16 @@
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-30",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-10-14",
+        "price": 737.54,
+        "pe": 27.8237,
+        "pcf": 14.5412,
+        "ps": 8.3012,
+        "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-07-30",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "TSLA": [
@@ -119370,6 +119380,16 @@
         "pe": 9.2755,
         "pcf": 11.8085,
         "ps": 7.9416,
+        "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-07-29",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-10-14",
+        "price": 147.55,
+        "pe": 8.7139,
+        "pcf": 11.0935,
+        "ps": 7.4607,
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-29",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
@@ -175958,6 +175978,16 @@
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-08-04",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-10-14",
+        "price": 200.97,
+        "pe": 171.143,
+        "pcf": 151.8357,
+        "ps": 83.8679,
+        "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-08-04",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "LLY": [
@@ -209912,7 +209942,7 @@
       }
     ]
   },
-  "updatedAt": "2026-10-15T00:38:41Z",
+  "updatedAt": "2026-10-16T00:31:26Z",
   "backfillUpdatedAt": "2026-10-13",
   "backfillErrors": {},
   "methodology": "For each trading date: EOD close divided by the latest already-filed rolling-four-quarter EPS, operating cash flow per share, and revenue per share. Per-share denominators use the average diluted weighted shares of the same four quarters.",
