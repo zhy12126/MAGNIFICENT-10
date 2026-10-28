@@ -638,8 +638,8 @@
         "displayScenarioTargetMargin": 0.065,
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-10-21T07:54:48.757808Z",
-          "revenueCagr": -0.9206298923815559,
+          "updatedAt": "2026-10-28T08:52:25.384294Z",
+          "revenueCagr": -0.9189782684357406,
           "growthPath": [
             -0.3,
             1.0,
@@ -653,22 +653,22 @@
             "year5": 0.11,
             "basis": "company-specific"
           },
-          "analystCount": 26,
+          "analystCount": 25,
           "estimates": [
             {
               "periodEnd": "2026-09-30",
-              "revenue": 28023953480.0,
-              "analystCount": 26
+              "revenue": 28253140390.0,
+              "analystCount": 27
             },
             {
               "periodEnd": "2026-12-31",
-              "revenue": 106882469590.0,
-              "analystCount": 40
+              "revenue": 107792399500.0,
+              "analystCount": 39
             },
             {
               "periodEnd": "2026-12-31",
-              "revenue": 28915159390.0,
-              "analystCount": 26
+              "revenue": 29216725380.0,
+              "analystCount": 25
             }
           ]
         },
@@ -733,8 +733,8 @@
         "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）；TSMC 金额按 1 USD = 31.6 TWD 换算",
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-10-21T07:55:01.925231Z",
-          "revenueCagr": 124.27730538411227,
+          "updatedAt": "2026-10-28T08:52:38.428950Z",
+          "revenueCagr": 140.2044385348767,
           "growthPath": [
             1.0,
             1.0,
@@ -748,22 +748,22 @@
             "year5": 0.1,
             "basis": "company-specific"
           },
-          "analystCount": 25,
+          "analystCount": 26,
           "estimates": [
             {
               "periodEnd": "2026-09-30",
-              "revenue": 1454935426950.0,
-              "analystCount": 26
+              "revenue": 1460392943930.0,
+              "analystCount": 28
             },
             {
               "periodEnd": "2026-12-31",
-              "revenue": 5442275068100.0,
+              "revenue": 5573546682970.0,
               "analystCount": 40
             },
             {
               "periodEnd": "2026-12-31",
-              "revenue": 1605253448470.0,
-              "analystCount": 25
+              "revenue": 1705011253270.0,
+              "analystCount": 26
             }
           ]
         },
@@ -823,12 +823,12 @@
         "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-10-21T07:55:15.154629Z",
-          "revenueCagr": -0.32924270053292626,
+          "updatedAt": "2026-10-28T08:52:51.471286Z",
+          "revenueCagr": -0.32811216499504525,
           "growthPath": [
             -0.3,
-            -3.0271151502891946e-05,
-            0.17957949147111507,
+            0.002408628865737894,
+            0.17967553031030592,
             0.07,
             0.05
           ],
@@ -838,7 +838,7 @@
             "year5": 0.05,
             "basis": "company-specific"
           },
-          "analystCount": 30,
+          "analystCount": 32,
           "estimates": [
             {
               "periodEnd": "2026-08-31",
@@ -847,13 +847,13 @@
             },
             {
               "periodEnd": "2026-11-30",
-              "revenue": 61669197360.0,
-              "analystCount": 32
+              "revenue": 61744356340.0,
+              "analystCount": 34
             },
             {
               "periodEnd": "2027-02-28",
-              "revenue": 66977957970.0,
-              "analystCount": 30
+              "revenue": 67062316840.0,
+              "analystCount": 32
             }
           ]
         },
@@ -918,12 +918,12 @@
         "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-10-21T07:55:28.426622Z",
-          "revenueCagr": -0.8253610492484906,
+          "updatedAt": "2026-10-28T08:53:04.522530Z",
+          "revenueCagr": -0.8250332211165854,
           "growthPath": [
-            0.4146128436394556,
+            0.41473707374297875,
             -0.3,
-            0.12390288800827487,
+            0.1254141325904623,
             0.15,
             0.12
           ],
@@ -933,22 +933,22 @@
             "year5": 0.12,
             "basis": "company-specific"
           },
-          "analystCount": 34,
+          "analystCount": 35,
           "estimates": [
             {
               "periodEnd": "2026-10-31",
-              "revenue": 105978068240.0,
-              "analystCount": 40
+              "revenue": 105982721590.0,
+              "analystCount": 42
             },
             {
               "periodEnd": "2026-10-31",
-              "revenue": 34893968920.0,
-              "analystCount": 38
+              "revenue": 34903492790.0,
+              "analystCount": 39
             },
             {
               "periodEnd": "2027-01-31",
-              "revenue": 36992592080.0,
-              "analystCount": 34
+              "revenue": 37027558030.0,
+              "analystCount": 35
             }
           ]
         },
@@ -1014,8 +1014,8 @@
         "displayScenarioTargetMargin": 0.1,
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-10-21T07:55:41.664576Z",
-          "revenueCagr": -0.8457064728226382,
+          "updatedAt": "2026-10-28T08:53:17.565618Z",
+          "revenueCagr": -0.8452386572842968,
           "growthPath": [
             -0.3,
             1.0,
@@ -1033,17 +1033,17 @@
           "estimates": [
             {
               "periodEnd": "2026-09-30",
-              "revenue": 13072358150.0,
+              "revenue": 13077889730.0,
               "analystCount": 38
             },
             {
               "periodEnd": "2026-12-31",
-              "revenue": 50948325430.0,
+              "revenue": 50972190010.0,
               "analystCount": 48
             },
             {
               "periodEnd": "2026-12-31",
-              "revenue": 16110943650.0,
+              "revenue": 16135533120.0,
               "analystCount": 38
             }
           ]
@@ -1113,8 +1113,8 @@
         "availableFrom": "2026-07-29",
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-10-21T07:55:54.768477Z",
-          "revenueCagr": 579182.252198089,
+          "updatedAt": "2026-10-28T08:53:30.596949Z",
+          "revenueCagr": 575223.1219794394,
           "growthPath": [
             1.0,
             1.0,
@@ -1132,17 +1132,17 @@
           "estimates": [
             {
               "periodEnd": "2026-09-30",
-              "revenue": 99676980720000.0,
+              "revenue": 99678538450000.0,
               "analystCount": 37
             },
             {
               "periodEnd": "2026-12-31",
-              "revenue": 344272994520000.0,
+              "revenue": 343915096860000.0,
               "analystCount": 45
             },
             {
               "periodEnd": "2026-12-31",
-              "revenue": 113731929060000.0,
+              "revenue": 113339616440000.0,
               "analystCount": 36
             }
           ]
@@ -1708,5 +1708,6 @@
       "dataSource": "Finviz supplemental + Yahoo Finance EOD",
       "note": "数据口径：收盘价和实际交易日来自 Yahoo Finance EOD；Trailing P/E、P/CF、P/S 与历史曲线共用已披露财报 TTM 分母；Finviz 仅提供前瞻及企业价值补充指标。"
     }
-  ]
+  ],
+  "analystEstimatesUpdatedAt": "2026-10-28T08:53:30.596982Z"
 }
