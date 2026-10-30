@@ -26,6 +26,7 @@ OFFICIAL_DOMAINS = {
     "stat.go.jp",
     "mof.go.jp",
     "bea.gov",
+    "cao.go.jp",
 }
 REQUIRED = {"id", "datetime", "timeLabel", "country", "title", "summary", "impact", "sourceUrl"}
 
