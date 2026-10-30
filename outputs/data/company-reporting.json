@@ -14,35 +14,23 @@
       "issued": "2026-07-30",
       "fiscalPeriodEnd": "2026-06-30"
     },
-    "MSFT": {
-      "value": "16%–17%",
-      "period": "FY2027 Q1收入 $89.85B–$90.95B，对比 FY2026 Q1实际收入 $77.67B",
-      "issued": "2026-07-29",
-      "fiscalPeriodEnd": "2026-06-30"
-    },
-    "GOOGL": {
-      "value": "未量化",
-      "period": "2026 Q3定性展望，对比2025 Q3：Cloud保持强劲增长；Search进入较高基数期，汇率约由Q2顺风1个百分点转为轻微逆风",
-      "issued": "2026-07-22",
-      "fiscalPeriodEnd": "2026-06-30"
-    },
     "AMZN": {
-      "value": "9%–12%",
-      "period": "2026 Q3净销售额 $197B–$202B，对比2025 Q3实际净销售额",
-      "issued": "2026-07-30",
-      "fiscalPeriodEnd": "2026-06-30"
+      "value": "12%–16%",
+      "period": "2026 Q4净销售额 $240.0B–$247.0B，对比2025 Q4实际净销售额；含约60个基点汇率逆风",
+      "issued": "2026-10-29",
+      "fiscalPeriodEnd": "2026-09-30"
     },
     "TSM": {
-      "value": "35%–38%",
-      "period": "2026 Q3美元收入 $44.6B–$45.8B，对比2025 Q3实际美元收入",
-      "issued": "2026-07-16",
-      "fiscalPeriodEnd": "2026-06-30"
+      "value": "55%–61%",
+      "period": "2026 Q4美元收入 $52.3B–$54.3B，对比2025 Q4实际美元收入 $33.73B",
+      "issued": "2026-10-15",
+      "fiscalPeriodEnd": "2026-09-30"
     },
     "MU": {
-      "value": "333%–351%",
-      "period": "FY2026 Q4收入 $49.0B–$51.0B，对比 FY2025 Q4实际收入",
-      "issued": "2026-06-24",
-      "fiscalPeriodEnd": "2026-05-31"
+      "value": "340%–362%",
+      "period": "FY2027 Q1收入 $61.5B（±$1.5B），对比 FY2026 Q1实际收入 $13.64B",
+      "issued": "2026-09-30",
+      "fiscalPeriodEnd": "2026-08-31"
     },
     "AVGO": {
       "value": "约 93%",
@@ -63,10 +51,10 @@
       "fiscalPeriodEnd": "2026-06-30"
     },
     "LLY": {
-      "value": "30%–33%",
-      "period": "2026全年收入 $85B–$87B，对比2025全年实际收入 $65.2B",
-      "issued": "2026-08-05",
-      "fiscalPeriodEnd": "2026-06-30"
+      "value": "40%–41%",
+      "period": "2026全年收入 $91.0B–$92.0B（上调），对比2025全年实际收入 $65.2B",
+      "issued": "2026-10-29",
+      "fiscalPeriodEnd": "2026-09-30"
     },
     "ORCL": {
       "value": "30%–34%",
@@ -81,12 +69,6 @@
       "period": "FY2026 Q4收入共识 $115.73B，对比 FY2025 Q4实际 $102.47B",
       "source": "Zacks",
       "updated": "2026-08"
-    },
-    "GOOGL": {
-      "value": "约 24.0%",
-      "period": "2026 Q3收入共识 $126.9B，对比 2025 Q3实际约 $102.35B",
-      "source": "S&P Global Market Intelligence",
-      "updated": "2026-07"
     }
   },
   "business": {
@@ -156,83 +138,83 @@
       "reportedRevenue": 109.42
     },
     "MSFT": {
-      "period": "微软FY2026 Q4（自然年2026 Q2）vs 微软FY2025 Q4",
-      "issued": "2026-07-29",
-      "source": "Microsoft FY2026 Q4财报",
+      "period": "微软FY2027 Q1（自然年2026 Q3）vs 微软FY2026 Q1",
+      "issued": "2026-10-28",
+      "source": "Microsoft FY2027 Q1财报（FY2027新分部口径，上年同期已由公司重述）",
       "segments": [
         [
-          "生产力与业务流程",
-          37.8,
-          "+14%",
-          "Microsoft 365、LinkedIn、Dynamics"
+          "智能体与基础设施（Agents and Infra）",
+          76.795,
+          "+25%",
+          "Azure、Microsoft 365云、生产力与服务器授权、行业解决方案"
         ],
         [
-          "云业务（Intelligent Cloud）",
-          38.6,
-          "约+29%",
-          "Azure、服务器产品及企业服务"
-        ],
-        [
-          "更多个人计算",
-          13.6,
-          "约+1%",
-          "Windows、设备、游戏和搜索广告"
+          "设备与消费者（Devices and Consumer）",
+          15.484,
+          "-3%",
+          "Windows OEM与设备、Xbox、搜索广告"
         ]
       ],
       "submetrics": [
         [
-          "Azure及其他云服务",
-          "+43%",
-          "云分部中的核心子业务"
+          "Azure",
+          "+48%",
+          "智能体与基础设施分部中的核心云业务",
+          43.2
+        ],
+        [
+          "Microsoft Cloud",
+          "+30%",
+          "$63.9B，跨分部口径（固定汇率+31%）"
         ]
       ],
-      "fiscalPeriodEnd": "2026-06-30",
-      "comparisonPeriod": "微软FY2026 Q4（自然年2026 Q2）vs 微软FY2025 Q4",
-      "manualUpdatedAt": "2026-07-29",
-      "reportedRevenue": 90.0
+      "fiscalPeriodEnd": "2026-09-30",
+      "comparisonPeriod": "微软FY2027 Q1（自然年2026 Q3）vs 微软FY2026 Q1",
+      "manualUpdatedAt": "2026-10-30",
+      "reportedRevenue": 92.279
     },
     "GOOGL": {
-      "period": "2026 Q2 vs 2025 Q2",
-      "issued": "2026-07-22",
-      "source": "Alphabet 财报",
+      "period": "2026 Q3 vs 2025 Q3",
+      "issued": "2026-10-28",
+      "source": "Alphabet 2026 Q3财报",
       "segments": [
         [
           "Google Services",
-          94.5,
-          "+15%",
+          96.302,
+          "+11%",
           "搜索、YouTube、订阅、平台与设备"
         ],
         [
           "Google Cloud",
-          24.77,
-          "+82%",
+          30.709,
+          "+103%",
           "云基础设施、平台及Workspace"
         ],
         [
           "Other Bets及其他",
-          0.53,
-          "未披露",
+          0.372,
+          "+8%",
           "Waymo等早期业务及公司层调整"
         ]
       ],
       "submetrics": [
         [
           "搜索及其他",
-          "+17%",
+          "+12%",
           "Google Services子业务",
-          67.0
+          65.8
         ],
         [
           "YouTube广告",
-          "+13%",
+          "+9%",
           "Google Services子业务",
-          11.7
+          11.6
         ]
       ],
-      "fiscalPeriodEnd": "2026-06-30",
-      "comparisonPeriod": "2026 Q2 vs 2025 Q2",
-      "manualUpdatedAt": "2026-07-22",
-      "reportedRevenue": 119.8
+      "fiscalPeriodEnd": "2026-09-30",
+      "comparisonPeriod": "2026 Q3 vs 2025 Q3",
+      "manualUpdatedAt": "2026-10-30",
+      "reportedRevenue": 127.577
     },
     "AMZN": {
       "period": "2026 Q2 vs 2025 Q2",
@@ -271,132 +253,132 @@
       "reportedRevenue": 200.63
     },
     "META": {
-      "period": "2026 Q2 vs 2025 Q2",
-      "issued": "2026-07-29",
-      "source": "Meta 2026 Q2财报",
+      "period": "2026 Q3 vs 2025 Q3",
+      "issued": "2026-10-21",
+      "source": "Meta 2026 Q3财报",
       "segments": [
         [
           "广告收入",
-          59.363,
-          "+27%",
+          63.061,
+          "+26%",
           "Facebook、Instagram、Messenger、WhatsApp及Threads广告"
         ],
         [
           "应用及其他收入",
-          1.007,
-          "+73%",
+          1.097,
+          "+59%",
           "WhatsApp付费消息、Meta Verified、支付及开发者费用"
         ],
         [
           "Reality Labs",
-          0.431,
-          "+16%",
+          0.443,
+          "-6%",
           "Quest、Ray-Ban Meta及AR/VR软硬件与内容"
         ]
       ],
       "submetrics": [
         [
           "广告展示量",
-          "+14%",
-          "对比2025 Q2；广告收入增长驱动"
+          "+10%",
+          "对比2025 Q3，应用家族广告展示量"
         ],
         [
           "平均广告价格",
-          "+12%",
-          "对比2025 Q2；广告收入增长驱动"
+          "+14%",
+          "对比2025 Q3，应用家族平均每条广告价格"
         ],
         [
           "Family日活人数",
           "+3%",
-          "2026年6月平均3.60B，对比2025年6月"
+          "2026年9月平均3.64B，对比2025年9月"
         ]
       ],
-      "fiscalPeriodEnd": "2026-06-30",
-      "comparisonPeriod": "2026 Q2 vs 2025 Q2",
-      "manualUpdatedAt": "2026-07-29",
-      "reportedRevenue": 60.801
+      "fiscalPeriodEnd": "2026-09-30",
+      "comparisonPeriod": "2026 Q3 vs 2025 Q3",
+      "manualUpdatedAt": "2026-10-30",
+      "reportedRevenue": 64.601
     },
     "TSLA": {
-      "period": "2026 Q2 vs 2025 Q2",
-      "issued": "2026-07-22",
-      "source": "Tesla 财报",
+      "period": "2026 Q3 vs 2025 Q3",
+      "issued": "2026-10-21",
+      "source": "Tesla 2026 Q3财报",
       "segments": [
         [
           "汽车业务",
-          20.5,
-          "+23%",
+          20.56,
+          "-3%",
           "整车销售、租赁及监管积分"
         ],
         [
           "能源发电与储能",
-          3.1,
-          "+13%",
+          2.881,
+          "-16%",
           "Megapack、Powerwall及太阳能"
         ],
         [
           "服务及其他",
-          4.6,
-          "约+100%",
+          4.605,
+          "+33%",
           "售后、充电、保险及二手车"
         ]
       ],
-      "fiscalPeriodEnd": "2026-06-30",
-      "comparisonPeriod": "2026 Q2 vs 2025 Q2",
-      "manualUpdatedAt": "2026-07-22",
-      "reportedRevenue": 28.2
+      "fiscalPeriodEnd": "2026-09-30",
+      "comparisonPeriod": "2026 Q3 vs 2025 Q3",
+      "manualUpdatedAt": "2026-10-30",
+      "reportedRevenue": 28.046
     },
     "TSM": {
-      "period": "2026 Q2 vs 2025 Q2（美元口径）",
-      "issued": "2026-07-16",
-      "source": "TSMC 2026 Q2财报及平台收入占比",
+      "period": "2026 Q3 vs 2025 Q3（美元口径）",
+      "issued": "2026-10-15",
+      "source": "TSMC 2026 Q3财报及平台收入占比",
       "segments": [
         [
           "高性能计算",
-          26.532,
-          "约+47.1%",
+          31.77,
+          "约+68.4%",
           "AI、服务器、CPU/GPU及网络芯片"
         ],
         [
           "智能手机",
-          8.844,
-          "约+8.9%",
+          9.811,
+          "约-1.2%",
           "手机应用处理器及通信芯片"
         ],
         [
           "物联网",
-          2.01,
-          "约+33.7%",
+          1.869,
+          "约+12.9%",
           "IoT及边缘设备芯片"
         ],
         [
           "汽车电子",
-          1.608,
-          "约+7.0%",
+          1.869,
+          "约+12.9%",
           "汽车计算、控制及功率相关芯片"
         ],
         [
           "数字消费电子",
-          0.402,
-          "约+33.7%",
+          0.467,
+          "约+41.1%",
           "消费电子芯片"
         ],
         [
           "其他",
-          0.804,
-          "约+33.7%",
+          0.934,
+          "约+41.1%",
           "未归入主要平台的晶圆收入"
         ]
       ],
       "submetrics": [
         [
           "公司总收入（美元）",
-          "+33.7%",
-          "与页面顶部33%相同，顶部为四舍五入显示"
+          "+41.2%",
+          "$46.72B，对比2025 Q3的$33.10B"
         ],
         [
           "公司总收入（新台币）",
-          "+36.0%",
-          "受汇率影响，与美元口径不同"
+          "+50.9%",
+          "NT$1,494.24B；受汇率影响，与美元口径不同"
         ],
         [
           "平台同比算法",
@@ -404,46 +386,57 @@
           "本季平台收入÷去年同期平台收入−1；平台收入=当季美元总收入×公司披露占比，结果受占比四舍五入影响"
         ]
       ],
-      "fiscalPeriodEnd": "2026-06-30",
-      "comparisonPeriod": "2026 Q2 vs 2025 Q2（美元口径）",
-      "manualUpdatedAt": "2026-07-16",
-      "reportedRevenue": 40.2
+      "fiscalPeriodEnd": "2026-09-30",
+      "comparisonPeriod": "2026 Q3 vs 2025 Q3（美元口径）",
+      "manualUpdatedAt": "2026-10-30",
+      "reportedRevenue": 46.72
     },
     "MU": {
-      "period": "FY2026 Q3 vs FY2025 Q3",
-      "issued": "2026-06-24",
-      "source": "Micron 财报",
+      "period": "FY2026 Q4 vs FY2025 Q4",
+      "issued": "2026-09-30",
+      "source": "Micron FY2026 Q4财报（业务部门口径）",
       "segments": [
         [
-          "DRAM（含HBM）",
-          31.3,
-          "+343%",
-          "HBM、服务器及客户端DRAM内存"
+          "云端存储（CMBU）",
+          16.283,
+          "+258%",
+          "超大规模云客户的HBM、服务器DRAM及数据中心SSD"
         ],
         [
-          "NAND",
-          9.9,
-          "+361%",
-          "数据中心SSD、移动及消费存储"
+          "核心数据中心（CDBU）",
+          18.002,
+          "+1042%",
+          "OEM服务器DDR5/RDIMM、数据中心SSD及QLC NAND"
         ],
         [
-          "其他",
-          0.26,
-          "未披露",
-          "未归入DRAM与NAND的产品"
+          "移动与客户端（MCBU）",
+          13.114,
+          "+249%",
+          "手机LPDDR5X、PC内存及客户端SSD"
+        ],
+        [
+          "汽车与嵌入式（AEBU）",
+          6.824,
+          "+376%",
+          "汽车、工业及消费嵌入式存储"
         ]
       ],
       "submetrics": [
         [
-          "HBM",
-          "未单列",
-          "HBM属于DRAM；公司未持续披露独立季度收入，因此不从DRAM中重复拆分"
+          "DRAM（FY2026全年）",
+          "+252%",
+          "$100.68B，对比FY2025全年$28.58B；季度拆分未在财报新闻稿披露"
+        ],
+        [
+          "NAND（FY2026全年）",
+          "+274%",
+          "$31.79B，对比FY2025全年$8.50B"
         ]
       ],
-      "fiscalPeriodEnd": "2026-05-31",
-      "comparisonPeriod": "FY2026 Q3 vs FY2025 Q3",
-      "manualUpdatedAt": "2026-06-24",
-      "reportedRevenue": 41.46
+      "fiscalPeriodEnd": "2026-08-31",
+      "comparisonPeriod": "FY2026 Q4 vs FY2025 Q4",
+      "manualUpdatedAt": "2026-10-30",
+      "reportedRevenue": 54.229
     },
     "AVGO": {
       "period": "FY2026 Q3 vs FY2025 Q3",
@@ -567,39 +560,39 @@
       "reportedRevenue": 79.319
     },
     "NFLX": {
-      "period": "2026 Q2 vs 2025 Q2",
-      "issued": "2026-07-16",
-      "source": "Netflix 2026 Q2 Form 10-Q地区收入表",
+      "period": "2026 Q3 vs 2025 Q3",
+      "issued": "2026-10-20",
+      "source": "Netflix 2026 Q3股东信地区收入表",
       "segments": [
         [
           "美国与加拿大（UCAN）",
-          5.432,
-          "+10%",
+          5.628,
+          "+11%",
           "美国和加拿大会员、广告及相关收入"
         ],
         [
           "欧洲、中东与非洲（EMEA）",
-          4.034,
-          "+14%",
+          4.107,
+          "+11%",
           "欧洲、中东与非洲地区收入"
         ],
         [
           "拉丁美洲（LATAM）",
-          1.584,
-          "+21%",
+          1.603,
+          "+17%",
           "墨西哥、中南美洲及加勒比地区收入"
         ],
         [
           "亚太地区（APAC）",
-          1.51,
-          "+16%",
+          1.537,
+          "+12%",
           "亚洲、澳大利亚及太平洋地区收入"
         ]
       ],
-      "fiscalPeriodEnd": "2026-06-30",
-      "comparisonPeriod": "2026 Q2 vs 2025 Q2",
-      "manualUpdatedAt": "2026-07-16",
-      "reportedRevenue": 12.56
+      "fiscalPeriodEnd": "2026-09-30",
+      "comparisonPeriod": "2026 Q3 vs 2025 Q3",
+      "manualUpdatedAt": "2026-10-30",
+      "reportedRevenue": 12.874
     },
     "MCD": {
       "period": "2026 Q2 vs 2025 Q2",
@@ -743,51 +736,51 @@
       "reportedRevenue": 19.3
     },
     "AXP": {
-      "period": "2026 Q2 vs 2025 Q2",
-      "issued": "2026-07-24",
-      "source": "American Express 2026 Q2分部业绩表",
+      "period": "2026 Q3 vs 2025 Q3",
+      "issued": "2026-10-23",
+      "source": "American Express 2026 Q3分部业绩表",
       "segments": [
         [
           "美国消费者服务",
-          9.524,
+          9.84,
           "+11%",
           "美国个人卡、消费信贷及相关服务"
         ],
         [
           "商业服务",
-          4.503,
-          "+7%",
+          4.553,
+          "+6%",
           "中小企业与大型企业支付、融资服务"
         ],
         [
           "国际卡服务",
-          3.619,
-          "+12%",
+          3.682,
+          "+10%",
           "美国以外个人及商业卡业务"
         ],
         [
           "全球商户与网络服务",
-          2.096,
-          "+8%",
+          2.082,
+          "+6%",
           "商户收单、处理及网络合作"
         ]
       ],
       "submetrics": [
         [
           "公司总收入（扣除利息支出）",
-          "+10%",
-          "$19.637B，对比2025 Q2的$17.856B；四个经营分部合计另有公司层抵销"
+          "+9%",
+          "$20.062B，对比2025 Q3的$18.426B；四个经营分部合计另有公司层抵销"
         ],
         [
           "持卡人消费额",
-          "+9%",
-          "交易规模指标，对比2025 Q2；不是收入分部"
+          "+8%",
+          "交易规模指标，$454.0B，对比2025 Q3；不是收入分部"
         ]
       ],
-      "fiscalPeriodEnd": "2026-06-30",
-      "comparisonPeriod": "2026 Q2 vs 2025 Q2",
-      "manualUpdatedAt": "2026-07-24",
-      "reportedRevenue": 19.742
+      "fiscalPeriodEnd": "2026-09-30",
+      "comparisonPeriod": "2026 Q3 vs 2025 Q3",
+      "manualUpdatedAt": "2026-10-30",
+      "reportedRevenue": 20.157
     }
   },
   "submetricParents": {
@@ -796,7 +789,7 @@
       "AI云、工业与企业": "AI数据中心"
     },
     "MSFT": {
-      "Azure及其他云服务": "云业务（Intelligent Cloud）"
+      "Azure": "智能体与基础设施（Agents and Infra）"
     },
     "GOOGL": {
       "搜索及其他": "Google Services",
