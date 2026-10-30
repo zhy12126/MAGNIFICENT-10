@@ -2,13 +2,19 @@ name: Refresh company fundamentals
 
 on:
   workflow_dispatch:
+    inputs:
+      tickers:
+        description: Optional comma-separated Alpha Vantage ticker group (default is the Sunday group)
+        required: false
   schedule:
     # Weekly filing check: Sunday 01:15 UTC = Sunday 10:15 Asia/Japan.
+    # Ten companies = 20 Alpha Vantage calls; US history backfill uses free SEC data.
     - cron: '15 01 * * 0'
-    # Expanded-company group runs Monday to stay within Alpha Vantage's daily quota.
+    # Monday group includes TSM so its Alpha Vantage history rebuild (3 calls)
+    # can run on the same day: 7 companies = 14 calls + 3 = 17 calls.
     - cron: '15 01 * * 1'
-    # Tuesday backfill: rebuild history for any filings detected on Sunday/Monday.
-    # This is separated to avoid exceeding Alpha Vantage's 30 calls/day rate limit.
+    # Tuesday catch-up: no new filings are fetched; any company whose valuation
+    # history is still behind its company model (e.g. an SEC timeout) is retried.
     - cron: '15 02 * * 2'
 
 permissions:
@@ -30,7 +36,6 @@ jobs:
         run: python -m pip install --disable-pip-version-check yfinance
       - name: Record current fiscal periods
         id: before
-        if: github.event.schedule != '15 02 * * 2'
         run: |
           python - <<'PY' >> "$GITHUB_OUTPUT"
           import json
@@ -42,7 +47,7 @@ jobs:
         run: python scripts/fetch_fundamentals.py
         env:
           ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
-          FUNDAMENTAL_TICKERS: ${{ github.event.schedule == '15 01 * * 1' && 'NFLX,MCD,PLTR,LLY,ORCL,AXP' || 'NVDA,AAPL,MSFT,GOOGL,AMZN,META,TSLA,TSM,MU,AVGO,AMD' }}
+          FUNDAMENTAL_TICKERS: ${{ inputs.tickers || (github.event.schedule == '15 01 * * 1' && 'TSM,NFLX,MCD,PLTR,LLY,ORCL,AXP' || 'NVDA,AAPL,MSFT,GOOGL,AMZN,META,TSLA,MU,AVGO,AMD') }}
         continue-on-error: true
       - name: Add SEC net-cash valuation adjustments
         if: github.event.schedule != '15 02 * * 2'
@@ -55,18 +60,35 @@ jobs:
       - name: Refresh SKHY from its separate K-IFRS path
         if: github.event.schedule != '15 02 * * 2'
         run: python scripts/fetch_skhy_fundamentals.py
-      - name: Detect newly available fiscal periods
+      - name: Detect filings that the valuation history has not caught up with
         id: changed
-        if: always()
         env:
           BEFORE_PERIODS: ${{ steps.before.outputs.periods }}
         run: |
           python - <<'PY' >> "$GITHUB_OUTPUT"
           import json, os
+          from datetime import date
+          def quarter(value):
+              try:
+                  parsed=date.fromisoformat(str(value))
+              except (TypeError, ValueError):
+                  return None
+              return parsed.year, (parsed.month - 1) // 3 + 1
           before=json.loads(os.environ.get('BEFORE_PERIODS', '{}') or '{}')
           data=json.load(open('outputs/data/fundamentals.json', encoding='utf-8'))
           after={k:v.get('fiscalPeriodEnd') for k,v in data.get('companies',{}).items()}
-          changed=sorted(k for k,v in after.items() if v and before.get(k) != v)
+          changed={k for k,v in after.items() if v and before.get(k) != v}
+          # Same rule as validate_valuation_consistency.py: a company model newer
+          # than the snapshot's TTM period still needs its history rebuilt, even
+          # when that filing was fetched by an earlier (failed) run.
+          stocks=json.load(open('outputs/data/stocks.json', encoding='utf-8')).get('stocks', [])
+          for stock in stocks:
+              model=stock.get('valuationModel') or {}
+              model_quarter=quarter(model.get('fiscalPeriodEndActual') or model.get('fiscalPeriodEnd'))
+              valuation_quarter=quarter(stock.get('ttmPeriodEnd'))
+              if model_quarter and valuation_quarter and valuation_quarter < model_quarter:
+                  changed.add(stock['ticker'])
+          changed=sorted(changed)
           print('filings_changed=' + ('true' if changed else 'false'))
           print('tickers=' + ','.join(changed))
           print('us_tickers=' + ','.join(k for k in changed if k not in {'TSM','SKHY'}))
@@ -78,19 +100,19 @@ jobs:
         if: github.event.schedule != '15 02 * * 2'
         run: python scripts/validate_fundamentals.py
       - name: Backfill US valuation history after a new filing
-        if: steps.changed.outputs.us_changed == 'true' && github.event.schedule != '15 01 * * 0'
+        if: steps.changed.outputs.us_changed == 'true'
         env:
           SEC_EDGAR_USER_AGENT: ${{ secrets.SEC_EDGAR_USER_AGENT }}
           HISTORY_TICKERS: ${{ steps.changed.outputs.us_tickers }}
         run: python scripts/fetch_free_valuation_history.py
       - name: Rebuild TSM history after a new filing
-        if: steps.changed.outputs.tsm_changed == 'true' && github.event.schedule != '15 01 * * 0'
+        if: steps.changed.outputs.tsm_changed == 'true'
         env:
           ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
           REBUILD_TICKERS: TSM
         run: python scripts/rebuild_selected_history.py
       - name: Rebuild separate SKHY history after a new filing
-        if: steps.changed.outputs.skhy_changed == 'true' && github.event.schedule != '15 01 * * 0'
+        if: steps.changed.outputs.skhy_changed == 'true'
         run: python scripts/fetch_skhy_history.py
       - name: Align the latest market snapshot after history changes
         if: steps.changed.outputs.filings_changed == 'true'

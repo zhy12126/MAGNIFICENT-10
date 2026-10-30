@@ -14,6 +14,7 @@ import re
 import time
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+from urllib.error import URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
@@ -84,13 +85,24 @@ def fetch_sec(cik):
         # and SEC otherwise returns normal JSON that json.load can parse.
         headers={"User-Agent": SEC_USER_AGENT},
     )
-    with urlopen(request, timeout=45) as response:
-        return json.load(response)
+    return sec_with_retry(request)
 
 
 def fetch_sec_json(url):
-    with urlopen(Request(url, headers={"User-Agent": SEC_USER_AGENT}), timeout=45) as response:
-        return json.load(response)
+    return sec_with_retry(Request(url, headers={"User-Agent": SEC_USER_AGENT}))
+
+
+def sec_with_retry(request, attempts=3):
+    # SEC occasionally times out from GitHub runners; a short retry avoids
+    # losing the whole weekly filing run to one slow response.
+    for attempt in range(attempts):
+        try:
+            with urlopen(request, timeout=45) as response:
+                return json.load(response)
+        except (URLError, TimeoutError):
+            if attempt == attempts - 1:
+                raise
+            time.sleep(10 * (attempt + 1))
 
 
 def augment_latest_inline_filing(cik, company_facts):
