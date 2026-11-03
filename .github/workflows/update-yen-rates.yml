@@ -32,7 +32,10 @@ jobs:
       - name: Fetch central bank policy-rate histories
         run: python scripts/fetch_policy_rates.py
       - name: Fetch official government bond yield curves
+        # On failure the script keeps the previous bond-yields.json; do not let
+        # a stalled bond source block the FX, calendar and policy-rate commit.
         run: python scripts/fetch_bond_yields.py
+        continue-on-error: true
       - name: Commit yen snapshots
         run: |
           git config user.name "github-actions[bot]"

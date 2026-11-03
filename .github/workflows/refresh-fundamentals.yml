@@ -66,7 +66,7 @@ jobs:
           BEFORE_PERIODS: ${{ steps.before.outputs.periods }}
         run: |
           python - <<'PY' >> "$GITHUB_OUTPUT"
-          import json, os
+          import json, os, sys
           from datetime import date
           def quarter(value):
               try:
@@ -77,10 +77,12 @@ jobs:
           before=json.loads(os.environ.get('BEFORE_PERIODS', '{}') or '{}')
           data=json.load(open('outputs/data/fundamentals.json', encoding='utf-8'))
           after={k:v.get('fiscalPeriodEnd') for k,v in data.get('companies',{}).items()}
-          changed={k for k,v in after.items() if v and before.get(k) != v}
-          # Same rule as validate_valuation_consistency.py: a company model newer
-          # than the snapshot's TTM period still needs its history rebuilt, even
-          # when that filing was fetched by an earlier (failed) run.
+          print('model_changed=' + ','.join(sorted(k for k,v in after.items() if v and before.get(k) != v)), file=sys.stderr)
+          # Same rule as validate_valuation_consistency.py: only a company model
+          # newer than the snapshot's TTM period needs its history rebuilt. This
+          # also catches filings fetched by an earlier (failed) run, and skips
+          # models whose history already reached that quarter.
+          changed=set()
           stocks=json.load(open('outputs/data/stocks.json', encoding='utf-8')).get('stocks', [])
           for stock in stocks:
               model=stock.get('valuationModel') or {}

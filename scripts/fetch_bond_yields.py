@@ -34,7 +34,9 @@ def fetch(url, post=False):
         context = ssl.create_default_context(cafile=certifi.where())
     except ImportError:
         context = ssl.create_default_context()
-    for attempt in range(2):
+    # ChinaBond intermittently stalls from GitHub runners; back off before retrying.
+    attempts = 3
+    for attempt in range(attempts):
         try:
             request = Request(url, data=b'' if post else None, headers={
                 'User-Agent': 'HY-Tools/1.0 (public government yield research)'})
@@ -43,9 +45,9 @@ def fetch(url, post=False):
                 encoding = 'cp932' if url.startswith(JP_BASE) else 'utf-8-sig'
                 return response.read().decode(encoding)
         except Exception:
-            if attempt:
+            if attempt == attempts - 1:
                 raise
-            time.sleep(1)
+            time.sleep(15 * (attempt + 1))
 
 
 def quote(raw):

@@ -92,13 +92,13 @@ def fetch_sec_json(url):
     return sec_with_retry(Request(url, headers={"User-Agent": SEC_USER_AGENT}))
 
 
-def sec_with_retry(request, attempts=3):
+def sec_with_retry(request, attempts=3, parse=True):
     # SEC occasionally times out from GitHub runners; a short retry avoids
     # losing the whole weekly filing run to one slow response.
     for attempt in range(attempts):
         try:
             with urlopen(request, timeout=45) as response:
-                return json.load(response)
+                return json.load(response) if parse else response.read().decode("utf-8", errors="replace")
         except (URLError, TimeoutError):
             if attempt == attempts - 1:
                 raise
@@ -128,9 +128,7 @@ def augment_latest_inline_filing(cik, company_facts):
     if newest_fact_end and newest_fact_end >= latest["report"]:
         return company_facts
     url = f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/{latest['accession']}/{latest['document']}"
-    request = Request(url, headers={"User-Agent": SEC_USER_AGENT})
-    with urlopen(request, timeout=45) as response:
-        document = response.read().decode("utf-8", errors="replace")
+    document = sec_with_retry(Request(url, headers={"User-Agent": SEC_USER_AGENT}), parse=False)
     contexts = {}
     for match in re.finditer(r'<(?:xbrli:)?context\b[^>]*\bid=["\']([^"\']+)["\'][^>]*>(.*?)</(?:xbrli:)?context>', document, re.I | re.S):
         body = match.group(2)
