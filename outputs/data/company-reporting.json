@@ -659,40 +659,40 @@
       "reportedRevenue": 1.935
     },
     "LLY": {
-      "period": "2026 Q2 vs 2025 Q2",
-      "issued": "2026-08-05",
-      "source": "Eli Lilly 2026 Q2财报",
+      "period": "2026 Q3 vs 2025 Q3",
+      "issued": "2026-10-29",
+      "source": "Eli Lilly 2026 Q3财报",
       "segments": [
         [
           "Mounjaro",
-          9.94,
-          "+91%",
+          10.723,
+          "+65%",
           "糖尿病适应症的替尔泊肽"
         ],
         [
           "Zepbound",
-          4.93,
-          "+44%",
+          5.352,
+          "+49%",
           "肥胖及体重管理适应症的替尔泊肽"
         ],
         [
           "其他药品及收入",
-          8.1,
-          "约+16%",
-          "Verzenio、Jardiance、Trulicity、Taltz、Kisunla及其他"
+          8.322,
+          "约+11%",
+          "Verzenio、Jardiance、Trulicity、Taltz、Kisunla及其他；含约$0.41B Jardiance里程碑收入"
         ]
       ],
       "submetrics": [
         [
           "公司总收入",
-          "+48%",
-          "$22.97B，对比2025 Q2的$15.56B"
+          "+39%",
+          "$24.397B，对比2025 Q3的$17.601B；含约$0.9B里程碑及返利估计调整等一次性收益"
         ]
       ],
-      "fiscalPeriodEnd": "2026-06-30",
-      "comparisonPeriod": "2026 Q2 vs 2025 Q2",
-      "manualUpdatedAt": "2026-08-05",
-      "reportedRevenue": 22.97
+      "fiscalPeriodEnd": "2026-09-30",
+      "comparisonPeriod": "2026 Q3 vs 2025 Q3",
+      "manualUpdatedAt": "2026-11-03",
+      "reportedRevenue": 24.397
     },
     "ORCL": {
       "period": "FY2027 Q1 vs FY2026 Q1",
