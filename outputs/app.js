@@ -259,26 +259,70 @@ const referenceFcfRate = (s, m) => {
   const rate = Number(m.displayFcfRate ?? (special ? special.scenarios[1][1] : cycleReady ? m.fcfMarginCycleMedian : m.normalizedFcfMargin));
   return Number.isFinite(rate) && rate >= .03 ? rate : null;
 };
-function currentPriceRequiredGrowth(s, m) {
+function currentPriceRequiredGrowth(s, m, rateOverride = null) {
   if (m.modelApplicability === 'not-applicable-financial') return null;
-  const marketCap = marketCapNumber(s.cap), revenue = Number(m.revenueTTM), fcfRate = referenceFcfRate(s,m), cost = Number(m.costOfEquity), terminal = Number(m.terminalGrowth), adjustment = Number(m.equityValueAdjustmentUsd) || 0, years = Math.max(1,Math.min(20,Math.round(Number(m.forecastYears)||5))), target = marketCap - adjustment;
-  if (![marketCap,revenue,fcfRate,cost,terminal,target].every(Number.isFinite) || target <= 0 || cost <= terminal) return null;
+  const marketCap = marketCapNumber(s.cap), revenue = Number(m.revenueTTM), fcfRate = rateOverride ?? referenceFcfRate(s,m), cost = Number(m.costOfEquity), terminal = Number(m.terminalGrowth), adjustment = Number(m.equityValueAdjustmentUsd) || 0, years = Math.max(1,Math.min(20,Math.round(Number(m.forecastYears)||5))), target = marketCap - adjustment;
+  if (![marketCap,revenue,fcfRate,cost,terminal,target].every(Number.isFinite) || fcfRate < .03 || target <= 0 || cost <= terminal) return null;
   const value = growth => { let total=0, forecast=revenue; for(let year=1;year<=years;year++){forecast*=1+growth;total+=forecast*fcfRate/(1+cost)**year} total+=forecast*fcfRate*(1+terminal)/(cost-terminal)/(1+cost)**years; return total };
-  let low=-.30,high=1.50; for(let i=0;i<64;i++){const mid=(low+high)/2;if(value(mid)<target)low=mid;else high=mid}
-  return value(high)>=target ? high : null;
+  let low=-.30,high=1.50; if(value(high)<target) return Infinity; if(value(low)>=target) return -Infinity;
+  for(let i=0;i<64;i++){const mid=(low+high)/2;if(value(mid)<target)low=mid;else high=mid}
+  return high;
+}
+const requiredGrowthLabel = growth => growth===Infinity?'>150%':growth===-Infinity?'<−30%':Number.isFinite(growth)?`${(growth*100).toFixed(0)}%`:'—';
+const usdCompact = value => value>=1e12?`$${(value/1e12).toFixed(2)}T`:`$${(value/1e9).toFixed(value>=1e11?0:1)}B`;
+const signedPercent = value => `${value>=0?'+':'−'}${Math.abs(value*100).toFixed(0)}%`;
+const modelForecastYears = m => Math.max(1,Math.min(20,Math.round(Number(m.forecastYears)||5)));
+const revenueMultipleNote = (m, growth) => { if(!Number.isFinite(growth)) return ''; const years=modelForecastYears(m), multiple=(1+growth)**years; return `${years}年后收入为现在的 ${multiple.toFixed(1)} 倍（${usdCompact(Number(m.revenueTTM)*multiple)}）` };
+// Reported growth over the same 12-month horizon as the consensus card; falls
+// back to the latest-quarter snapshot until the filing-based inputs exist.
+const reportedGrowthInfo = (s, m) => {
+  const ttm=Number(m.revenueTTM), prior=Number(m.revenueTTMPriorYear), quarter=reportedQuarterLabel(s);
+  if(ttm>0&&prior>0){const latest=Number(m.revenueLatestQuarter),latestPrior=Number(m.revenueLatestQuarterPriorYear),quarterNote=latest>0&&latestPrior>0?` · 最近一季（${quarter}）${signedPercent(latest/latestPrior-1)}`:'';return {label:'近12个月实际增长',short:'近12个月实际增速',value:ttm/prior-1,text:signedPercent(ttm/prior-1),note:`TTM收入 ${usdCompact(ttm)}，对比一年前 ${usdCompact(prior)}${quarterNote}`}}
+  const parsed=Number.parseFloat(String(s.growth||'').replace('−','-'));
+  return {label:'最近一季实际增长',short:'最近一季实际增速',value:Number.isFinite(parsed)?parsed/100:null,text:s.growth||'—',note:`${quarter}已披露财报 · 对比去年同期收入`};
+};
+const consensusGrowthInfo = m => {
+  const consensus=m.analystConsensus, growth=Number(consensus?.next12MonthGrowth);
+  if(!consensus||consensus.suspectFiscalYearLabel||!Number.isFinite(growth)) return null;
+  const years=(consensus.estimates||[]).map(row=>`${String(row.periodEnd).slice(0,7)} ${usdCompact(Number(row.revenue))}`).join('、');
+  return {value:growth,text:signedPercent(growth),note:`未来12个月收入增速 · 按财年一致预期（${years}）推算${consensus.analystCount?` · ${consensus.analystCount}位分析师`:''} · 更新于 ${String(consensus.updatedAt||'').slice(0,10)}`};
+};
+// The same price implies very different growth depending on the cash margin
+// assumed, so show the reported margins side by side instead of one number.
+const defaultFcfRate = (s, m) => referenceFcfRate(s,{...m,displayFcfRate:undefined});
+function fcfRateScenarioTable(s, m) {
+  if (m.modelApplicability === 'not-applicable-financial') return '';
+  const special=SPECIAL_VALUATION_SCENARIOS[s.ticker],cycleReady=CYCLE_SCENARIO_TICKERS.has(s.ticker)&&Number(m.fcfMarginCycleYears)>=5,years=modelForecastYears(m);
+  const candidates=[['TTM实际现金流率',Number(m.fcfMarginTTM)],[special?'公司级正常化假设（默认）':cycleReady?`${Number(m.fcfMarginCycleYears)}年周期中位数（默认）`:'TTM与近3年加权（默认）',defaultFcfRate(s,m)],['近3年中位数',Number(m.fcfMargin3yMedian)]];
+  const rows=candidates.filter(([,rate],index)=>Number.isFinite(rate)&&!candidates.slice(0,index).some(([,other])=>Math.abs(other-rate)<.005));
+  if(rows.length<2) return '';
+  const body=rows.map(([label,rate])=>{const growth=currentPriceRequiredGrowth(s,m,rate),usable=rate>=.03;return `<div><span>${label}</span><b>${(rate*100).toFixed(1)}%</b><data>${usable?requiredGrowthLabel(growth):'—'}</data><small>${usable?(revenueMultipleNote(m,growth)||(growth===Infinity?'超出模型上限':growth===-Infinity?'低于模型下限':'')):'现金流率低于3%，无法反推'}</small></div>`}).join('');
+  return `<h4>同一价格，不同现金流率假设下需要的增长</h4><div class="growth-rate-head" aria-hidden="true"><span>现金流率口径</span><b>FCF率</b><data>需要的年化增长</data><small>对应的${years}年后收入</small></div>${body}`;
+}
+function simpleGrowthSummary(s, m) {
+  const required=currentPriceRequiredGrowth(s,m),fcfRate=referenceFcfRate(s,m),years=modelForecastYears(m),actual=reportedGrowthInfo(s,m),consensus=consensusGrowthInfo(m);
+  const note=fcfRate===null?'缺少可持续的公司级FCF率':`未来${years}年年化收入增速 · 假设FCF率 ${(fcfRate*100).toFixed(1)}%${Number.isFinite(required)?` · ${revenueMultipleNote(m,required)}`:''}`;
+  const compare=(value,label)=>Number.isFinite(value)?`比${label}${required>=value?'高':'低'} ${Math.abs((required-value)*100).toFixed(0)} 个百分点`:'';
+  const parts=Number.isFinite(required)?[compare(actual.value,actual.short),compare(consensus?.value,'分析师未来12个月预期')].filter(Boolean):[];
+  return {label:requiredGrowthLabel(required),note,gap:parts.length?`价格要求的年化增速${parts.join('，')}。`:''};
 }
 function simpleGrowthCards(s,m) {
-  const required=currentPriceRequiredGrowth(s,m),fcfRate=referenceFcfRate(s,m),analystExpectation=ANALYST_REVENUE_EXPECTATIONS[s.ticker],guidance=COMPANY_REVENUE_GUIDANCE[s.ticker],forwardReference=analystExpectation||guidance;
-  const forecastYears=Math.max(1,Math.min(20,Math.round(Number(m.forecastYears)||5))),requiredValue=Number.isFinite(required)?`${(required*100).toFixed(0)}%`:'—', requiredNote=m.modelApplicability==='not-applicable-financial'?'金融公司不适用收入FCF反推':fcfRate===null?'缺少可持续的公司级FCF率':`未来${forecastYears}年收入CAGR；关键条件可在下方编辑`;
-  const forwardLabel=analystExpectation?'分析师收入预期':'公司财报指引',guidanceValue=forwardReference?.value||'',guidanceNote=analystExpectation?`${analystExpectation.period} · ${analystExpectation.source}，更新于 ${analystExpectation.updated}`:guidance?`${guidance.period} · 财报发布于 ${guidance.issued}`:'';
-  const hasForwardValue=Boolean(forwardReference)&&!['','未提供','未量化','—','-'].includes(String(guidanceValue).trim());
-  const forwardCard=hasForwardValue?`<div><span>${forwardLabel}</span><b>${guidanceValue}</b><small>${guidanceNote}</small></div>`:'';
-  const quarter=reportedQuarterLabel(s),actual=s.growth||'—';
+  const analystOverride=ANALYST_REVENUE_EXPECTATIONS[s.ticker],guidance=COMPANY_REVENUE_GUIDANCE[s.ticker],actual=reportedGrowthInfo(s,m),consensus=consensusGrowthInfo(m),hasValue=value=>!['','未提供','未量化','—','-'].includes(String(value||'').trim());
+  const actualCard=`<div><span>${actual.label}</span><b>${actual.text}</b><small>${actual.note}</small></div>`;
+  const analystCard=analystOverride&&hasValue(analystOverride.value)?`<div><span>分析师收入预期</span><b>${analystOverride.value}</b><small>${analystOverride.period} · ${analystOverride.source}，更新于 ${analystOverride.updated}</small></div>`:consensus?`<div><span>分析师一致预期</span><b>${consensus.text}</b><small>${consensus.note}</small></div>`:'';
+  const guidanceCard=guidance&&hasValue(guidance.value)?`<div><span>公司财报指引</span><b>${guidance.value}</b><small>${guidance.period} · 财报发布于 ${guidance.issued}</small></div>`:'';
+  if (m.modelApplicability==='not-applicable-financial') {
+    const f=m.financialValuationModel||{},book=Number(f.commonEquityUsd),income=Number(m.netIncomeTTM),cap=marketCapNumber(s.cap),ready=book>0&&Number.isFinite(income)&&Number.isFinite(cap);
+    const bookCards=ready?`<div class="baseline-primary"><span>当前市净率（P/B）</span><b>${(cap/book).toFixed(1)}x</b><small>金融公司按账面价值与ROE衡量，不适用收入—FCF反推 · 普通股权益截至 ${f.periodEnd||m.fiscalPeriodEnd}</small></div><div><span>TTM净资产收益率（ROE）</span><b>${(income/book*100).toFixed(0)}%</b><small>TTM净利润 ${usdCompact(income)} ÷ 普通股权益 ${usdCompact(book)}</small></div>`:`<div class="baseline-primary"><span>当前价格要求的增长</span><b>—</b><small>金融公司不适用收入—FCF反推</small></div>`;
+    return `<div class="model-head simple-growth-head"><div><p class="eyebrow">PRICE &amp; GROWTH CHECK</p><h3>价格与增长对照</h3></div><div class="growth-compare growth-scenarios simple-growth-cards">${bookCards}${actualCard}${analystCard}${guidanceCard}</div></div>`;
+  }
+  const summary=simpleGrowthSummary(s,m),fcfRate=referenceFcfRate(s,m),forecastYears=modelForecastYears(m);
   const ttmFcf=Number(m.fcfMarginTTM),median3y=Number(m.fcfMargin3yMedian),weight=Number(m.ttmWeight),cycleReady=CYCLE_SCENARIO_TICKERS.has(s.ticker)&&Number(m.fcfMarginCycleYears)>=5,fcfDefaultSource=SPECIAL_VALUATION_SCENARIOS[s.ticker]?'默认：公司级正常化假设':cycleReady?'默认：5–7年周期中位数':'默认：TTM与近3年中位数';
   const fcfMethod=SPECIAL_VALUATION_SCENARIOS[s.ticker]?`实际值：TTM ${(ttmFcf*100).toFixed(1)}%，近3年中位数 ${(median3y*100).toFixed(1)}%。默认算法：根据该公司现金流正常化情景单独设为 ${(fcfRate*100).toFixed(1)}%，属于模型假设，不是财报指引。`:cycleReady?`实际值：TTM ${(ttmFcf*100).toFixed(1)}%，近3年中位数 ${(median3y*100).toFixed(1)}%，${Number(m.fcfMarginCycleYears)}年周期中位数 ${(Number(m.fcfMarginCycleMedian)*100).toFixed(1)}%。默认算法：采用完整周期中位数，即 ${(fcfRate*100).toFixed(1)}%。`:`实际值：TTM ${(ttmFcf*100).toFixed(1)}%，近3年中位数 ${(median3y*100).toFixed(1)}%。默认算法：TTM × ${(weight*100).toFixed(0)}% + 三年中位数 × ${((1-weight)*100).toFixed(0)}% = ${(fcfRate*100).toFixed(1)}%。`;
-  const growthFormula=m.modelApplicability==='not-applicable-financial'?'金融公司不使用这套收入—FCF反推公式。':`计算公式：第 t 年收入 = TTM收入 × (1 + g)^t；第 t 年FCF = 第 t 年收入 × 假设FCF率；终值 = 第 ${forecastYears} 年FCF × (1 + 永续增长率) ÷ (权益成本 − 永续增长率)；企业经营价值 = 各年FCF现值 + 终值现值；再加净现金等权益调整，与当前市值相等时反解 g。`;
-  const controls=m.modelApplicability==='not-applicable-financial'?'':`<div class="simple-growth-controls"><label><span>假设FCF率<small class="control-source">${fcfDefaultSource}</small></span><span><input type="number" inputmode="decimal" data-model-input="displayFcfRate" value="${(fcfRate*100).toFixed(1)}" min="3" max="80" step="0.1"><small>%</small></span></label><label><span>Beta<small class="control-source">CAPM风险参数</small></span><span><input type="number" inputmode="decimal" data-model-input="beta" value="${Number(m.beta).toFixed(2)}" min="0" max="5" step="0.01"></span></label><label><span>权益成本<small class="control-source">修改Beta时自动重算</small></span><span><input type="number" inputmode="decimal" data-model-input="costOfEquity" value="${(Number(m.costOfEquity)*100).toFixed(1)}" min="1" max="30" step="0.1"><small>%</small></span></label><label><span>永续增长</span><span><input type="number" inputmode="decimal" data-model-input="terminalGrowth" value="${(Number(m.terminalGrowth)*100).toFixed(1)}" min="0" max="6" step="0.1"><small>%</small></span></label><label><span>预测年限</span><span><input type="number" inputmode="numeric" data-model-input="forecastYears" value="${forecastYears}" min="1" max="20" step="1"><small>年</small></span></label></div><p class="fcf-method-note">CAPM：权益成本 = 无风险利率 ${(Number(m.riskFreeRate)*100).toFixed(2)}% + Beta <span id="capm-beta-value">${Number(m.beta).toFixed(2)}</span> × 股权风险溢价 ${(Number(m.equityRiskPremium)*100).toFixed(2)}%。权益成本仍可直接覆盖。</p>`;
-  return `<div class="model-head simple-growth-head"><div><p class="eyebrow">PRICE &amp; GROWTH CHECK</p><h3>价格与增长对照</h3></div><div class="growth-compare growth-scenarios simple-growth-cards"><div class="baseline-primary"><span>当前价格要求的增长</span><b id="simple-required-growth">${requiredValue}</b><small id="simple-required-note">${requiredNote}</small></div>${forwardCard}<div><span>当前季度增长</span><b>${actual}</b><small>${quarter}已披露财报 · 对比去年同期收入</small></div></div></div>${controls}${m.modelApplicability==='not-applicable-financial'?'':`<p class="fcf-method-note">${fcfMethod}</p>`}<p class="model-formula-note">${growthFormula}</p>`;
+  const growthFormula=`计算公式：第 t 年收入 = TTM收入 × (1 + g)^t；第 t 年FCF = 第 t 年收入 × 假设FCF率；终值 = 第 ${forecastYears} 年FCF × (1 + 永续增长率) ÷ (权益成本 − 永续增长率)；企业经营价值 = 各年FCF现值 + 终值现值；再加净现金等权益调整，与当前市值相等时反解 g。`;
+  const capm=`CAPM：权益成本 = 无风险利率 ${(Number(m.riskFreeRate)*100).toFixed(2)}% + Beta <span id="capm-beta-value">${Number(m.beta).toFixed(2)}</span> × 股权风险溢价 ${(Number(m.equityRiskPremium)*100).toFixed(2)}%。权益成本仍可直接覆盖。`;
+  const controls=`<div class="simple-growth-controls"><label><span>假设FCF率<small class="control-source">${fcfDefaultSource}</small></span><span><input type="number" inputmode="decimal" data-model-input="displayFcfRate" value="${(fcfRate*100).toFixed(1)}" min="3" max="80" step="0.1"><small>%</small></span></label><label><span>Beta<small class="control-source">CAPM风险参数</small></span><span><input type="number" inputmode="decimal" data-model-input="beta" value="${Number(m.beta).toFixed(2)}" min="0" max="5" step="0.01"></span></label><label><span>权益成本<small class="control-source">修改Beta时自动重算</small></span><span><input type="number" inputmode="decimal" data-model-input="costOfEquity" value="${(Number(m.costOfEquity)*100).toFixed(1)}" min="1" max="30" step="0.1"><small>%</small></span></label><label><span>永续增长</span><span><input type="number" inputmode="decimal" data-model-input="terminalGrowth" value="${(Number(m.terminalGrowth)*100).toFixed(1)}" min="0" max="6" step="0.1"><small>%</small></span></label><label><span>预测年限</span><span><input type="number" inputmode="numeric" data-model-input="forecastYears" value="${forecastYears}" min="1" max="20" step="1"><small>年</small></span></label></div>`;
+  return `<div class="model-head simple-growth-head"><div><p class="eyebrow">PRICE &amp; GROWTH CHECK</p><h3>价格与增长对照</h3></div><div class="growth-compare growth-scenarios simple-growth-cards"><div class="baseline-primary"><span>当前价格要求的增长</span><b id="simple-required-growth">${summary.label}</b><small id="simple-required-note">${summary.note}</small></div>${actualCard}${analystCard}${guidanceCard}</div></div><p class="growth-gap-note" id="simple-gap-note">${summary.gap}</p><div class="growth-rate-table" id="simple-rate-table">${fcfRateScenarioTable(s,m)}</div>${controls}<details class="model-notes"><summary>计算说明与公式</summary><p class="fcf-method-note">${capm}</p><p class="fcf-method-note">${fcfMethod}</p><p class="model-formula-note">${growthFormula}</p></details>`;
 }
 function modelInputs(s) {
   const m = modelForStock(s), ready = m?.status === 'ready';
@@ -327,7 +371,7 @@ function updateModelGrowthPreview() {
   const m = modelForStock(s), values = {}; container.querySelectorAll('[data-model-input]').forEach(input => { const n = Number(input.value), key=input.dataset.modelInput; if (Number.isFinite(n)) values[key] = key === 'beta' || key === 'forecastYears' ? n : n / 100 });
   Object.assign(m, values);
   const simpleRequired=container.querySelector('#simple-required-growth'),simpleNote=container.querySelector('#simple-required-note');
-  if(simpleRequired){const required=currentPriceRequiredGrowth(s,m),years=Math.max(1,Math.min(20,Math.round(Number(m.forecastYears)||5)));simpleRequired.textContent=Number.isFinite(required)?`${(required*100).toFixed(0)}%`:'—';if(simpleNote)simpleNote.textContent=m.modelApplicability==='not-applicable-financial'?'金融公司不适用收入FCF反推':referenceFcfRate(s,m)===null?'缺少可持续的公司级FCF率':`未来${years}年收入CAGR；关键条件可在下方编辑`;return}
+  if(simpleRequired){const summary=simpleGrowthSummary(s,m),gap=container.querySelector('#simple-gap-note'),table=container.querySelector('#simple-rate-table');simpleRequired.textContent=summary.label;if(simpleNote)simpleNote.textContent=summary.note;if(gap)gap.textContent=summary.gap;if(table)table.innerHTML=fcfRateScenarioTable(s,m);return}
   const current = container.querySelector('#scenario-current-growth'), normalized = container.querySelector('#scenario-normalized-growth'), cycle = container.querySelector('#scenario-cycle-growth'), baseline = container.querySelector('#model-required-growth'), sensitivity = container.querySelector('#model-growth-sensitivity');
   const referenceGrowth = analystGrowthInfo(m,REFERENCE_GROWTH[s.ticker]??.12,s.ticker).growth;
   if (current) current.textContent = priceLabel(scenarioModelPrice(s,m,referenceGrowth,m.fcfMarginTTM));
@@ -648,15 +692,10 @@ new MutationObserver(refreshInsightDisclosure).observe(document.querySelector('#
 
 // Detail-page growth metrics use the most recently reported quarter from the
 // Alpha Vantage company overview, not a forward-estimate proxy.
-const REPORTED_FISCAL_QUARTERS={
-  NVDA:{'2026-04-26':'FY2027 Q1','2026-04-30':'FY2027 Q1','2026-07-26':'FY2027 Q2','2026-07-31':'FY2027 Q2'},
-  AAPL:{'2026-06-27':'FY2026 Q3'},
-  MSFT:{'2026-06-30':'FY2026 Q4'},
-  MU:{'2026-05-28':'FY2026 Q3'},
-  AVGO:{'2026-05-03':'FY2026 Q2','2026-04-30':'FY2026 Q2'},
-  ORCL:{'2026-05-31':'FY2026 Q4'}
-};
-const reportedQuarterLabel = stock => { const raw = stock?.ttmPeriodEnd || stock?.valuationModel?.fiscalPeriodEnd; if (!raw) return '最近已披露季度'; const fiscalLabel=REPORTED_FISCAL_QUARTERS[stock?.ticker]?.[raw]; if(fiscalLabel) return fiscalLabel; const date = new Date(`${raw}T00:00:00Z`); if (Number.isNaN(date.getTime())) return '最近已披露季度'; return `${date.getUTCFullYear()} Q${Math.floor(date.getUTCMonth() / 3) + 1}` };
+// Month in which each non-calendar fiscal year ends. 52/53-week calendars close
+// up to a week past month-end, so the period date is shifted back before use.
+const FISCAL_YEAR_END_MONTH={NVDA:1,AAPL:9,MSFT:6,MU:8,AVGO:10,ORCL:5};
+const reportedQuarterLabel = stock => { const raw = stock?.ttmPeriodEnd || stock?.valuationModel?.fiscalPeriodEnd; if (!raw) return '最近已披露季度'; const date = new Date(`${raw}T00:00:00Z`); if (Number.isNaN(date.getTime())) return '最近已披露季度'; const fiscalEnd=FISCAL_YEAR_END_MONTH[stock?.ticker]; if(!fiscalEnd) return `${date.getUTCFullYear()} Q${Math.floor(date.getUTCMonth() / 3) + 1}`; date.setUTCDate(date.getUTCDate()-7); const month=date.getUTCMonth()+1, quarter=Math.floor((((month-fiscalEnd-1)%12)+12)%12/3)+1; return `FY${date.getUTCFullYear()+(month>fiscalEnd?1:0)} Q${quarter}` };
 const comparableQuarterLabel = stock => { const current=reportedQuarterLabel(stock); if(current==='最近已披露季度') return current; const previous=current.replace(/(FY)?(\d{4})/,(_,fy,year)=>`${fy||''}${Number(year)-1}`); return `${current} vs ${previous}` };
 const refreshGrowthPanels = () => {
   const detail = document.querySelector('#detail');

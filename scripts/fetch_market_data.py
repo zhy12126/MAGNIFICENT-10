@@ -440,6 +440,13 @@ def peg_ratio(value):
         return "—"
     return f"{value:.2f}" if abs(value) < 0.1 else f"{value:.1f}"
 
+def percent(value):
+    """Whole-percent label; a tiny decline must not render as "-0%"."""
+    if value is None:
+        return "—"
+    label = f"{value * 100:.0f}%"
+    return "0%" if label == "-0%" else label
+
 def money(value):
     if value is None:
         return "—"
@@ -602,6 +609,11 @@ def main():
             updated_tickers.add(ticker)
             continue
         model = dict(fundamentals.get(ticker, {}))
+        # Prefer growth of the latest filed quarter over the snapshot
+        # provider's figure, which can lag a new filing by days.
+        latest_quarter, year_ago_quarter = number(model.get("revenueLatestQuarter")), number(model.get("revenueLatestQuarterPriorYear"))
+        if latest_quarter and year_ago_quarter:
+            revenue_growth = latest_quarter / year_ago_quarter - 1
         # All trailing multiples reuse the exact point-in-time financial
         # denominator used by the historical backfill. Finviz trailing values
         # are intentionally ignored; only forward/enterprise metrics remain.
@@ -638,9 +650,9 @@ def main():
             # forward PE.  The daily snapshot does not expose a reliable
             # company-level forward revenue consensus, so we leave
             # that field absent rather than presenting a proxy as an estimate.
-            "growth": "—" if revenue_growth is None else f"{revenue_growth * 100:.0f}%",
-            "revenueGrowthCurrent": "—" if revenue_growth is None else f"{revenue_growth * 100:.0f}%",
-            "epsGrowthCurrent": "—" if eps_growth is None else f"{eps_growth * 100:.0f}%",
+            "growth": percent(revenue_growth),
+            "revenueGrowthCurrent": percent(revenue_growth),
+            "epsGrowthCurrent": percent(eps_growth),
             "price": "—" if price is None else f"${price:,.2f}", "change": change,
             "valuationModel": model,
             "valuationAsOf": trade_date.isoformat(),

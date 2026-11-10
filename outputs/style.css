@@ -3215,3 +3215,19 @@ nav a:hover {
     grid-column: auto;
   }
 }
+
+/* Price & growth check: cards wrap, gap note, cash-margin table, folded notes */
+.simple-growth-cards{flex-wrap:wrap;justify-content:flex-end;min-width:0}
+.growth-gap-note{margin:12px 2px 0;font-size:12px;line-height:1.6;color:#4d5a53}
+.growth-gap-note:empty,.growth-rate-table:empty{display:none}
+.growth-rate-table{margin-top:12px;padding:12px 14px;border:1px solid #e2e8e4;border-radius:8px;background:#fafcfb}
+.growth-rate-table h4{margin:0 0 8px;font-size:12px;color:#37413d}
+.growth-rate-table>div{display:grid;grid-template-columns:minmax(0,1.3fr) 64px 120px minmax(0,1.7fr);align-items:baseline;gap:12px;padding:7px 0;border-top:1px solid #e9eeeb;font-size:12px;color:#56615c}
+.growth-rate-table>.growth-rate-head{border-top:0;padding-top:0}
+.growth-rate-table b{font:600 12px "DM Mono",monospace;color:#37413d;text-align:right}
+.growth-rate-table data{font:700 14px "DM Mono",monospace;color:#147851;text-align:right}
+.growth-rate-table small{font-size:11px;color:#8a918e}
+.growth-rate-head span,.growth-rate-head b,.growth-rate-head data,.growth-rate-head small{font:500 10px/1.2 Manrope,"Noto Sans SC",sans-serif;color:#929995}
+.model-notes{margin-top:12px}
+.model-notes summary{cursor:pointer;font-size:11px;font-weight:600;color:#3f7a63}
+@media(max-width:780px){.simple-growth-cards{justify-content:flex-start}.simple-growth-cards>div{flex:1 1 calc(50% - 6px);width:auto}.growth-rate-table>.growth-rate-head{display:none}.growth-rate-table>div{grid-template-columns:minmax(0,1fr) auto auto;gap:4px 10px}.growth-rate-table>div>small{grid-column:1/-1}.growth-rate-table>div>b::before{content:"FCF率 "}.growth-rate-table>div>data::before{content:"需增长 "}.growth-rate-table>div>b::before,.growth-rate-table>div>data::before{font:400 10px Manrope,"Noto Sans SC",sans-serif;color:#929995}}

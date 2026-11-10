@@ -1,6 +1,6 @@
 {
   "source": "Yahoo Finance EOD + point-in-time filing TTM; Finviz supplemental metrics",
-  "updatedAt": "2026-11-10T04:12:37Z",
+  "updatedAt": "2026-11-10T23:04:45Z",
   "sourceByTicker": {
     "NVDA": "Finviz",
     "AAPL": "Finviz",
@@ -28,19 +28,19 @@
       "logo": "N",
       "color": "#d5f4b4",
       "ink": "#55a62f",
-      "cap": "4.31T",
-      "pe": "22.6",
-      "fpe": "11.3",
+      "cap": "4.07T",
+      "pe": "21.4",
+      "fpe": "10.7",
       "peg": "0.2",
-      "ps": "14.4",
-      "pcf": "32.5",
-      "evEbitda": "21.1",
-      "implied": "41%",
+      "ps": "13.6",
+      "pcf": "30.7",
+      "evEbitda": "19.9",
+      "implied": "39%",
       "growth": "106%",
       "revenueGrowthCurrent": "106%",
       "epsGrowthCurrent": "128%",
-      "price": "$178.67",
-      "change": "-4.2703%",
+      "price": "$168.89",
+      "change": "-5.4738%",
       "valuationModel": {
         "status": "ready",
         "company": "NVIDIA",
@@ -66,37 +66,35 @@
         "displayScenarioTargetMargin": 0.46,
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-11-10T10:13:51.461358Z",
-          "revenueCagr": -0.8289217138699974,
+          "updatedAt": "2026-11-10T22:56:27.415279Z",
+          "basisPeriodEnd": "2026-07-31",
+          "revenueCagr": 0.7327452575607099,
+          "next12MonthGrowth": 0.7587840065596492,
+          "suspectFiscalYearLabel": false,
           "growthPath": [
-            -0.3,
-            1.0,
-            -0.3,
+            0.7587840065596492,
+            0.5658560043730995,
+            0.37292800218654976,
             0.18,
             0.14
           ],
-          "consensusYears": 3,
+          "consensusYears": 1,
           "farGrowth": {
             "year4": 0.18,
             "year5": 0.14,
             "basis": "company-specific"
           },
-          "analystCount": 42,
+          "analystCount": 54,
           "estimates": [
-            {
-              "periodEnd": "2026-10-31",
-              "revenue": 108976833310.0,
-              "analystCount": 45
-            },
             {
               "periodEnd": "2027-01-31",
               "revenue": 411653417250.0,
               "analystCount": 54
             },
             {
-              "periodEnd": "2027-01-31",
-              "revenue": 124482690590.0,
-              "analystCount": 42
+              "periodEnd": "2028-01-31",
+              "revenue": 692206374410.0,
+              "analystCount": 57
             }
           ]
         },
@@ -110,7 +108,7 @@
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null
       },
-      "valuationAsOf": "2026-11-09",
+      "valuationAsOf": "2026-11-10",
       "ttmPeriodEnd": "2026-07-26",
       "ttmAvailableFrom": "2026-08-26",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
@@ -124,19 +122,19 @@
       "logo": "●",
       "color": "#111",
       "ink": "#fff",
-      "cap": "5.10T",
-      "pe": "39.1",
-      "fpe": "33.5",
+      "cap": "5.06T",
+      "pe": "38.9",
+      "fpe": "33.3",
       "peg": "4.1",
-      "ps": "10.8",
-      "pcf": "35.6",
-      "evEbitda": "29.9",
+      "ps": "10.7",
+      "pcf": "35.4",
+      "evEbitda": "29.7",
       "implied": "27%",
       "growth": "12%",
       "revenueGrowthCurrent": "12%",
       "epsGrowthCurrent": "14%",
-      "price": "$350.69",
-      "change": "2.4301%",
+      "price": "$348.51",
+      "change": "-0.6216%",
       "valuationModel": {
         "status": "ready",
         "company": "Apple",
@@ -161,37 +159,35 @@
         "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-11-10T10:14:04.542130Z",
-          "revenueCagr": -0.0023862819816058423,
+          "updatedAt": "2026-11-10T22:56:40.946783Z",
+          "basisPeriodEnd": "2026-09-30",
+          "revenueCagr": 0.09257397489379104,
+          "next12MonthGrowth": -0.00226227071749574,
+          "suspectFiscalYearLabel": true,
           "growthPath": [
-            -0.3,
-            -0.3,
-            1.0,
+            -0.00226227071749574,
+            0.19627602367173447,
+            0.12813801183586723,
             0.06,
             0.05
           ],
-          "consensusYears": 3,
+          "consensusYears": 2,
           "farGrowth": {
             "year4": 0.06,
             "year5": 0.05,
             "basis": "company-specific"
           },
-          "analystCount": 16,
+          "analystCount": 23,
           "estimates": [
-            {
-              "periodEnd": "2026-12-31",
-              "revenue": 153064137540.0,
-              "analystCount": 16
-            },
-            {
-              "periodEnd": "2027-03-31",
-              "revenue": 124000404410.0,
-              "analystCount": 21
-            },
             {
               "periodEnd": "2027-09-30",
               "revenue": 477692148210.0,
               "analystCount": 37
+            },
+            {
+              "periodEnd": "2028-09-30",
+              "revenue": 571661993480.0,
+              "analystCount": 23
             }
           ]
         },
@@ -200,12 +196,12 @@
         "equityValueAdjustmentUsd": -31298000000.0,
         "balanceSheetPeriodEnd": "2026-09-26",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
-        "beta": 1.08,
-        "costOfEquity": 0.0965,
+        "beta": 1.09,
+        "costOfEquity": 0.097,
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null
       },
-      "valuationAsOf": "2026-11-09",
+      "valuationAsOf": "2026-11-10",
       "ttmPeriodEnd": "2026-09-26",
       "ttmAvailableFrom": "2026-11-03",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
@@ -219,19 +215,19 @@
       "logo": "▦",
       "color": "#e9f2ff",
       "ink": "#1676d2",
-      "cap": "4.05T",
-      "pe": "28.5",
-      "fpe": "22.6",
+      "cap": "3.96T",
+      "pe": "27.9",
+      "fpe": "22.1",
       "peg": "1.1",
-      "ps": "11.7",
-      "pcf": "20.7",
-      "evEbitda": "20.1",
-      "implied": "39%",
+      "ps": "11.5",
+      "pcf": "20.3",
+      "evEbitda": "19.6",
+      "implied": "38%",
       "growth": "19%",
       "revenueGrowthCurrent": "19%",
       "epsGrowthCurrent": "32%",
-      "price": "$545.18",
-      "change": "2.7459%",
+      "price": "$533.16",
+      "change": "-2.2048%",
       "valuationModel": {
         "status": "ready",
         "company": "Microsoft",
@@ -256,37 +252,35 @@
         "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-11-10T10:14:17.619430Z",
-          "revenueCagr": 0.19547374096267256,
+          "updatedAt": "2026-11-10T22:56:54.473662Z",
+          "basisPeriodEnd": "2026-09-30",
+          "revenueCagr": 0.19968751771616833,
+          "next12MonthGrowth": 0.19733000661457312,
+          "suspectFiscalYearLabel": false,
           "growthPath": [
-            -0.3,
-            0.05399923657858818,
-            1.0,
+            0.19733000661457312,
+            0.17822000440971542,
+            0.15911000220485771,
             0.14,
             0.12
           ],
-          "consensusYears": 3,
+          "consensusYears": 1,
           "farGrowth": {
             "year4": 0.14,
             "year5": 0.12,
             "basis": "company-specific"
           },
-          "analystCount": 35,
+          "analystCount": 45,
           "estimates": [
-            {
-              "periodEnd": "2026-12-31",
-              "revenue": 96699568110.0,
-              "analystCount": 36
-            },
-            {
-              "periodEnd": "2027-03-31",
-              "revenue": 99276094220.0,
-              "analystCount": 35
-            },
             {
               "periodEnd": "2027-06-30",
               "revenue": 395904377660.0,
               "analystCount": 45
+            },
+            {
+              "periodEnd": "2028-06-30",
+              "revenue": 476390348030.0,
+              "analystCount": 55
             }
           ]
         },
@@ -295,12 +289,12 @@
         "equityValueAdjustmentUsd": 24637000000.0,
         "balanceSheetPeriodEnd": "2026-09-30",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
-        "beta": 1.03,
-        "costOfEquity": 0.094,
+        "beta": 1.04,
+        "costOfEquity": 0.0945,
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null
       },
-      "valuationAsOf": "2026-11-09",
+      "valuationAsOf": "2026-11-10",
       "ttmPeriodEnd": "2026-09-30",
       "ttmAvailableFrom": "2026-10-28",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
@@ -314,19 +308,19 @@
       "logo": "G",
       "color": "#fff5e7",
       "ink": "#4285f4",
-      "cap": "3.52T",
+      "cap": "3.50T",
       "pe": "15.0",
       "fpe": "19.1",
       "peg": "1.0",
       "ps": "7.5",
       "pcf": "19.7",
-      "evEbitda": "18.4",
+      "evEbitda": "18.3",
       "implied": "55%",
       "growth": "24%",
       "revenueGrowthCurrent": "24%",
       "epsGrowthCurrent": "-26%",
-      "price": "$288.15",
-      "change": "1.1834%",
+      "price": "$287.38",
+      "change": "-0.2672%",
       "valuationModel": {
         "status": "ready",
         "company": "Alphabet",
@@ -351,22 +345,25 @@
         "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-11-10T10:14:30.695178Z",
-          "revenueCagr": -0.9103236621236609,
+          "updatedAt": "2026-11-10T22:57:07.991978Z",
+          "basisPeriodEnd": "2026-09-30",
+          "revenueCagr": 0.273509686949728,
+          "next12MonthGrowth": 0.2728089969164349,
+          "suspectFiscalYearLabel": false,
           "growthPath": [
-            0.12459125509901092,
-            -0.3,
-            -0.018539549114230502,
+            0.2728089969164349,
+            0.2218726646109566,
+            0.17093633230547828,
             0.12,
             0.1
           ],
-          "consensusYears": 3,
+          "consensusYears": 1,
           "farGrowth": {
             "year4": 0.12,
             "year5": 0.1,
             "basis": "company-specific"
           },
-          "analystCount": 25,
+          "analystCount": 47,
           "estimates": [
             {
               "periodEnd": "2026-12-31",
@@ -374,14 +371,9 @@
               "analystCount": 47
             },
             {
-              "periodEnd": "2026-12-31",
-              "revenue": 142401246490.0,
-              "analystCount": 36
-            },
-            {
-              "periodEnd": "2027-03-31",
-              "revenue": 141075043480.0,
-              "analystCount": 25
+              "periodEnd": "2027-12-31",
+              "revenue": 637514180150.0,
+              "analystCount": 50
             }
           ]
         },
@@ -390,12 +382,12 @@
         "equityValueAdjustmentUsd": 138980000000.0,
         "balanceSheetPeriodEnd": "2026-09-30",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
-        "beta": 1.21,
-        "costOfEquity": 0.10300000000000001,
+        "beta": 1.22,
+        "costOfEquity": 0.10350000000000001,
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null
       },
-      "valuationAsOf": "2026-11-09",
+      "valuationAsOf": "2026-11-10",
       "ttmPeriodEnd": "2026-09-30",
       "ttmAvailableFrom": "2026-10-29",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
@@ -409,19 +401,19 @@
       "logo": "a",
       "color": "#fff0dc",
       "ink": "#111",
-      "cap": "2.89T",
-      "pe": "21.6",
-      "fpe": "24.8",
+      "cap": "2.93T",
+      "pe": "21.9",
+      "fpe": "25.2",
       "peg": "0.9",
-      "ps": "3.6",
-      "pcf": "17.3",
-      "evEbitda": "16.5",
-      "implied": "44%",
+      "ps": "3.7",
+      "pcf": "17.5",
+      "evEbitda": "16.7",
+      "implied": "45%",
       "growth": "12%",
       "revenueGrowthCurrent": "12%",
       "epsGrowthCurrent": "-3%",
-      "price": "$266.93",
-      "change": "2.9425%",
+      "price": "$270.87",
+      "change": "1.4760%",
       "valuationModel": {
         "status": "ready",
         "company": "Amazon",
@@ -447,22 +439,25 @@
         "displayScenarioTargetMargin": 0.08,
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-11-10T10:14:43.769734Z",
-          "revenueCagr": -0.9304912107095539,
+          "updatedAt": "2026-11-10T22:57:21.519047Z",
+          "basisPeriodEnd": "2026-09-30",
+          "revenueCagr": 0.15947915558701609,
+          "next12MonthGrowth": 0.15993461165253908,
+          "suspectFiscalYearLabel": false,
           "growthPath": [
-            0.08076296596280974,
-            -0.3,
-            -0.26261770172220333,
+            0.15993461165253908,
+            0.14662307443502606,
+            0.13331153721751304,
             0.12,
             0.1
           ],
-          "consensusYears": 3,
+          "consensusYears": 1,
           "farGrowth": {
             "year4": 0.12,
             "year5": 0.1,
             "basis": "company-specific"
           },
-          "analystCount": 31,
+          "analystCount": 55,
           "estimates": [
             {
               "periodEnd": "2026-12-31",
@@ -470,14 +465,9 @@
               "analystCount": 55
             },
             {
-              "periodEnd": "2026-12-31",
-              "revenue": 244838490660.0,
-              "analystCount": 45
-            },
-            {
-              "periodEnd": "2027-03-31",
-              "revenue": 210245179650.0,
-              "analystCount": 31
+              "periodEnd": "2027-12-31",
+              "revenue": 959647733950.0,
+              "analystCount": 60
             }
           ]
         },
@@ -486,12 +476,12 @@
         "equityValueAdjustmentUsd": -70557000000.0,
         "balanceSheetPeriodEnd": "2026-09-30",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
-        "beta": 1.47,
-        "costOfEquity": 0.11599999999999999,
+        "beta": 1.49,
+        "costOfEquity": 0.11699999999999999,
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null
       },
-      "valuationAsOf": "2026-11-09",
+      "valuationAsOf": "2026-11-10",
       "ttmPeriodEnd": "2026-09-30",
       "ttmAvailableFrom": "2026-10-30",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
@@ -516,8 +506,8 @@
       "growth": "26%",
       "revenueGrowthCurrent": "26%",
       "epsGrowthCurrent": "264%",
-      "price": "$641.37",
-      "change": "5.1168%",
+      "price": "$641.39",
+      "change": "0.0031%",
       "valuationModel": {
         "status": "ready",
         "company": "Meta",
@@ -542,22 +532,25 @@
         "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-11-10T10:14:56.848177Z",
-          "revenueCagr": -0.9195692410156028,
+          "updatedAt": "2026-11-10T22:57:35.046465Z",
+          "basisPeriodEnd": "2026-09-30",
+          "revenueCagr": 0.22871501016202656,
+          "next12MonthGrowth": 0.23162177242006732,
+          "suspectFiscalYearLabel": false,
           "growthPath": [
-            0.13038695739074613,
-            -0.3,
-            -0.16877015695491526,
+            0.23162177242006732,
+            0.19441451494671155,
+            0.1572072574733558,
             0.12,
             0.1
           ],
-          "consensusYears": 3,
+          "consensusYears": 1,
           "farGrowth": {
             "year4": 0.12,
             "year5": 0.1,
             "basis": "company-specific"
           },
-          "analystCount": 32,
+          "analystCount": 54,
           "estimates": [
             {
               "periodEnd": "2026-12-31",
@@ -565,14 +558,9 @@
               "analystCount": 54
             },
             {
-              "periodEnd": "2026-12-31",
-              "revenue": 75155372690.0,
-              "analystCount": 44
-            },
-            {
-              "periodEnd": "2027-03-31",
-              "revenue": 68520511499.0,
-              "analystCount": 32
+              "periodEnd": "2027-12-31",
+              "revenue": 312629972860.0,
+              "analystCount": 59
             }
           ]
         },
@@ -586,7 +574,7 @@
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null
       },
-      "valuationAsOf": "2026-11-09",
+      "valuationAsOf": "2026-11-10",
       "ttmPeriodEnd": "2026-09-30",
       "ttmAvailableFrom": "2026-10-22",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
@@ -600,19 +588,19 @@
       "logo": "T",
       "color": "#ffe8e8",
       "ink": "#d93232",
-      "cap": "1.49T",
-      "pe": "415.5",
-      "fpe": "187.4",
+      "cap": "1.50T",
+      "pe": "417.4",
+      "fpe": "188.3",
       "peg": "9.5",
-      "ps": "12.9",
-      "pcf": "71.5",
-      "evEbitda": "141.8",
+      "ps": "13.0",
+      "pcf": "71.8",
+      "evEbitda": "142.5",
       "implied": "103%",
-      "growth": "-0%",
-      "revenueGrowthCurrent": "-0%",
+      "growth": "0%",
+      "revenueGrowthCurrent": "0%",
       "epsGrowthCurrent": "-43%",
-      "price": "$378.05",
-      "change": "5.5357%",
+      "price": "$379.78",
+      "change": "0.4576%",
       "valuationModel": {
         "status": "ready",
         "company": "Tesla",
@@ -638,37 +626,35 @@
         "displayScenarioTargetMargin": 0.065,
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-10-28T08:52:25.384294Z",
-          "revenueCagr": -0.9189782684357406,
+          "updatedAt": "2026-11-10T22:57:48.567240Z",
+          "basisPeriodEnd": "2026-09-30",
+          "revenueCagr": 0.14326622634489938,
+          "next12MonthGrowth": 0.1452371006650386,
+          "suspectFiscalYearLabel": false,
           "growthPath": [
-            -0.3,
-            1.0,
-            -0.3,
+            0.1452371006650386,
+            0.14349140044335906,
+            0.14174570022167954,
             0.14,
             0.11
           ],
-          "consensusYears": 3,
+          "consensusYears": 1,
           "farGrowth": {
             "year4": 0.14,
             "year5": 0.11,
             "basis": "company-specific"
           },
-          "analystCount": 25,
+          "analystCount": 43,
           "estimates": [
             {
-              "periodEnd": "2026-09-30",
-              "revenue": 28253140390.0,
-              "analystCount": 27
+              "periodEnd": "2026-12-31",
+              "revenue": 107858928650.0,
+              "analystCount": 43
             },
             {
-              "periodEnd": "2026-12-31",
-              "revenue": 107792399500.0,
-              "analystCount": 39
-            },
-            {
-              "periodEnd": "2026-12-31",
-              "revenue": 29216725380.0,
-              "analystCount": 25
+              "periodEnd": "2027-12-31",
+              "revenue": 122458192040.0,
+              "analystCount": 43
             }
           ]
         },
@@ -677,12 +663,12 @@
         "equityValueAdjustmentUsd": 37440159000.0,
         "balanceSheetPeriodEnd": "2026-09-30",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
-        "beta": 1.76,
-        "costOfEquity": 0.1305,
+        "beta": 1.75,
+        "costOfEquity": 0.13,
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null
       },
-      "valuationAsOf": "2026-11-09",
+      "valuationAsOf": "2026-11-10",
       "ttmPeriodEnd": "2026-09-30",
       "ttmAvailableFrom": "2026-10-22",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
@@ -696,19 +682,19 @@
       "logo": "◌",
       "color": "#eaf8fb",
       "ink": "#20899b",
-      "cap": "2.02T",
-      "pe": "25.0",
-      "fpe": "16.8",
+      "cap": "2.06T",
+      "pe": "25.5",
+      "fpe": "17.2",
       "peg": "0.4",
-      "ps": "13.3",
-      "pcf": "20.7",
-      "evEbitda": "16.9",
+      "ps": "13.5",
+      "pcf": "21.1",
+      "evEbitda": "17.2",
       "implied": "40%",
       "growth": "41%",
       "revenueGrowthCurrent": "41%",
       "epsGrowthCurrent": "58%",
-      "price": "$388.62",
-      "change": "3.5105%",
+      "price": "$396.48",
+      "change": "2.0225%",
       "valuationModel": {
         "status": "ready",
         "company": "TSMC",
@@ -733,46 +719,44 @@
         "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）；TSMC 金额按 1 USD = 31.6 TWD 换算",
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-10-28T08:52:38.428950Z",
-          "revenueCagr": 140.2044385348767,
+          "updatedAt": "2026-11-10T22:58:02.082557Z",
+          "basisPeriodEnd": "2026-09-30",
+          "revenueCagr": 0.42132626072265866,
+          "next12MonthGrowth": 0.4323875485392321,
+          "suspectFiscalYearLabel": false,
           "growthPath": [
-            1.0,
-            1.0,
-            -0.3,
+            0.4323875485392321,
+            0.33159169902615476,
+            0.23079584951307738,
             0.13,
             0.1
           ],
-          "consensusYears": 3,
+          "consensusYears": 1,
           "farGrowth": {
             "year4": 0.13,
             "year5": 0.1,
             "basis": "company-specific"
           },
-          "analystCount": 26,
+          "analystCount": 40,
           "estimates": [
             {
-              "periodEnd": "2026-09-30",
-              "revenue": 1460392943930.0,
-              "analystCount": 28
-            },
-            {
               "periodEnd": "2026-12-31",
-              "revenue": 5573546682970.0,
+              "revenue": 176649918407.27844,
               "analystCount": 40
             },
             {
-              "periodEnd": "2026-12-31",
-              "revenue": 1705011253270.0,
-              "analystCount": 26
+              "periodEnd": "2027-12-31",
+              "revenue": 243393552976.58224,
+              "analystCount": 41
             }
           ]
         },
-        "beta": 1.46,
-        "costOfEquity": 0.11549999999999999,
+        "beta": 1.45,
+        "costOfEquity": 0.11499999999999999,
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null
       },
-      "valuationAsOf": "2026-11-09",
+      "valuationAsOf": "2026-11-10",
       "ttmPeriodEnd": "2026-09-30",
       "ttmAvailableFrom": "2026-10-15",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
@@ -786,19 +770,19 @@
       "logo": "μ",
       "color": "#e8f7ed",
       "ink": "#16834c",
-      "cap": "830B",
-      "pe": "9.9",
-      "fpe": "3.5",
+      "cap": "820B",
+      "pe": "9.7",
+      "fpe": "3.4",
       "peg": "0.08",
-      "ps": "6.3",
-      "pcf": "9.3",
+      "ps": "6.2",
+      "pcf": "9.2",
       "evEbitda": "7.2",
-      "implied": "41%",
+      "implied": "40%",
       "growth": "379%",
       "revenueGrowthCurrent": "379%",
       "epsGrowthCurrent": "1061%",
-      "price": "$733.15",
-      "change": "6.2536%",
+      "price": "$725.11",
+      "change": "-1.0966%",
       "valuationModel": {
         "status": "ready",
         "company": "Micron",
@@ -823,37 +807,35 @@
         "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-10-28T08:52:51.471286Z",
-          "revenueCagr": -0.32811216499504525,
+          "updatedAt": "2026-11-10T22:58:15.612911Z",
+          "basisPeriodEnd": "2026-08-31",
+          "revenueCagr": 0.5497278544892896,
+          "next12MonthGrowth": 1.071631021997144,
+          "suspectFiscalYearLabel": false,
           "growthPath": [
-            -0.3,
-            0.002408628865737894,
-            0.17967553031030592,
+            1.0,
+            0.1597671381892125,
+            0.11488356909460626,
             0.07,
             0.05
           ],
-          "consensusYears": 3,
+          "consensusYears": 2,
           "farGrowth": {
             "year4": 0.07,
             "year5": 0.05,
             "basis": "company-specific"
           },
-          "analystCount": 32,
+          "analystCount": 42,
           "estimates": [
             {
-              "periodEnd": "2026-08-31",
-              "revenue": 61670130780.0,
-              "analystCount": 33
+              "periodEnd": "2027-08-31",
+              "revenue": 275888402110.0,
+              "analystCount": 43
             },
             {
-              "periodEnd": "2026-11-30",
-              "revenue": 61744356340.0,
-              "analystCount": 34
-            },
-            {
-              "periodEnd": "2027-02-28",
-              "revenue": 67062316840.0,
-              "analystCount": 32
+              "periodEnd": "2028-08-31",
+              "revenue": 320063699660.0,
+              "analystCount": 42
             }
           ]
         },
@@ -862,12 +844,12 @@
         "equityValueAdjustmentUsd": 35242000000.0,
         "balanceSheetPeriodEnd": "2026-09-03",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
-        "beta": 2.46,
-        "costOfEquity": 0.1655,
+        "beta": 2.42,
+        "costOfEquity": 0.1635,
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null
       },
-      "valuationAsOf": "2026-11-09",
+      "valuationAsOf": "2026-11-10",
       "ttmPeriodEnd": "2026-09-03",
       "ttmAvailableFrom": "2026-10-09",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
@@ -881,19 +863,19 @@
       "logo": "B",
       "color": "#fff0ea",
       "ink": "#d34b28",
-      "cap": "1.53T",
-      "pe": "40.7",
-      "fpe": "16.5",
-      "peg": "0.2",
-      "ps": "17.5",
-      "pcf": "38.3",
-      "evEbitda": "30.0",
+      "cap": "1.58T",
+      "pe": "42.3",
+      "fpe": "17.2",
+      "peg": "0.3",
+      "ps": "18.2",
+      "pcf": "39.8",
+      "evEbitda": "31.1",
       "implied": "38%",
       "growth": "86%",
       "revenueGrowthCurrent": "86%",
       "epsGrowthCurrent": "214%",
-      "price": "$319.48",
-      "change": "8.7814%",
+      "price": "$331.98",
+      "change": "3.9126%",
       "valuationModel": {
         "status": "ready",
         "company": "Broadcom",
@@ -918,37 +900,35 @@
         "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-10-28T08:53:04.522530Z",
-          "revenueCagr": -0.8250332211165854,
+          "updatedAt": "2026-11-10T22:58:29.132145Z",
+          "basisPeriodEnd": "2026-07-31",
+          "revenueCagr": 0.7090362599873894,
+          "next12MonthGrowth": 0.7256571388828519,
+          "suspectFiscalYearLabel": false,
           "growthPath": [
-            0.41473707374297875,
-            -0.3,
-            0.1254141325904623,
+            0.7256571388828519,
+            0.5337714259219013,
+            0.34188571296095066,
             0.15,
             0.12
           ],
-          "consensusYears": 3,
+          "consensusYears": 1,
           "farGrowth": {
             "year4": 0.15,
             "year5": 0.12,
             "basis": "company-specific"
           },
-          "analystCount": 35,
+          "analystCount": 41,
           "estimates": [
             {
               "periodEnd": "2026-10-31",
-              "revenue": 105982721590.0,
-              "analystCount": 42
+              "revenue": 105985008460.0,
+              "analystCount": 41
             },
             {
-              "periodEnd": "2026-10-31",
-              "revenue": 34903492790.0,
-              "analystCount": 39
-            },
-            {
-              "periodEnd": "2027-01-31",
-              "revenue": 37027558030.0,
-              "analystCount": 35
+              "periodEnd": "2027-10-31",
+              "revenue": 174226851580.0,
+              "analystCount": 49
             }
           ]
         },
@@ -957,12 +937,12 @@
         "equityValueAdjustmentUsd": -37696000000.0,
         "balanceSheetPeriodEnd": "2026-08-02",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
-        "beta": 1.53,
-        "costOfEquity": 0.11900000000000002,
+        "beta": 1.51,
+        "costOfEquity": 0.11800000000000002,
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null
       },
-      "valuationAsOf": "2026-11-09",
+      "valuationAsOf": "2026-11-10",
       "ttmPeriodEnd": "2026-08-02",
       "ttmAvailableFrom": "2026-09-10",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
@@ -976,19 +956,19 @@
       "logo": "A",
       "color": "#fff2eb",
       "ink": "#d34b28",
-      "cap": "834B",
-      "pe": "110.2",
-      "fpe": "28.9",
+      "cap": "845B",
+      "pe": "111.7",
+      "fpe": "29.2",
       "peg": "0.3",
-      "ps": "18.5",
-      "pcf": "92.1",
-      "evEbitda": "74.5",
+      "ps": "18.7",
+      "pcf": "93.3",
+      "evEbitda": "75.5",
       "implied": "112%",
       "growth": "45%",
       "revenueGrowthCurrent": "45%",
       "epsGrowthCurrent": "93%",
-      "price": "$508.58",
-      "change": "13.2594%",
+      "price": "$515.21",
+      "change": "1.3036%",
       "valuationModel": {
         "status": "ready",
         "company": "AMD",
@@ -1014,37 +994,35 @@
         "displayScenarioTargetMargin": 0.1,
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-10-28T08:53:17.565618Z",
-          "revenueCagr": -0.8452386572842968,
+          "updatedAt": "2026-11-10T22:58:42.652426Z",
+          "basisPeriodEnd": "2026-09-30",
+          "revenueCagr": 0.8137869423281809,
+          "next12MonthGrowth": 0.8089983139690944,
+          "suspectFiscalYearLabel": false,
           "growthPath": [
-            -0.3,
-            1.0,
-            -0.3,
+            0.8089983139690944,
+            0.5959988759793963,
+            0.38299943798969815,
             0.17,
             0.13
           ],
-          "consensusYears": 3,
+          "consensusYears": 1,
           "farGrowth": {
             "year4": 0.17,
             "year5": 0.13,
             "basis": "company-specific"
           },
-          "analystCount": 38,
+          "analystCount": 43,
           "estimates": [
             {
-              "periodEnd": "2026-09-30",
-              "revenue": 13077889730.0,
-              "analystCount": 38
+              "periodEnd": "2026-12-31",
+              "revenue": 52235526870.0,
+              "analystCount": 43
             },
             {
-              "periodEnd": "2026-12-31",
-              "revenue": 50972190010.0,
-              "analystCount": 48
-            },
-            {
-              "periodEnd": "2026-12-31",
-              "revenue": 16135533120.0,
-              "analystCount": 38
+              "periodEnd": "2027-12-31",
+              "revenue": 95706771610.0,
+              "analystCount": 49
             }
           ]
         },
@@ -1053,12 +1031,12 @@
         "equityValueAdjustmentUsd": 8697000000.0,
         "balanceSheetPeriodEnd": "2026-09-26",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
-        "beta": 2.56,
-        "costOfEquity": 0.1705,
+        "beta": 2.54,
+        "costOfEquity": 0.1695,
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null
       },
-      "valuationAsOf": "2026-11-09",
+      "valuationAsOf": "2026-11-10",
       "ttmPeriodEnd": "2026-09-26",
       "ttmAvailableFrom": "2026-11-04",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
@@ -1072,19 +1050,19 @@
       "logo": "H",
       "color": "#fff0ea",
       "ink": "#d04d34",
-      "cap": "979B",
-      "pe": "7.8",
-      "fpe": "3.3",
-      "peg": "0.03",
-      "ps": "6.7",
-      "pcf": "9.9",
-      "evEbitda": "9.6",
-      "implied": "33%",
+      "cap": "945B",
+      "pe": "7.5",
+      "fpe": "3.2",
+      "peg": "0.02",
+      "ps": "6.5",
+      "pcf": "9.6",
+      "evEbitda": "9.2",
+      "implied": "32%",
       "growth": "317%",
       "revenueGrowthCurrent": "317%",
       "epsGrowthCurrent": "196%",
-      "price": "$134.38",
-      "change": "5.5285%",
+      "price": "$129.66",
+      "change": "-3.5124%",
       "valuationModel": {
         "status": "ready",
         "company": "SK hynix",
@@ -1114,7 +1092,7 @@
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null
       },
-      "valuationAsOf": "2026-11-09",
+      "valuationAsOf": "2026-11-10",
       "ttmPeriodEnd": "2026-06-30",
       "ttmAvailableFrom": "2026-07-29",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
@@ -1128,19 +1106,19 @@
       "logo": "N",
       "color": "#fff0f0",
       "ink": "#e50914",
-      "cap": "263B",
-      "pe": "18.5",
-      "fpe": "17.0",
+      "cap": "260B",
+      "pe": "18.3",
+      "fpe": "16.8",
       "peg": "0.8",
-      "ps": "5.5",
-      "pcf": "22.2",
-      "evEbitda": "8.1",
+      "ps": "5.4",
+      "pcf": "22.0",
+      "evEbitda": "8.0",
       "implied": "24%",
       "growth": "11%",
       "revenueGrowthCurrent": "11%",
       "epsGrowthCurrent": "49%",
-      "price": "$63.95",
-      "change": "0.8516%",
+      "price": "$63.26",
+      "change": "-1.0790%",
       "valuationModel": {
         "status": "ready",
         "company": "Netflix",
@@ -1165,22 +1143,25 @@
         "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-11-05T09:47:59.372128Z",
-          "revenueCagr": -0.9250701171861355,
+          "updatedAt": "2026-11-10T22:58:56.207002Z",
+          "basisPeriodEnd": "2026-09-30",
+          "revenueCagr": 0.10889089054464773,
+          "next12MonthGrowth": 0.1093150697770624,
+          "suspectFiscalYearLabel": false,
           "growthPath": [
-            0.056659175888535085,
-            -0.3,
-            0.025128399969329696,
+            0.1093150697770624,
+            0.1062100465180416,
+            0.1031050232590208,
             0.1,
             0.08
           ],
-          "consensusYears": 3,
+          "consensusYears": 1,
           "farGrowth": {
             "year4": 0.1,
             "year5": 0.08,
             "basis": "company-specific"
           },
-          "analystCount": 21,
+          "analystCount": 41,
           "estimates": [
             {
               "periodEnd": "2026-12-31",
@@ -1188,14 +1169,9 @@
               "analystCount": 41
             },
             {
-              "periodEnd": "2026-12-31",
-              "revenue": 13446130180.0,
-              "analystCount": 35
-            },
-            {
-              "periodEnd": "2027-03-31",
-              "revenue": 13614021880.0,
-              "analystCount": 21
+              "periodEnd": "2027-12-31",
+              "revenue": 56600948050.0,
+              "analystCount": 45
             }
           ]
         },
@@ -1204,12 +1180,12 @@
         "equityValueAdjustmentUsd": -6905939000.0,
         "balanceSheetPeriodEnd": "2026-09-30",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
-        "beta": 1.58,
-        "costOfEquity": 0.12150000000000002,
+        "beta": 1.6,
+        "costOfEquity": 0.12250000000000003,
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null
       },
-      "valuationAsOf": "2026-11-09",
+      "valuationAsOf": "2026-11-10",
       "ttmPeriodEnd": "2026-09-30",
       "ttmAvailableFrom": "2026-10-21",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
@@ -1225,17 +1201,17 @@
       "ink": "#da291c",
       "cap": "199B",
       "pe": "22.3",
-      "fpe": "20.5",
+      "fpe": "20.6",
       "peg": "3.4",
       "ps": "7.2",
-      "pcf": "18.3",
+      "pcf": "18.4",
       "evEbitda": "16.7",
-      "implied": "6%",
+      "implied": "7%",
       "growth": "1%",
       "revenueGrowthCurrent": "1%",
       "epsGrowthCurrent": "10%",
-      "price": "$281.44",
-      "change": "1.7793%",
+      "price": "$282.17",
+      "change": "0.2594%",
       "valuationModel": {
         "status": "ready",
         "company": "McDonald's",
@@ -1260,37 +1236,35 @@
         "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-11-05T09:48:12.495064Z",
-          "revenueCagr": -0.9303898518831755,
+          "updatedAt": "2026-11-10T22:59:09.742930Z",
+          "basisPeriodEnd": "2026-09-30",
+          "revenueCagr": 0.012753587683486334,
+          "next12MonthGrowth": 0.012758789201553045,
+          "suspectFiscalYearLabel": false,
           "growthPath": [
-            -0.3,
-            1.0,
-            -0.3,
+            0.012758789201553045,
+            0.025172526134368697,
+            0.03758626306718435,
             0.05,
             0.04
           ],
-          "consensusYears": 3,
+          "consensusYears": 1,
           "farGrowth": {
             "year4": 0.05,
             "year5": 0.04,
             "basis": "company-specific"
           },
-          "analystCount": 26,
+          "analystCount": 28,
           "estimates": [
             {
-              "periodEnd": "2026-09-30",
-              "revenue": 7285066270.0,
-              "analystCount": 26
+              "periodEnd": "2026-12-31",
+              "revenue": 27871393810.0,
+              "analystCount": 28
             },
             {
-              "periodEnd": "2026-12-31",
-              "revenue": 28157729470.0,
-              "analystCount": 30
-            },
-            {
-              "periodEnd": "2026-12-31",
-              "revenue": 7236128490.0,
-              "analystCount": 26
+              "periodEnd": "2027-12-31",
+              "revenue": 28226032510.0,
+              "analystCount": 31
             }
           ]
         },
@@ -1299,12 +1273,12 @@
         "equityValueAdjustmentUsd": -39017500000.0,
         "balanceSheetPeriodEnd": "2026-09-30",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
-        "beta": 0.41,
-        "costOfEquity": 0.063,
+        "beta": 0.42,
+        "costOfEquity": 0.0635,
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null
       },
-      "valuationAsOf": "2026-11-09",
+      "valuationAsOf": "2026-11-10",
       "ttmPeriodEnd": "2026-09-30",
       "ttmAvailableFrom": "2026-11-06",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
@@ -1318,19 +1292,19 @@
       "logo": "P",
       "color": "#eef0f2",
       "ink": "#101113",
-      "cap": "408B",
-      "pe": "118.5",
-      "fpe": "67.4",
+      "cap": "407B",
+      "pe": "118.2",
+      "fpe": "67.3",
       "peg": "0.9",
-      "ps": "59.7",
-      "pcf": "106.1",
-      "evEbitda": "118.5",
-      "implied": "86%",
+      "ps": "59.5",
+      "pcf": "105.9",
+      "evEbitda": "118.2",
+      "implied": "85%",
       "growth": "96%",
       "revenueGrowthCurrent": "96%",
       "epsGrowthCurrent": "137%",
-      "price": "$169.20",
-      "change": "5.4994%",
+      "price": "$168.82",
+      "change": "-0.2246%",
       "valuationModel": {
         "status": "ready",
         "company": "Palantir",
@@ -1357,37 +1331,35 @@
         "displayScenarioCurrentMargin": 0.35,
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-11-05T09:48:25.604475Z",
-          "revenueCagr": -0.8385686820898333,
+          "updatedAt": "2026-11-10T22:59:22.966238Z",
+          "basisPeriodEnd": "2026-09-30",
+          "revenueCagr": 0.5989863887815394,
+          "next12MonthGrowth": 0.6157544323624371,
+          "suspectFiscalYearLabel": false,
           "growthPath": [
-            -0.3,
-            1.0,
-            -0.3,
+            0.6157544323624371,
+            0.487169621574958,
+            0.358584810787479,
             0.23,
             0.19
           ],
-          "consensusYears": 3,
+          "consensusYears": 1,
           "farGrowth": {
             "year4": 0.23,
             "year5": 0.19,
             "basis": "company-specific"
           },
-          "analystCount": 25,
+          "analystCount": 27,
           "estimates": [
             {
-              "periodEnd": "2026-09-30",
-              "revenue": 2180441570.0,
-              "analystCount": 25
+              "periodEnd": "2026-12-31",
+              "revenue": 8550516260.0,
+              "analystCount": 27
             },
             {
-              "periodEnd": "2026-12-31",
-              "revenue": 8220206440.0,
-              "analystCount": 31
-            },
-            {
-              "periodEnd": "2026-12-31",
-              "revenue": 2456443500.0,
-              "analystCount": 25
+              "periodEnd": "2027-12-31",
+              "revenue": 13112152240.0,
+              "analystCount": 30
             }
           ]
         },
@@ -1396,12 +1368,12 @@
         "equityValueAdjustmentUsd": 10594934000.0,
         "balanceSheetPeriodEnd": "2026-09-30",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
-        "beta": 1.65,
-        "costOfEquity": 0.125,
+        "beta": 1.62,
+        "costOfEquity": 0.12350000000000003,
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null
       },
-      "valuationAsOf": "2026-11-09",
+      "valuationAsOf": "2026-11-10",
       "ttmPeriodEnd": "2026-09-30",
       "ttmAvailableFrom": "2026-11-03",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
@@ -1415,19 +1387,19 @@
       "logo": "L",
       "color": "#fff0f1",
       "ink": "#d52b1e",
-      "cap": "1.33T",
-      "pe": "45.8",
-      "fpe": "28.1",
-      "peg": "0.8",
-      "ps": "14.6",
-      "pcf": "41.3",
-      "evEbitda": "29.5",
+      "cap": "1.35T",
+      "pe": "46.5",
+      "fpe": "28.5",
+      "peg": "0.9",
+      "ps": "14.8",
+      "pcf": "41.9",
+      "evEbitda": "29.9",
       "implied": "34%",
       "growth": "39%",
       "revenueGrowthCurrent": "39%",
       "epsGrowthCurrent": "16%",
-      "price": "$1,411.95",
-      "change": "4.2799%",
+      "price": "$1,432.29",
+      "change": "1.4406%",
       "valuationModel": {
         "status": "ready",
         "company": "Eli Lilly",
@@ -1453,37 +1425,35 @@
         "displayScenarioTargetMargin": 0.16,
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-11-05T09:48:38.906450Z",
-          "revenueCagr": -0.9296613972013414,
+          "updatedAt": "2026-11-10T22:59:36.500706Z",
+          "basisPeriodEnd": "2026-09-30",
+          "revenueCagr": 0.17868105178562388,
+          "next12MonthGrowth": 0.18431260817201145,
+          "suspectFiscalYearLabel": false,
           "growthPath": [
-            0.12372414904228757,
-            -0.3,
-            -0.13128635836339053,
+            0.18431260817201145,
+            0.1828750721146743,
+            0.18143753605733715,
             0.18,
             0.14
           ],
-          "consensusYears": 3,
+          "consensusYears": 1,
           "farGrowth": {
             "year4": 0.18,
             "year5": 0.14,
             "basis": "company-specific"
           },
-          "analystCount": 5,
+          "analystCount": 23,
           "estimates": [
             {
               "periodEnd": "2026-12-31",
-              "revenue": 91654783150.0,
-              "analystCount": 18
+              "revenue": 91842525940.0,
+              "analystCount": 23
             },
             {
-              "periodEnd": "2026-12-31",
-              "revenue": 24602759720.0,
-              "analystCount": 11
-            },
-            {
-              "periodEnd": "2027-03-31",
-              "revenue": 22930955200.0,
-              "analystCount": 5
+              "periodEnd": "2027-12-31",
+              "revenue": 106207741540.0,
+              "analystCount": 28
             }
           ]
         },
@@ -1492,12 +1462,12 @@
         "equityValueAdjustmentUsd": -41979400000.0,
         "balanceSheetPeriodEnd": "2026-09-30",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
-        "beta": 0.41,
-        "costOfEquity": 0.063,
+        "beta": 0.39,
+        "costOfEquity": 0.062000000000000006,
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null
       },
-      "valuationAsOf": "2026-11-09",
+      "valuationAsOf": "2026-11-10",
       "ttmPeriodEnd": "2026-09-30",
       "ttmAvailableFrom": "2026-10-29",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
@@ -1511,19 +1481,19 @@
       "logo": "O",
       "color": "#fff0f0",
       "ink": "#c74634",
-      "cap": "362B",
-      "pe": "18.6",
-      "fpe": "10.8",
+      "cap": "357B",
+      "pe": "18.3",
+      "fpe": "10.6",
       "peg": "0.4",
-      "ps": "4.9",
-      "pcf": "7.5",
-      "evEbitda": "14.1",
-      "implied": "39%",
+      "ps": "4.8",
+      "pcf": "7.4",
+      "evEbitda": "13.9",
+      "implied": "38%",
       "growth": "30%",
       "revenueGrowthCurrent": "30%",
       "epsGrowthCurrent": "55%",
-      "price": "$119.79",
-      "change": "3.1783%",
+      "price": "$117.98",
+      "change": "-1.5110%",
       "valuationModel": {
         "status": "ready",
         "company": "Oracle",
@@ -1550,37 +1520,35 @@
         "displayScenarioCurrentMargin": -0.352,
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-11-05T09:48:52.039198Z",
-          "revenueCagr": 0.361729701827457,
+          "updatedAt": "2026-11-10T22:59:50.551326Z",
+          "basisPeriodEnd": "2026-08-31",
+          "revenueCagr": 0.41545769961157974,
+          "next12MonthGrowth": 0.38560127496319785,
+          "suspectFiscalYearLabel": false,
           "growthPath": [
-            -0.3,
-            0.20090674852528312,
-            1.0,
+            0.38560127496319785,
+            0.31373418330879854,
+            0.2418670916543993,
             0.17,
             0.13
           ],
-          "consensusYears": 3,
+          "consensusYears": 1,
           "farGrowth": {
             "year4": 0.17,
             "year5": 0.13,
             "basis": "company-specific"
           },
-          "analystCount": 29,
+          "analystCount": 38,
           "estimates": [
             {
-              "periodEnd": "2026-11-30",
-              "revenue": 21325007560.0,
-              "analystCount": 30
-            },
-            {
-              "periodEnd": "2027-02-28",
-              "revenue": 23369199520.0,
-              "analystCount": 29
-            },
-            {
               "periodEnd": "2027-05-31",
-              "revenue": 90408509510.0,
-              "analystCount": 39
+              "revenue": 90446551360.0,
+              "analystCount": 38
+            },
+            {
+              "periodEnd": "2028-05-31",
+              "revenue": 131818816050.0,
+              "analystCount": 38
             }
           ]
         },
@@ -1589,12 +1557,12 @@
         "equityValueAdjustmentUsd": 36369000000.0,
         "balanceSheetPeriodEnd": "2026-08-31",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
-        "beta": 1.8,
-        "costOfEquity": 0.1325,
+        "beta": 1.79,
+        "costOfEquity": 0.132,
         "impliedGrowthStatus": "ready",
         "impliedGrowthNote": null
       },
-      "valuationAsOf": "2026-11-09",
+      "valuationAsOf": "2026-11-10",
       "ttmPeriodEnd": "2026-08-31",
       "ttmAvailableFrom": "2026-09-11",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
@@ -1609,18 +1577,18 @@
       "color": "#e9f5ff",
       "ink": "#006fcf",
       "cap": "217B",
-      "pe": "18.1",
-      "fpe": "16.1",
+      "pe": "18.0",
+      "fpe": "16.0",
       "peg": "1.1",
-      "ps": "5.1",
-      "pcf": "12.6",
+      "ps": "5.0",
+      "pcf": "12.5",
       "evEbitda": "9.4",
       "implied": "—",
       "growth": "12%",
       "revenueGrowthCurrent": "12%",
       "epsGrowthCurrent": "31%",
-      "price": "$324.31",
-      "change": "1.0343%",
+      "price": "$323.46",
+      "change": "-0.2621%",
       "valuationModel": {
         "status": "ready",
         "company": "American Express",
@@ -1659,12 +1627,12 @@
         "equityValueAdjustmentUsd": -16510000000.0,
         "balanceSheetPeriodEnd": "2026-09-30",
         "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt",
-        "beta": 1.07,
-        "costOfEquity": 0.096,
+        "beta": 1.08,
+        "costOfEquity": 0.0965,
         "impliedGrowthStatus": "not_applicable",
         "impliedGrowthNote": "金融公司的经营现金流包含客户贷款和融资变动，不使用普通工业公司的反向 FCFE 模型。"
       },
-      "valuationAsOf": "2026-11-09",
+      "valuationAsOf": "2026-11-10",
       "ttmPeriodEnd": "2026-09-30",
       "ttmAvailableFrom": "2026-10-23",
       "trailingValuationSource": "point-in-time filing TTM shared with history",
@@ -1672,6 +1640,5 @@
       "dataSource": "Finviz supplemental + Yahoo Finance EOD",
       "note": "数据口径：收盘价和实际交易日来自 Yahoo Finance EOD；Trailing P/E、P/CF、P/S 与历史曲线共用已披露财报 TTM 分母；Finviz 仅提供前瞻及企业价值补充指标。"
     }
-  ],
-  "analystEstimatesUpdatedAt": "2026-11-10T10:14:56.848222Z"
+  ]
 }

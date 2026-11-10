@@ -10,7 +10,7 @@ import os
 import re
 import statistics
 import time
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import urlopen
@@ -119,6 +119,31 @@ def latest_ttm(income, cash):
     net_income = sum(report_value(income_report, "netIncome") or 0 for income_report, _ in pairs)
     return revenue, operating_cashflow, fcf, net_income, fcf / revenue, max(income_report.get("fiscalDateEnding", "") for income_report, _ in pairs)
 
+def revenue_growth_inputs(income):
+    """Revenue of the latest quarter and TTM, each with its year-ago comparison.
+
+    Uses the same filed quarterly statements as the TTM model so the page can
+    show reported growth instead of a third-party snapshot figure.
+    """
+    reports = income.get("quarterlyReports", [])[:8]
+    if len(reports) < 8:
+        return None
+    revenues = [report_value(report, "totalRevenue") for report in reports]
+    if any(value is None or value <= 0 for value in revenues):
+        return None
+    try:
+        latest, year_ago = date.fromisoformat(reports[0]["fiscalDateEnding"]), date.fromisoformat(reports[4]["fiscalDateEnding"])
+    except (KeyError, ValueError):
+        return None
+    # Reject provider gaps: the fifth report back must be the same quarter a year earlier.
+    if not 350 <= (latest - year_ago).days <= 380:
+        return None
+    return {
+        "revenueTTMPriorYear": sum(revenues[4:8]),
+        "revenueLatestQuarter": revenues[0],
+        "revenueLatestQuarterPriorYear": revenues[4],
+    }
+
 def annual_margins(income, cash):
     income_by_year = {r.get("fiscalDateEnding"): r for r in income.get("annualReports", [])}
     results = []
@@ -157,7 +182,10 @@ def main():
             normalized = ttm_weight * ttm_margin + (1 - ttm_weight) * median_margin
             reporting_currency = "USD"
             fx_rate_to_usd = 1.0
+            growth_inputs = revenue_growth_inputs(income)
             if ticker == "TSM":
+                if growth_inputs:
+                    growth_inputs = {key: value / TSM_TWD_PER_USD for key, value in growth_inputs.items()}
                 revenue /= TSM_TWD_PER_USD
                 operating_cashflow /= TSM_TWD_PER_USD
                 fcf /= TSM_TWD_PER_USD
@@ -177,6 +205,8 @@ def main():
                 "reportingCurrency": reporting_currency, "modelCurrency": "USD", "fxRateToUsd": fx_rate_to_usd,
                 "rationale": rationale, "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）" + (f"；TSMC 金额按 1 USD = {TSM_TWD_PER_USD:.1f} TWD 换算" if ticker == "TSM" else ""),
             }
+            if growth_inputs:
+                refreshed[ticker].update(growth_inputs)
             if ticker in DISPLAY_SCENARIO_MARGINS:
                 target_margin, current_override = DISPLAY_SCENARIO_MARGINS[ticker]
                 refreshed[ticker]["displayScenarioTargetMargin"] = target_margin
