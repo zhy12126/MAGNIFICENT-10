@@ -8,12 +8,6 @@
       "issued": "2026-08-26",
       "fiscalPeriodEnd": "2026-07-26"
     },
-    "AAPL": {
-      "value": "9%–11%",
-      "period": "FY2026 Q4（截至9月）总收入，对比 FY2025 Q4实际收入；iPhone约增长15%",
-      "issued": "2026-07-30",
-      "fiscalPeriodEnd": "2026-06-30"
-    },
     "AMZN": {
       "value": "12%–16%",
       "period": "2026 Q4净销售额 $240.0B–$247.0B，对比2025 Q4实际净销售额；含约60个基点汇率逆风",
@@ -39,16 +33,16 @@
       "fiscalPeriodEnd": "2026-07-31"
     },
     "AMD": {
-      "value": "约 41%",
-      "period": "2026 Q3收入约 $13.0B（±$0.3B），对比2025 Q3实际收入 $9.246B",
-      "issued": "2026-08-04",
-      "fiscalPeriodEnd": "2026-06-30"
+      "value": "约 66%",
+      "period": "2026 Q4收入约 $17.0B（±3%），对比2025 Q4实际收入（公司按中值测算）",
+      "issued": "2026-11-03",
+      "fiscalPeriodEnd": "2026-09-30"
     },
     "PLTR": {
-      "value": "约 82%",
-      "period": "FY2026全年收入 $8.150B–$8.158B，对比 FY2025全年实际收入",
-      "issued": "2026-08-03",
-      "fiscalPeriodEnd": "2026-06-30"
+      "value": "约 91%",
+      "period": "FY2026全年收入 $8.530B–$8.534B（上调），对比 FY2025全年实际收入 $4.475B",
+      "issued": "2026-11-02",
+      "fiscalPeriodEnd": "2026-09-30"
     },
     "LLY": {
       "value": "40%–41%",
@@ -63,14 +57,7 @@
       "fiscalPeriodEnd": "2026-08-31"
     }
   },
-  "analystDisplayOverrides": {
-    "AAPL": {
-      "value": "约 13.0%",
-      "period": "FY2026 Q4收入共识 $115.73B，对比 FY2025 Q4实际 $102.47B",
-      "source": "Zacks",
-      "updated": "2026-08"
-    }
-  },
+  "analystDisplayOverrides": {},
   "business": {
     "NVDA": {
       "period": "FY2027 Q2 vs FY2026 Q2",
@@ -97,45 +84,45 @@
       "reportedRevenue": 96.221
     },
     "AAPL": {
-      "period": "FY2026 Q3 vs FY2025 Q3",
-      "issued": "2026-07-30",
-      "source": "Apple FY2026 Q3财务报表",
+      "period": "FY2026 Q4 vs FY2025 Q4",
+      "issued": "2026-11-02",
+      "source": "Apple FY2026 Q4财务报表",
       "segments": [
         [
           "iPhone",
-          54.25,
-          "+21.7%",
+          57.583,
+          "+17.5%",
           "iPhone手机及相关硬件"
         ],
         [
           "Mac",
-          10.35,
-          "+28.6%",
+          10.792,
+          "+23.7%",
           "Mac电脑"
         ],
         [
           "iPad",
-          6.19,
-          "−5.9%",
+          6.229,
+          "−10.4%",
           "iPad平板电脑"
         ],
         [
           "可穿戴、家居与配件",
-          7.89,
-          "+6.6%",
+          8.3,
+          "−7.9%",
           "Watch、AirPods、Home及配件"
         ],
         [
           "服务",
-          30.74,
-          "+12.1%",
+          31.573,
+          "+9.8%",
           "App Store、订阅、广告、云服务等"
         ]
       ],
-      "fiscalPeriodEnd": "2026-06-30",
-      "comparisonPeriod": "FY2026 Q3 vs FY2025 Q3",
-      "manualUpdatedAt": "2026-07-30",
-      "reportedRevenue": 109.42
+      "fiscalPeriodEnd": "2026-09-30",
+      "comparisonPeriod": "FY2026 Q4 vs FY2025 Q4",
+      "manualUpdatedAt": "2026-11-11",
+      "reportedRevenue": 114.477
     },
     "MSFT": {
       "period": "微软FY2027 Q1（自然年2026 Q3）vs 微软FY2026 Q1",
@@ -217,40 +204,40 @@
       "reportedRevenue": 127.577
     },
     "AMZN": {
-      "period": "2026 Q2 vs 2025 Q2",
-      "issued": "2026-07-30",
-      "source": "Amazon 财报",
+      "period": "2026 Q3 vs 2025 Q3",
+      "issued": "2026-10-29",
+      "source": "Amazon 2026 Q3财报",
       "segments": [
         [
           "北美",
-          116.2,
-          "+16%",
+          112.852,
+          "+6%",
           "美国、加拿大及墨西哥零售与服务"
         ],
         [
           "国际",
-          42.2,
-          "+15%",
+          43.108,
+          "+5%",
           "北美以外零售与服务"
         ],
         [
           "AWS",
-          42.23,
-          "+37%",
+          45.984,
+          "+39%",
           "云计算、存储、数据库及AI服务"
         ]
       ],
       "submetrics": [
         [
           "广告服务",
-          "+26%",
-          "计入北美与国际分部，不单独计入饼图"
+          "+12%",
+          "剔除汇率影响（报告口径+11%，$19.6B）；计入北美与国际分部，不单独计入饼图"
         ]
       ],
-      "fiscalPeriodEnd": "2026-06-30",
-      "comparisonPeriod": "2026 Q2 vs 2025 Q2",
-      "manualUpdatedAt": "2026-07-30",
-      "reportedRevenue": 200.63
+      "fiscalPeriodEnd": "2026-09-30",
+      "comparisonPeriod": "2026 Q3 vs 2025 Q3",
+      "manualUpdatedAt": "2026-11-11",
+      "reportedRevenue": 201.944
     },
     "META": {
       "period": "2026 Q3 vs 2025 Q3",
@@ -470,47 +457,47 @@
       "reportedRevenue": 29.591
     },
     "AMD": {
-      "period": "2026 Q2 vs 2025 Q2",
-      "issued": "2026-08-04",
-      "source": "AMD 财报",
+      "period": "2026 Q3 vs 2025 Q3",
+      "issued": "2026-11-03",
+      "source": "AMD 2026 Q3财报",
       "segments": [
         [
           "数据中心",
-          6.718,
-          "约+110%",
+          8.546,
+          "约+97%",
           "EPYC服务器CPU及Instinct AI加速器"
         ],
         [
           "客户端与游戏",
-          3.841,
-          "约+7%",
+          3.722,
+          "约−8%",
           "Ryzen客户端CPU、Radeon及游戏主机芯片"
         ],
         [
           "嵌入式",
-          0.977,
-          "约+19%",
+          1.109,
+          "约+29%",
           "工业、通信、汽车及自适应计算"
         ]
       ],
       "submetrics": [
         [
           "客户端业务",
-          "+23%",
+          "+7%",
           "客户端与游戏子业务",
-          80.7
+          79.2
         ],
         [
           "游戏业务",
-          "−31%",
+          "−40%",
           "客户端与游戏子业务",
-          19.3
+          20.8
         ]
       ],
-      "fiscalPeriodEnd": "2026-06-30",
-      "comparisonPeriod": "2026 Q2 vs 2025 Q2",
-      "manualUpdatedAt": "2026-08-04",
-      "reportedRevenue": 11.536
+      "fiscalPeriodEnd": "2026-09-30",
+      "comparisonPeriod": "2026 Q3 vs 2025 Q3",
+      "manualUpdatedAt": "2026-11-11",
+      "reportedRevenue": 13.377
     },
     "SKHY": {
       "period": "2026 Q2 vs 2025 Q2（美元口径）",
@@ -595,68 +582,80 @@
       "reportedRevenue": 12.874
     },
     "MCD": {
-      "period": "2026 Q2 vs 2025 Q2",
-      "issued": "2026-08-04",
-      "source": "McDonald's 2026 Q2财报",
+      "period": "2026 Q3 vs 2025 Q3",
+      "issued": "2026-11-04",
+      "source": "McDonald's 2026 Q3财报",
       "segments": [
         [
           "特许经营餐厅收入",
-          4.393,
-          "+4%",
+          4.487,
+          "+3%",
           "租金、特许权使用费及初始加盟费"
         ],
         [
           "直营餐厅销售",
-          2.525,
-          "+3%",
+          2.48,
+          "−3%",
           "公司直接经营餐厅的销售收入"
         ],
         [
           "其他收入",
-          0.182,
-          "+6%",
+          0.189,
+          "+26%",
           "技术费、品牌授权及其他收入"
         ]
       ],
-      "fiscalPeriodEnd": "2026-06-30",
-      "comparisonPeriod": "2026 Q2 vs 2025 Q2",
-      "manualUpdatedAt": "2026-08-04",
-      "reportedRevenue": 7.1
+      "submetrics": [
+        [
+          "全球同店销售",
+          "+1.5%",
+          "美国−0.2%，国际直营市场+1.4%，国际发展特许市场+4.2%"
+        ],
+        [
+          "全系统销售额",
+          "+4%",
+          "含加盟餐厅的全部门店销售，超过$38B；不是公司收入"
+        ]
+      ],
+      "fiscalPeriodEnd": "2026-09-30",
+      "comparisonPeriod": "2026 Q3 vs 2025 Q3",
+      "manualUpdatedAt": "2026-11-11",
+      "reportedRevenue": 7.157
     },
     "PLTR": {
-      "period": "2026 Q2 vs 2025 Q2",
-      "issued": "2026-08-03",
-      "source": "Palantir 财报",
+      "period": "2026 Q3 vs 2025 Q3",
+      "issued": "2026-11-02",
+      "source": "Palantir 2026 Q3财报及Form 10-Q",
       "segments": [
         [
           "政府业务",
-          0.99,
-          "约+72%",
+          1.146,
+          "约+81%",
           "美国及国际政府机构合同"
         ],
         [
           "商业业务",
-          0.945,
-          "约+122%",
+          1.168,
+          "约+113%",
           "美国及国际企业客户"
         ]
       ],
       "submetrics": [
         [
           "美国商业",
-          "+149%",
-          "商业业务子项"
+          "+148%",
+          "商业业务子项，$984M"
         ],
         [
           "美国政府",
-          "+90%",
-          "政府业务子项"
+          "+96%",
+          "政府业务子项，$953M"
         ]
       ],
-      "fiscalPeriodEnd": "2026-06-30",
-      "comparisonPeriod": "2026 Q2 vs 2025 Q2",
-      "manualUpdatedAt": "2026-08-03",
-      "reportedRevenue": 1.935
+      "fiscalPeriodEnd": "2026-09-30",
+      "comparisonPeriod": "2026 Q3 vs 2025 Q3",
+      "manualUpdatedAt": "2026-11-11",
+      "reportedRevenue": 2.313
     },
     "LLY": {
       "period": "2026 Q3 vs 2025 Q3",
