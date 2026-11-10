@@ -26,7 +26,7 @@
       "displayScenarioTargetMargin": 0.46,
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
-        "updatedAt": "2026-11-03T09:52:22.677767Z",
+        "updatedAt": "2026-11-10T10:13:51.461358Z",
         "revenueCagr": -0.8289217138699974,
         "growthPath": [
           -0.3,
@@ -90,12 +90,12 @@
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
-        "updatedAt": "2026-11-03T09:52:35.932043Z",
-        "revenueCagr": -0.891124357116292,
+        "updatedAt": "2026-11-10T10:14:04.542130Z",
+        "revenueCagr": -0.0023862819816058423,
         "growthPath": [
-          0.04685985970431439,
           -0.3,
-          0.81880136586961,
+          -0.3,
+          1.0,
           0.06,
           0.05
         ],
@@ -108,19 +108,19 @@
         "analystCount": 16,
         "estimates": [
           {
-            "periodEnd": "2026-09-30",
-            "revenue": 477635413220.0,
-            "analystCount": 36
-          },
-          {
-            "periodEnd": "2026-09-30",
-            "revenue": 113265972500.0,
-            "analystCount": 24
-          },
-          {
             "periodEnd": "2026-12-31",
-            "revenue": 152753825040.0,
+            "revenue": 153064137540.0,
             "analystCount": 16
+          },
+          {
+            "periodEnd": "2027-03-31",
+            "revenue": 124000404410.0,
+            "analystCount": 21
+          },
+          {
+            "periodEnd": "2027-09-30",
+            "revenue": 477692148210.0,
+            "analystCount": 37
           }
         ]
       },
@@ -154,11 +154,11 @@
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
-        "updatedAt": "2026-11-03T09:52:49.186858Z",
-        "revenueCagr": 0.19493369438299557,
+        "updatedAt": "2026-11-10T10:14:17.619430Z",
+        "revenueCagr": 0.19547374096267256,
         "growthPath": [
           -0.3,
-          0.0537096988179413,
+          0.05399923657858818,
           1.0,
           0.14,
           0.12
@@ -169,22 +169,22 @@
           "year5": 0.12,
           "basis": "company-specific"
         },
-        "analystCount": 31,
+        "analystCount": 35,
         "estimates": [
           {
             "periodEnd": "2026-12-31",
-            "revenue": 96627860740.0,
-            "analystCount": 32
+            "revenue": 96699568110.0,
+            "analystCount": 36
           },
           {
             "periodEnd": "2027-03-31",
-            "revenue": 99188849640.0,
-            "analystCount": 31
+            "revenue": 99276094220.0,
+            "analystCount": 35
           },
           {
             "periodEnd": "2027-06-30",
-            "revenue": 395770693890.0,
-            "analystCount": 39
+            "revenue": 395904377660.0,
+            "analystCount": 45
           }
         ]
       },
@@ -218,12 +218,12 @@
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
-        "updatedAt": "2026-11-03T09:53:02.436684Z",
-        "revenueCagr": -0.909951432852901,
+        "updatedAt": "2026-11-10T10:14:30.695178Z",
+        "revenueCagr": -0.9103236621236609,
         "growthPath": [
-          0.12453067840616061,
+          0.12459125509901092,
           -0.3,
-          -0.013849029042723005,
+          -0.018539549114230502,
           0.12,
           0.1
         ],
@@ -233,22 +233,22 @@
           "year5": 0.1,
           "basis": "company-specific"
         },
-        "analystCount": 22,
+        "analystCount": 25,
         "estimates": [
           {
             "periodEnd": "2026-12-31",
-            "revenue": 499570648860.0,
-            "analystCount": 44
+            "revenue": 499584104220.0,
+            "analystCount": 47
           },
           {
             "periodEnd": "2026-12-31",
-            "revenue": 142356715910.0,
-            "analystCount": 35
+            "revenue": 142401246490.0,
+            "analystCount": 36
           },
           {
             "periodEnd": "2027-03-31",
-            "revenue": 141367528000.0,
-            "analystCount": 22
+            "revenue": 141075043480.0,
+            "analystCount": 25
           }
         ]
       },
@@ -283,12 +283,12 @@
       "displayScenarioTargetMargin": 0.08,
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
-        "updatedAt": "2026-11-03T09:53:15.624845Z",
-        "revenueCagr": -0.931097769337778,
+        "updatedAt": "2026-11-10T10:14:43.769734Z",
+        "revenueCagr": -0.9304912107095539,
         "growthPath": [
-          0.08047587092519581,
+          0.08076296596280974,
           -0.3,
-          -0.2677331932433614,
+          -0.26261770172220333,
           0.12,
           0.1
         ],
@@ -298,22 +298,22 @@
           "year5": 0.1,
           "basis": "company-specific"
         },
-        "analystCount": 27,
+        "analystCount": 31,
         "estimates": [
           {
             "periodEnd": "2026-12-31",
-            "revenue": 828922106060.0,
-            "analystCount": 47
+            "revenue": 829032225880.0,
+            "analystCount": 55
           },
           {
             "periodEnd": "2026-12-31",
-            "revenue": 244617854270.0,
-            "analystCount": 42
+            "revenue": 244838490660.0,
+            "analystCount": 45
           },
           {
             "periodEnd": "2027-03-31",
-            "revenue": 209325832190.0,
-            "analystCount": 27
+            "revenue": 210245179650.0,
+            "analystCount": 31
           }
         ]
       },
@@ -347,12 +347,12 @@
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
-        "updatedAt": "2026-11-03T09:53:28.815734Z",
-        "revenueCagr": -0.9195938901698504,
+        "updatedAt": "2026-11-10T10:14:56.848177Z",
+        "revenueCagr": -0.9195692410156028,
         "growthPath": [
-          0.13038696874408906,
+          0.13038695739074613,
           -0.3,
-          -0.16902489920620278,
+          -0.16877015695491526,
           0.12,
           0.1
         ],
@@ -362,11 +362,11 @@
           "year5": 0.1,
           "basis": "company-specific"
         },
-        "analystCount": 33,
+        "analystCount": 32,
         "estimates": [
           {
             "periodEnd": "2026-12-31",
-            "revenue": 256875736220.0,
+            "revenue": 256875734930.0,
             "analystCount": 54
           },
           {
@@ -376,8 +376,8 @@
           },
           {
             "periodEnd": "2027-03-31",
-            "revenue": 68510011150.0,
-            "analystCount": 33
+            "revenue": 68520511499.0,
+            "analystCount": 32
           }
         ]
       },
@@ -1096,5 +1096,5 @@
       "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     }
   },
-  "analystEstimatesUpdatedAt": "2026-11-05T09:49:05.161316Z"
+  "analystEstimatesUpdatedAt": "2026-11-10T10:14:56.848222Z"
 }
