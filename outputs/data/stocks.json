@@ -626,7 +626,7 @@
         "displayScenarioTargetMargin": 0.065,
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-11-10T22:57:48.567240Z",
+          "updatedAt": "2026-11-11T09:44:36.859165Z",
           "basisPeriodEnd": "2026-09-30",
           "revenueCagr": 0.14326622634489938,
           "next12MonthGrowth": 0.1452371006650386,
@@ -719,7 +719,7 @@
         "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）；TSMC 金额按 1 USD = 31.6 TWD 换算",
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-11-10T22:58:02.082557Z",
+          "updatedAt": "2026-11-11T09:44:50.071802Z",
           "basisPeriodEnd": "2026-09-30",
           "revenueCagr": 0.42132626072265866,
           "next12MonthGrowth": 0.4323875485392321,
@@ -807,7 +807,7 @@
         "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-11-10T22:58:15.612911Z",
+          "updatedAt": "2026-11-11T09:45:03.167622Z",
           "basisPeriodEnd": "2026-08-31",
           "revenueCagr": 0.5497278544892896,
           "next12MonthGrowth": 1.071631021997144,
@@ -900,7 +900,7 @@
         "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-11-10T22:58:29.132145Z",
+          "updatedAt": "2026-11-11T09:45:16.382819Z",
           "basisPeriodEnd": "2026-07-31",
           "revenueCagr": 0.7090362599873894,
           "next12MonthGrowth": 0.7256571388828519,
@@ -994,7 +994,7 @@
         "displayScenarioTargetMargin": 0.1,
         "analystConsensus": {
           "source": "Alpha Vantage EARNINGS_ESTIMATES",
-          "updatedAt": "2026-11-10T22:58:42.652426Z",
+          "updatedAt": "2026-11-11T09:45:29.534758Z",
           "basisPeriodEnd": "2026-09-30",
           "revenueCagr": 0.8137869423281809,
           "next12MonthGrowth": 0.8089983139690944,
@@ -1090,7 +1090,41 @@
         "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2120882/000119312526321989/d115239d6k.htm",
         "availableFrom": "2026-07-29",
         "impliedGrowthStatus": "ready",
-        "impliedGrowthNote": null
+        "impliedGrowthNote": null,
+        "analystConsensus": {
+          "source": "Alpha Vantage EARNINGS_ESTIMATES",
+          "updatedAt": "2026-11-11T09:45:42.626199Z",
+          "basisPeriodEnd": "2026-06-30",
+          "revenueCagr": 1.1126782766680279,
+          "next12MonthGrowth": 1.4295306735134656,
+          "suspectFiscalYearLabel": false,
+          "growthPath": [
+            1.0,
+            0.6933333333333334,
+            0.38666666666666666,
+            0.08,
+            0.06
+          ],
+          "consensusYears": 1,
+          "farGrowth": {
+            "year4": 0.08,
+            "year5": 0.06,
+            "basis": "company-specific"
+          },
+          "analystCount": 38,
+          "estimates": [
+            {
+              "periodEnd": "2026-12-31",
+              "revenue": 269758809010.65942,
+              "analystCount": 38
+            },
+            {
+              "periodEnd": "2027-12-31",
+              "revenue": 431553186195.2251,
+              "analystCount": 46
+            }
+          ]
+        }
       },
       "valuationAsOf": "2026-11-09",
       "ttmPeriodEnd": "2026-06-30",
@@ -1640,5 +1674,6 @@
       "dataSource": "Finviz supplemental + Yahoo Finance EOD",
       "note": "数据口径：收盘价和实际交易日来自 Yahoo Finance EOD；Trailing P/E、P/CF、P/S 与历史曲线共用已披露财报 TTM 分母；Finviz 仅提供前瞻及企业价值补充指标。"
     }
-  ]
+  ],
+  "analystEstimatesUpdatedAt": "2026-11-11T09:45:42.626229Z"
 }
