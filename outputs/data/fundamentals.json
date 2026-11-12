@@ -767,7 +767,7 @@
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
-        "updatedAt": "2026-11-10T22:58:56.207002Z",
+        "updatedAt": "2026-11-12T10:12:22.370991Z",
         "basisPeriodEnd": "2026-09-30",
         "revenueCagr": 0.10889089054464773,
         "next12MonthGrowth": 0.1093150697770624,
@@ -829,7 +829,7 @@
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）",
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
-        "updatedAt": "2026-11-10T22:59:09.742930Z",
+        "updatedAt": "2026-11-12T10:12:35.589277Z",
         "basisPeriodEnd": "2026-09-30",
         "revenueCagr": 0.012753587683486334,
         "next12MonthGrowth": 0.012758789201553045,
@@ -893,7 +893,7 @@
       "displayScenarioCurrentMargin": 0.35,
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
-        "updatedAt": "2026-11-10T22:59:22.966238Z",
+        "updatedAt": "2026-11-12T10:12:48.758895Z",
         "basisPeriodEnd": "2026-09-30",
         "revenueCagr": 0.5989863887815394,
         "next12MonthGrowth": 0.6157544323624371,
@@ -956,7 +956,7 @@
       "displayScenarioTargetMargin": 0.16,
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
-        "updatedAt": "2026-11-10T22:59:36.500706Z",
+        "updatedAt": "2026-11-12T10:13:01.994288Z",
         "basisPeriodEnd": "2026-09-30",
         "revenueCagr": 0.17868105178562388,
         "next12MonthGrowth": 0.18431260817201145,
@@ -1020,7 +1020,7 @@
       "displayScenarioCurrentMargin": -0.352,
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
-        "updatedAt": "2026-11-10T22:59:50.551326Z",
+        "updatedAt": "2026-11-12T10:13:15.167848Z",
         "basisPeriodEnd": "2026-08-31",
         "revenueCagr": 0.41545769961157974,
         "next12MonthGrowth": 0.38560127496319785,
@@ -1098,5 +1098,5 @@
       "balanceSheetAdjustmentSource": "SEC Company Facts: cash + current marketable securities - debt"
     }
   },
-  "analystEstimatesUpdatedAt": "2026-11-11T09:45:42.626229Z"
+  "analystEstimatesUpdatedAt": "2026-11-12T10:13:28.338795Z"
 }
