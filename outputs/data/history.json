@@ -11446,6 +11446,16 @@
         "ttmPeriodEnd": "2026-07-26",
         "ttmAvailableFrom": "2026-08-26",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-11-18",
+        "price": 150.96,
+        "pe": 19.1114,
+        "pcf": 27.4351,
+        "ps": 12.1669,
+        "ttmPeriodEnd": "2026-07-26",
+        "ttmAvailableFrom": "2026-08-26",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "AAPL": [
@@ -22819,6 +22829,16 @@
         "pe": 39.252,
         "pcf": 35.7563,
         "ps": 10.835,
+        "ttmPeriodEnd": "2026-09-26",
+        "ttmAvailableFrom": "2026-11-03",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-11-18",
+        "price": 352.45,
+        "pe": 39.3122,
+        "pcf": 35.8112,
+        "ps": 10.8516,
         "ttmPeriodEnd": "2026-09-26",
         "ttmAvailableFrom": "2026-11-03",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
@@ -34267,6 +34287,16 @@
         "ttmPeriodEnd": "2026-09-30",
         "ttmAvailableFrom": "2026-10-28",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-11-18",
+        "price": 508.29,
+        "pe": 26.5532,
+        "pcf": 19.3348,
+        "ps": 10.9319,
+        "ttmPeriodEnd": "2026-09-30",
+        "ttmAvailableFrom": "2026-10-28",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "GOOGL": [
@@ -45712,6 +45742,16 @@
         "ttmPeriodEnd": "2026-09-30",
         "ttmAvailableFrom": "2026-10-29",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-11-18",
+        "price": 282.44,
+        "pe": 14.7232,
+        "pcf": 19.3267,
+        "ps": 7.3659,
+        "ttmPeriodEnd": "2026-09-30",
+        "ttmAvailableFrom": "2026-10-29",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "AMZN": [
@@ -57135,6 +57175,16 @@
         "pe": 20.8244,
         "pcf": 16.6767,
         "ps": 3.5198,
+        "ttmPeriodEnd": "2026-09-30",
+        "ttmAvailableFrom": "2026-10-30",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-11-18",
+        "price": 267.74,
+        "pe": 21.6198,
+        "pcf": 17.3137,
+        "ps": 3.6542,
         "ttmPeriodEnd": "2026-09-30",
         "ttmAvailableFrom": "2026-10-30",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
@@ -68572,6 +68622,16 @@
         "pe": 21.1303,
         "pcf": 11.9474,
         "ps": 6.5811,
+        "ttmPeriodEnd": "2026-09-30",
+        "ttmAvailableFrom": "2026-10-22",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-11-18",
+        "price": 616.38,
+        "pe": 21.0453,
+        "pcf": 11.8993,
+        "ps": 6.5546,
         "ttmPeriodEnd": "2026-09-30",
         "ttmAvailableFrom": "2026-10-22",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
@@ -80019,6 +80079,16 @@
         "pe": 417.7607,
         "pcf": 71.8523,
         "ps": 12.9802,
+        "ttmPeriodEnd": "2026-09-30",
+        "ttmAvailableFrom": "2026-10-22",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-11-18",
+        "price": 383.72,
+        "pe": 421.7283,
+        "pcf": 72.5347,
+        "ps": 13.1035,
         "ttmPeriodEnd": "2026-09-30",
         "ttmAvailableFrom": "2026-10-22",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
@@ -95234,6 +95304,16 @@
         "ttmPeriodEnd": "2026-09-30",
         "ttmAvailableFrom": "2026-10-15",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-11-18",
+        "price": 362.62,
+        "pe": 23.3346,
+        "pcf": 19.2868,
+        "ps": 12.3643,
+        "ttmPeriodEnd": "2026-09-30",
+        "ttmAvailableFrom": "2026-10-15",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "MU": [
@@ -106678,6 +106758,16 @@
         "pe": 9.575,
         "pcf": 9.0725,
         "ps": 6.1085,
+        "ttmPeriodEnd": "2026-09-03",
+        "ttmAvailableFrom": "2026-10-09",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-11-18",
+        "price": 705.27,
+        "pe": 9.4789,
+        "pcf": 8.9814,
+        "ps": 6.0472,
         "ttmPeriodEnd": "2026-09-03",
         "ttmAvailableFrom": "2026-10-09",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
@@ -120624,6 +120714,16 @@
         "ttmPeriodEnd": "2026-06-30",
         "ttmAvailableFrom": "2026-07-29",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-11-18",
+        "price": 122.47,
+        "pe": 7.1185,
+        "pcf": 9.0622,
+        "ps": 6.0946,
+        "ttmPeriodEnd": "2026-06-30",
+        "ttmAvailableFrom": "2026-07-29",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "AVGO": [
@@ -132071,6 +132171,16 @@
         "ttmPeriodEnd": "2026-08-02",
         "ttmAvailableFrom": "2026-09-10",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-11-18",
+        "price": 354.05,
+        "pe": 45.1154,
+        "pcf": 42.4655,
+        "ps": 19.3746,
+        "ttmPeriodEnd": "2026-08-02",
+        "ttmAvailableFrom": "2026-09-10",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "AMD": [
@@ -143444,6 +143554,16 @@
         "pe": 109.1194,
         "pcf": 91.1303,
         "ps": 18.2977,
+        "ttmPeriodEnd": "2026-09-26",
+        "ttmAvailableFrom": "2026-11-04",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-11-18",
+        "price": 530.14,
+        "pe": 114.9134,
+        "pcf": 95.9691,
+        "ps": 19.2693,
         "ttmPeriodEnd": "2026-09-26",
         "ttmAvailableFrom": "2026-11-04",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
@@ -154894,6 +155014,16 @@
         "ttmPeriodEnd": "2026-09-30",
         "ttmAvailableFrom": "2026-10-21",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-11-18",
+        "price": 59.82,
+        "pe": 17.3169,
+        "pcf": 20.7761,
+        "ps": 5.1415,
+        "ttmPeriodEnd": "2026-09-30",
+        "ttmAvailableFrom": "2026-10-21",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "MCD": [
@@ -166261,6 +166391,16 @@
         "ttmPeriodEnd": "2026-09-30",
         "ttmAvailableFrom": "2026-11-06",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-11-18",
+        "price": 274.03,
+        "pe": 21.7007,
+        "pcf": 17.8311,
+        "ps": 7.0263,
+        "ttmPeriodEnd": "2026-09-30",
+        "ttmAvailableFrom": "2026-11-06",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "PLTR": [
@@ -177615,6 +177755,16 @@
         "pe": 109.6479,
         "pcf": 98.1914,
         "ps": 55.1997,
+        "ttmPeriodEnd": "2026-09-30",
+        "ttmAvailableFrom": "2026-11-03",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-11-18",
+        "price": 156.67,
+        "pe": 109.7249,
+        "pcf": 98.2604,
+        "ps": 55.2385,
         "ttmPeriodEnd": "2026-09-30",
         "ttmAvailableFrom": "2026-11-03",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
@@ -189060,6 +189210,16 @@
         "pe": 45.9662,
         "pcf": 41.3688,
         "ps": 14.6623,
+        "ttmPeriodEnd": "2026-09-30",
+        "ttmAvailableFrom": "2026-10-29",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-11-18",
+        "price": 1382.75,
+        "pe": 44.9011,
+        "pcf": 40.4102,
+        "ps": 14.3226,
         "ttmPeriodEnd": "2026-09-30",
         "ttmAvailableFrom": "2026-10-29",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
@@ -200510,6 +200670,16 @@
         "ttmPeriodEnd": "2026-08-31",
         "ttmAvailableFrom": "2026-09-11",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-11-18",
+        "price": 113.89,
+        "pe": 17.6794,
+        "pcf": 7.126,
+        "ps": 4.6601,
+        "ttmPeriodEnd": "2026-08-31",
+        "ttmAvailableFrom": "2026-09-11",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ],
     "AXP": [
@@ -211957,10 +212127,20 @@
         "ttmPeriodEnd": "2026-09-30",
         "ttmAvailableFrom": "2026-10-23",
         "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
+      },
+      {
+        "date": "2026-11-18",
+        "price": 315.4,
+        "pe": 17.5972,
+        "pcf": 12.235,
+        "ps": 4.9121,
+        "ttmPeriodEnd": "2026-09-30",
+        "ttmAvailableFrom": "2026-10-23",
+        "valuationMethod": "daily EOD close / shared point-in-time filing TTM per-share denominator"
       }
     ]
   },
-  "updatedAt": "2026-11-18T03:45:21Z",
+  "updatedAt": "2026-11-19T03:43:01Z",
   "backfillUpdatedAt": "2026-11-09",
   "backfillErrors": {},
   "methodology": "For each trading date: EOD close divided by the latest already-filed rolling-four-quarter EPS, operating cash flow per share, and revenue per share. Per-share denominators use the average diluted weighted shares of the same four quarters.",
