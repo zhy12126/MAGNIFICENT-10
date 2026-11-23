@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16T07:59:19Z",
+  "updatedAt": "2026-11-23T09:00:42Z",
   "companies": {
     "NVDA": {
       "status": "ready",
@@ -463,13 +463,13 @@
       "status": "ready",
       "company": "TSMC",
       "fiscalPeriodEnd": "2026-09-30",
-      "revenueTTM": 156768552025.31644,
+      "revenueTTM": 156794416613.92404,
       "operatingCashflowTTM": 100500948512.65822,
       "fcfTTM": 48417811677.21519,
-      "netIncomeTTM": 80766210063.29114,
-      "fcfMarginTTM": 0.3088490073531854,
+      "netIncomeTTM": 80788174082.27847,
+      "fcfMarginTTM": 0.30879806005104565,
       "fcfMargin3yMedian": 0.2605418762342138,
-      "normalizedFcfMargin": 0.28228008523775105,
+      "normalizedFcfMargin": 0.28225715895178816,
       "fcfMarginCycleMedian": 0.22489498413595382,
       "fcfMarginCycleYears": 7,
       "ttmWeight": 0.45,
@@ -482,7 +482,7 @@
       "rationale": "晶圆厂资本开支与景气周期显著，三年中位数为主。",
       "source": "Alpha Vantage INCOME_STATEMENT + CASH_FLOW（公司申报财报）；TSMC 金额按 1 USD = 31.6 TWD 换算",
       "revenueTTMPriorYear": 114918507943.03796,
-      "revenueLatestQuarter": 47260315284.81013,
+      "revenueLatestQuarter": 47286179873.41772,
       "revenueLatestQuarterPriorYear": 31326529050.63291,
       "analystConsensus": {
         "source": "Alpha Vantage EARNINGS_ESTIMATES",
@@ -718,63 +718,29 @@
     "SKHY": {
       "status": "ready",
       "company": "SK hynix",
-      "fiscalPeriodEnd": "2026-06-30",
-      "revenueTTM": 141808121788.6528,
-      "operatingCashflowTTM": 95370583686.04964,
-      "fcfTTM": 68354239287.79216,
-      "netIncomeTTM": 121414246872.6797,
-      "fcfMarginTTM": 0.4820192131848807,
+      "fiscalPeriodEnd": "2026-09-30",
+      "revenueTTM": 200387758024.89633,
+      "operatingCashflowTTM": 124095048995.1459,
+      "fcfTTM": 91546634146.06679,
+      "netIncomeTTM": 140545646967.68225,
+      "fcfMarginTTM": 0.45684743942637934,
       "fcfMargin3yMedian": 0.19840848634054134,
       "fcfMarginCycleMedian": 0.1700322890998682,
       "fcfMarginCycleYears": 5,
-      "normalizedFcfMargin": 0.29767224073606013,
+      "normalizedFcfMargin": 0.28886211992058464,
       "ttmWeight": 0.35,
       "terminalGrowth": 0.025,
       "riskFreeRate": 0.0425,
       "equityRiskPremium": 0.05,
       "reportingCurrency": "KRW",
       "modelCurrency": "USD",
-      "fxRateToUsd": 0.0007496308123153947,
+      "fxRateToUsd": 0.0007440033574604637,
       "beta": 2.466,
       "costOfEquity": 0.16580000000000003,
       "rationale": "DRAM 与 NAND 周期显著，TTM 权重 35%，三年中位数权重 65%。",
-      "source": "SK hynix 2Q26 official K-IFRS results (SEC 6-K + earnings presentation); FY2021 cycle input from Korean DART annual report; KRW translated at latest KRW/USD",
-      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2120882/000119312526321989/d115239d6k.htm",
-      "availableFrom": "2026-07-29",
-      "analystConsensus": {
-        "source": "Alpha Vantage EARNINGS_ESTIMATES",
-        "updatedAt": "2026-11-18T10:32:09.221327Z",
-        "basisPeriodEnd": "2026-06-30",
-        "revenueCagr": 1.1151047949344748,
-        "next12MonthGrowth": 1.4308668806913758,
-        "suspectFiscalYearLabel": false,
-        "growthPath": [
-          1.0,
-          0.6933333333333334,
-          0.38666666666666666,
-          0.08,
-          0.06
-        ],
-        "consensusYears": 1,
-        "farGrowth": {
-          "year4": 0.08,
-          "year5": 0.06,
-          "basis": "company-specific"
-        },
-        "analystCount": 39,
-        "estimates": [
-          {
-            "periodEnd": "2026-12-31",
-            "revenue": 272664239381.65704,
-            "analystCount": 39
-          },
-          {
-            "periodEnd": "2027-12-31",
-            "revenue": 437220975187.02246,
-            "analystCount": 46
-          }
-        ]
-      }
+      "source": "Yahoo Finance 000660.KS K-IFRS statements; FY2021 cycle input from Korean DART annual report; KRW translated at latest KRW/USD",
+      "sourceUrl": null,
+      "availableFrom": "2026-11-14"
     },
     "NFLX": {
       "status": "ready",
@@ -1043,13 +1009,13 @@
       "status": "ready",
       "company": "Oracle",
       "fiscalPeriodEnd": "2026-08-31",
-      "revenueTTM": 71777000000.0,
+      "revenueTTM": 71776000000.0,
       "operatingCashflowTTM": 46940000000.0,
       "fcfTTM": -28720000000.0,
       "netIncomeTTM": 18920000000.0,
-      "fcfMarginTTM": -0.40012817476350365,
+      "fcfMarginTTM": -0.40013374944271063,
       "fcfMargin3yMedian": -0.00686423108416523,
-      "normalizedFcfMargin": -0.30181218884366906,
+      "normalizedFcfMargin": -0.3018163698530743,
       "fcfMarginCycleMedian": 0.16955599151219122,
       "fcfMarginCycleYears": 7,
       "ttmWeight": 0.75,
