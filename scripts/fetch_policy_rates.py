@@ -1,4 +1,7 @@
-"""Build policy-rate step histories: PBOC 7-day reverse repo and BIS US/JP.
+"""Build policy-rate step histories: PBOC main reverse repo and BIS US/JP.
+
+The PBOC series is the 7-day reverse repo rate until 1 Nov 2026 and the
+fixed-rate overnight reverse repo rate from 2 Nov 2026 (OVERNIGHT_SWITCH).
 
 China's BIS series is LPR, so it must not be used for this chart. Reviewed
 historical PBOC changes seed its series; recent official operation notices
@@ -25,6 +28,9 @@ CHINA_SOURCE = Path('outputs/data/china-policy-rate-source.json')
 HISTORY_START = '2016-01-01'
 BIS_URL = 'https://stats.bis.org/api/v1/data/WS_CBPOL/D.US+JP?startPeriod=2016-01-01&format=csv'
 PBOC_INDEX = 'https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/index.html'
+# PBOC 2026 Q3 Monetary Policy Report: the main open-market operation switched
+# to the daily fixed-rate overnight reverse repo from this date.
+OVERNIGHT_SWITCH = '2026-11-02'
 
 
 def fetch(url: str) -> str:
@@ -142,6 +148,18 @@ def parse_operation(url: str, raw: str) -> tuple[str, float | None, str]:
         raise ValueError(f'PBOC operation date unavailable: {url}')
     day = match.group(1)
     date.fromisoformat(day)
+    compact = re.sub(r'\s+', '', ' '.join(parsed.text))
+    if day >= OVERNIGHT_SWITCH:
+        # From 2 Nov 2026 the main operation is the fixed-rate overnight reverse
+        # repo; 7-day repos moved to rate tenders and no longer quote the policy rate.
+        for row in parsed.rows:
+            if row and row[0] == '隔夜':
+                rates = [cell for cell in row[1:] if re.fullmatch(r'\d+(?:\.\d+)?%', cell)]
+                if len(rates) == 1:
+                    return day, float(rates[0][:-1]), url
+        if '隔夜' not in compact and any(term in compact for term in ('7天期逆回购', '14天期逆回购', '央行票据')):
+            return day, None, url
+        raise ValueError(f'PBOC overnight operation table unavailable: {url}')
     for row in parsed.rows:
         if row and row[0] in {'7天', '7天期'}:
             rates = [cell for cell in row[1:] if re.fullmatch(r'\d+(?:\.\d+)?%', cell)]
@@ -149,7 +167,6 @@ def parse_operation(url: str, raw: str) -> tuple[str, float | None, str]:
                 return day, float(rates[0][:-1]), url
     # Zero-volume operations have no interest-rate quote. Never treat zero
     # operation volume as a zero interest rate, or mix in 14-day/overnight rates.
-    compact = re.sub(r'\s+', '', ' '.join(parsed.text))
     if '7天期逆回购操作量为零' in compact or '7天期逆回购操作量为0' in compact:
         return day, None, url
     if '7天' not in compact and ('14天期逆回购' in compact or '隔夜逆回购' in compact):
@@ -161,8 +178,8 @@ def parse_operation(url: str, raw: str) -> tuple[str, float | None, str]:
 
 def build_china(index: str, get=fetch) -> dict:
     source = json.loads(CHINA_SOURCE.read_text(encoding='utf-8'))
-    series = {'id': 'cn', 'shortMeasure': '7天逆回购利率',
-              'measure': '人民银行公开市场7天期逆回购操作利率',
+    series = {'id': 'cn', 'shortMeasure': '公开市场主要操作利率',
+              'measure': '人民银行公开市场主要操作利率：2026年11月2日起为隔夜逆回购操作利率，此前为7天期逆回购操作利率',
               'provider': '中国人民银行', 'sourceUrl': source['latestSourceUrl'],
               'asOf': source['asOf'], 'points': source['points']}
     validate_points(series['points'], series['asOf'])

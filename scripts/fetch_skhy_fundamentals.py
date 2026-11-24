@@ -95,6 +95,10 @@ def main():
             continue
         merged = {**(stock.get("valuationModel") or {}), **model}
         merged.pop("reason", None)
+        # SKHY's period end is already the actual K-IFRS quarter end; stale
+        # aliases from an earlier sync would hide a newer filing.
+        merged.pop("providerFiscalPeriodEnd", None)
+        merged.pop("fiscalPeriodEndActual", None)
         beta = merged.get("beta")
         if beta is not None:
             merged["costOfEquity"] = RISK_FREE_RATE + float(beta) * EQUITY_RISK_PREMIUM

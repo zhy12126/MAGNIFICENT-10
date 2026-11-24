@@ -30,7 +30,10 @@ jobs:
       - name: Build reviewed official event calendar
         run: python scripts/build_yen_events.py
       - name: Fetch central bank policy-rate histories
+        # On failure the script keeps the previous policy-rates.json; a changed
+        # PBOC notice format must not freeze the FX and calendar data as well.
         run: python scripts/fetch_policy_rates.py
+        continue-on-error: true
       - name: Fetch official government bond yield curves
         # On failure the script keeps the previous bond-yields.json; do not let
         # a stalled bond source block the FX, calendar and policy-rate commit.

@@ -116,6 +116,9 @@ jobs:
       - name: Rebuild separate SKHY history after a new filing
         if: steps.changed.outputs.skhy_changed == 'true'
         run: python scripts/fetch_skhy_history.py
+      - name: Hold back models whose quarter is not on SEC EDGAR yet
+        if: steps.changed.outputs.filings_changed == 'true'
+        run: python scripts/defer_unmatched_models.py
       - name: Align the latest market snapshot after history changes
         if: steps.changed.outputs.filings_changed == 'true'
         run: python scripts/fetch_market_data.py

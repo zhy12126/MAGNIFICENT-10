@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-23T09:00:42Z",
+  "updatedAt": "2026-11-24T01:22:23Z",
   "companies": {
     "NVDA": {
       "status": "ready",
@@ -719,10 +719,10 @@
       "status": "ready",
       "company": "SK hynix",
       "fiscalPeriodEnd": "2026-09-30",
-      "revenueTTM": 200387758024.89633,
-      "operatingCashflowTTM": 124095048995.1459,
-      "fcfTTM": 91546634146.06679,
-      "netIncomeTTM": 140545646967.68225,
+      "revenueTTM": 200030578179.28766,
+      "operatingCashflowTTM": 123873856588.5949,
+      "fcfTTM": 91383457448.18576,
+      "netIncomeTTM": 140295132300.62036,
       "fcfMarginTTM": 0.45684743942637934,
       "fcfMargin3yMedian": 0.19840848634054134,
       "fcfMarginCycleMedian": 0.1700322890998682,
@@ -734,7 +734,7 @@
       "equityRiskPremium": 0.05,
       "reportingCurrency": "KRW",
       "modelCurrency": "USD",
-      "fxRateToUsd": 0.0007440033574604637,
+      "fxRateToUsd": 0.0007426772135534239,
       "beta": 2.466,
       "costOfEquity": 0.16580000000000003,
       "rationale": "DRAM 与 NAND 周期显著，TTM 权重 35%，三年中位数权重 65%。",

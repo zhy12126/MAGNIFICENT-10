@@ -95,6 +95,10 @@ def main() -> None:
         # Beta and the latest market cap are market-data fields, so retain the
         # cached versions while replacing all filing-derived inputs.
         model = {**(stock.get("valuationModel") or {}), **fresh}
+        # Period aliases describe the previous filing; drop them so a newer
+        # model is never masked by an older "actual" period end.
+        model.pop("providerFiscalPeriodEnd", None)
+        model.pop("fiscalPeriodEndActual", None)
         provider_date, actual_date = fresh.get("fiscalPeriodEnd"), stock.get("ttmPeriodEnd")
         provider_quarter = str(provider_date or "")[:7]
         actual_quarter = str(actual_date or "")[:7]

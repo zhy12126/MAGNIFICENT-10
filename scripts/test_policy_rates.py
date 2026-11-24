@@ -20,6 +20,18 @@ class PolicyRatesTests(unittest.TestCase):
         html = notice('<table><tr><td>7<span>天</span></td><td>1.<span>40</span>%</td><td>515亿元</td></tr><tr><td>14天</td><td>1.65%</td></tr></table>')
         self.assertEqual(rates.parse_operation('https://www.pbc.gov.cn/example', html)[1], 1.4)
 
+    def test_after_overnight_switch_uses_overnight_fixed_rate_not_seven_day_tender(self):
+        html = notice('<table><tr><td>隔夜</td><td>1.25%</td><td>3640亿元</td></tr><tr><td>7天</td><td>1.40%</td></tr></table>', '2026-11-13')
+        self.assertEqual(rates.parse_operation('https://www.pbc.gov.cn/example', html)[1], 1.25)
+
+    def test_after_overnight_switch_seven_day_tender_alone_has_no_policy_rate(self):
+        html = notice('<p>以固定数量、利率招标方式开展了3000亿元7天期逆回购操作</p>', '2026-11-30')
+        self.assertIsNone(rates.parse_operation('https://www.pbc.gov.cn/example', html)[1])
+
+    def test_after_overnight_switch_unrecognised_table_fails(self):
+        with self.assertRaises(ValueError):
+            rates.parse_operation('https://www.pbc.gov.cn/example', notice('<p>7天逆回购</p><td>格式已调整</td>', '2026-11-13'))
+
     def test_historical_column_order(self):
         html = notice('<table><tr><td>7天</td><td>1000亿元</td><td>2.10%</td></tr></table>', '2022-01-17')
         self.assertEqual(rates.parse_operation('https://www.pbc.gov.cn/example', html)[:2], ('2022-01-17', 2.1))

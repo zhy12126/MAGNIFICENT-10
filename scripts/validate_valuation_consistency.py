@@ -78,7 +78,9 @@ def main():
             if snapshot_value is None or history_value in (None, 0):
                 issues.append(f"{ticker}: {metric} missing on one side")
                 continue
-            if round(snapshot_value, 1) != round(history_value, 1):
+            # The snapshot shows one decimal, so allow its rounding (e.g. 85.25
+            # vs "85.3", which round() may send either way) but nothing more.
+            if abs(snapshot_value - history_value) > 0.05 + 1e-9:
                 difference = abs(snapshot_value / history_value - 1)
                 issues.append(f"{ticker}: {metric} differs by {difference * 100:.2f}%")
         auditable_rows = [row for row in rows if row.get("ttmPeriodEnd")]
