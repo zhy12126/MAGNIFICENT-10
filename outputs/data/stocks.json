@@ -1,6 +1,6 @@
 {
   "source": "Yahoo Finance EOD + point-in-time filing TTM; Finviz supplemental metrics",
-  "updatedAt": "2026-11-26T04:14:16Z",
+  "updatedAt": "2026-11-27T04:21:33Z",
   "sourceByTicker": {
     "NVDA": "Finviz",
     "AAPL": "Finviz",
@@ -317,13 +317,13 @@
       "logo": "G",
       "color": "#fff5e7",
       "ink": "#4285f4",
-      "cap": "3.32T",
+      "cap": "3.33T",
       "pe": "14.2",
       "fpe": "18.2",
       "peg": "0.9",
       "ps": "7.1",
       "pcf": "18.7",
-      "evEbitda": "17.3",
+      "evEbitda": "17.4",
       "implied": "53%",
       "growth": "25%",
       "revenueGrowthCurrent": "25%",
@@ -794,14 +794,14 @@
       "logo": "μ",
       "color": "#e8f7ed",
       "ink": "#16834c",
-      "cap": "680B",
+      "cap": "770B",
       "pe": "8.1",
       "fpe": "2.9",
       "peg": "0.08",
       "ps": "5.2",
       "pcf": "7.7",
-      "evEbitda": "5.9",
-      "implied": "35%",
+      "evEbitda": "6.7",
+      "implied": "39%",
       "growth": "379%",
       "revenueGrowthCurrent": "379%",
       "epsGrowthCurrent": "1061%",
@@ -1725,6 +1725,5 @@
       "dataSource": "Finviz supplemental + Yahoo Finance EOD",
       "note": "数据口径：收盘价和实际交易日来自 Yahoo Finance EOD；Trailing P/E、P/CF、P/S 与历史曲线共用已披露财报 TTM 分母；Finviz 仅提供前瞻及企业价值补充指标。"
     }
-  ],
-  "analystEstimatesUpdatedAt": "2026-11-26T11:27:18.528118Z"
+  ]
 }
